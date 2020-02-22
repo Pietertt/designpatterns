@@ -17,7 +17,10 @@ public class mouse extends TimerTask {
       public void run(){
             for(int i = 0; i < rects.size(); i++){
                   if(rects.get(i).selected == true){
-                        System.out.println("Still pressed");
+                        System.out.print("Still pressed");
+                        System.out.print(rects.get(i).id);
+                        System.out.print(" ");
+                        System.out.println();
                   }
             }
       }
