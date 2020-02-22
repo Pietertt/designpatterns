@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import java.util.*;
+import java.awt.*;
 
 import javax.swing.Timer;
 
@@ -20,8 +21,11 @@ import mouse.mouse;
 
 public class main extends JPanel implements MouseListener{
 
-      private int[] unselected = { 255, 0, 0 };
-      private int[] selected = { 255, 135, 135 };
+      private static int[] unselected = { 255, 0, 0 };
+      private static int[] selected = { 255, 135, 135 };
+
+      private static int offsetX = 200;
+      private static int offsetY = 200;
 
       private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
@@ -65,18 +69,11 @@ public class main extends JPanel implements MouseListener{
       
       main.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       main.frame.setSize(500, 500);
-      main.frame.setLocationRelativeTo(null);
+      main.frame.setLocation(main.offsetX, main.offsetY);
       main.frame.setVisible(true);
 
       Timer timer = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                  for(int i = 0; i < main.rects.size(); i++){
-                        if(main.rects.get(i).selected){
-                              main.rects.get(i).color = main.selected;
-                        } else {
-                              main.rects.get(i).color = main.unselected;
-                        }
-                  }
                   update();
             }
       });
@@ -85,6 +82,21 @@ public class main extends JPanel implements MouseListener{
   }
 
       public static void update(){
+            for(int i = 0; i < main.rects.size(); i++){
+                  if(main.rects.get(i).selected){
+                        //main.rects.get(i).color = main.selected;
+                        Point a = MouseInfo.getPointerInfo().getLocation();
+
+                        int x = (int)a.getX() - offsetX - rects.get(i).width / 2;
+                        int y = (int)a.getY() - offsetY - rects.get(i).height;
+
+                        main.rects.get(i).x = x;
+                        main.rects.get(i).y = y;
+                  } else {
+                        //main.rects.get(i).color = main.unselected;
+                  }
+            }
+            
             main.frame.repaint();
       }
 
@@ -95,6 +107,9 @@ public class main extends JPanel implements MouseListener{
   public void mouseEntered(MouseEvent e) {}  
   public void mouseExited(MouseEvent e) {}  
   public void mousePressed(MouseEvent e) {
+      //-----------------------------------------------------------------------------
+      //                            Selection handler
+      //-----------------------------------------------------------------------------
 
       // looping through each rectangle 
       for(int i = 0; i < rects.size(); i++){
