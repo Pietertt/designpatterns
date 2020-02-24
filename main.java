@@ -23,38 +23,36 @@ import ui.ui;
 
 public class main {
 
+      private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
+
   public static void main(String[] args) {
 
       JFrame frame = new JFrame();
-      board board = new board(frame);
-      //board b = new board(frame);
-
-
-      frame.add(board);
-      //frame.add();
-
-      //main.frame.add(ui);
-      //main.frame.getContentPane().add(main, BorderLayout.NORTH);
-      //main.frame.getContentPane().add(ui);
-      
 
       // populates the field with the initial 5 rectangles
       for(int i = 0; i < 5; i++){
-            board.rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
+            rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
       }
 
       // populates the field with the initial 5 ellipses 
       for(int i = 0; i < 5; i++){
-            board.ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
+            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
       }
+
+      board board = new board(frame, rects, ellipses);
+      ui ui = new ui(frame);
+
+      frame.getContentPane().add(board);
+      frame.getContentPane().add(ui, BorderLayout.SOUTH);
       
-      // some window settings
+      // // some window settings
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(board.width, board.height);
       frame.setLocation(board.offsetX, board.offsetY);
       frame.setVisible(true);
 
-      // the timer which fires 100 times a second
+      // // the timer which fires 100 times a second
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   board.update();

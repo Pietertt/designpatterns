@@ -23,5 +23,22 @@ import shapes.ellipse;
 import board.board;
 
 public class ui extends JPanel {
-      JButton btn = new JButton();     
+      private JFrame frame;
+
+      public ui(JFrame frame){
+            this.frame = frame;
+
+            JButton rect = new JButton("Add rectangle");
+            JButton ellipse = new JButton("Add ellipse");
+
+            rect.addActionListener(new ActionListener() { 
+                  public void actionPerformed(ActionEvent e) { 
+                        System.out.println(8);
+                  }
+            });
+
+            super.add(rect);
+            super.add(ellipse);
+
+      }
 }
