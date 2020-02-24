@@ -38,7 +38,12 @@ public class board extends JPanel implements MouseListener {
       public static ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public static JFrame frame;
+      private static JFrame frame;
+
+      public board(JFrame frame){
+            this.frame = frame;
+            addMouseListener(this);  
+      }
 
       // paint method which is responsible for painting the window
       public void paintComponent(Graphics g) {
@@ -57,10 +62,6 @@ public class board extends JPanel implements MouseListener {
                   g2d.setColor(new Color(ellipses.get(i).color[0], ellipses.get(i).color[1], ellipses.get(i).color[2]));
                   g2d.fill(new Ellipse2D.Double(ellipses.get(i).x, ellipses.get(i).y, ellipses.get(i).width, ellipses.get(i).height));
             }
-      }
-
-      public board(){
-            addMouseListener(this);  
       }
 
       public static void update(){

@@ -23,5 +23,5 @@ import shapes.ellipse;
 import board.board;
 
 public class ui extends JPanel {
-      
+      JButton btn = new JButton();     
 }
