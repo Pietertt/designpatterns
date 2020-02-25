@@ -59,7 +59,7 @@ public class main {
                   int mode = ui.getMode();
                   mode = board.getMode();
                   // updates the main rectangle arraylist with any changes made in the board
-                  rects = board.update(mode);
+                  rects = board.update(1);
                   // feeds the current rectangles arraylist to the ui
                   ui.set(rects);
                   // retrieves the rectangle arraylist to catch any changes made by the ui

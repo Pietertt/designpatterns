@@ -37,9 +37,10 @@ public class board extends JPanel implements MouseListener {
       // //                                  Modes
       // //-----------------------------------------------------------------------------  
       
-      public int mode = 0;
+      public int mode = 1;
 
       public boolean dragging = false;
+      public boolean added = false;
 
       public static int offsetX = 200;
       public static int offsetY = 200;
@@ -78,7 +79,7 @@ public class board extends JPanel implements MouseListener {
       
 
       public ArrayList<rectangle> update(int mode){
-            this.mode = mode;
+    
       //-----------------------------------------------------------------------------
       //                Responsible for dragging rectangles around
       //-----------------------------------------------------------------------------
@@ -144,14 +145,14 @@ public class board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e) { 
+            System.out.println("Click");
             switch(this.mode){
                   case 0:
                         break;
                   case 1:
-                        if(dragging == false){
-                              int[] rgb = { 255, 0, 0 };
-                              Point a = MouseInfo.getPointerInfo().getLocation();
-                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 50, 50, 6, rgb));
+                        if(true){
+                              
+                              System.out.println("Clicked");
                               this.dragging = true;
                         }
                         break;
@@ -191,7 +192,14 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         this.dragging = true;
-                        System.out.println(this.dragging);
+                        int[] rgb = { 255, 0, 0 };
+                        Point a = MouseInfo.getPointerInfo().getLocation();
+                        if(this.added == false){
+                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
+                              this.added = true;
+                        } else {
+                              System.out.println(8);
+                        }
                         break;
                   default:
                         break;
