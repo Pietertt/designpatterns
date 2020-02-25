@@ -25,14 +25,15 @@ import board.board;
 public class ui extends JPanel {
       private ArrayList<rectangle> rects = new ArrayList<rectangle>();
 
+      public int mode = 0;
+
       public ui(){
             JButton rect = new JButton("Add rectangle");
             JButton ellipse = new JButton("Add ellipse");
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e) { 
-                        int[] rgb = { 255, 0, 0 };
-                        rects.add(new rectangle(200, 200, 50, 50, 6, rgb));
+                        mode = 1;
                   }
             });
 
@@ -48,5 +49,13 @@ public class ui extends JPanel {
       // method used to update the rectangle arraylist in the mail program
       public ArrayList<rectangle> get(){
             return this.rects;
+      }
+
+      public int getMode(){
+            return this.mode;
+      }
+
+      public void setMode(int mode){
+            this.mode = mode;
       }
 }

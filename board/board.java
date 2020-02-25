@@ -24,14 +24,22 @@ import board.board;
 
 public class board extends JPanel implements MouseListener {
 
+      private static JFrame frame;
+
       // //-----------------------------------------------------------------------------
       // //                                  colors
       // //-----------------------------------------------------------------------------
 
-      private static JFrame frame;
-
       public static int[] unselected = { 255, 0, 0 };
       public static int[] selected = { 255, 135, 135 };
+
+      // //-----------------------------------------------------------------------------
+      // //                                  Modes
+      // //-----------------------------------------------------------------------------  
+      
+      public int mode = 0;
+
+      public boolean dragging = false;
 
       public static int offsetX = 200;
       public static int offsetY = 200;
@@ -69,49 +77,64 @@ public class board extends JPanel implements MouseListener {
       }
       
 
-      public ArrayList<rectangle> update(){
-      //       //-----------------------------------------------------------------------------
-      //       //                Responsible for dragging rectangles around
-      //       //-----------------------------------------------------------------------------
-            for(int i = 0; i < this.rects.size(); i++){
-                  if(this.rects.get(i).selected){
-                        Point a = MouseInfo.getPointerInfo().getLocation();
+      public ArrayList<rectangle> update(int mode){
+            this.mode = mode;
+      //-----------------------------------------------------------------------------
+      //                Responsible for dragging rectangles around
+      //-----------------------------------------------------------------------------
 
-                        // the absolute X and Y values of the cursor
-                        int xAbsolute = (int)a.getX();
-                        int yAbsolute = (int)a.getY();
+            // decides what to execute based on the current mode
+            // 0 ------------> default, allows dragging of rectangles
+            // 1 ------------> a rectangle is being created
+            switch(this.mode){ 
+                  case 0: 
+                        for(int i = 0; i < this.rects.size(); i++){
+                              if(this.rects.get(i).selected){
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
 
-                        // determines the current mouse position regarding the rectangle X and Y values
-                        int xRelative = (int)a.getX() - offsetX - this.rects.get(i).width / 2;
-                        int yRelative = (int)a.getY() - offsetY - this.rects.get(i).height;
+                                    // the absolute X and Y values of the cursor
+                                    int xAbsolute = (int)a.getX();
+                                    int yAbsolute = (int)a.getY();
 
-                        int xRect = xAbsolute - this.rects.get(i).width / 2;
-                        int yRect = yAbsolute - this.rects.get(i).height;
+                                    // determines the current mouse position regarding the rectangle X and Y values
+                                    int xRelative = (int)a.getX() - offsetX - this.rects.get(i).width / 2;
+                                    int yRelative = (int)a.getY() - offsetY - this.rects.get(i).height;
 
-                        // updates the current selected rectangle to the current mouse position
-                        if(xRect > offsetX){ // the X position of the rectangle must be bigger than the window X offset
-                              if(xRect < (offsetX + width - this.rects.get(i).width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
-                                    if(yRect > offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
-                                          if(yRect < (offsetY + height - this.rects.get(i).height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
-                                                this.rects.get(i).x = xRelative;
-                                                this.rects.get(i).y = yRelative;   
+                                    int xRect = xAbsolute - this.rects.get(i).width / 2;
+                                    int yRect = yAbsolute - this.rects.get(i).height;
+
+                                    // updates the current selected rectangle to the current mouse position
+                                    if(xRect > offsetX){ // the X position of the rectangle must be bigger than the window X offset
+                                          if(xRect < (offsetX + width - this.rects.get(i).width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
+                                                if(yRect > offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
+                                                      if(yRect < (offsetY + height - this.rects.get(i).height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
+                                                            this.rects.get(i).x = xRelative;
+                                                            this.rects.get(i).y = yRelative;   
+                                                      } else {
+                                                            this.rects.get(i).y = height - this.rects.get(i).height;
+                                                      }
+                                                } else {
+                                                      this.rects.get(i).y = 0;
+                                                }
                                           } else {
-                                                this.rects.get(i).y = height - this.rects.get(i).height;
+                                                this.rects.get(i).x = width - this.rects.get(i).width;
                                           }
                                     } else {
-                                          this.rects.get(i).y = 0;
+                                          this.rects.get(i).x = 0;
                                     }
-                              } else {
-                                    this.rects.get(i).x = width - this.rects.get(i).width;
-                              }
-                        } else {
-                              this.rects.get(i).x = 0;
+                              } 
                         }
-                  } 
+                        break;
+                  case 1:
+                        
+                        break;
+                  default:
+                        break;
             }
             
             // updates the frame which is given as a parameter
             frame.repaint();
+            //System.out.println(this.dragging);
             // returns the rectangle arraylist for further use to the main program
             return this.rects;
       }
@@ -121,7 +144,20 @@ public class board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e) { 
-      
+            switch(this.mode){
+                  case 0:
+                        break;
+                  case 1:
+                        if(dragging == false){
+                              int[] rgb = { 255, 0, 0 };
+                              Point a = MouseInfo.getPointerInfo().getLocation();
+                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 50, 50, 6, rgb));
+                              this.dragging = true;
+                        }
+                        break;
+                  default:
+                        break;
+            }
       }  
     
       public void mouseEntered(MouseEvent e) {}  
@@ -131,30 +167,55 @@ public class board extends JPanel implements MouseListener {
             //                            Selection handler
             //-----------------------------------------------------------------------------
     
-            // looping through each rectangle 
-            for(int i = 0; i < this.rects.size(); i++){
-                int x = e.getX();
-                int y = e.getY();
-    
-                // looping through the width of the current rectangle
-                for(int j = 0; j < this.rects.get(i).width; j++){
-                      // checking if the current mouse.x is within the range of the rectangle width
-                      if(x == this.rects.get(i).x + j){
-                            // looping through the height of the rectangle
-                            for(int k = 0; k < this.rects.get(i).height; k++){
-                                  // checking if the current mouse.y is within the range of the rectangle height
-                                  if(y == this.rects.get(i).y + k){
-                                    this.rects.get(i).selected = true;
-                                  }
-                            }
-                      }
-                }
-          }
+            switch(this.mode){
+                  case 0:
+                        // looping through each rectangle 
+                        for(int i = 0; i < this.rects.size(); i++){
+                              int x = e.getX();
+                              int y = e.getY();
+            
+                              // looping through the width of the current rectangle
+                              for(int j = 0; j < this.rects.get(i).width; j++){
+                                    // checking if the current mouse.x is within the range of the rectangle width
+                                    if(x == this.rects.get(i).x + j){
+                                          // looping through the height of the rectangle
+                                          for(int k = 0; k < this.rects.get(i).height; k++){
+                                                // checking if the current mouse.y is within the range of the rectangle height
+                                                if(y == this.rects.get(i).y + k){
+                                                      this.rects.get(i).selected = true;
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                        break;
+                  case 1:
+                        this.dragging = true;
+                        System.out.println(this.dragging);
+                        break;
+                  default:
+                        break;
+            }
       }  
       public void mouseReleased(MouseEvent e) {
-            // deselects all rectangles when the mouse is released
-            for(int i = 0; i < this.rects.size(); i++){
-                  this.rects.get(i).selected = false;
+            switch(this.mode){
+                  case 0:
+                         // deselects all rectangles when the mouse is released
+                        for(int i = 0; i < this.rects.size(); i++){
+                              this.rects.get(i).selected = false;
+                        }
+                        break;
+                  case 1:
+                        this.dragging = false;
+                        this.mode = 0;
+                        System.out.println(this.dragging);
+                        break;
+                  default:
+                        break;
             }
       } 
+
+      public int getMode(){
+            return this.mode;
+      }
 }

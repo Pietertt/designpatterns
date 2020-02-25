@@ -56,8 +56,13 @@ public class main {
       // // the timer which fires 100 times a second
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                  rects = board.update();
+                  int mode = ui.getMode();
+                  mode = board.getMode();
+                  // updates the main rectangle arraylist with any changes made in the board
+                  rects = board.update(mode);
+                  // feeds the current rectangles arraylist to the ui
                   ui.set(rects);
+                  // retrieves the rectangle arraylist to catch any changes made by the ui
                   rects = ui.get();
             }
       });
