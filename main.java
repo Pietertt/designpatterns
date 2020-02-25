@@ -30,18 +30,19 @@ public class main {
 
       JFrame frame = new JFrame();
 
-      // populates the field with the initial 5 rectangles
+      // populates the rectangle array with the initial 5 rectangles
       for(int i = 0; i < 5; i++){
             rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
       }
 
-      // populates the field with the initial 5 ellipses 
+      // populates the ellipses array with the initial 5 ellipses 
       for(int i = 0; i < 5; i++){
             ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
       }
 
+      // populates the board with the first shapes
       board board = new board(frame, rects, ellipses);
-      ui ui = new ui(frame);
+      ui ui = new ui();
 
       frame.getContentPane().add(board);
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
@@ -55,7 +56,9 @@ public class main {
       // // the timer which fires 100 times a second
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                  board.update();
+                  rects = board.update();
+                  ui.set(rects);
+                  rects = ui.get();
             }
       });
       timer.setInitialDelay(0);

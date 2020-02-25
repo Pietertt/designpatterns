@@ -69,7 +69,7 @@ public class board extends JPanel implements MouseListener {
       }
       
 
-      public void update(){
+      public ArrayList<rectangle> update(){
       //       //-----------------------------------------------------------------------------
       //       //                Responsible for dragging rectangles around
       //       //-----------------------------------------------------------------------------
@@ -110,7 +110,14 @@ public class board extends JPanel implements MouseListener {
                   } 
             }
             
+            // updates the frame which is given as a parameter
             frame.repaint();
+            // returns the rectangle arraylist for further use to the main program
+            return this.rects;
+      }
+
+      public void addRectangle(rectangle rect){
+            this.rects.add(rect);
       }
 
       public void mouseClicked(MouseEvent e) { 

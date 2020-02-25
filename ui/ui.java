@@ -23,22 +23,30 @@ import shapes.ellipse;
 import board.board;
 
 public class ui extends JPanel {
-      private JFrame frame;
+      private ArrayList<rectangle> rects = new ArrayList<rectangle>();
 
-      public ui(JFrame frame){
-            this.frame = frame;
-
+      public ui(){
             JButton rect = new JButton("Add rectangle");
             JButton ellipse = new JButton("Add ellipse");
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e) { 
-                        System.out.println(8);
+                        int[] rgb = { 255, 0, 0 };
+                        rects.add(new rectangle(200, 200, 50, 50, 6, rgb));
                   }
             });
 
             super.add(rect);
             super.add(ellipse);
+      }
 
+      // method to update (or completely set) the rectangle arraylist from outside
+      public void set(ArrayList<rectangle> rects){
+            this.rects = rects;
+      }
+
+      // method used to update the rectangle arraylist in the mail program
+      public ArrayList<rectangle> get(){
+            return this.rects;
       }
 }
