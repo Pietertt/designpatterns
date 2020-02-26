@@ -138,10 +138,7 @@ public class board extends JPanel implements MouseListener {
                               int x = (int)a.getX();
                               int y = (int)a.getY();
 
-                              if(x - offsetX < rect.x){
-                                    int width = rect.x - (x - offsetX);
-                                    System.out.println(width);
-                              } else {
+                              if((x - offsetX) > rect.x){
                                     rect.width = (x - offsetX) - rect.x;
                                     rect.height = (y - offsetY) - rect.y;
                               }
@@ -160,14 +157,11 @@ public class board extends JPanel implements MouseListener {
       public void mouseClicked(MouseEvent e) { 
             switch(this.mode){
                   case 0:
-                        break;
-                  case 1:
-                        if(this.dragging == false){
-                              // int[] rgb = { 255, 0, 0 };
-                              // Point a = MouseInfo.getPointerInfo().getLocation();
-                              // this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
-                              // this.dragging = true;
+                        for(int i = 0; i < this.rects.size(); i++){
+                              
                         }
+                  case 1:
+                        
                         break;
                   default:
                         break;

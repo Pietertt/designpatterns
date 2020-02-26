@@ -55,7 +55,7 @@ public class main {
       frame.setVisible(true);
 
       // // the timer which fires 100 times a second
-      Timer timer = new Timer(100, new ActionListener() {
+      Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
  
