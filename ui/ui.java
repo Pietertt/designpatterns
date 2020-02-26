@@ -36,7 +36,6 @@ public class ui extends JPanel {
       public ui(){
             JButton rect = new JButton();
 
-
             rect.setIcon(new javax.swing.ImageIcon(getClass().getResource("rectangle.png")));
             rect.setBorderPainted(false);
             rect.setFocusPainted(false);
