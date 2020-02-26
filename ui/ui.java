@@ -22,14 +22,25 @@ import shapes.rectangle;
 import shapes.ellipse;
 import ui.board;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+
+
+
 public class ui extends JPanel {
       private ArrayList<rectangle> rects = new ArrayList<rectangle>();
 
       public int mode = 0;
 
       public ui(){
-            JButton rect = new JButton("Add rectangle");
-            JButton ellipse = new JButton("Add ellipse");
+            JButton rect = new JButton();
+
+
+            rect.setIcon(new javax.swing.ImageIcon(getClass().getResource("rectangle.png")));
+            rect.setBorderPainted(false);
+            rect.setFocusPainted(false);
+            rect.setContentAreaFilled(false);
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e) { 
@@ -38,7 +49,7 @@ public class ui extends JPanel {
             });
 
             super.add(rect);
-            super.add(ellipse);
+            //super.add(ellipse);
       }
 
       // method to update (or completely set) the rectangle arraylist from outside
