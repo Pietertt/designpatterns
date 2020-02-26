@@ -18,7 +18,7 @@ import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
-import board.board;
+import ui.board;
 import ui.ui;
 
 public class main {
@@ -40,9 +40,10 @@ public class main {
             ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
       }
 
-      // populates the board with the first shapes
-      board board = new board(frame, rects, ellipses);
       ui ui = new ui();
+
+      // populates the board with the first shapes
+      board board = new board(frame, rects, ellipses, ui);
 
       frame.getContentPane().add(board);
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
@@ -54,12 +55,12 @@ public class main {
       frame.setVisible(true);
 
       // // the timer which fires 100 times a second
-      Timer timer = new Timer(10, new ActionListener() {
+      Timer timer = new Timer(100, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                  int mode = ui.getMode();
-                  mode = board.getMode();
                   // updates the main rectangle arraylist with any changes made in the board
-                  rects = board.update(1);
+ 
+                  rects = board.update();
+
                   // feeds the current rectangles arraylist to the ui
                   ui.set(rects);
                   // retrieves the rectangle arraylist to catch any changes made by the ui

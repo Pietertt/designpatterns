@@ -1,4 +1,4 @@
-package board;
+package ui;
 
 import java.util.ArrayList;
 
@@ -20,11 +20,13 @@ import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
-import board.board;
+
+import ui.ui;
 
 public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
+      private static ui ui;
 
       // //-----------------------------------------------------------------------------
       // //                                  colors
@@ -37,7 +39,7 @@ public class board extends JPanel implements MouseListener {
       // //                                  Modes
       // //-----------------------------------------------------------------------------  
       
-      public int mode = 1;
+      public int mode = 0;
 
       public boolean dragging = false;
       public boolean added = false;
@@ -50,11 +52,12 @@ public class board extends JPanel implements MouseListener {
       public ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell){
+      public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
             for(int i = 0; i < rectangles.size(); i++){
                   this.rects.add(rectangles.get(i));
             }
             this.frame = frame;
+            this.ui = ui;
             addMouseListener(this);  
       }
 
@@ -78,8 +81,10 @@ public class board extends JPanel implements MouseListener {
       }
       
 
-      public ArrayList<rectangle> update(int mode){
-    
+      public ArrayList<rectangle> update(){
+
+      this.mode = ui.getMode();
+
       //-----------------------------------------------------------------------------
       //                Responsible for dragging rectangles around
       //-----------------------------------------------------------------------------
@@ -127,7 +132,20 @@ public class board extends JPanel implements MouseListener {
                         }
                         break;
                   case 1:
-                        
+                        if(this.dragging == true){
+                              rectangle rect = this.rects.get(this.rects.size() - 1);
+                              Point a = MouseInfo.getPointerInfo().getLocation();
+                              int x = (int)a.getX();
+                              int y = (int)a.getY();
+
+                              if(x - offsetX < rect.x){
+                                    int width = rect.x - (x - offsetX);
+                                    System.out.println(width);
+                              } else {
+                                    rect.width = (x - offsetX) - rect.x;
+                                    rect.height = (y - offsetY) - rect.y;
+                              }
+                        }
                         break;
                   default:
                         break;
@@ -135,25 +153,20 @@ public class board extends JPanel implements MouseListener {
             
             // updates the frame which is given as a parameter
             frame.repaint();
-            //System.out.println(this.dragging);
             // returns the rectangle arraylist for further use to the main program
             return this.rects;
       }
 
-      public void addRectangle(rectangle rect){
-            this.rects.add(rect);
-      }
-
       public void mouseClicked(MouseEvent e) { 
-            System.out.println("Click");
             switch(this.mode){
                   case 0:
                         break;
                   case 1:
-                        if(true){
-                              
-                              System.out.println("Clicked");
-                              this.dragging = true;
+                        if(this.dragging == false){
+                              // int[] rgb = { 255, 0, 0 };
+                              // Point a = MouseInfo.getPointerInfo().getLocation();
+                              // this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
+                              // this.dragging = true;
                         }
                         break;
                   default:
@@ -191,15 +204,13 @@ public class board extends JPanel implements MouseListener {
                         }
                         break;
                   case 1:
-                        this.dragging = true;
-                        int[] rgb = { 255, 0, 0 };
-                        Point a = MouseInfo.getPointerInfo().getLocation();
                         if(this.added == false){
+                              int[] rgb = { 255, 0, 0 };
+                              Point a = MouseInfo.getPointerInfo().getLocation();
                               this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
                               this.added = true;
-                        } else {
-                              System.out.println(8);
-                        }
+                              this.dragging = true;
+                        } 
                         break;
                   default:
                         break;
@@ -215,15 +226,11 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         this.dragging = false;
-                        this.mode = 0;
-                        System.out.println(this.dragging);
+                        this.added = false;
+                        this.ui.setMode(0);
                         break;
                   default:
                         break;
             }
       } 
-
-      public int getMode(){
-            return this.mode;
-      }
 }

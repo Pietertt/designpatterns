@@ -20,7 +20,7 @@ import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
-import board.board;
+import ui.board;
 
 public class ui extends JPanel {
       private ArrayList<rectangle> rects = new ArrayList<rectangle>();
@@ -33,7 +33,7 @@ public class ui extends JPanel {
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e) { 
-                        mode = 1;
+                        setMode(1);
                   }
             });
 
@@ -46,7 +46,7 @@ public class ui extends JPanel {
             this.rects = rects;
       }
 
-      // method used to update the rectangle arraylist in the mail program
+      // method used to update the rectangle arraylist in the main program
       public ArrayList<rectangle> get(){
             return this.rects;
       }
@@ -55,7 +55,7 @@ public class ui extends JPanel {
             return this.mode;
       }
 
-      public void setMode(int mode){
-            this.mode = mode;
+      public void setMode(int i){
+            this.mode = i;
       }
 }
