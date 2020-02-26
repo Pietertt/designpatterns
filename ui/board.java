@@ -67,8 +67,17 @@ public class board extends JPanel implements MouseListener {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
 
+            for(int i = 0; i < this.rects.size(); i++){
+                  if(this.rects.get(i).pressed){
+                        this.rects.get(i).color = this.selected;
+                  } else {
+                        this.rects.get(i).color = this.unselected;
+                  }
+            }
+
             // fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
+                  
                   g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
                   g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
             }
@@ -157,8 +166,20 @@ public class board extends JPanel implements MouseListener {
       public void mouseClicked(MouseEvent e) { 
             switch(this.mode){
                   case 0:
+                        // the absolute X and Y values of the cursor
+                        int x = e.getX();
+                        int y = e.getY();
                         for(int i = 0; i < this.rects.size(); i++){
-                              
+                              this.rects.get(i).pressed = false;
+                              for(int j = 0; j < this.rects.get(i).width; j++){
+                                    if(x == this.rects.get(i).x + j){
+                                          for(int k = 0; k < this.rects.get(i).height; k++){
+                                                if(y == this.rects.get(i).y + k){
+                                                      this.rects.get(i).pressed = true;
+                                                } 
+                                          }
+                                    }
+                              }
                         }
                   case 1:
                         
