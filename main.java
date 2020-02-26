@@ -46,7 +46,7 @@ public class main {
       board board = new board(frame, rects, ellipses, ui);
 
       frame.getContentPane().add(board);
-      frame.getContentPane().add(ui, BorderLayout.WEST);
+      frame.getContentPane().add(ui, BorderLayout.SOUTH);
       
       // // some window settings
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
