@@ -61,10 +61,12 @@ public class ui extends JPanel {
             return this.rects;
       }
 
+      // returns the current mode
       public int getMode(){
             return this.mode;
       }
 
+      // sets the current mode to whatever mode is given
       public void setMode(int i){
             this.mode = i;
       }

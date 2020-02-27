@@ -45,6 +45,7 @@ public class main {
       // populates the board with the first shapes
       board board = new board(frame, rects, ellipses, ui);
 
+      // added the board and the UI to the frame
       frame.getContentPane().add(board);
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
       
@@ -58,11 +59,11 @@ public class main {
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
- 
                   rects = board.update();
 
                   // feeds the current rectangles arraylist to the ui
                   ui.set(rects);
+                  
                   // retrieves the rectangle arraylist to catch any changes made by the ui
                   rects = ui.get();
             }

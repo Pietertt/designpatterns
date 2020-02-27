@@ -14,12 +14,15 @@ import java.awt.Graphics2D;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
+
+import javax.swing.*;
 
 import ui.ui;
 
@@ -41,6 +44,8 @@ public class board extends JPanel implements MouseListener {
       
       public int mode = 0;
 
+      public int currentlySelected;
+
       public boolean dragging = false;
       public boolean added = false;
 
@@ -57,8 +62,13 @@ public class board extends JPanel implements MouseListener {
                   this.rects.add(rectangles.get(i));
             }
             this.frame = frame;
+            super.setFocusable(true);
             this.ui = ui;
             addMouseListener(this);  
+
+            // fires an event with the 'DELETE' identifier when the backspace is pressed
+            getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("BACK_SPACE"), "DELETE");
+            getActionMap().put("DELETE", delete);
       }
 
       // paint method which is responsible for painting the window
@@ -67,6 +77,7 @@ public class board extends JPanel implements MouseListener {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
 
+            // changes the color of a rectangle when it is selected
             for(int i = 0; i < this.rects.size(); i++){
                   if(this.rects.get(i).pressed){
                         this.rects.get(i).color = this.selected;
@@ -81,23 +92,12 @@ public class board extends JPanel implements MouseListener {
                   g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
                   g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
             }
-
-            // fills and colors specific areas based on values in the 'ellipses' array
-            // for(int i = 0; i < ellipses.size(); i++){
-            //       g2d.setColor(new Color(ellipses.get(i).color[0], ellipses.get(i).color[1], ellipses.get(i).color[2]));
-            //       g2d.fill(new Ellipse2D.Double(ellipses.get(i).x, ellipses.get(i).y, ellipses.get(i).width, ellipses.get(i).height));
-            // }
       }
       
 
       public ArrayList<rectangle> update(){
 
       this.mode = ui.getMode();
-
-      //-----------------------------------------------------------------------------
-      //                Responsible for dragging rectangles around
-      //-----------------------------------------------------------------------------
-
             // decides what to execute based on the current mode
             // 0 ------------> default, allows dragging of rectangles
             // 1 ------------> a rectangle is being created
@@ -142,6 +142,7 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         if(this.dragging == true){
+                              // updates the values of a rectangle to the mouse coordinates when dragging is allowed
                               rectangle rect = this.rects.get(this.rects.size() - 1);
                               Point a = MouseInfo.getPointerInfo().getLocation();
                               int x = (int)a.getX();
@@ -157,7 +158,7 @@ public class board extends JPanel implements MouseListener {
                         break;
             }
             
-            // updates the frame which is given as a parameter
+            // updates the frame
             frame.repaint();
             // returns the rectangle arraylist for further use to the main program
             return this.rects;
@@ -169,6 +170,8 @@ public class board extends JPanel implements MouseListener {
                         // the absolute X and Y values of the cursor
                         int x = e.getX();
                         int y = e.getY();
+
+                        // determines where the user clicked and sets the 'pressed' property of a rectangle to true when the user clicks in a rectangle
                         for(int i = 0; i < this.rects.size(); i++){
                               this.rects.get(i).pressed = false;
                               for(int j = 0; j < this.rects.get(i).width; j++){
@@ -176,6 +179,7 @@ public class board extends JPanel implements MouseListener {
                                           for(int k = 0; k < this.rects.get(i).height; k++){
                                                 if(y == this.rects.get(i).y + k){
                                                       this.rects.get(i).pressed = true;
+                                                      this.currentlySelected = i;
                                                 } 
                                           }
                                     }
@@ -220,6 +224,7 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         if(this.added == false){
+                              // creates a tiny rectangle to start dragging
                               int[] rgb = { 255, 0, 0 };
                               Point a = MouseInfo.getPointerInfo().getLocation();
                               this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
@@ -240,12 +245,25 @@ public class board extends JPanel implements MouseListener {
                         }
                         break;
                   case 1:
+                        // resets the 'dragging' and 'added' variables to enable dragging later on 
                         this.dragging = false;
                         this.added = false;
+                        // set the mode to 0 to enable selecting and moving rectangles
                         this.ui.setMode(0);
                         break;
                   default:
                         break;
             }
       } 
+
+      Action delete = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                  // determines which rectangle is selected and removing it from the arraylist
+                  for(int i = 0; i < rects.size(); i++){
+                        if(rects.get(i).pressed){
+                              rects.remove(i);
+                        }
+                }
+            }
+        };
 }
