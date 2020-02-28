@@ -56,6 +56,9 @@ public class board extends JPanel implements MouseListener {
       public static int width = 500;
       public static int height = 500;
 
+      public int lastX = 0;
+      public int lastY = 0;
+
       public ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
@@ -229,9 +232,10 @@ public class board extends JPanel implements MouseListener {
                                           for(int k = 0; k < this.rects.get(i).height; k++){
                                                 // checking if the current mouse.y is within the range of the rectangle height
                                                 if(y == this.rects.get(i).y + k){
-                                                      this.rects.get(i).moving = true;
-                                                      this.rects.get(i).selected = true;
                                                       this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                                      if(this.rects.get(i).selected){
+                                                            this.rects.get(i).moving = true;
+                                                      }
                                                 }
                                           }
                                     }
