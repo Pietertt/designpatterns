@@ -79,24 +79,21 @@ public class board extends JPanel implements MouseListener {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
 
-            // changes the color of a rectangle when it is selected
-            for(int i = 0; i < this.rects.size(); i++){
-                  if(this.rects.get(i).selected){
-                        this.rects.get(i).color = this.GRAY;
-                  }
-            }
-
             // fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
-
                   rectangle rect = this.rects.get(i);
 
                   if(rect.selected){
-                        //g2d.fillOval(rect.x + rect.width - 2, rect.y + rect.height - 2, 5, 5);
+                        //draw a rectangle which is slightly bigger to act as a border
                         g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
                         g2d.fillRect(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2);
+
+                        for(int j = 0; j < rect.handles.length; j++){
+                              g2d.fillOval(rect.handles[j].x, rect.handles[j].y, rect.handles[j].width, rect.handles[j].height);
+                        }
                   }
 
+                  // draw the rectangle 
                   g2d.setColor(new Color(rect.color[0], rect.color[1], rect.color[2]));
                   g2d.fillRect(rect.x, rect.y, rect.width, rect.height);
             }
@@ -224,6 +221,7 @@ public class board extends JPanel implements MouseListener {
                                                 // checking if the current mouse.y is within the range of the rectangle height
                                                 if(y == this.rects.get(i).y + k){
                                                       this.rects.get(i).moving = true;
+                                                      this.rects.get(i).selected = true;
                                                 }
                                           }
                                     }
@@ -256,6 +254,9 @@ public class board extends JPanel implements MouseListener {
                         // resets the 'dragging' and 'added' variables to enable dragging later on 
                         this.dragging = false;
                         this.added = false;
+                        for(int i = 0; i < this.rects.size(); i++){
+                              this.rects.get(i).selected = false;
+                        }
                         // set the mode to 0 to enable selecting and moving rectangles
                         this.ui.setMode(0);
                         break;
