@@ -21,13 +21,15 @@ public class rectangle extends shape {
             this.width = width;
             this.height = height;
             this.id = id;
-            this.handles.add(new handle(this.x + this.width, this.y + this.height));
       }
 
       // clears all handels and creates a new one on the current position
       public void select(){
             this.handles.clear();
             this.handles.add(new handle(this.x + this.width, this.y + this.height));
+            this.handles.add(new handle(this.x - 7, this.y - 7));
+            this.handles.add(new handle(this.x + this.width, this.y - 7));
+            this.handles.add(new handle(this.x - 7, this.y + this.height));
       }
 
       public boolean mouse(int x, int y){
