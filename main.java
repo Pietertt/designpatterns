@@ -32,12 +32,12 @@ public class main {
 
       // populates the rectangle array with the initial 5 rectangles
       for(int i = 0; i < 5; i++){
-            rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
+            rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.GRAY));
       }
 
       // populates the ellipses array with the initial 5 ellipses 
       for(int i = 0; i < 5; i++){
-            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
+            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
       }
 
       ui ui = new ui();

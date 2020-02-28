@@ -24,6 +24,8 @@ import shapes.ellipse;
 
 import javax.swing.*;
 
+import javax.swing.border.Border;
+
 import ui.ui;
 
 public class board extends JPanel implements MouseListener {
@@ -35,8 +37,8 @@ public class board extends JPanel implements MouseListener {
       // //                                  colors
       // //-----------------------------------------------------------------------------
 
-      public static int[] unselected = { 255, 0, 0 };
-      public static int[] selected = { 255, 135, 135 };
+      public static int[] GRAY = { 213, 213, 213 };
+      public static int[] BLUE = { 76, 153, 229 };
 
       // //-----------------------------------------------------------------------------
       // //                                  Modes
@@ -79,18 +81,24 @@ public class board extends JPanel implements MouseListener {
 
             // changes the color of a rectangle when it is selected
             for(int i = 0; i < this.rects.size(); i++){
-                  if(this.rects.get(i).pressed){
-                        this.rects.get(i).color = this.selected;
-                  } else {
-                        this.rects.get(i).color = this.unselected;
+                  if(this.rects.get(i).selected){
+                        this.rects.get(i).color = this.GRAY;
                   }
             }
 
             // fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
-                  
-                  g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
-                  g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
+
+                  rectangle rect = this.rects.get(i);
+
+                  if(rect.selected){
+                        //g2d.fillOval(rect.x + rect.width - 2, rect.y + rect.height - 2, 5, 5);
+                        g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
+                        g2d.fillRect(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2);
+                  }
+
+                  g2d.setColor(new Color(rect.color[0], rect.color[1], rect.color[2]));
+                  g2d.fillRect(rect.x, rect.y, rect.width, rect.height);
             }
       }
       
@@ -101,10 +109,11 @@ public class board extends JPanel implements MouseListener {
             // decides what to execute based on the current mode
             // 0 ------------> default, allows dragging of rectangles
             // 1 ------------> a rectangle is being created
+
             switch(this.mode){ 
                   case 0: 
                         for(int i = 0; i < this.rects.size(); i++){
-                              if(this.rects.get(i).selected){
+                              if(this.rects.get(i).moving){
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // the absolute X and Y values of the cursor
@@ -143,14 +152,13 @@ public class board extends JPanel implements MouseListener {
                   case 1:
                         if(this.dragging == true){
                               // updates the values of a rectangle to the mouse coordinates when dragging is allowed
+                              // the newest rectangle is selected
                               rectangle rect = this.rects.get(this.rects.size() - 1);
                               Point a = MouseInfo.getPointerInfo().getLocation();
-                              int x = (int)a.getX();
-                              int y = (int)a.getY();
 
-                              if((x - offsetX) > rect.x){
-                                    rect.width = (x - offsetX) - rect.x;
-                                    rect.height = (y - offsetY) - rect.y;
+                              // resizes the rectangle when the mouse position minus the offset is larger than the INITIAL x value of the rectangle
+                              if(((int)a.getX() - offsetX) > rect.x){
+                                    rect.resize(offsetX, offsetY, (int)a.getX(), (int)a.getY());
                               }
                         }
                         break;
@@ -171,14 +179,14 @@ public class board extends JPanel implements MouseListener {
                         int x = e.getX();
                         int y = e.getY();
 
-                        // determines where the user clicked and sets the 'pressed' property of a rectangle to true when the user clicks in a rectangle
+                        // determines where the user clicked and sets the 'selected' property of a rectangle to true when the user clicks in a rectangle
                         for(int i = 0; i < this.rects.size(); i++){
-                              this.rects.get(i).pressed = false;
+                              this.rects.get(i).selected = false;
                               for(int j = 0; j < this.rects.get(i).width; j++){
                                     if(x == this.rects.get(i).x + j){
                                           for(int k = 0; k < this.rects.get(i).height; k++){
                                                 if(y == this.rects.get(i).y + k){
-                                                      this.rects.get(i).pressed = true;
+                                                      this.rects.get(i).selected = true;
                                                       this.currentlySelected = i;
                                                 } 
                                           }
@@ -215,7 +223,7 @@ public class board extends JPanel implements MouseListener {
                                           for(int k = 0; k < this.rects.get(i).height; k++){
                                                 // checking if the current mouse.y is within the range of the rectangle height
                                                 if(y == this.rects.get(i).y + k){
-                                                      this.rects.get(i).selected = true;
+                                                      this.rects.get(i).moving = true;
                                                 }
                                           }
                                     }
@@ -241,7 +249,7 @@ public class board extends JPanel implements MouseListener {
                   case 0:
                          // deselects all rectangles when the mouse is released
                         for(int i = 0; i < this.rects.size(); i++){
-                              this.rects.get(i).selected = false;
+                              this.rects.get(i).moving = false;
                         }
                         break;
                   case 1:
@@ -260,7 +268,7 @@ public class board extends JPanel implements MouseListener {
             public void actionPerformed(ActionEvent e) {
                   // determines which rectangle is selected and removing it from the arraylist
                   for(int i = 0; i < rects.size(); i++){
-                        if(rects.get(i).pressed){
+                        if(rects.get(i).selected){
                               rects.remove(i);
                         }
                 }
