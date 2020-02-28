@@ -78,6 +78,7 @@ public class board extends JPanel implements MouseListener {
 
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
+            g2d.setRenderingHint( RenderingHints. KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
             // fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
@@ -86,10 +87,13 @@ public class board extends JPanel implements MouseListener {
                   if(rect.selected){
                         //draw a rectangle which is slightly bigger to act as a border
                         g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
-                        g2d.fillRect(rect.x - 1, rect.y - 1, rect.width + 2, rect.height + 2);
+                        g2d.fillRect(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
 
-                        for(int j = 0; j < rect.handles.length; j++){
-                              g2d.fillOval(rect.handles[j].x, rect.handles[j].y, rect.handles[j].width, rect.handles[j].height);
+                        for(int j = 0; j < rect.handles.size(); j++){
+                              g2d.setColor(new Color(255, 255, 255));
+                              g2d.fillOval(rect.handles.get(j).x - 2, rect.handles.get(j).y - 2, rect.handles.get(j).width + 4, rect.handles.get(j).height + 4);
+                              g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
+                              g2d.fillOval(rect.handles.get(j).x, rect.handles.get(j).y, rect.handles.get(j).width, rect.handles.get(j).height);
                         }
                   }
 
@@ -131,6 +135,7 @@ public class board extends JPanel implements MouseListener {
                                                       if(yRect < (offsetY + height - this.rects.get(i).height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
                                                             this.rects.get(i).x = xRelative;
                                                             this.rects.get(i).y = yRelative;   
+                                                            this.rects.get(i).select();
                                                       } else {
                                                             this.rects.get(i).y = height - this.rects.get(i).height;
                                                       }
@@ -169,7 +174,7 @@ public class board extends JPanel implements MouseListener {
             return this.rects;
       }
 
-      public void mouseClicked(MouseEvent e) { 
+      public void mouseClicked(MouseEvent e) {       
             switch(this.mode){
                   case 0:
                         // the absolute X and Y values of the cursor
@@ -184,6 +189,7 @@ public class board extends JPanel implements MouseListener {
                                           for(int k = 0; k < this.rects.get(i).height; k++){
                                                 if(y == this.rects.get(i).y + k){
                                                       this.rects.get(i).selected = true;
+                                                      this.rects.get(i).select();
                                                       this.currentlySelected = i;
                                                 } 
                                           }
@@ -198,7 +204,9 @@ public class board extends JPanel implements MouseListener {
             }
       }  
     
-      public void mouseEntered(MouseEvent e) {}  
+      public void mouseEntered(MouseEvent e) {
+            
+      }  
       public void mouseExited(MouseEvent e) {}  
       public void mousePressed(MouseEvent e) {
             //-----------------------------------------------------------------------------
@@ -222,6 +230,7 @@ public class board extends JPanel implements MouseListener {
                                                 if(y == this.rects.get(i).y + k){
                                                       this.rects.get(i).moving = true;
                                                       this.rects.get(i).selected = true;
+                                                      this.setCursor(new Cursor(Cursor.HAND_CURSOR));
                                                 }
                                           }
                                     }
@@ -231,9 +240,8 @@ public class board extends JPanel implements MouseListener {
                   case 1:
                         if(this.added == false){
                               // creates a tiny rectangle to start dragging
-                              int[] rgb = { 255, 0, 0 };
                               Point a = MouseInfo.getPointerInfo().getLocation();
-                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
+                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
                               this.added = true;
                               this.dragging = true;
                         } 
@@ -243,6 +251,7 @@ public class board extends JPanel implements MouseListener {
             }
       }  
       public void mouseReleased(MouseEvent e) {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             switch(this.mode){
                   case 0:
                          // deselects all rectangles when the mouse is released

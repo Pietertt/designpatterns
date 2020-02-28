@@ -1,15 +1,11 @@
 package ui;
 
-import javax.swing.*;
-
-import java.awt.*;
-
 public class handle {
 
       public int x;
       public int y;
-      public int height = 5;
-      public int width = 5;
+      public int height = 7;
+      public int width = 7;
 
       public handle(int x, int y){
             this.x = x;
