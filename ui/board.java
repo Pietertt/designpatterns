@@ -209,6 +209,7 @@ public class board extends JPanel implements MouseListener {
       }  
       public void mouseExited(MouseEvent e) {}  
       public void mousePressed(MouseEvent e) {
+
             //-----------------------------------------------------------------------------
             //                            Selection handler
             //-----------------------------------------------------------------------------
@@ -236,6 +237,8 @@ public class board extends JPanel implements MouseListener {
                                     }
                               }
                         }
+
+                  
                         break;
                   case 1:
                         if(this.added == false){
