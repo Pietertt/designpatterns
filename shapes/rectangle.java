@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import ui.handle;
+import shapes.handle;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ public class rectangle extends shape {
       public int width;
       public int height;
       public int id;
+      public int[] color;
 
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
@@ -21,12 +22,13 @@ public class rectangle extends shape {
             this.width = width;
             this.height = height;
             this.id = id;
+            this.color = rgb;
       }
 
       // clears all handels and creates a new one on the current position
       public void select(){
             this.handles.clear();
-            this.handles.add(new handle(this.x + this.width, this.y + this.height));
+            this.handles.add(new handle(this.x + this.width, this.y + this.height, this.color));
             // this.handles.add(new handle(this.x - 7, this.y - 7));
             // this.handles.add(new handle(this.x + this.width, this.y - 7));
             // this.handles.add(new handle(this.x - 7, this.y + this.height));

@@ -21,6 +21,7 @@ import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
+import shapes.handle;
 
 import javax.swing.*;
 
@@ -114,8 +115,6 @@ public class board extends JPanel implements MouseListener {
 
       this.width = frame.getWidth();
       this.height = frame.getHeight();
-
-            System.out.println(this.offsetX);
 
       this.mode = ui.getMode();
             // decides what to execute based on the current mode

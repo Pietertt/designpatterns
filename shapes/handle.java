@@ -1,16 +1,12 @@
-package ui;
+package shapes;
 
-public class handle {
-
-      public int x;
-      public int y;
+public class handle extends shape {
       public int height = 7;
       public int width = 7;
       public boolean selected = false;
 
-      public handle(int x, int y){
-            this.x = x;
-            this.y = y;
+      public handle(int x, int y, int[] rgb){
+            super(x, y, rgb);
       }   
 
       public boolean mouse(int x, int y){
