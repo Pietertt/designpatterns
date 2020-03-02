@@ -109,6 +109,14 @@ public class board extends JPanel implements MouseListener {
 
       public ArrayList<rectangle> update(){
 
+      this.offsetX = (int)frame.getLocation().getX();
+      this.offsetY = (int)frame.getLocation().getY();
+
+      this.width = frame.getWidth();
+      this.height = frame.getHeight();
+
+            System.out.println(this.offsetX);
+
       this.mode = ui.getMode();
             // decides what to execute based on the current mode
             // 0 ------------> default, allows dragging of rectangles
@@ -126,17 +134,17 @@ public class board extends JPanel implements MouseListener {
                                     int yAbsolute = (int)a.getY();
 
                                     // determines the current mouse position regarding the rectangle X and Y values
-                                    int xRelative = (int)a.getX() - offsetX - rect.width / 2;
-                                    int yRelative = (int)a.getY() - offsetY - rect.height;
+                                    int xRelative = (int)a.getX() - this.offsetX - rect.width;
+                                    int yRelative = (int)a.getY() - this.offsetY - rect.height;
 
                                     int xRect = xAbsolute - rect.width / 2;
                                     int yRect = yAbsolute - rect.height;
 
                                     // updates the current selected rectangle to the current mouse position
-                                    if(xRect > offsetX){ // the X position of the rectangle must be bigger than the window X offset
-                                          if(xRect < (offsetX + width - rect.width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
-                                                if(yRect > offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
-                                                      if(yRect < (offsetY + height - rect.height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
+                                    if(xRect > this.offsetX){ // the X position of the rectangle must be bigger than the window X offset
+                                          if(xRect < (this.offsetX + width - rect.width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
+                                                if(yRect > this.offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
+                                                      if(yRect < (this.offsetY + height - rect.height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
                                                             rect.x = xRelative;
                                                             rect.y = yRelative;   
                                                             rect.select();
