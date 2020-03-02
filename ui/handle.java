@@ -25,4 +25,9 @@ public class handle {
             }
             return false;
       }
+
+      public void update(int x, int y){
+            this.x = x;
+            this.y = y;
+      }
 }
