@@ -6,6 +6,7 @@ public class handle {
       public int y;
       public int height = 7;
       public int width = 7;
+      public boolean selected = false;
 
       public handle(int x, int y){
             this.x = x;

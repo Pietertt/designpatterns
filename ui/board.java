@@ -186,19 +186,37 @@ public class board extends JPanel implements MouseListener {
 
                         // determines where the user clicked and sets the 'selected' property of a rectangle to true when the user clicks in a rectangle
                         for(int i = 0; i < this.rects.size(); i++){
-                              this.rects.get(i).selected = false;
-                              for(int j = 0; j < this.rects.get(i).width; j++){
-                                    if(x == this.rects.get(i).x + j){
-                                          for(int k = 0; k < this.rects.get(i).height; k++){
-                                                if(y == this.rects.get(i).y + k){
-                                                      this.rects.get(i).selected = true;
-                                                      this.rects.get(i).select();
+                              rectangle rect = this.rects.get(i);
+
+                              for(int j = 0; j < rect.handles.size(); j++){
+                                    handle handle = rect.handles.get(j);
+                                    for(int k = 0; k < rect.width; k++){
+                                          if(x == handle.x + k){
+                                                for(int l = 0; l < rect.height; l++){
+                                                      if(y == handle.y + l){
+                                                            rect.handles.get(j).selected = true;
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+
+                              //rect.selected = false;
+                              for(int j = 0; j < rect.width; j++){
+                                    if(x == rect.x + j){
+                                          for(int k = 0; k < rect.height; k++){
+                                                if(y == rect.y + k){
+                                                      rect.selected = true;
+                                                      rect.select(); // created handles to enable resizing
                                                       this.currentlySelected = i;
                                                 } 
                                           }
                                     }
                               }
+
+                              
                         }
+
                   case 1:
                         
                         break;
@@ -257,6 +275,7 @@ public class board extends JPanel implements MouseListener {
                         break;
             }
       }  
+
       public void mouseReleased(MouseEvent e) {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             switch(this.mode){
