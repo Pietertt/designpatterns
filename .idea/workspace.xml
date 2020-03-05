@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="519a5044-dda2-45d0-bb98-c69a54ad6b42" name="Default Changelist" comment="" />
+    <list default="true" id="5a503efd-87cf-434d-b3ca-25236f7c2ce6" name="Default Changelist" comment="Command pattern met Undo/Redo - Works, but still in progess">
+      <change afterPath="$PROJECT_DIR$/commands/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/IPlaceShape.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/placeRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/placeRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,18 +29,22 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
-  <component name="ProjectId" id="1XWP5RFbTYljQuV3opnAh518r9y" />
+  <component name="ProjectId" id="1YLR3eWkqqpuKOOrkkgNchawMiN" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -46,41 +65,64 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main" />
       <module name="graphicsEditorTest" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../bigproject" value="PREVIEW" />
+      </map>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="519a5044-dda2-45d0-bb98-c69a54ad6b42" name="Default Changelist" comment="" />
-      <created>1581158693081</created>
+      <changelist id="5a503efd-87cf-434d-b3ca-25236f7c2ce6" name="Default Changelist" comment="" />
+      <created>1582719689324</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1581158693081</updated>
-      <workItem from="1581158696275" duration="749000" />
-      <workItem from="1581237022598" duration="9490000" />
-      <workItem from="1581319389224" duration="4717000" />
-      <workItem from="1581420382422" duration="6423000" />
-      <workItem from="1581582536698" duration="475000" />
+      <updated>1582719689324</updated>
+      <workItem from="1582719690990" duration="3725000" />
+      <workItem from="1583049759675" duration="4690000" />
+      <workItem from="1583150883180" duration="1797000" />
+      <workItem from="1583222827699" duration="7193000" />
+      <workItem from="1583309084734" duration="1991000" />
+      <workItem from="1583322149628" duration="4958000" />
+      <workItem from="1583396956670" duration="4858000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Command pattern met Undo/Redo - Works, but still in progess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Command pattern met Undo/Redo - Works, but still in progess" />
   </component>
 </project>

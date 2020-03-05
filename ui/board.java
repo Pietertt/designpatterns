@@ -2,31 +2,40 @@ package ui;
 
 import java.util.ArrayList;
 
-import java.util.*;
 import java.awt.*;
 
-import javax.swing.Timer;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
+import java.util.List;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.Stack;
 
-import shapes.rectangle;
+import commands.Order;
+import commands.Rectangle;
+import commands.placeRectangle;
 import shapes.ellipse;
 
-import ui.ui;
 
 public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
       private static ui ui;
+
+      private List<Order> orderList = new ArrayList<Order>();
+
+      private Stack<Order> undoStack;
+      private Stack<Order> redoStack;
+      private List<Rectangle> deletedRects = new ArrayList<>();
+
+      private List<String> history;
 
       // //-----------------------------------------------------------------------------
       // //                                  colors
@@ -35,9 +44,12 @@ public class board extends JPanel implements MouseListener {
       public static int[] unselected = { 255, 0, 0 };
       public static int[] selected = { 255, 135, 135 };
 
+      public static int[] GRAY = { 213, 213, 213 };
+      public static int[] BLUE = { 76, 153, 229 };
+
       // //-----------------------------------------------------------------------------
       // //                                  Modes
-      // //-----------------------------------------------------------------------------  
+      // //-----------------------------------------------------------------------------
       
       public int mode = 0;
 
@@ -49,16 +61,28 @@ public class board extends JPanel implements MouseListener {
       public static int width = 500;
       public static int height = 500;
 
-      public ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      //public ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      public ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
+      public board(JFrame frame, ArrayList<Rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
+            undoStack = new Stack<>();
+            redoStack = new Stack<>();
+            history = new ArrayList<>();
             for(int i = 0; i < rectangles.size(); i++){
                   this.rects.add(rectangles.get(i));
             }
             this.frame = frame;
             this.ui = ui;
-            addMouseListener(this);  
+            addMouseListener(this);
+
+            // populates the rectangle array with the initial 5 rectangles
+
+      }
+
+
+      public void initiate() {
+
       }
 
       // paint method which is responsible for painting the window
@@ -66,6 +90,8 @@ public class board extends JPanel implements MouseListener {
 
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
+
+
 
             for(int i = 0; i < this.rects.size(); i++){
                   if(this.rects.get(i).pressed){
@@ -75,12 +101,26 @@ public class board extends JPanel implements MouseListener {
                   }
             }
 
-            // fills and colors specific areas based on values in the 'rects' array
+            //IPlaceShape rect = new Rectangle();
+
+            //rect.execute();
+
+            undoStack.clear();
+            //redoStack.clear();
+
+             //fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
-                  
-                  g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
-                  g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
+
+                  //g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
+                  //g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
+                  //Rectangle rectangle = new Rectangle(this.rects.get(i).x, this.rects.get(i).y,
+                          //this.rects.get(i).width, this.rects.get(i).height, 6, this.GRAY);
+
+                  placeRectangle placeRect = new placeRectangle(rects.get(i), frame, g2d);
+                  this.undoStack.push(placeRect);
+                  placeRect.execute();
             }
+
 
             // fills and colors specific areas based on values in the 'ellipses' array
             // for(int i = 0; i < ellipses.size(); i++){
@@ -88,9 +128,27 @@ public class board extends JPanel implements MouseListener {
             //       g2d.fill(new Ellipse2D.Double(ellipses.get(i).x, ellipses.get(i).y, ellipses.get(i).width, ellipses.get(i).height));
             // }
       }
-      
 
-      public ArrayList<rectangle> update(){
+      public void undoDrawRectangle() {
+            System.out.println("Stack: " + undoStack);
+            Order opt = undoStack.pop();
+            redoStack.add(opt);
+            int indexOfLastRect = rects.size() - 1;
+            deletedRects.add(rects.get(indexOfLastRect));
+            rects.remove(indexOfLastRect);
+            opt.undo();
+      }
+
+      public void redoDrawRectangle() {
+            System.out.println("Stack: " + undoStack);
+            Order opt = redoStack.pop();
+            //int indexOfLastRect = rects.size() - 1;
+            rects.addAll(deletedRects);
+            opt.redo();
+      }
+
+
+      public ArrayList<Rectangle> update() {
 
       this.mode = ui.getMode();
 
@@ -142,7 +200,7 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         if(this.dragging == true){
-                              rectangle rect = this.rects.get(this.rects.size() - 1);
+                              Rectangle rect = this.rects.get(this.rects.size() - 1);
                               Point a = MouseInfo.getPointerInfo().getLocation();
                               int x = (int)a.getX();
                               int y = (int)a.getY();
@@ -222,7 +280,7 @@ public class board extends JPanel implements MouseListener {
                         if(this.added == false){
                               int[] rgb = { 255, 0, 0 };
                               Point a = MouseInfo.getPointerInfo().getLocation();
-                              this.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, rgb));
+                              this.rects.add(new Rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY,1, 1, 1, this.GRAY));
                               this.added = true;
                               this.dragging = true;
                         } 
@@ -247,5 +305,5 @@ public class board extends JPanel implements MouseListener {
                   default:
                         break;
             }
-      } 
+      }
 }

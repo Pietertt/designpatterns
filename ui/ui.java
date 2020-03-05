@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 
+import commands.Rectangle;
 import shapes.rectangle;
 import shapes.ellipse;
 import ui.board;
@@ -29,7 +30,7 @@ import java.awt.image.BufferedImage;
 
 
 public class ui extends JPanel {
-      private ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      private ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
 
       public int mode = 0;
 
@@ -52,12 +53,12 @@ public class ui extends JPanel {
       }
 
       // method to update (or completely set) the rectangle arraylist from outside
-      public void set(ArrayList<rectangle> rects){
+      public void set(ArrayList<Rectangle> rects){
             this.rects = rects;
       }
 
       // method used to update the rectangle arraylist in the main program
-      public ArrayList<rectangle> get(){
+      public ArrayList<Rectangle> get(){
             return this.rects;
       }
 

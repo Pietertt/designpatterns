@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 
+import commands.Rectangle;
+import commands.placeRectangle;
 import shapes.rectangle;
 import shapes.ellipse;
 import ui.board;
@@ -23,21 +25,23 @@ import ui.ui;
 
 public class main {
 
-      private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      private static ArrayList<commands.Rectangle> rects = new ArrayList<commands.Rectangle>();
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
   public static void main(String[] args) {
 
       JFrame frame = new JFrame();
+      frame.setLayout(new BorderLayout());
 
-      // populates the rectangle array with the initial 5 rectangles
+
+
       for(int i = 0; i < 5; i++){
-            rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
+          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
       }
 
-      // populates the ellipses array with the initial 5 ellipses 
+      // populates the ellipses array with the initial 5
       for(int i = 0; i < 5; i++){
-            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
+          ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
       }
 
       ui ui = new ui();
@@ -45,8 +49,30 @@ public class main {
       // populates the board with the first shapes
       board board = new board(frame, rects, ellipses, ui);
 
+      JButton undo = new JButton("UNDO");
+      frame.add(undo, BorderLayout.EAST);
+
+
+
+      undo.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent actionEvent) {
+              board.undoDrawRectangle();
+          }
+      });
+
       frame.getContentPane().add(board);
       frame.getContentPane().add(ui, BorderLayout.WEST);
+
+      JButton redo = new JButton("REDO");
+      frame.getContentPane().add(redo,BorderLayout.NORTH);
+
+      redo.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent actionEvent) {
+              board.redoDrawRectangle();
+          }
+      });
       
       // // some window settings
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
