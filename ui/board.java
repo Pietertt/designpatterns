@@ -246,16 +246,10 @@ public class board extends JPanel implements MouseListener {
 
                               for(int j = 0; j < rect.handles.size(); j++){
                                     handle handle = rect.handles.get(j);
-                                    for(int k = 0; k < handle.width; k++){
-                                          if(x == handle.x + k){
-                                                for(int l = 0; l < handle.height; l++){
-                                                      if(y == handle.y + l){
-                                                            handle.selected = true;
-                                                            this.mode = 2;
-                                                            ui.setMode(2);
-                                                      }
-                                                }
-                                          }
+                                    if(handle.selected(x, y)){
+                                          handle.selected = true;
+                                          this.mode = 2;
+                                          ui.setMode(2);
                                     }
                               }
             
