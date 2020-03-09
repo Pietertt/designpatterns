@@ -9,6 +9,7 @@ import shapes.rectangle;
 import shapes.ellipse;
 import ui.board;
 import ui.ui;
+import io.io;
 
 public class main {
 
@@ -18,6 +19,9 @@ public class main {
   public static void main(String[] args) {
 
       JFrame frame = new JFrame();
+
+      io io = new io("test.pieter");
+      System.out.println(io.read());
 
       // populates the rectangle array with the initial 5 rectangles
       for(int i = 0; i < 5; i++){
