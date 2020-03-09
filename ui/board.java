@@ -37,9 +37,6 @@ public class board extends JPanel implements MouseListener {
       public static int width = 500;
       public static int height = 500;
 
-      public int lastX = 0;
-      public int lastY = 0;
-
       public ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
@@ -89,17 +86,17 @@ public class board extends JPanel implements MouseListener {
       
 
       public ArrayList<rectangle> update(){
+            this.offsetX = (int)frame.getLocation().getX();
+            this.offsetY = (int)frame.getLocation().getY();
 
-      this.offsetX = (int)frame.getLocation().getX();
-      this.offsetY = (int)frame.getLocation().getY();
+            this.width = frame.getWidth();
+            this.height = frame.getHeight();
 
-      this.width = frame.getWidth();
-      this.height = frame.getHeight();
-
-      this.mode = ui.getMode();
+            this.mode = ui.getMode();
             // decides what to execute based on the current mode
             // 0 ------------> default, allows dragging of rectangles
             // 1 ------------> a rectangle is being created
+            // 2 ------------> the rectangle is dragged
 
             switch(this.mode){ 
                   case 0: 
@@ -113,10 +110,10 @@ public class board extends JPanel implements MouseListener {
                                     int yAbsolute = (int)a.getY();
 
                                     // determines the current mouse position regarding the rectangle X and Y values
-                                    int xRelative = (int)a.getX() - this.offsetX - rect.width;
+                                    int xRelative = (int)a.getX() - this.offsetX - rect.width / 2;
                                     int yRelative = (int)a.getY() - this.offsetY - rect.height;
 
-                                    int xRect = xAbsolute - rect.width / 2;
+                                    int xRect = xAbsolute - rect.width;
                                     int yRect = yAbsolute - rect.height;
 
                                     // updates the current selected rectangle to the current mouse position
