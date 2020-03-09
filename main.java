@@ -16,22 +16,31 @@ public class main {
       private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-  public static void main(String[] args) {
+      public static void init(){
+            io io = new io("test.pieter");
+            ArrayList<String> commands =  io.read();
+            for(int i = 0; i < commands.size(); i++){
+                  String[] splitted = commands.get(i).split(" ");
+                  if(splitted[0].equals("rectangle")){
+                        rects.add(new rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
+                  }
+            }
+      }
 
+  public static void main(String[] args) {
       JFrame frame = new JFrame();
 
-      io io = new io("test.pieter");
-      System.out.println(io.read());
+      init();
 
-      // populates the rectangle array with the initial 5 rectangles
-      for(int i = 0; i < 5; i++){
-            rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.GRAY));
-      }
+      // // populates the rectangle array with the initial 5 rectangles
+      // for(int i = 0; i < 5; i++){
+      //       rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.GRAY));
+      // }
 
-      // populates the ellipses array with the initial 5 ellipses 
-      for(int i = 0; i < 5; i++){
-            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
-      }
+      // // populates the ellipses array with the initial 5 ellipses 
+      // for(int i = 0; i < 5; i++){
+      //       ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
+      // }
 
       ui ui = new ui();
 

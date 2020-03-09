@@ -34,8 +34,8 @@ public class board extends JPanel implements MouseListener {
 
       public static int offsetX = 200;
       public static int offsetY = 200;
-      public static int width = 500;
-      public static int height = 500;
+      public static int width = 600;
+      public static int height = 600;
 
       public ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
