@@ -29,19 +29,6 @@ public class rectangle extends shape {
             this.handles.add(new handle(this.x + this.width, this.y + this.height, this.color));
       }
 
-      public boolean mouse(int x, int y){
-            for(int i = 0; i < this.width; i++){
-                  if(x == this.x + i){
-                        for(int j = 0; j < this.height; j++){
-                              if(y == this.height + j){
-                                    return true;
-                              } 
-                        }
-                  }
-            }
-            return false;
-      }
-
       // updates the width and height of the rectangle 
       public void resize(int offsetX, int offsetY, int x, int y){
             this.select();

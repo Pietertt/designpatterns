@@ -209,28 +209,14 @@ public class board extends JPanel implements MouseListener {
                         int y = e.getY();
 
                         for(int i = 0; i < this.rects.size(); i++){
-                              this.rects.get(i).selected = false;
-                        }
-
-                        // determines where the user clicked and sets the 'selected' property of a rectangle to true when the user clicks in a rectangle
-                        for(int i = 0; i < this.rects.size(); i++){
                               rectangle rect = this.rects.get(i);
-
-                              for(int j = 0; j < rect.width; j++){
-                                    if(x == rect.x + j){
-                                          for(int k = 0; k < rect.height; k++){
-                                                if(y == rect.y + k){
-                                                      rect.selected = true;
-                                                      rect.select(); // created handles to enable resizing
-                                                      this.currentlySelected = i;
-                                                } 
-                                          }
-                                    }
+                              rect.selected = false;
+                              if(rect.selected(x, y)){
+                                    rect.selected = true;
+                                    rect.select(); // created handles to enable resizing
+                                    this.currentlySelected = i;
                               }
-
-                              
                         }
-
                   case 1:
                         
                         break;
