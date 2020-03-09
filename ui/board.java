@@ -1,33 +1,13 @@
 package ui;
 
-import java.util.ArrayList;
-
 import java.util.*;
 import java.awt.*;
-
-import javax.swing.Timer;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-
+import javax.swing.*;
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
 
 import shapes.rectangle;
 import shapes.ellipse;
 import shapes.handle;
-
-import javax.swing.*;
-
-import javax.swing.border.Border;
-
-import ui.ui;
 
 public class board extends JPanel implements MouseListener {
 
@@ -254,24 +234,13 @@ public class board extends JPanel implements MouseListener {
                               }
             
                               // looping through the width of the current rectangle
-                              for(int j = 0; j < rect.width; j++){
-                                    // checking if the current mouse.x is within the range of the rectangle width
-                                    if(x == rect.x + j){
-                                          // looping through the height of the rectangle
-                                          for(int k = 0; k < rect.height; k++){
-                                                // checking if the current mouse.y is within the range of the rectangle height
-                                                if(y == rect.y + k){
-                                                      this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                                                      if(rect.selected){
-                                                            rect.moving = true;
-                                                      }
-                                                }
-                                          }
+                              if(rect.selected(x, y)){
+                                    this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                    if(rect.selected){
+                                          rect.moving = true;
                                     }
                               }
                         }
-
-                  
                         break;
                   case 1:
                         if(this.added == false){

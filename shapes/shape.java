@@ -1,9 +1,6 @@
 package shapes;
 
-import java.util.ArrayList;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class shape extends JPanel {
       public int x;

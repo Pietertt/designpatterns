@@ -1,11 +1,5 @@
 package shapes;
 
-import javax.swing.*;
-
-import java.awt.*;
-
-import shapes.handle;
-
 import java.util.ArrayList;
 
 public class rectangle extends shape {
