@@ -10,15 +10,13 @@ import java.util.ArrayList;
 
 public class rectangle extends shape {
 
-      public int width;
-      public int height;
       public int id;
       public int[] color;
 
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
       public rectangle(int x, int y, int width, int height, int id, int[] rgb){
-            super(x, y, rgb);
+            super(x, y, width, height, rgb);
             this.width = width;
             this.height = height;
             this.id = id;
