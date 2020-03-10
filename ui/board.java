@@ -36,22 +36,22 @@ public class board extends JPanel implements MouseListener {
       public static int height = 600;
 
       public ArrayList<rectangle> rects = new ArrayList<rectangle>();
-      public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
+      public ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
+      public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell, ui ui) {
 
-            for(int i = 0; i < rectangles.size(); i++){
+            for (int i = 0; i < rectangles.size(); i++) {
                   this.rects.add(rectangles.get(i));
             }
 
-            for(int i = 0; i < ell.size(); i++){
+            for (int i = 0; i < ell.size(); i++) {
                   this.ellipses.add(ell.get(i));
             }
 
             this.frame = frame;
             super.setFocusable(true);
             this.ui = ui;
-            addMouseListener(this);  
+            addMouseListener(this);
 
             // fires an event with the 'DELETE' identifier when the backspace is pressed
             getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("BACK_SPACE"), "DELETE");
@@ -59,24 +59,27 @@ public class board extends JPanel implements MouseListener {
       }
 
       // paint method which is responsible for painting the window
-      @Override public void paintComponent(Graphics g) {
+      @Override
+      public void paintComponent(Graphics g) {
 
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint( RenderingHints. KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+            g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-            for(int i = 0; i < this.ellipses.size(); i++){
+            for (int i = 0; i < this.ellipses.size(); i++) {
                   ellipse e = this.ellipses.get(i);
 
-                  if(e.selected){
+                  if (e.selected) {
                         g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
                         g2d.fillOval(e.x - 2, e.y - 2, e.width + 4, e.height + 4);
 
-                        for(int j = 0; j < e.handles.size(); j++){
+                        for (int j = 0; j < e.handles.size(); j++) {
                               g2d.setColor(new Color(255, 255, 255));
-                              g2d.fillOval(e.handles.get(j).x - 6, e.handles.get(j).y - 6, e.handles.get(j).width + 4, e.handles.get(j).height + 4);
+                              g2d.fillOval(e.handles.get(j).x - 6, e.handles.get(j).y - 6, e.handles.get(j).width + 4,
+                                          e.handles.get(j).height + 4);
                               g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
-                              g2d.fillOval(e.handles.get(j).x - 4, e.handles.get(j).y - 4, e.handles.get(j).width, e.handles.get(j).height);
+                              g2d.fillOval(e.handles.get(j).x - 4, e.handles.get(j).y - 4, e.handles.get(j).width,
+                                          e.handles.get(j).height);
                         }
                   }
 
@@ -86,32 +89,33 @@ public class board extends JPanel implements MouseListener {
             }
 
             // fills and colors specific areas based on values in the 'rects' array
-            for(int i = 0; i < this.rects.size(); i++){
+            for (int i = 0; i < this.rects.size(); i++) {
                   rectangle rect = this.rects.get(i);
 
-                  if(rect.selected){
-                        //draw a rectangle which is slightly bigger to act as a border
+                  if (rect.selected) {
+                        // draw a rectangle which is slightly bigger to act as a border
                         g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
                         g2d.fillRect(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
 
-                        for(int j = 0; j < rect.handles.size(); j++){
+                        for (int j = 0; j < rect.handles.size(); j++) {
                               g2d.setColor(new Color(255, 255, 255));
-                              g2d.fillOval(rect.handles.get(j).x - 2, rect.handles.get(j).y - 2, rect.handles.get(j).width + 4, rect.handles.get(j).height + 4);
+                              g2d.fillOval(rect.handles.get(j).x - 2, rect.handles.get(j).y - 2,
+                                          rect.handles.get(j).width + 4, rect.handles.get(j).height + 4);
                               g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
-                              g2d.fillOval(rect.handles.get(j).x, rect.handles.get(j).y, rect.handles.get(j).width, rect.handles.get(j).height);
+                              g2d.fillOval(rect.handles.get(j).x, rect.handles.get(j).y, rect.handles.get(j).width,
+                                          rect.handles.get(j).height);
                         }
                   }
 
-                  // draw the rectangle 
+                  // draw the rectangle
                   g2d.setColor(new Color(rect.color[0], rect.color[1], rect.color[2]));
                   g2d.fillRect(rect.x, rect.y, rect.width, rect.height);
             }
       }
-      
 
-      public ArrayList<rectangle> update(){
-            this.offsetX = (int)frame.getLocation().getX();
-            this.offsetY = (int)frame.getLocation().getY();
+      public ArrayList<rectangle> update() {
+            this.offsetX = (int) frame.getLocation().getX();
+            this.offsetY = (int) frame.getLocation().getY();
 
             this.width = frame.getWidth();
             this.height = frame.getHeight();
@@ -122,29 +126,46 @@ public class board extends JPanel implements MouseListener {
             // 1 ------------> a rectangle is being created
             // 2 ------------> the rectangle is dragged
 
-            switch(this.mode){ 
-                  case 0: 
-                        for(int i = 0; i < this.ellipses.size(); i++){
+            switch (this.mode) {
+                  case 0:
+                        for (int i = 0; i < this.ellipses.size(); i++) {
                               ellipse e = this.ellipses.get(i);
-                              if(e.moving){
+                              if (e.moving) {
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // the absolute X and Y values of the cursor
-                                    int xAbsolute = (int)a.getX();
-                                    int yAbsolute = (int)a.getY();
+                                    int xAbsolute = (int) a.getX();
+                                    int yAbsolute = (int) a.getY();
 
-                                    int xRelative = (int)a.getX() - this.offsetX - e.width;
-                                    int yRelative = (int)a.getY() - this.offsetY - e.height;
+                                    int xRelative = (int) a.getX() - this.offsetX - e.width;
+                                    int yRelative = (int) a.getY() - this.offsetY - e.height;
 
                                     int xEll = xAbsolute - e.width;
                                     int yEll = yAbsolute - e.height;
 
-                                    if(xEll > this.offsetX){ // the X position of the rectangle must be bigger than the window X offset
-                                          if(xEll < (this.offsetX + width - e.width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
-                                                if(yEll > this.offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
-                                                      if(yEll < (this.offsetY + height - e.height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
+                                    if (xEll > this.offsetX) { // the X position of the rectangle must be bigger than
+                                                               // the window X offset
+                                          if (xEll < (this.offsetX + width - e.width)) { // the X position of the
+                                                                                         // rectangle must be bigger
+                                                                                         // than the X offset of the
+                                                                                         // screen + the height of the
+                                                                                         // screen + the width of the
+                                                                                         // rectangle / 2
+                                                if (yEll > this.offsetY) { // the Y position of the rectangle must be
+                                                                           // bigger than the window Y offset
+                                                      if (yEll < (this.offsetY + height - e.height)) { // the Y position
+                                                                                                       // of the
+                                                                                                       // rectangle must
+                                                                                                       // be bigger than
+                                                                                                       // the offset of
+                                                                                                       // the window +
+                                                                                                       // the height of
+                                                                                                       // the window -
+                                                                                                       // the height of
+                                                                                                       // the rectangle
+                                                                                                       // / 2
                                                             e.x = xRelative;
-                                                            e.y = yRelative;   
+                                                            e.y = yRelative;
                                                             e.select();
                                                       } else {
                                                             e.y = height - e.height;
@@ -161,29 +182,52 @@ public class board extends JPanel implements MouseListener {
                               }
                         }
 
-                        for(int i = 0; i < this.rects.size(); i++){
+                        for (int i = 0; i < this.rects.size(); i++) {
                               rectangle rect = this.rects.get(i);
-                              if(this.rects.get(i).moving){
+                              if (this.rects.get(i).moving) {
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // the absolute X and Y values of the cursor
-                                    int xAbsolute = (int)a.getX();
-                                    int yAbsolute = (int)a.getY();
+                                    int xAbsolute = (int) a.getX();
+                                    int yAbsolute = (int) a.getY();
 
                                     // determines the current mouse position regarding the rectangle X and Y values
-                                    int xRelative = (int)a.getX() - this.offsetX - rect.width / 2;
-                                    int yRelative = (int)a.getY() - this.offsetY - rect.height;
+                                    int xRelative = (int) a.getX() - this.offsetX - rect.width / 2;
+                                    int yRelative = (int) a.getY() - this.offsetY - rect.height;
 
                                     int xRect = xAbsolute - rect.width;
                                     int yRect = yAbsolute - rect.height;
 
                                     // updates the current selected rectangle to the current mouse position
-                                    if(xRect > this.offsetX){ // the X position of the rectangle must be bigger than the window X offset
-                                          if(xRect < (this.offsetX + width - rect.width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
-                                                if(yRect > this.offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
-                                                      if(yRect < (this.offsetY + height - rect.height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
+                                    if (xRect > this.offsetX) { // the X position of the rectangle must be bigger than
+                                                                // the window X offset
+                                          if (xRect < (this.offsetX + width - rect.width)) { // the X position of the
+                                                                                             // rectangle must be bigger
+                                                                                             // than the X offset of the
+                                                                                             // screen + the height of
+                                                                                             // the screen + the width
+                                                                                             // of the rectangle / 2
+                                                if (yRect > this.offsetY) { // the Y position of the rectangle must be
+                                                                            // bigger than the window Y offset
+                                                      if (yRect < (this.offsetY + height - rect.height)) { // the Y
+                                                                                                           // position
+                                                                                                           // of the
+                                                                                                           // rectangle
+                                                                                                           // must be
+                                                                                                           // bigger
+                                                                                                           // than the
+                                                                                                           // offset of
+                                                                                                           // the window
+                                                                                                           // + the
+                                                                                                           // height of
+                                                                                                           // the window
+                                                                                                           // - the
+                                                                                                           // height of
+                                                                                                           // the
+                                                                                                           // rectangle
+                                                                                                           // / 2
                                                             rect.x = xRelative;
-                                                            rect.y = yRelative;   
+                                                            rect.y = yRelative;
                                                             rect.select();
                                                       } else {
                                                             rect.y = height - rect.height;
@@ -197,31 +241,33 @@ public class board extends JPanel implements MouseListener {
                                     } else {
                                           rect.x = 0;
                                     }
-                              } 
+                              }
                         }
                         break;
                   case 1:
-                        if(this.dragging == true){
-                              // updates the values of a rectangle to the mouse coordinates when dragging is allowed
+                        if (this.dragging == true) {
+                              // updates the values of a rectangle to the mouse coordinates when dragging is
+                              // allowed
                               // the newest rectangle is selected
                               rectangle rect = this.rects.get(this.rects.size() - 1);
                               Point a = MouseInfo.getPointerInfo().getLocation();
 
-                              // resizes the rectangle when the mouse position minus the offset is larger than the INITIAL x value of the rectangle
-                              if(((int)a.getX() - offsetX) > rect.x){
-                                    rect.resize(offsetX, offsetY, (int)a.getX(), (int)a.getY());
+                              // resizes the rectangle when the mouse position minus the offset is larger than
+                              // the INITIAL x value of the rectangle
+                              if (((int) a.getX() - offsetX) > rect.x) {
+                                    rect.resize(offsetX, offsetY, (int) a.getX(), (int) a.getY());
                               }
                         }
                         break;
                   case 2:
                         Point a = MouseInfo.getPointerInfo().getLocation();
-                        int x = (int)a.getX();
-                        int y = (int)a.getY();
-                        for(int i = 0; i < this.rects.size(); i++){
+                        int x = (int) a.getX();
+                        int y = (int) a.getY();
+                        for (int i = 0; i < this.rects.size(); i++) {
                               rectangle rect = this.rects.get(i);
-                              for(int j = 0; j < rect.handles.size(); j++){
+                              for (int j = 0; j < rect.handles.size(); j++) {
                                     handle handle = rect.handles.get(j);
-                                    if(handle.selected){
+                                    if (handle.selected) {
                                           rect.width = (x - offsetX) - rect.x;
                                           rect.height = (y - offsetY) - rect.y;
                                           handle.update(x - offsetX, y - offsetY);
@@ -239,26 +285,26 @@ public class board extends JPanel implements MouseListener {
             return this.rects;
       }
 
-      public void mouseClicked(MouseEvent e) {       
-            switch(this.mode){
+      public void mouseClicked(MouseEvent e) {
+            switch (this.mode) {
                   case 0:
                         // the absolute X and Y values of the cursor
                         int x = e.getX();
                         int y = e.getY();
 
-                        for(int i = 0; i < this.rects.size(); i++){
+                        for (int i = 0; i < this.rects.size(); i++) {
                               rectangle rect = this.rects.get(i);
                               rect.selected = false;
-                              if(rect.selected(x, y)){
+                              if (rect.selected(x, y)) {
                                     rect.selected = true;
                                     rect.select(); // created handles to enable resizing
                               }
                         }
 
-                        for(int i = 0; i < this.ellipses.size(); i++){
+                        for (int i = 0; i < this.ellipses.size(); i++) {
                               ellipse ell = this.ellipses.get(i);
                               ell.selected = false;
-                              if(ell.selected(x, y)){
+                              if (ell.selected(x, y)) {
                                     ell.selected = true;
                                     ell.select();
                               }
@@ -266,27 +312,43 @@ public class board extends JPanel implements MouseListener {
                   default:
                         break;
             }
-      }  
-    
+      }
+
       public void mouseEntered(MouseEvent e) {
-            
-      }  
-      public void mouseExited(MouseEvent e) {}  
+
+      }
+
+      public void mouseExited(MouseEvent e) {
+      }
+
       public void mousePressed(MouseEvent e) {
 
-            //-----------------------------------------------------------------------------
-            //                            Selection handler
-            //-----------------------------------------------------------------------------
-    
-            switch(this.mode){
+            // -----------------------------------------------------------------------------
+            // Selection handler
+            // -----------------------------------------------------------------------------
+
+            switch (this.mode) {
                   case 0:
-                        // looping through each rectangle 
-                        for(int i = 0; i < this.rects.size(); i++){
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              int x = e.getX();
+                              int y = e.getY();
+
+                              ellipse ell = this.ellipses.get(i);
+
+                              if(ell.selected(x, y)){
+                                    this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                    if(ell.selected){
+                                          ell.moving = true;
+                                    } 
+                              }
+                        }
+
+                        // looping through each rectangle
+                        for (int i = 0; i < this.rects.size(); i++) {
                               int x = e.getX();
                               int y = e.getY();
 
                               rectangle rect = this.rects.get(i);
-                              ellipse ell = this.ellipses.get(i);
 
                               for(int j = 0; j < rect.handles.size(); j++){
                                     handle handle = rect.handles.get(j);
@@ -303,13 +365,6 @@ public class board extends JPanel implements MouseListener {
                                     if(rect.selected){
                                           rect.moving = true;
                                     }
-                              }
-
-                              if(ell.selected(x, y)){
-                                    this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                                    if(ell.selected){
-                                          ell.moving = true;
-                                    } 
                               }
                         }
                         break;
@@ -373,7 +428,13 @@ public class board extends JPanel implements MouseListener {
                         if(rects.get(i).selected){
                               rects.remove(i);
                         }
-                }
+                  }
+
+                  for(int i = 0; i < ellipses.size(); i++){
+                        if(ellipses.get(i).selected){
+                              ellipses.remove(i);
+                        }
+                  }
             }
-        };
+      };
 }
