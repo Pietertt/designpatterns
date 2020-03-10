@@ -274,6 +274,18 @@ public class board extends JPanel implements MouseListener {
                                     }
                               }
                         }
+
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              ellipse ell = this.ellipses.get(i);
+                              for(int j = 0; j < ell.handles.size(); j++){
+                                    handle h = ell.handles.get(j);
+                                    if (h.selected) {
+                                          ell.width = (x - offsetX) - ell.x;
+                                          ell.height = (y - offsetY) - ell.y;
+                                          h.update(x - offsetX, y - offsetY);
+                                    }
+                              }
+                        }
                         break;
                   default:
                         break;
@@ -334,6 +346,15 @@ public class board extends JPanel implements MouseListener {
                               int y = e.getY();
 
                               ellipse ell = this.ellipses.get(i);
+
+                              for(int j = 0; j < ell.handles.size(); j++){
+                                    handle handle = ell.handles.get(j);
+                                    if(handle.selected(x, y)){
+                                          handle.selected = true;
+                                          this.mode = 2;
+                                          ui.setMode(2);
+                                    }
+                              }
 
                               if(ell.selected(x, y)){
                                     this.setCursor(new Cursor(Cursor.HAND_CURSOR));
