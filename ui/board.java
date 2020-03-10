@@ -41,9 +41,15 @@ public class board extends JPanel implements MouseListener {
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
       public board(JFrame frame, ArrayList<rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
+
             for(int i = 0; i < rectangles.size(); i++){
                   this.rects.add(rectangles.get(i));
             }
+
+            for(int i = 0; i < ell.size(); i++){
+                  this.ellipses.add(ell.get(i));
+            }
+
             this.frame = frame;
             super.setFocusable(true);
             this.ui = ui;
@@ -60,6 +66,13 @@ public class board extends JPanel implements MouseListener {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint( RenderingHints. KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+            for(int i = 0; i < this.ellipses.size(); i++){
+                  ellipse e = this.ellipses.get(i);
+                  g2d.setColor(new Color(e.color[0], e.color[1], e.color[2]));
+                  g2d.fillOval(e.x, e.y, e.width, e.height);
+
+            }
 
             // fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
