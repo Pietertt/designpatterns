@@ -124,9 +124,46 @@ public class board extends JPanel implements MouseListener {
 
             switch(this.mode){ 
                   case 0: 
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              ellipse e = this.ellipses.get(i);
+                              if(e.moving){
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
+
+                                    // the absolute X and Y values of the cursor
+                                    int xAbsolute = (int)a.getX();
+                                    int yAbsolute = (int)a.getY();
+
+                                    int xRelative = (int)a.getX() - this.offsetX - e.width;
+                                    int yRelative = (int)a.getY() - this.offsetY - e.height;
+
+                                    int xEll = xAbsolute - e.width;
+                                    int yEll = yAbsolute - e.height;
+
+                                    if(xEll > this.offsetX){ // the X position of the rectangle must be bigger than the window X offset
+                                          if(xEll < (this.offsetX + width - e.width)){ // the X position of the rectangle must be bigger than the X offset of the screen + the height of the screen + the width of the rectangle / 2
+                                                if(yEll > this.offsetY){ // the Y position of the rectangle must be bigger than the window Y offset
+                                                      if(yEll < (this.offsetY + height - e.height)){ // the Y position of the rectangle must be bigger than the offset of the window + the height of the window - the height of the rectangle / 2
+                                                            e.x = xRelative;
+                                                            e.y = yRelative;   
+                                                            e.select();
+                                                      } else {
+                                                            e.y = height - e.height;
+                                                      }
+                                                } else {
+                                                      e.y = 0;
+                                                }
+                                          } else {
+                                                e.x = width - e.width;
+                                          }
+                                    } else {
+                                          e.x = 0;
+                                    }
+                              }
+                        }
+
                         for(int i = 0; i < this.rects.size(); i++){
+                              rectangle rect = this.rects.get(i);
                               if(this.rects.get(i).moving){
-                                    rectangle rect = this.rects.get(i);
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // the absolute X and Y values of the cursor
@@ -226,9 +263,6 @@ public class board extends JPanel implements MouseListener {
                                     ell.select();
                               }
                         }
-                  case 1:
-                        
-                        break;
                   default:
                         break;
             }
@@ -252,6 +286,7 @@ public class board extends JPanel implements MouseListener {
                               int y = e.getY();
 
                               rectangle rect = this.rects.get(i);
+                              ellipse ell = this.ellipses.get(i);
 
                               for(int j = 0; j < rect.handles.size(); j++){
                                     handle handle = rect.handles.get(j);
@@ -268,6 +303,13 @@ public class board extends JPanel implements MouseListener {
                                     if(rect.selected){
                                           rect.moving = true;
                                     }
+                              }
+
+                              if(ell.selected(x, y)){
+                                    this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                                    if(ell.selected){
+                                          ell.moving = true;
+                                    } 
                               }
                         }
                         break;
@@ -293,14 +335,25 @@ public class board extends JPanel implements MouseListener {
                         for(int i = 0; i < this.rects.size(); i++){
                               this.rects.get(i).moving = false;
                         }
+
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              this.ellipses.get(i).moving = false;
+                        }
+
                         break;
                   case 1:
                         // resets the 'dragging' and 'added' variables to enable dragging later on 
                         this.dragging = false;
                         this.added = false;
+
                         for(int i = 0; i < this.rects.size(); i++){
                               this.rects.get(i).selected = false;
                         }
+
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              this.ellipses.get(i).selected = false;
+                        }
+
                         // set the mode to 0 to enable selecting and moving rectangles
                         this.ui.setMode(0);
                         break;
