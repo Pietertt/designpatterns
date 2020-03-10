@@ -9,7 +9,7 @@ import shapes.rectangle;
 import shapes.ellipse;
 import ui.board;
 import ui.ui;
-import io.io;
+import io.parser;
 
 public class main {
 
@@ -17,8 +17,8 @@ public class main {
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
       public static void init(){
-            io io = new io("test.pieter");
-            ArrayList<String> commands =  io.read();
+            parser p = new parser("test.pieter");
+            ArrayList<String> commands =  p.read();
             for(int i = 0; i < commands.size(); i++){
                   String[] splitted = commands.get(i).split(" ");
                   if(splitted[0].equals("rectangle")){
@@ -32,15 +32,10 @@ public class main {
 
       init();
 
-      // // populates the rectangle array with the initial 5 rectangles
-      // for(int i = 0; i < 5; i++){
-      //       rects.add(new rectangle(50 + i * 75, 50, 50, 50, i, board.GRAY));
-      // }
-
-      // // populates the ellipses array with the initial 5 ellipses 
-      // for(int i = 0; i < 5; i++){
-      //       ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
-      // }
+      // populates the ellipses array with the initial 5 ellipses 
+      for(int i = 0; i < 5; i++){
+            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
+      }
 
       ui ui = new ui();
 

@@ -4,10 +4,10 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.*;
 
-public class io {
+public class parser {
       private File file;
 
-      public io(String filename){
+      public parser(String filename){
             this.file = new File(filename);
       }
 
