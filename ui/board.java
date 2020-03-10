@@ -27,8 +27,6 @@ public class board extends JPanel implements MouseListener {
       
       public int mode = 0;
 
-      public int currentlySelected;
-
       public boolean dragging = false;
       public boolean added = false;
 
@@ -69,6 +67,19 @@ public class board extends JPanel implements MouseListener {
 
             for(int i = 0; i < this.ellipses.size(); i++){
                   ellipse e = this.ellipses.get(i);
+
+                  if(e.selected){
+                        g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
+                        g2d.fillOval(e.x - 2, e.y - 2, e.width + 4, e.height + 4);
+
+                        for(int j = 0; j < e.handles.size(); j++){
+                              g2d.setColor(new Color(255, 255, 255));
+                              g2d.fillOval(e.handles.get(j).x - 6, e.handles.get(j).y - 6, e.handles.get(j).width + 4, e.handles.get(j).height + 4);
+                              g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
+                              g2d.fillOval(e.handles.get(j).x - 4, e.handles.get(j).y - 4, e.handles.get(j).width, e.handles.get(j).height);
+                        }
+                  }
+
                   g2d.setColor(new Color(e.color[0], e.color[1], e.color[2]));
                   g2d.fillOval(e.x, e.y, e.width, e.height);
 
@@ -204,7 +215,15 @@ public class board extends JPanel implements MouseListener {
                               if(rect.selected(x, y)){
                                     rect.selected = true;
                                     rect.select(); // created handles to enable resizing
-                                    this.currentlySelected = i;
+                              }
+                        }
+
+                        for(int i = 0; i < this.ellipses.size(); i++){
+                              ellipse ell = this.ellipses.get(i);
+                              ell.selected = false;
+                              if(ell.selected(x, y)){
+                                    ell.selected = true;
+                                    ell.select();
                               }
                         }
                   case 1:

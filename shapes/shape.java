@@ -2,6 +2,8 @@ package shapes;
 
 import javax.swing.*;
 
+import java.util.ArrayList;
+
 public class shape extends JPanel {
       public int x;
       public int y;
@@ -12,6 +14,8 @@ public class shape extends JPanel {
 
       public boolean moving = false;
       public boolean selected = false;
+
+      public ArrayList<handle> handles  = new ArrayList<handle>();
 
       public shape(int x, int y, int width, int height, int[] color){
             this.x = x;
@@ -32,5 +36,11 @@ public class shape extends JPanel {
                   }
             }
             return false;
+      }
+
+      // clears all handels and creates a new one on the current position
+      public void select(){
+            this.handles.clear();
+            this.handles.add(new handle(this.x + this.width, this.y + this.height, this.color));
       }
 }

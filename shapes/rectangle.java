@@ -1,13 +1,9 @@
 package shapes;
 
-import java.util.ArrayList;
-
 public class rectangle extends shape {
 
       public int id;
       public int[] color;
-
-      public ArrayList<handle> handles  = new ArrayList<handle>();
 
       public rectangle(int x, int y, int width, int height, int id, int[] rgb){
             super(x, y, width, height, rgb);
@@ -15,12 +11,6 @@ public class rectangle extends shape {
             this.height = height;
             this.id = id;
             this.color = rgb;
-      }
-
-      // clears all handels and creates a new one on the current position
-      public void select(){
-            this.handles.clear();
-            this.handles.add(new handle(this.x + this.width, this.y + this.height, this.color));
       }
 
       // updates the width and height of the rectangle 
