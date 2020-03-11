@@ -15,12 +15,17 @@ public class ui extends JPanel {
 
       public ui(){
             JButton rect = new JButton();
-            JButton ellipse = new JButton("Add rectangle");
+            JButton ellipse = new JButton();
 
             rect.setIcon(new javax.swing.ImageIcon(getClass().getResource("rectangle.png")));
             rect.setBorderPainted(false);
             rect.setFocusPainted(false);
             rect.setContentAreaFilled(false);
+
+            ellipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("ellipse.png")));
+            ellipse.setBorderPainted(false);
+            ellipse.setFocusPainted(false);
+            ellipse.setContentAreaFilled(false);
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e){ 
