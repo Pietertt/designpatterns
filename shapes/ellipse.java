@@ -2,10 +2,7 @@ package shapes;
 
 public class ellipse extends shape {
 
-      public int width;
-      public int height;
-
-      public ellipse(int x, int y, int width, int height, int[] rgb){
+      public ellipse(int x, int y, int width, int height, int id, int[] rgb){
             super(x, y, width, height, rgb);
       }
 }

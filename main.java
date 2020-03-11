@@ -27,8 +27,10 @@ public class main {
                   String[] splitted = commands.get(i).split(" ");
                   if(splitted[0].equals("rectangle")){
                         s.rects.add(new rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
-                  } else if(splitted[0].equals("ellipse")){
-                        s.ellipses.add(new ellipse(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), board.GRAY));
+                  }  
+                  
+                  if(splitted[0].equals("ellipse")){
+                        s.ellipses.add(new ellipse(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
                   }
             }
 
@@ -37,7 +39,7 @@ public class main {
 
   public static void main(String[] args) {
       JFrame frame = new JFrame();      
-      
+
       ui ui = new ui();
 
       // populates the board with the first shapes
