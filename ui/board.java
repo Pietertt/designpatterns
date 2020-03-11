@@ -263,6 +263,7 @@ public class board extends JPanel implements MouseListener {
                         Point a = MouseInfo.getPointerInfo().getLocation();
                         int x = (int) a.getX();
                         int y = (int) a.getY();
+                        
                         for (int i = 0; i < this.rects.size(); i++) {
                               rectangle rect = this.rects.get(i);
                               for (int j = 0; j < rect.handles.size(); j++) {
