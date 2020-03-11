@@ -116,6 +116,9 @@ public class board extends JPanel implements MouseListener {
                   placeRectangle placeRect = new placeRectangle(rects.get(i), frame, g2d);
                   this.undoStack.push(placeRect);
                   placeRect.execute();
+                  //frame.add(rects.get(i));
+                  this.addMouseListener(rects.get(i));
+                  //frame.addMouseListener(rects.get(i));
                   //frame.add();
                   //frame.getContentPane().add(rects.get(i));
                   //this.add(rects.get(i));
