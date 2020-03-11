@@ -2,31 +2,12 @@ package ui;
 
 import java.util.ArrayList;
 
-import java.util.*;
-import java.awt.*;
-
-import javax.swing.Timer;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
 
-import commands.Rectangle;
-import shapes.rectangle;
-import shapes.ellipse;
-import ui.board;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.image.BufferedImage;
-
+import shapes.Rectangle;
 
 
 public class ui extends JPanel {
@@ -43,7 +24,7 @@ public class ui extends JPanel {
             rect.setContentAreaFilled(false);
 
             rect.addActionListener(new ActionListener() { 
-                  public void actionPerformed(ActionEvent e) { 
+                  public void actionPerformed(ActionEvent e) {
                         setMode(1);
                   }
             });

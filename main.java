@@ -1,31 +1,22 @@
 import java.util.ArrayList;
 
-import java.util.*;
 import java.awt.*;
 
 import javax.swing.Timer;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
 
-import commands.Rectangle;
-import commands.placeRectangle;
-import shapes.rectangle;
+import shapes.Rectangle;
 import shapes.ellipse;
 import ui.board;
 import ui.ui;
 
 public class main {
 
-      private static ArrayList<commands.Rectangle> rects = new ArrayList<commands.Rectangle>();
+      private static ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
   public static void main(String[] args) {
@@ -36,7 +27,7 @@ public class main {
 
 
       for(int i = 0; i < 5; i++){
-          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
+          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected, false, false));
       }
 
       // populates the ellipses array with the initial 5
@@ -50,7 +41,7 @@ public class main {
       board board = new board(frame, rects, ellipses, ui);
 
       JButton undo = new JButton("UNDO");
-      frame.add(undo, BorderLayout.EAST);
+      //frame.add(undo, BorderLayout.EAST);
 
 
 
@@ -65,7 +56,7 @@ public class main {
       frame.getContentPane().add(ui, BorderLayout.WEST);
 
       JButton redo = new JButton("REDO");
-      frame.getContentPane().add(redo,BorderLayout.NORTH);
+      //frame.getContentPane().add(redo,BorderLayout.NORTH);
 
       redo.addActionListener(new ActionListener() {
           @Override

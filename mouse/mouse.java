@@ -3,14 +3,13 @@ package mouse;
 import java.util.ArrayList;
 
 import java.util.*;
-import java.awt.event.MouseEvent;
 
-import shapes.*;
+import shapes.Rectangle;
 
 public class mouse extends TimerTask {
-      public ArrayList<rectangle> rects;
+      public ArrayList<Rectangle> rects;
 
-      public mouse(ArrayList<rectangle> rects){
+      public mouse(ArrayList<Rectangle> rects){
             this.rects = rects;
       }
 

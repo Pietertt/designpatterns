@@ -1,10 +1,6 @@
 package shapes;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
-
-public class ellipse extends shape {
+public class ellipse extends Shape {
 
       public int width;
       public int height;

@@ -1,5 +1,6 @@
 package commands;
 
+import shapes.Rectangle;
 import ui.board;
 
 import javax.swing.*;
@@ -7,11 +8,11 @@ import java.awt.*;
 import java.util.Stack;
 
 public class placeRectangle implements Order {
-    private Rectangle rectangle;
+    private shapes.Rectangle rectangle;
     JFrame canvas;
 
-    private static final Stack<Rectangle> undoStack = new Stack<>();
-    private static final Stack<Rectangle> redoStack = new Stack<>();
+    private static final Stack<shapes.Rectangle> undoStack = new Stack<>();
+    private static final Stack<shapes.Rectangle> redoStack = new Stack<>();
 
     Graphics2D g;
 
@@ -28,11 +29,7 @@ public class placeRectangle implements Order {
 
     @Override
     public void execute() {
-        //jpanel.add(new Rectangle(rectangle.x, rectangle.y,rectangle.width,rectangle.height,rectangle.id,rectangle.rgb));
         rectangle.paintComponent(g);
-        //canvas.add(rectangle, BorderLayout.CENTER);
-        //rectangle.repaint();
-        //canvas.repaint();
     }
 
     @Override

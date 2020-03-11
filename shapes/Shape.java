@@ -1,4 +1,4 @@
-package commands;
+package shapes;
 
 import javax.swing.*;
 import java.awt.*;
