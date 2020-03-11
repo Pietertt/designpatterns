@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 import shapes.rectangle;
 import shapes.ellipse;
+import shapes.shapes;
 import ui.board;
 import ui.ui;
 import io.parser;
@@ -16,31 +17,31 @@ public class main {
       private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
       private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public static void init(){
+      shapes s;
+
+      public static shapes init(){
             parser p = new parser("test.pieter");
             ArrayList<String> commands =  p.read();
+            shapes s = new shapes();
             for(int i = 0; i < commands.size(); i++){
                   String[] splitted = commands.get(i).split(" ");
                   if(splitted[0].equals("rectangle")){
-                        rects.add(new rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
+                        s.rects.add(new rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
+                  } else if(splitted[0].equals("ellipse")){
+                        s.ellipses.add(new ellipse(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), board.GRAY));
                   }
             }
+
+            return s;
       }
 
   public static void main(String[] args) {
-      JFrame frame = new JFrame();
-
-      init();
-
-      // populates the ellipses array with the initial 5 ellipses 
-      for(int i = 0; i < 5; i++){
-            ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.GRAY));
-      }
-
+      JFrame frame = new JFrame();      
+      
       ui ui = new ui();
 
       // populates the board with the first shapes
-      board board = new board(frame, rects, ellipses, ui);
+      board board = new board(frame, init(), ui);
 
       // added the board and the UI to the frame
       frame.getContentPane().add(board);
