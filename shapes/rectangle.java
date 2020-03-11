@@ -11,12 +11,5 @@ public class rectangle extends shape {
             this.height = height;
             this.id = id;
             this.color = rgb;
-      }
-
-      // updates the width and height of the rectangle 
-      public void resize(int offsetX, int offsetY, int x, int y){
-            this.select();
-            this.width = (x - offsetX) - this.x;
-            this.height = (y - offsetY) - this.y;
-      }     
+      } 
 }

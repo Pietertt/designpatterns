@@ -13,11 +13,7 @@ import ui.ui;
 import io.parser;
 
 public class main {
-
-      private static ArrayList<rectangle> rects = new ArrayList<rectangle>();
-      private static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
-
-      shapes s;
+      static shapes s;
 
       public static shapes init(){
             parser p = new parser("test.pieter");
@@ -59,13 +55,14 @@ public class main {
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
-                  rects = board.update();
+                  s = board.update();
+                  board.kind = ui.getKind();
 
                   // feeds the current rectangles arraylist to the ui
-                  ui.set(rects);
+                  ui.set(s);
                   
                   // retrieves the rectangle arraylist to catch any changes made by the ui
-                  rects = ui.get();
+                  s = ui.get();
             }
       });
       timer.setInitialDelay(0);

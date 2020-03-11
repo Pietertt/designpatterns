@@ -28,6 +28,7 @@ public class board extends JPanel implements MouseListener {
       // //-----------------------------------------------------------------------------  
       
       public int mode = 0;
+      public String kind = "";
 
       public boolean dragging = false;
       public boolean added = false;
@@ -107,7 +108,7 @@ public class board extends JPanel implements MouseListener {
             }
       }
 
-      public ArrayList<rectangle> update() {
+      public shapes update() {
             this.offsetX = (int) frame.getLocation().getX();
             this.offsetY = (int) frame.getLocation().getY();
 
@@ -240,16 +241,32 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         if (this.dragging == true) {
-                              // updates the values of a rectangle to the mouse coordinates when dragging is
-                              // allowed
-                              // the newest rectangle is selected
-                              rectangle rect = this.shapes.rects.get(this.shapes.rects.size() - 1);
-                              Point a = MouseInfo.getPointerInfo().getLocation();
+                              if(this.kind == "rectangle"){
+                                    // updates the values of a rectangle to the mouse coordinates when dragging is
+                                    // allowed
+                                    // the newest rectangle is selected
+                                    rectangle rect = this.shapes.rects.get(this.shapes.rects.size() - 1);
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
 
-                              // resizes the rectangle when the mouse position minus the offset is larger than
-                              // the INITIAL x value of the rectangle
-                              if (((int) a.getX() - offsetX) > rect.x) {
-                                    rect.resize(offsetX, offsetY, (int) a.getX(), (int) a.getY());
+                                    // resizes the rectangle when the mouse position minus the offset is larger than
+                                    // the INITIAL x value of the rectangle
+                                    if (((int) a.getX() - offsetX) > rect.x) {
+                                          rect.resize(offsetX, offsetY, (int) a.getX(), (int) a.getY());
+                                    }
+                              }
+
+                              if(this.kind == "ellipse"){
+                                    // updates the values of a rectangle to the mouse coordinates when dragging is
+                                    // allowed
+                                    // the newest rectangle is selected
+                                    ellipse e = this.shapes.ellipses.get(this.shapes.ellipses.size() - 1);
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
+
+                                    // resizes the rectangle when the mouse position minus the offset is larger than
+                                    // the INITIAL x value of the rectangle
+                                    if (((int) a.getX() - offsetX) > e.x) {
+                                          e.resize(offsetX, offsetY, (int) a.getX(), (int) a.getY());
+                                    }
                               }
                         }
                         break;
@@ -289,7 +306,7 @@ public class board extends JPanel implements MouseListener {
             // updates the frame
             frame.repaint();
             // returns the rectangle arraylist for further use to the main program
-            return this.shapes.rects;
+            return this.shapes;
       }
 
       public void mouseClicked(MouseEvent e) {
@@ -386,11 +403,21 @@ public class board extends JPanel implements MouseListener {
                         break;
                   case 1:
                         if(this.added == false){
-                              // creates a tiny rectangle to start dragging
-                              Point a = MouseInfo.getPointerInfo().getLocation();
-                              this.shapes.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
-                              this.added = true;
-                              this.dragging = true;
+                              System.out.println(this.kind);
+                              if(this.kind == "rectangle"){
+                                    // creates a tiny rectangle to start dragging
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
+                                    this.shapes.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    this.added = true;
+                                    this.dragging = true;
+                              }
+
+                              if(this.kind == "ellipse"){
+                                    Point a = MouseInfo.getPointerInfo().getLocation();
+                                    this.shapes.ellipses.add(new ellipse((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    this.added = true;
+                                    this.dragging = true;
+                              }
                         } 
                         break;
                   default:

@@ -5,12 +5,13 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.*;
 
-import shapes.rectangle;
+import shapes.*;
 
 public class ui extends JPanel {
-      private ArrayList<rectangle> rects = new ArrayList<rectangle>();
+      private shapes s;
 
       public int mode = 0;
+      public String kind = "";
 
       public ui(){
             JButton rect = new JButton();
@@ -24,12 +25,14 @@ public class ui extends JPanel {
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e){ 
                         setMode(1);
+                        setKind("rectangle");
                   }
             });
 
             ellipse.addActionListener(new ActionListener(){
                   public void actionPerformed(ActionEvent e){
                         setMode(1);
+                        setKind("ellipse");
                   }
             });
 
@@ -39,13 +42,13 @@ public class ui extends JPanel {
       }
 
       // method to update (or completely set) the rectangle arraylist from outside
-      public void set(ArrayList<rectangle> rects){
-            this.rects = rects;
+      public void set(shapes s){
+            this.s = s;
       }
 
       // method used to update the rectangle arraylist in the main program
-      public ArrayList<rectangle> get(){
-            return this.rects;
+      public shapes get(){
+            return this.s;
       }
 
       // returns the current mode
@@ -56,5 +59,13 @@ public class ui extends JPanel {
       // sets the current mode to whatever mode is given
       public void setMode(int i){
             this.mode = i;
+      }
+
+      public String getKind(){
+            return this.kind;
+      }
+
+      public void setKind(String kind){
+            this.kind = kind;
       }
 }

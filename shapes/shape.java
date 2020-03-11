@@ -43,4 +43,11 @@ public class shape extends JPanel {
             this.handles.clear();
             this.handles.add(new handle(this.x + this.width, this.y + this.height, this.color));
       }
+      
+      // updates the width and height of the rectangle 
+      public void resize(int offsetX, int offsetY, int x, int y){
+            this.select();
+            this.width = (x - offsetX) - this.x;
+            this.height = (y - offsetY) - this.y;
+      }    
 }
