@@ -14,6 +14,7 @@ import io.parser;
 
 public class main {
       public static ArrayList<shapes> history = new ArrayList<shapes>();
+      public static shapes currentShape;
 
       public static shapes init(){
             parser p = new parser("test.pieter");
@@ -54,7 +55,7 @@ public class main {
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
-                  history = board.update();
+                  currentShape = board.update();
                   board.kind = ui.getKind();
 
                   // feeds the current rectangles arraylist to the ui
