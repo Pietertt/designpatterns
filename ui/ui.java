@@ -16,6 +16,8 @@ public class ui extends JPanel {
       public ui(){
             JButton rect = new JButton();
             JButton ellipse = new JButton();
+            JButton left = new JButton();
+            JButton right = new JButton();
 
             rect.setIcon(new javax.swing.ImageIcon(getClass().getResource("rectangle.png")));
             rect.setBorderPainted(false);
@@ -26,6 +28,16 @@ public class ui extends JPanel {
             ellipse.setBorderPainted(false);
             ellipse.setFocusPainted(false);
             ellipse.setContentAreaFilled(false);
+
+            left.setIcon(new javax.swing.ImageIcon(getClass().getResource("left.png")));
+            left.setBorderPainted(false);
+            left.setFocusPainted(false);
+            left.setContentAreaFilled(false);
+
+            right.setIcon(new javax.swing.ImageIcon(getClass().getResource("right.png")));
+            right.setBorderPainted(false);
+            right.setFocusPainted(false);
+            right.setContentAreaFilled(false);
 
             rect.addActionListener(new ActionListener() { 
                   public void actionPerformed(ActionEvent e){ 
@@ -41,6 +53,8 @@ public class ui extends JPanel {
                   }
             });
 
+            super.add(left);
+            super.add(right);
             super.add(rect);
             super.add(ellipse);
             //super.add(ellipse);

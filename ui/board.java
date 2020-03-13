@@ -76,8 +76,6 @@ public class board extends JPanel implements MouseListener {
                         }
                   }
 
-                  //System.out.println(e.x + " " + e.y + " " + e.width + " " + e.height);
-
                   g2d.setColor(new Color(e.color[0], e.color[1], e.color[2]));
                   g2d.fillOval(e.x, e.y, e.width, e.height);
 
