@@ -14,9 +14,10 @@ public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
       private static ui ui;
-      private ArrayList<shapes> history;
 
-      private int size = history.size();
+      private ArrayList<shapes> history = new ArrayList<shapes>();
+
+      private int size;
 
       // //-----------------------------------------------------------------------------
       // //                                  colors
@@ -40,8 +41,9 @@ public class board extends JPanel implements MouseListener {
       public static int width = 600;
       public static int height = 600;
 
-      public board(JFrame frame, shapes s, ui ui, ArrayList<shapes> history) {
-            this.history = history;
+      public board(JFrame frame, shapes s, ui ui) {
+            this.history.add(s);
+            this.size = this.history.size();
             
             this.frame = frame;
             super.setFocusable(true);
@@ -111,6 +113,7 @@ public class board extends JPanel implements MouseListener {
       }
 
       public ArrayList<shapes> update() {
+            this.size = this.history.size();
             this.offsetX = (int) frame.getLocation().getX();
             this.offsetY = (int) frame.getLocation().getY();
 

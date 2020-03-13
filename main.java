@@ -18,7 +18,7 @@ public class main {
       public static shapes init(){
             parser p = new parser("test.pieter");
             ArrayList<String> commands =  p.read();
-            shapes s = new shapes();
+                  shapes s = new shapes();
             for(int i = 0; i < commands.size(); i++){
                   String[] splitted = commands.get(i).split(" ");
                   if(splitted[0].equals("rectangle")){
@@ -29,7 +29,6 @@ public class main {
                         s.ellipses.add(new ellipse(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), 4, board.GRAY));
                   }
             }
-
             return s;
       }
 
@@ -37,9 +36,9 @@ public class main {
       JFrame frame = new JFrame();      
 
       ui ui = new ui();
-
+      
       // populates the board with the first shapes
-      board board = new board(frame, init(), ui, history);
+      board board = new board(frame, init(), ui);
 
       // added the board and the UI to the frame
       frame.getContentPane().add(board);
