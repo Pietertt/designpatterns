@@ -14,7 +14,9 @@ public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
       private static ui ui;
-      private shapes shapes;
+      private ArrayList<shapes> history;
+
+      private int size = history.size();
 
       // //-----------------------------------------------------------------------------
       // //                                  colors
@@ -38,8 +40,8 @@ public class board extends JPanel implements MouseListener {
       public static int width = 600;
       public static int height = 600;
 
-      public board(JFrame frame, shapes s, ui ui) {
-            this.shapes = s;
+      public board(JFrame frame, shapes s, ui ui, ArrayList<shapes> history) {
+            this.history = history;
             
             this.frame = frame;
             super.setFocusable(true);
@@ -59,8 +61,8 @@ public class board extends JPanel implements MouseListener {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-            for (int i = 0; i < this.shapes.ellipses.size(); i++) {
-                  ellipse e = this.shapes.ellipses.get(i);
+            for (int i = 0; i < this.history.get(size - 1).ellipses.size(); i++) {
+                  ellipse e = this.history.get(size - 1).ellipses.get(i);
 
                   if (e.selected) {
                         g2d.setColor(new Color(this.BLUE[0], this.BLUE[1], this.BLUE[2]));
@@ -84,8 +86,8 @@ public class board extends JPanel implements MouseListener {
             }
 
             // fills and colors specific areas based on values in the 'rects' array
-            for (int i = 0; i < this.shapes.rects.size(); i++) {
-                  rectangle rect = this.shapes.rects.get(i);
+            for (int i = 0; i < this.history.get(size - 1).rects.size(); i++) {
+                  rectangle rect = this.history.get(size - 1).rects.get(i);
 
                   if (rect.selected) {
                         // draw a rectangle which is slightly bigger to act as a border
@@ -108,7 +110,7 @@ public class board extends JPanel implements MouseListener {
             }
       }
 
-      public shapes update() {
+      public ArrayList<shapes> update() {
             this.offsetX = (int) frame.getLocation().getX();
             this.offsetY = (int) frame.getLocation().getY();
 
@@ -123,8 +125,8 @@ public class board extends JPanel implements MouseListener {
 
             switch (this.mode) {
                   case 0:
-                        for (int i = 0; i < this.shapes.ellipses.size(); i++) {
-                              ellipse e = this.shapes.ellipses.get(i);
+                        for (int i = 0; i < this.history.get(size - 1).ellipses.size(); i++) {
+                              ellipse e = this.history.get(size - 1).ellipses.get(i);
                               if (e.moving) {
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
@@ -177,9 +179,9 @@ public class board extends JPanel implements MouseListener {
                               }
                         }
 
-                        for (int i = 0; i < this.shapes.rects.size(); i++) {
-                              rectangle rect = this.shapes.rects.get(i);
-                              if (this.shapes.rects.get(i).moving) {
+                        for (int i = 0; i < this.history.get(size - 1).rects.size(); i++) {
+                              rectangle rect = this.history.get(size - 1).rects.get(i);
+                              if (this.history.get(size - 1).rects.get(i).moving) {
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // the absolute X and Y values of the cursor
@@ -245,7 +247,7 @@ public class board extends JPanel implements MouseListener {
                                     // updates the values of a rectangle to the mouse coordinates when dragging is
                                     // allowed
                                     // the newest rectangle is selected
-                                    rectangle rect = this.shapes.rects.get(this.shapes.rects.size() - 1);
+                                    rectangle rect = this.history.get(size - 1).rects.get(this.history.get(size - 1).rects.size() - 1);
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // resizes the rectangle when the mouse position minus the offset is larger than
@@ -259,7 +261,7 @@ public class board extends JPanel implements MouseListener {
                                     // updates the values of a rectangle to the mouse coordinates when dragging is
                                     // allowed
                                     // the newest rectangle is selected
-                                    ellipse e = this.shapes.ellipses.get(this.shapes.ellipses.size() - 1);
+                                    ellipse e = this.history.get(size - 1).ellipses.get(this.history.get(size - 1).ellipses.size() - 1);
                                     Point a = MouseInfo.getPointerInfo().getLocation();
 
                                     // resizes the rectangle when the mouse position minus the offset is larger than
@@ -275,8 +277,8 @@ public class board extends JPanel implements MouseListener {
                         int x = (int) a.getX();
                         int y = (int) a.getY();
 
-                        for (int i = 0; i < this.shapes.rects.size(); i++) {
-                              rectangle rect = this.shapes.rects.get(i);
+                        for (int i = 0; i < this.history.get(size - 1).rects.size(); i++) {
+                              rectangle rect = this.history.get(size - 1).rects.get(i);
                               for (int j = 0; j < rect.handles.size(); j++) {
                                     handle handle = rect.handles.get(j);
                                     if (handle.selected) {
@@ -287,8 +289,8 @@ public class board extends JPanel implements MouseListener {
                               }
                         }
 
-                        for(int i = 0; i < this.shapes.ellipses.size(); i++){
-                              ellipse ell = this.shapes.ellipses.get(i);
+                        for(int i = 0; i < this.history.get(size - 1).ellipses.size(); i++){
+                              ellipse ell = this.history.get(size - 1).ellipses.get(i);
                               for(int j = 0; j < ell.handles.size(); j++){
                                     handle h = ell.handles.get(j);
                                     if (h.selected) {
@@ -306,7 +308,7 @@ public class board extends JPanel implements MouseListener {
             // updates the frame
             frame.repaint();
             // returns the rectangle arraylist for further use to the main program
-            return this.shapes;
+            return this.history;
       }
 
       public void mouseClicked(MouseEvent e) {
@@ -316,8 +318,8 @@ public class board extends JPanel implements MouseListener {
                         int x = e.getX();
                         int y = e.getY();
 
-                        for (int i = 0; i < this.shapes.rects.size(); i++) {
-                              rectangle rect = this.shapes.rects.get(i);
+                        for (int i = 0; i < this.history.get(size - 1).rects.size(); i++) {
+                              rectangle rect = this.history.get(size - 1).rects.get(i);
                               rect.selected = false;
                               if (rect.selected(x, y)) {
                                     rect.selected = true;
@@ -325,8 +327,8 @@ public class board extends JPanel implements MouseListener {
                               }
                         }
 
-                        for (int i = 0; i < this.shapes.ellipses.size(); i++) {
-                              ellipse ell = this.shapes.ellipses.get(i);
+                        for (int i = 0; i < this.history.get(size - 1).ellipses.size(); i++) {
+                              ellipse ell = this.history.get(size - 1).ellipses.get(i);
                               ell.selected = false;
                               if (ell.selected(x, y)) {
                                     ell.selected = true;
@@ -353,11 +355,11 @@ public class board extends JPanel implements MouseListener {
 
             switch (this.mode) {
                   case 0:
-                        for(int i = 0; i < this.shapes.ellipses.size(); i++){
+                        for(int i = 0; i < this.history.get(size - 1).ellipses.size(); i++){
                               int x = e.getX();
                               int y = e.getY();
 
-                              ellipse ell = this.shapes.ellipses.get(i);
+                              ellipse ell = this.history.get(size - 1).ellipses.get(i);
 
                               for(int j = 0; j < ell.handles.size(); j++){
                                     handle handle = ell.handles.get(j);
@@ -377,11 +379,11 @@ public class board extends JPanel implements MouseListener {
                         }
 
                         // looping through each rectangle
-                        for (int i = 0; i < this.shapes.rects.size(); i++) {
+                        for (int i = 0; i < this.history.get(size - 1).rects.size(); i++) {
                               int x = e.getX();
                               int y = e.getY();
 
-                              rectangle rect = this.shapes.rects.get(i);
+                              rectangle rect = this.history.get(size - 1).rects.get(i);
 
                               for(int j = 0; j < rect.handles.size(); j++){
                                     handle handle = rect.handles.get(j);
@@ -407,14 +409,16 @@ public class board extends JPanel implements MouseListener {
                               if(this.kind == "rectangle"){
                                     // creates a tiny rectangle to start dragging
                                     Point a = MouseInfo.getPointerInfo().getLocation();
-                                    this.shapes.rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    this.history.get(size - 1).rects.add(new rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    //this.history.add(this.history.get(size - 1));
                                     this.added = true;
                                     this.dragging = true;
                               }
 
                               if(this.kind == "ellipse"){
                                     Point a = MouseInfo.getPointerInfo().getLocation();
-                                    this.shapes.ellipses.add(new ellipse((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    this.history.get(size - 1).ellipses.add(new ellipse((int)a.getX() - offsetX, (int)a.getY() - offsetY, 1, 1, 6, this.GRAY));
+                                    //this.history.add(this.history.get(size - 1));
                                     this.added = true;
                                     this.dragging = true;
                               }
@@ -430,12 +434,12 @@ public class board extends JPanel implements MouseListener {
             switch(this.mode){
                   case 0:
                          // deselects all rectangles when the mouse is released
-                        for(int i = 0; i < this.shapes.rects.size(); i++){
-                              this.shapes.rects.get(i).moving = false;
+                        for(int i = 0; i < this.history.get(size - 1).rects.size(); i++){
+                              this.history.get(size - 1).rects.get(i).moving = false;
                         }
 
-                        for(int i = 0; i < this.shapes.ellipses.size(); i++){
-                              this.shapes.ellipses.get(i).moving = false;
+                        for(int i = 0; i < this.history.get(size - 1).ellipses.size(); i++){
+                              this.history.get(size - 1).ellipses.get(i).moving = false;
                         }
 
                         break;
@@ -444,12 +448,12 @@ public class board extends JPanel implements MouseListener {
                         this.dragging = false;
                         this.added = false;
 
-                        for(int i = 0; i < this.shapes.rects.size(); i++){
-                              this.shapes.rects.get(i).selected = false;
+                        for(int i = 0; i < this.history.get(size - 1).rects.size(); i++){
+                              this.history.get(size - 1).rects.get(i).selected = false;
                         }
 
-                        for(int i = 0; i < this.shapes.ellipses.size(); i++){
-                              this.shapes.ellipses.get(i).selected = false;
+                        for(int i = 0; i < this.history.get(size - 1).ellipses.size(); i++){
+                              this.history.get(size - 1).ellipses.get(i).selected = false;
                         }
 
                         // set the mode to 0 to enable selecting and moving rectangles
@@ -467,15 +471,15 @@ public class board extends JPanel implements MouseListener {
       Action delete = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                   // determines which rectangle is selected and removing it from the arraylist
-                  for(int i = 0; i < shapes.rects.size(); i++){
-                        if(shapes.rects.get(i).selected){
-                              shapes.rects.remove(i);
+                  for(int i = 0; i < history.get(size - 1).rects.size(); i++){
+                        if(history.get(size - 1).rects.get(i).selected){
+                              history.get(size - 1).rects.remove(i);
                         }
                   }
 
-                  for(int i = 0; i < shapes.ellipses.size(); i++){
-                        if(shapes.ellipses.get(i).selected){
-                              shapes.ellipses.remove(i);
+                  for(int i = 0; i < history.get(size - 1).ellipses.size(); i++){
+                        if(history.get(size - 1).ellipses.get(i).selected){
+                              history.get(size - 1).ellipses.remove(i);
                         }
                   }
             }

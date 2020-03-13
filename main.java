@@ -13,7 +13,7 @@ import ui.ui;
 import io.parser;
 
 public class main {
-      static shapes s;
+      public static ArrayList<shapes> history = new ArrayList<shapes>();
 
       public static shapes init(){
             parser p = new parser("test.pieter");
@@ -39,7 +39,7 @@ public class main {
       ui ui = new ui();
 
       // populates the board with the first shapes
-      board board = new board(frame, init(), ui);
+      board board = new board(frame, init(), ui, history);
 
       // added the board and the UI to the frame
       frame.getContentPane().add(board);
@@ -55,14 +55,14 @@ public class main {
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
-                  s = board.update();
+                  history = board.update();
                   board.kind = ui.getKind();
 
                   // feeds the current rectangles arraylist to the ui
-                  ui.set(s);
+                  ui.set(history);
                   
                   // retrieves the rectangle arraylist to catch any changes made by the ui
-                  s = ui.get();
+                  history = ui.get();
             }
       });
       timer.setInitialDelay(0);

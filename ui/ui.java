@@ -8,7 +8,7 @@ import java.awt.event.*;
 import shapes.*;
 
 public class ui extends JPanel {
-      private shapes s;
+      private ArrayList<shapes> history;
 
       public int mode = 0;
       public String kind = "";
@@ -73,13 +73,13 @@ public class ui extends JPanel {
       }
 
       // method to update (or completely set) the rectangle arraylist from outside
-      public void set(shapes s){
-            this.s = s;
+      public void set(ArrayList<shapes> h){
+            this.history = h;
       }
 
       // method used to update the rectangle arraylist in the main program
-      public shapes get(){
-            return this.s;
+      public ArrayList<shapes> get(){
+            return this.history;
       }
 
       // returns the current mode
