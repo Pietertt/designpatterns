@@ -53,6 +53,18 @@ public class ui extends JPanel {
                   }
             });
 
+            left.addActionListener(new ActionListener(){
+                  public void actionPerformed(ActionEvent e){
+                        System.out.println("Left");
+                  }
+            });
+
+            right.addActionListener(new ActionListener(){
+                  public void actionPerformed(ActionEvent e){
+                        System.out.println("Right");
+                  }
+            });
+
             super.add(left);
             super.add(right);
             super.add(rect);
