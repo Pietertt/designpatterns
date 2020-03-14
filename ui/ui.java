@@ -15,6 +15,7 @@ public class ui extends JPanel {
 
       public int mode = 0;
 
+
       public ui(){
             JButton rect = new JButton();
 
@@ -23,7 +24,9 @@ public class ui extends JPanel {
             rect.setFocusPainted(false);
             rect.setContentAreaFilled(false);
 
-            rect.addActionListener(new ActionListener() { 
+            //rect.addMouseListener(mouseListener);
+
+            rect.addActionListener(new ActionListener() {
                   public void actionPerformed(ActionEvent e) {
                         setMode(1);
                   }

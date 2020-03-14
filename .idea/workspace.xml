@@ -3,8 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5a503efd-87cf-434d-b3ca-25236f7c2ce6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/dragRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/dragRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/placeRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/placeRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/pressRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/pressRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/selectRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/selectRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mouse/mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/mouse/mouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +114,9 @@
       <workItem from="1583507525008" duration="2526000" />
       <workItem from="1583746185365" duration="530000" />
       <workItem from="1583835854926" duration="2328000" />
-      <workItem from="1583915098783" duration="12660000" />
+      <workItem from="1583915098783" duration="13202000" />
+      <workItem from="1584015461941" duration="1198000" />
+      <workItem from="1584174234082" duration="16463000" />
     </task>
     <task id="LOCAL-00001" summary="Command pattern met Undo/Redo - Works, but still in progess">
       <created>1583401856002</created>

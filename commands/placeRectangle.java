@@ -16,10 +16,12 @@ public class placeRectangle implements Order {
 
     Graphics2D g;
 
-    public placeRectangle(Rectangle rectangle, JFrame canvas, Graphics2D g) {
+    board board;
+
+    public placeRectangle(Rectangle rectangle, Graphics2D g, board board) {
         this.rectangle = rectangle;
+        this.rectangle.setBoard(board);
         undoStack.add(this.rectangle);
-        this.canvas = canvas;
         this.g = g;
     }
 

@@ -1,27 +1,63 @@
 package mouse;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import commands.placeRectangle;
+import ui.ui;
 
 import java.util.*;
 
 import shapes.Rectangle;
 
-public class mouse extends TimerTask {
-      public ArrayList<Rectangle> rects;
+public class mouse implements MouseListener {
+      private boolean RectangleButton = false;
+      private boolean EllipseButton = false;
 
-      public mouse(ArrayList<Rectangle> rects){
+      public ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
+
+      public mouse(ArrayList<Rectangle> rects, Graphics2D g) {
             this.rects = rects;
+            for(int i = 0; i < this.rects.size(); i++) {
+                  //placeRectangle placeRect = new placeRectangle(this.rects.get(i), g);
+                  //this.undoStack.push(placeRect);
+                  //placeRect.execute();
+            }
       }
 
-      public void run(){
-            for(int i = 0; i < rects.size(); i++){
-                  if(rects.get(i).selected == true){
-                        System.out.print("Still pressed");
-                        System.out.print(rects.get(i).id);
-                        System.out.print(" ");
-                        System.out.println();
-                  }
-            }
+      @Override
+      public void mouseClicked(MouseEvent mouseEvent) {
+
+      }
+
+      @Override
+      public void mousePressed(MouseEvent mouseEvent) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent mouseEvent) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent mouseEvent) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent mouseEvent) {
+
+      }
+
+      public void setRectangleButton(boolean rectangleButton) {
+            RectangleButton = rectangleButton;
+      }
+
+      public void setEllipseButton(boolean ellipseButton) {
+            EllipseButton = ellipseButton;
       }
 }
 

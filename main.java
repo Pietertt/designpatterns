@@ -27,7 +27,7 @@ public class main {
 
 
       for(int i = 0; i < 5; i++){
-          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected, false, false));
+          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
       }
 
       // populates the ellipses array with the initial 5

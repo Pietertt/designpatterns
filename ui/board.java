@@ -15,16 +15,15 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.Stack;
 
-import commands.Order;
+import commands.*;
 import shapes.Rectangle;
-import commands.placeRectangle;
 import shapes.ellipse;
 
 
 public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
-      public static ui ui;
+      private static ui ui;
 
       private List<Order> orderList = new ArrayList<Order>();
 
@@ -47,7 +46,7 @@ public class board extends JPanel implements MouseListener {
       // //-----------------------------------------------------------------------------
       // //                                  Modes
       // //-----------------------------------------------------------------------------
-      
+
       public int mode = 0;
 
       public boolean dragging = false;
@@ -107,21 +106,10 @@ public class board extends JPanel implements MouseListener {
 
              //fills and colors specific areas based on values in the 'rects' array
             for(int i = 0; i < this.rects.size(); i++){
-
-                  //g2d.setColor(new Color(this.rects.get(i).color[0], this.rects.get(i).color[1], this.rects.get(i).color[2]));
-                  //g2d.fillRect(this.rects.get(i).x, this.rects.get(i).y, this.rects.get(i).width, this.rects.get(i).height);
-                  //Rectangle rectangle = new Rectangle(this.rects.get(i).x, this.rects.get(i).y,
-                          //this.rects.get(i).width, this.rects.get(i).height, 6, this.GRAY);
-
-                  placeRectangle placeRect = new placeRectangle(rects.get(i), frame, g2d);
+                  placeRectangle placeRect = new placeRectangle(rects.get(i), g2d, this);
                   this.undoStack.push(placeRect);
                   placeRect.execute();
-                  //frame.add(rects.get(i));
-                  this.addMouseListener(rects.get(i));
-                  //frame.addMouseListener(rects.get(i));
-                  //frame.add();
-                  //frame.getContentPane().add(rects.get(i));
-                  //this.add(rects.get(i));
+                  //this.addMouseListener(rects.get(i));
             }
 
 
@@ -152,12 +140,13 @@ public class board extends JPanel implements MouseListener {
 
       public ArrayList<Rectangle> update() {
 
-            //rects.clear();
+
       for (int i = 0; i < this.rects.size(); i++) {
-            //rects.clear();
-            Rectangle rect = this.rects.get(i).update(ui);
-            rects.remove(rects.get(i));
-            rects.add(rect);
+            dragRectangle dragRectangle = new dragRectangle(this.rects.get(i), ui.getMode());
+            //Rectangle rect = this.rects.get(i).update(ui);
+            dragRectangle.execute();
+            //rects.remove(rects.get(i));
+            //rects.add(rect);
       }
 
       //this.mode = ui.getMode();
@@ -224,37 +213,68 @@ public class board extends JPanel implements MouseListener {
 //                  default:
 //                        break;
 //            }
-            
+
             // updates the frame which is given as a parameter
             frame.repaint();
             // returns the rectangle arraylist for further use to the main program
             return this.rects;
       }
 
-      public void mouseClicked(MouseEvent e) { 
+      public void mouseClicked(MouseEvent e) {
+            switch(this.mode){
+                  case 0:
+                        for(Rectangle rect : rects) {
+                              pressRectangle pressRectangle = new pressRectangle(rect, e);
+                              pressRectangle.execute();
+                        }
+                        break;
+                  case 1:
 
-      }  
-    
-      public void mouseEntered(MouseEvent e) {}  
-      public void mouseExited(MouseEvent e) {}  
-      public void mousePressed(MouseEvent e) {
-            //System.out.println(e.getX());
-
-            if(this.mode == 1) {
-                  if (this.added == false) {
-                        int[] rgb = {255, 0, 0};
-                        Point a = MouseInfo.getPointerInfo().getLocation();
-                        //this.added = true;
-                        //this.dragging = true;
-                        this.rects.add(new Rectangle((int) a.getX() - offsetX, (int) a.getY() - offsetY, 1, 1, 1, this.BLUE, true, true));
-                  }
+                        break;
+                  default:
+                        break;
             }
-      }  
+      }
+
+      public void mouseEntered(MouseEvent e) {}
+      public void mouseExited(MouseEvent e) {}
+      public void mousePressed(MouseEvent e) {
+            switch(this.mode){
+                 case 0:
+                       for(Rectangle rect : rects) {
+                             selectRectangle selectRectangle = new selectRectangle(rect, e);
+                             selectRectangle.execute();
+                       }
+                       break;
+                  case 1:
+                        System.out.println("Mouse Pressed");
+                        if (this.added == false) {
+                              int[] rgb = {255, 0, 0};
+                              Point a = MouseInfo.getPointerInfo().getLocation();
+                              this.rects.add(new Rectangle((int) a.getX() - offsetX, (int) a.getY() - offsetY, 1, 1, 6, rgb));
+                              this.added = true;
+                              this.dragging = true;
+                        }
+                        break;
+                  default:
+                        break;
+            }
+      }
       public void mouseReleased(MouseEvent e) {
-            if(this.mode == 0) {
-                  for(int i = 0; i < this.rects.size(); i++){
-                        rects.get(i).selected = false;
-                  }
+            switch(this.mode) {
+                  case 0:
+                        for(int i = 0; i < this.rects.size(); i++){
+                              rects.get(i).selected = false;
+                        }
+                        break;
+                  case 1:
+                        this.dragging = false;
+                        this.added = false;
+                        //this.mode = 0;
+                        ui.setMode(0);
+                        break;
+                  default:
+                        break;
             }
       }
 }

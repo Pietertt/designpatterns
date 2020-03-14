@@ -7,9 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-public class Rectangle extends JComponent implements MouseListener {
+public class Rectangle extends JComponent implements MouseMotionListener {
     public boolean selected = false;
     public boolean pressed = false;
     public int id;
@@ -24,8 +25,8 @@ public class Rectangle extends JComponent implements MouseListener {
     //MODUS
     public int mode = 0;
 
-    public boolean dragging = false;
-    public boolean added = false;
+//    public boolean dragging = false;
+//    public boolean added = false;
 
     public int x,y;
     public int[] rgb;
@@ -43,7 +44,7 @@ public class Rectangle extends JComponent implements MouseListener {
     public int[] color;
     private board board;
 
-    public Rectangle(int x, int y, int width, int height, int id, int[] rgb, boolean added, boolean dragging){
+    public Rectangle(int x, int y, int width, int height, int id, int[] rgb){
         //super(x, y, rgb);
         this.x = x;
         this.y = y;
@@ -51,8 +52,8 @@ public class Rectangle extends JComponent implements MouseListener {
         this.width = width;
         this.height = height;
         this.id = id;
-        this.added = added;
-        this.dragging = dragging;
+//        this.added = added;
+//        this.dragging = dragging;
 
         //this.setSize(this.width, this.height);
         //this.setSize(this.width, this.height);
@@ -60,6 +61,10 @@ public class Rectangle extends JComponent implements MouseListener {
         //addMouseListener(this);
         //this.selected = selected;
         //this.mode = mode;
+    }
+
+    public void setBoard(board board) {
+        this.board = board;
     }
 
     @Override
@@ -74,19 +79,19 @@ public class Rectangle extends JComponent implements MouseListener {
         }
     }
 
-    public Rectangle update(ui ui) {
+    public Rectangle update(int mode) {
 
         //-----------------------------------------------------------------------------
         //                Responsible for dragging rectangles around
         //-----------------------------------------------------------------------------
 
 
-        this.mode = ui.getMode();
+        //this.mode = ui.getMode();
 
         // decides what to execute based on the current mode
         // 0 ------------> default, allows dragging of rectangles
         // 1 ------------> a rectangle is being created
-        switch(this.mode){
+        switch(mode){
             case 0:
                     if(selected){
                         Point a = MouseInfo.getPointerInfo().getLocation();
@@ -130,7 +135,7 @@ public class Rectangle extends JComponent implements MouseListener {
                     }
                 break;
             case 1:
-                if(this.dragging){
+                if(board.dragging == true){
                     //Rectangle rect = this;
                     Point a = MouseInfo.getPointerInfo().getLocation();
                     int x = (int)a.getX();
@@ -166,93 +171,51 @@ public class Rectangle extends JComponent implements MouseListener {
         this.repaint();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        switch(this.mode){
-            case 0:
-                // the absolute X and Y values of the cursor
-                int x = e.getX();
-                int y = e.getY();
-                    this.pressed = false;
-                    for(int j = 0; j < this.width; j++){
-                        if(x == this.x + j){
-                            for(int k = 0; k < this.height; k++){
-                                if(y == this.y + k){
-                                    this.pressed = true;
-                                }
-                            }
-                        }
-                    }
-            case 1:
 
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //-----------------------------------------------------------------------------
-        //                            Selection handler
-        //-----------------------------------------------------------------------------
-
-//        switch(this.mode){
-//            case 0:
-                // looping through each rectangle
-
-
-        if(this.mode == 0) {
-            int x = e.getX();
-            int y = e.getY();
-//
-
-
-            // looping through the width of the current rectangle
-            for (int j = 0; j < this.width; j++) {
-                // checking if the current mouse.x is within the range of the rectangle width
-                if (x == this.x + j) {
-                    // looping through the height of the rectangle
-                    for (int k = 0; k < this.height; k++) {
-                        // checking if the current mouse.y is within the range of the rectangle height
-                        if (y == this.y + k) {
-                            this.selected = true;
-                        }
+    public void pressedHandler(MouseEvent e) {
+        // the absolute X and Y values of the cursor
+        int x = e.getX();
+        int y = e.getY();
+        this.pressed = false;
+        for(int j = 0; j < this.width; j++){
+            if(x == this.x + j){
+                for(int k = 0; k < this.height; k++){
+                    if(y == this.y + k){
+                        this.pressed = true;
                     }
                 }
             }
         }
-//                break;
-//            case 1:
-//                if(this.added == false){
-//                    int[] rgb = { 255, 0, 0 };
-//                    Point a = MouseInfo.getPointerInfo().getLocation();
-//                    board.rects.add(new Rectangle((int)a.getX() - offsetX, (int)a.getY() - offsetY,1, 1, 1, this.GRAY, true, true, false));
-//                    this.added = true;
-//                    this.dragging = true;
-//                }
-//                break;
-//            default:
-//                break;
     }
 
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-        if(this.mode == 1){
-                this.dragging = false;
-                this.added = false;
-                this.mode = 0;
-                board.ui.setMode(0);
+    public void selectionHandler(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+//
+
+
+        // looping through the width of the current rectangle
+        for (int j = 0; j < this.width; j++) {
+            // checking if the current mouse.x is within the range of the rectangle width
+            if (x == this.x + j) {
+                // looping through the height of the rectangle
+                for (int k = 0; k < this.height; k++) {
+                    // checking if the current mouse.y is within the range of the rectangle height
+                    if (y == this.y + k) {
+                        this.selected = true;
+                    }
+                }
+            }
         }
     }
 
     @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
+    public void mouseDragged(MouseEvent mouseEvent) {
 
     }
 
     @Override
-    public void mouseExited(MouseEvent mouseEvent) {
+    public void mouseMoved(MouseEvent mouseEvent) {
 
     }
 }
