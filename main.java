@@ -55,13 +55,13 @@ public class main {
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
                   // updates the main rectangle arraylist with any changes made in the board
-                  currentShape = board.update();
+                  history = board.update();
                   board.kind = ui.getKind();
 
-                  // feeds the current rectangles arraylist to the ui
+                  // feeds the current history to the ui
                   ui.set(history);
                   
-                  // retrieves the rectangle arraylist to catch any changes made by the ui
+                  // retrieves the history arraylist to catch any changes made by the ui
                   history = ui.get();
             }
       });

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class shape extends JPanel {
+public class shape extends JPanel implements Cloneable {
       public int x;
       public int y;
       public int width;

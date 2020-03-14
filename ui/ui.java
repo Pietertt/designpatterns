@@ -55,7 +55,8 @@ public class ui extends JPanel {
 
             left.addActionListener(new ActionListener(){
                   public void actionPerformed(ActionEvent e){
-                        System.out.println("Left");
+                        history.remove(history.size() - 1);
+                        System.out.println("Popped");
                   }
             });
 
