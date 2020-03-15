@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import java.awt.event.*;
 
+import commands.placeRectangle;
 import shapes.Rectangle;
 import shapes.ellipse;
 import ui.board;
@@ -24,24 +25,22 @@ public class main {
       JFrame frame = new JFrame();
       frame.setLayout(new BorderLayout());
 
+      ui ui = new ui();
 
+      // populates the board with the first shapes
+      board board = new board(frame,ellipses, ui);
 
-      for(int i = 0; i < 5; i++){
-          rects.add(new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected));
-      }
+      board.initiate();
 
       // populates the ellipses array with the initial 5
       for(int i = 0; i < 5; i++){
           ellipses.add(new ellipse(50 + i * 75, 150, 50, 50, board.unselected));
       }
 
-      ui ui = new ui();
 
-      // populates the board with the first shapes
-      board board = new board(frame, rects, ellipses, ui);
 
       JButton undo = new JButton("UNDO");
-      //frame.add(undo, BorderLayout.EAST);
+      frame.add(undo, BorderLayout.EAST);
 
 
 
@@ -56,7 +55,7 @@ public class main {
       frame.getContentPane().add(ui, BorderLayout.WEST);
 
       JButton redo = new JButton("REDO");
-      //frame.getContentPane().add(redo,BorderLayout.NORTH);
+      frame.getContentPane().add(redo,BorderLayout.NORTH);
 
       redo.addActionListener(new ActionListener() {
           @Override

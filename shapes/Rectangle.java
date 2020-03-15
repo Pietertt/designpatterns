@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Rectangle extends JComponent implements MouseMotionListener {
     public boolean selected = false;
@@ -18,7 +19,12 @@ public class Rectangle extends JComponent implements MouseMotionListener {
     public static int[] GRAY = { 213, 213, 213 };
     public static int[] BLUE = { 76, 153, 229 };
 
-    //public ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
+
+    // UNDO & REDO states
+    private Stack<Rectangle> undoRectangleState;
+    private Stack<Rectangle> redoRectangleState;
+    // Is this rectangle paint or no? (Undo,Redo)
+    private boolean painted;
 
     public JFrame frame;
 
@@ -52,6 +58,9 @@ public class Rectangle extends JComponent implements MouseMotionListener {
         this.width = width;
         this.height = height;
         this.id = id;
+        this.undoRectangleState = new Stack<>();
+        this.redoRectangleState = new Stack<>();
+        this.painted = true;
 //        this.added = added;
 //        this.dragging = dragging;
 
@@ -70,14 +79,18 @@ public class Rectangle extends JComponent implements MouseMotionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //Graphics2D g2d = (Graphics2D) g;
-        //this.g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
+        //g2d = (Graphics2D) g;
 
-        if(!undo) {
-            g.setColor(new Color(rgb[0], rgb[1], rgb[2]));
-            g.fillRect(x, y, width, height);
+
+
+        if(painted) {
+            g2d.setColor(new Color(rgb[0], rgb[1], rgb[2]));
+            g2d.fillRect(x, y, width, height);
         }
     }
+
+
 
     public Rectangle update(int mode) {
 
@@ -157,17 +170,31 @@ public class Rectangle extends JComponent implements MouseMotionListener {
         return this;
     }
 
-    public void undoButtonClicked()
+    public void undoButtonClicked(Rectangle rectangle, boolean painted)
     {
-        System.out.println("Undo");
-        undo = true;
+        System.out.println("Undo in rectangle");
+        this.painted = painted;
+        //Rectangle rectangle = this.undoRectangleState.pop();
+        //this.redoRectangleState.add(rectangle);
+        this.x = rectangle.x;
+        this.y = rectangle.y;
+        this.width = rectangle.width;
+        this.height = rectangle.height;
+        this.id = id;
         this.repaint();
     }
 
-    public void redoButtonClicked()
+    public void redoButtonClicked(Rectangle rectangle, boolean painted)
     {
-        System.out.println("Redo");
-        undo = false;
+        System.out.println("Redo in rectangle");
+        this.painted = painted;
+        //Rectangle rectangle = this.undoRectangleState.pop();
+        //this.redoRectangleState.add(rectangle);
+        this.x = rectangle.x;
+        this.y = rectangle.y;
+        this.width = rectangle.width;
+        this.height = rectangle.height;
+        this.id = id;
         this.repaint();
     }
 

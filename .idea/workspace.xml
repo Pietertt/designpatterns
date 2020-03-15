@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5a503efd-87cf-434d-b3ca-25236f7c2ce6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/dragRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/dragRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/placeRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/placeRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/pressRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/pressRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/commands/selectRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/selectRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouse/mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/mouse/mouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.java" afterDir="false" />
@@ -116,7 +116,8 @@
       <workItem from="1583835854926" duration="2328000" />
       <workItem from="1583915098783" duration="13202000" />
       <workItem from="1584015461941" duration="1198000" />
-      <workItem from="1584174234082" duration="16463000" />
+      <workItem from="1584174234082" duration="19840000" />
+      <workItem from="1584258895433" duration="14735000" />
     </task>
     <task id="LOCAL-00001" summary="Command pattern met Undo/Redo - Works, but still in progess">
       <created>1583401856002</created>
@@ -132,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583938278694</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Command pattern in progress ~ update Commands added">
+      <created>1584192099759</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584192099759</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +162,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Command pattern met Undo/Redo - Works, but still in progess" />
     <MESSAGE value="Command pattern in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Command pattern in progress" />
+    <MESSAGE value="Command pattern in progress ~ update Commands added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Command pattern in progress ~ update Commands added" />
   </component>
 </project>

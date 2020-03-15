@@ -25,10 +25,10 @@ public class board extends JPanel implements MouseListener {
       private static JFrame frame;
       private static ui ui;
 
-      private List<Order> orderList = new ArrayList<Order>();
+      private static final List<Order> orderList = new ArrayList<Order>();
 
-      private Stack<Order> undoStack;
-      private Stack<Order> redoStack;
+      private static final  Stack<Order> undoStack = new Stack<>();
+      private static final  Stack<Order> redoStack = new Stack<>();
       private List<Rectangle> deletedRects = new ArrayList<>();
 
       private List<String> history;
@@ -57,17 +57,19 @@ public class board extends JPanel implements MouseListener {
       public static int width = 500;
       public static int height = 500;
 
+      dragRectangle dragRectangle;
+
+      //private Graphics2D g2d;
+
       //public ArrayList<rectangle> rects = new ArrayList<rectangle>();
       public ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
       public static ArrayList<ellipse> ellipses = new ArrayList<ellipse>();
 
-      public board(JFrame frame, ArrayList<Rectangle> rectangles, ArrayList<ellipse> ell, ui ui){
-            undoStack = new Stack<>();
-            redoStack = new Stack<>();
+      public board(JFrame frame, ArrayList<ellipse> ell, ui ui){
             history = new ArrayList<>();
-            for(int i = 0; i < rectangles.size(); i++){
-                  this.rects.add(rectangles.get(i));
-            }
+//            for(int i = 0; i < rectangles.size(); i++){
+//                  this.rects.add(rectangles.get(i));
+//            }
             this.frame = frame;
             this.ui = ui;
             addMouseListener(this);
@@ -78,7 +80,13 @@ public class board extends JPanel implements MouseListener {
 
 
       public void initiate() {
-
+            for(int i = 0; i < 5; i++){
+                  Rectangle rectangle = new Rectangle(50 + i * 75, 50, 50, 50, i, board.unselected);
+                  rects.add(rectangle);
+                  placeRectangle placeRectangle = new placeRectangle(rects.get(i), this);
+                  //placeRectangle.execute();
+                  this.undoStack.add(placeRectangle);
+            }
       }
 
       // paint method which is responsible for painting the window
@@ -101,16 +109,24 @@ public class board extends JPanel implements MouseListener {
 
             //rect.execute();
 
-            undoStack.clear();
+            //undoStack.clear();
             //redoStack.clear();
 
-             //fills and colors specific areas based on values in the 'rects' array
-            for(int i = 0; i < this.rects.size(); i++){
-                  placeRectangle placeRect = new placeRectangle(rects.get(i), g2d, this);
-                  this.undoStack.push(placeRect);
-                  placeRect.execute();
-                  //this.addMouseListener(rects.get(i));
+
+            for(int i = 0; i < this.undoStack.size(); i++) {
+                  if(undoStack.get(i).getName().equals("place")) {
+                        undoStack.get(i).addGraphics(g2d);
+                        undoStack.get(i).execute();
+                  }
             }
+
+             //fills and colors specific areas based on values in the 'rects' array
+//            for(int i = 0; i < this.rects.size(); i++){
+//                  placeRectangle placeRect = new placeRectangle(rects.get(i), g2d, this);
+//                  //this.undoStack.push(placeRect);
+//                  placeRect.execute();
+//                  //this.addMouseListener(rects.get(i));
+//            }
 
 
             // fills and colors specific areas based on values in the 'ellipses' array
@@ -124,16 +140,17 @@ public class board extends JPanel implements MouseListener {
             System.out.println("Stack: " + undoStack);
             Order opt = undoStack.pop();
             redoStack.add(opt);
-            int indexOfLastRect = rects.size() - 1;
-            deletedRects.add(rects.get(indexOfLastRect));
-            rects.remove(indexOfLastRect);
+//            int indexOfLastRect = rects.size() - 1;
+//            deletedRects.add(rects.get(indexOfLastRect));
+//            rects.remove(indexOfLastRect);
             opt.undo();
       }
 
       public void redoDrawRectangle() {
             System.out.println("Stack: " + redoStack);
             Order opt = redoStack.pop();
-            rects.addAll(deletedRects);
+            undoStack.add(opt);
+            //rects.addAll(deletedRects);
             opt.redo();
       }
 
@@ -142,12 +159,18 @@ public class board extends JPanel implements MouseListener {
 
 
       for (int i = 0; i < this.rects.size(); i++) {
-            dragRectangle dragRectangle = new dragRectangle(this.rects.get(i), ui.getMode());
+            this.dragRectangle = new dragRectangle(this.rects.get(i), ui.getMode());
             //Rectangle rect = this.rects.get(i).update(ui);
-            dragRectangle.execute();
-            //rects.remove(rects.get(i));
-            //rects.add(rect);
+
+
+            //this.undoStack.push(dragRectangle);
+            this.dragRectangle.execute();
+
+            //this.undoStack.add(dragRectangle); // VERPLAATSEN.. wordt telkens weer toegevoegd.
+/*            rects.remove(rects.get(i));
+            rects.add(rects.get(i));*/
       }
+
 
       //this.mode = ui.getMode();
 
@@ -215,7 +238,8 @@ public class board extends JPanel implements MouseListener {
 //            }
 
             // updates the frame which is given as a parameter
-            frame.repaint();
+            this.repaint();
+            //frame.repaint();
             // returns the rectangle arraylist for further use to the main program
             return this.rects;
       }
@@ -225,7 +249,11 @@ public class board extends JPanel implements MouseListener {
                   case 0:
                         for(Rectangle rect : rects) {
                               pressRectangle pressRectangle = new pressRectangle(rect, e);
+
                               pressRectangle.execute();
+                              if(rect.pressed) {
+                                    this.undoStack.push(pressRectangle);
+                              }
                         }
                         break;
                   case 1:
@@ -244,6 +272,9 @@ public class board extends JPanel implements MouseListener {
                        for(Rectangle rect : rects) {
                              selectRectangle selectRectangle = new selectRectangle(rect, e);
                              selectRectangle.execute();
+                             if(rect.selected) {
+                                   this.undoStack.push(selectRectangle);
+                             }
                        }
                        break;
                   case 1:
@@ -260,7 +291,9 @@ public class board extends JPanel implements MouseListener {
                         break;
             }
       }
+
       public void mouseReleased(MouseEvent e) {
+
             switch(this.mode) {
                   case 0:
                         for(int i = 0; i < this.rects.size(); i++){

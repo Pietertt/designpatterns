@@ -26,11 +26,7 @@ public class ui extends JPanel {
 
             //rect.addMouseListener(mouseListener);
 
-            rect.addActionListener(new ActionListener() {
-                  public void actionPerformed(ActionEvent e) {
-                        setMode(1);
-                  }
-            });
+            rect.addActionListener(e -> setMode(1));
 
             super.add(rect);
             //super.add(ellipse);
