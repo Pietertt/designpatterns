@@ -1,11 +1,7 @@
 javac \
 main.java
 cd commands
-      javac order.java \
-            dragShapeCommand.java \
-            placeShapeCommand.java \
-            resizeShapeCommand.java \
-            selectShapeCommand.java
+      javac order.java selectShapeCommand.java
 cd ../
 cd io
       javac parser.java
