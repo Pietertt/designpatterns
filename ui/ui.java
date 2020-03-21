@@ -8,8 +8,7 @@ import java.awt.event.*;
 
 import shapes.*;
 
-public class ui extends JPanel implements MouseListener {
-      private ArrayList<shapes> history;
+public class ui extends JPanel {
 
       public int mode = 0;
       public String kind = "";
@@ -44,28 +43,5 @@ public class ui extends JPanel implements MouseListener {
             super.add(right);
             super.add(rect);
             super.add(ellipse);
-
-            super.setFocusable(true);
-            addMouseListener(this);
-      }
-
-      public void mouseClicked(MouseEvent e){
-            System.out.println("Click");
-      }
-
-      public void mouseEntered(MouseEvent e){
-
-      }
-
-      public void mouseExited(MouseEvent e){
-
-      }
-
-      public void mousePressed(MouseEvent e){
-
-      }
-
-      public void mouseReleased(MouseEvent e){
-
       }
 }

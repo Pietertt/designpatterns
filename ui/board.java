@@ -8,12 +8,18 @@ import java.awt.event.*;
 import shapes.rectangle;
 import shapes.ellipse;
 import shapes.handle;
-import shapes.shapes;
+import shapes.snapshot;
 
-public class board extends JPanel {
+import commands.*;
+
+public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
       private static ui ui;
+
+      private ArrayList<snapshot> history = new ArrayList<snapshot>();
+
+      private order order;
 
       
 
@@ -40,7 +46,8 @@ public class board extends JPanel {
       public static int height = 600;
 
       public board() {
-            
+            super.setFocusable(true);
+            addMouseListener(this);
       }
 
       // paint method which is responsible for painting the window
@@ -51,5 +58,29 @@ public class board extends JPanel {
 
       public void update() {
             
-      }    
+      }   
+      
+      public void mouseClicked(MouseEvent e){
+            order.execute();
+      }
+
+      public void mouseExited(MouseEvent e){
+
+      }
+
+      public void mouseEntered(MouseEvent e){
+
+      } 
+
+      public void mouseReleased(MouseEvent e){
+
+      }
+
+      public void mousePressed(MouseEvent e){
+
+      }
+
+      public void setCommand(order order){
+            this.order = order;
+      }
 }

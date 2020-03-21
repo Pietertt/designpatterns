@@ -7,9 +7,10 @@ import java.awt.event.*;
 
 import shapes.rectangle;
 import shapes.ellipse;
-import shapes.shapes;
+
 import ui.board;
 import ui.ui;
+
 import io.parser;
 
 public class main {
@@ -22,6 +23,7 @@ public class main {
       
       // added the board and the UI to the frame
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
+      frame.getContentPane().add(board);
       
       // // some window settings
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
