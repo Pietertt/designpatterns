@@ -3,11 +3,12 @@ package ui;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.Timer;
+
 import java.awt.event.*;
 
 import shapes.*;
 
-public class ui extends JPanel {
+public class ui extends JPanel implements MouseListener {
       private ArrayList<shapes> history;
 
       public int mode = 0;
@@ -39,65 +40,32 @@ public class ui extends JPanel {
             right.setFocusPainted(false);
             right.setContentAreaFilled(false);
 
-            rect.addActionListener(new ActionListener() { 
-                  public void actionPerformed(ActionEvent e){ 
-                        setMode(1);
-                        setKind("rectangle");
-                  }
-            });
-
-            ellipse.addActionListener(new ActionListener(){
-                  public void actionPerformed(ActionEvent e){
-                        setMode(1);
-                        setKind("ellipse");
-                  }
-            });
-
-            left.addActionListener(new ActionListener(){
-                  public void actionPerformed(ActionEvent e){
-                        history.remove(history.size() - 1);
-                        System.out.println("Popped");
-                  }
-            });
-
-            right.addActionListener(new ActionListener(){
-                  public void actionPerformed(ActionEvent e){
-                        System.out.println("Right");
-                  }
-            });
-
             super.add(left);
             super.add(right);
             super.add(rect);
             super.add(ellipse);
-            //super.add(ellipse);
+
+            super.setFocusable(true);
+            addMouseListener(this);
       }
 
-      // method to update (or completely set) the rectangle arraylist from outside
-      public void set(ArrayList<shapes> h){
-            this.history = h;
+      public void mouseClicked(MouseEvent e){
+            System.out.println("Click");
       }
 
-      // method used to update the rectangle arraylist in the main program
-      public ArrayList<shapes> get(){
-            return this.history;
+      public void mouseEntered(MouseEvent e){
+
       }
 
-      // returns the current mode
-      public int getMode(){
-            return this.mode;
+      public void mouseExited(MouseEvent e){
+
       }
 
-      // sets the current mode to whatever mode is given
-      public void setMode(int i){
-            this.mode = i;
+      public void mousePressed(MouseEvent e){
+
       }
 
-      public String getKind(){
-            return this.kind;
-      }
+      public void mouseReleased(MouseEvent e){
 
-      public void setKind(String kind){
-            this.kind = kind;
       }
 }
