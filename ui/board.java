@@ -79,8 +79,4 @@ public class board extends JPanel implements MouseListener {
       public void mousePressed(MouseEvent e){
 
       }
-
-      public void setCommand(order order){
-            this.order = order;
-      }
 }
