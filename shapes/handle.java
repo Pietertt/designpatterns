@@ -1,6 +1,6 @@
 package shapes;
 
-public class handle extends shape {
+public class handle extends Shape {
       public boolean selected = false;
 
       public handle(int x, int y, int[] rgb){

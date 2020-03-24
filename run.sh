@@ -1,1 +1,1 @@
-javac main.java shapes/shape.java shapes/ellipse.java shapes/rectangle.java shapes/handle.java commands/order.java commands/selectShapeCommand.java io/parser.java mouse/mouse.java ui/board.java ui/ui.java && java main
+javac main.java shapes/Shape.java shapes/ellipse.java shapes/Rectangle.java shapes/handle.java commands/order.java commands/createShapeCommand.java io/parser.java mouse/mouse.java ui/board.java ui/ui.java && java main

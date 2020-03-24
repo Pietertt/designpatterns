@@ -5,10 +5,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-import shapes.rectangle;
+import shapes.Shape;
+import shapes.Rectangle;
 import shapes.ellipse;
 import shapes.handle;
-import shapes.snapshot;
 
 import commands.*;
 
@@ -16,8 +16,6 @@ public class board extends JPanel implements MouseListener {
 
       private static JFrame frame;
       private static ui ui;
-
-      private ArrayList<snapshot> history = new ArrayList<snapshot>();
 
       private order order;
 
@@ -61,7 +59,9 @@ public class board extends JPanel implements MouseListener {
       }   
       
       public void mouseClicked(MouseEvent e){
-            order.execute();
+            Shape rectangle = new Rectangle(100, 100, 50, 50, 0, this.GRAY);
+            this.order = new createShapeCommand(rectangle);
+            this.order.execute();
       }
 
       public void mouseExited(MouseEvent e){

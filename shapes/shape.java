@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class shape extends JPanel {
+public class Shape extends JPanel {
       public int x;
       public int y;
       public int width;
@@ -14,7 +14,7 @@ public class shape extends JPanel {
 
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
-      public shape(int x, int y, int width, int height, int[] color){
+      public Shape(int x, int y, int width, int height, int[] color){
             this.x = x;
             this.y = y;
             this.width = width;
@@ -22,9 +22,7 @@ public class shape extends JPanel {
             this.color = color;
       }
 
-      public void select(){
-            System.out.println("Selecting this rectangle");
+      public void create(){
+            System.out.println("Creating this rectangle");
       }
-      
-
 }

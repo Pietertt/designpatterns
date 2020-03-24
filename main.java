@@ -5,7 +5,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.*;
 
-import shapes.rectangle;
+import shapes.Rectangle;
 import shapes.ellipse;
 
 import ui.board;
