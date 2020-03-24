@@ -11,4 +11,8 @@ public class handle extends Shape {
             this.x = x;
             this.y = y;
       }
+
+      public void draw() {
+
+      }
 }

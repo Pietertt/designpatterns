@@ -17,20 +17,22 @@ public class board extends JPanel implements MouseListener {
       private static JFrame frame;
       private static ui ui;
 
-      private order order;
+      private Order order;
+
+      private Stack<Order> history = new Stack<Order>();
 
       
 
-      // //-----------------------------------------------------------------------------
-      // // colors
-      // //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------------
+      //                                  Colors
+      //-----------------------------------------------------------------------------
 
       public static int[] GRAY = { 213, 213, 213 };
       public static int[] BLUE = { 76, 153, 229 };
 
-      // //-----------------------------------------------------------------------------
-      // // Modes
-      // //-----------------------------------------------------------------------------
+      //-----------------------------------------------------------------------------
+      //                                  Modes
+      //-----------------------------------------------------------------------------
 
       public int mode = 0;
       public String kind = "";
@@ -51,7 +53,7 @@ public class board extends JPanel implements MouseListener {
       // paint method which is responsible for painting the window
       @Override
       public void paintComponent(Graphics g) {
-
+            
       }
 
       public void update() {
@@ -61,6 +63,7 @@ public class board extends JPanel implements MouseListener {
       public void mouseClicked(MouseEvent e){
             Shape rectangle = new Rectangle(100, 100, 50, 50, 0, this.GRAY);
             this.order = new createShapeCommand(rectangle);
+            this.history.add(this.order);
             this.order.execute();
       }
 

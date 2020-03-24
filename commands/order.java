@@ -1,5 +1,5 @@
 package commands;
 
-public interface order {
+public interface Order {
       abstract void execute();  
 }

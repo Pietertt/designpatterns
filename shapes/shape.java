@@ -4,15 +4,13 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class Shape extends JPanel {
+public abstract class Shape extends JPanel {
       public int x;
       public int y;
       public int width;
       public int height;
 
       public int[] color;
-
-      public ArrayList<handle> handles  = new ArrayList<handle>();
 
       public Shape(int x, int y, int width, int height, int[] color){
             this.x = x;
@@ -22,7 +20,5 @@ public class Shape extends JPanel {
             this.color = color;
       }
 
-      public void create(){
-            System.out.println("Creating this rectangle");
-      }
+      public abstract void draw();
 }

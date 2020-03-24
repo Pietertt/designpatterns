@@ -3,7 +3,7 @@ package commands;
 import shapes.Rectangle;
 import shapes.Shape;
 
-public class createShapeCommand implements order {
+public class createShapeCommand implements Order {
       private Shape shape;
 
       public createShapeCommand(Shape shape){
@@ -12,6 +12,6 @@ public class createShapeCommand implements order {
 
       @Override
       public void execute(){
-            this.shape.create();
+            this.shape.draw();
       }
 }

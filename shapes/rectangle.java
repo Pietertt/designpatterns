@@ -12,4 +12,8 @@ public class Rectangle extends Shape {
             this.id = id;
             this.color = rgb;
       } 
+
+      public void draw(){
+            
+      }
 }
