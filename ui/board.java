@@ -20,6 +20,7 @@ public class board extends JPanel implements MouseListener {
       private Order order;
 
       private Stack<Order> history = new Stack<Order>();
+      private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       
 
@@ -45,7 +46,8 @@ public class board extends JPanel implements MouseListener {
       public static int width = 600;
       public static int height = 600;
 
-      public board() {
+      public board(JFrame frame) {
+            this.frame = frame;
             super.setFocusable(true);
             addMouseListener(this);
       }
@@ -53,18 +55,24 @@ public class board extends JPanel implements MouseListener {
       // paint method which is responsible for painting the window
       @Override
       public void paintComponent(Graphics g) {
-            
+            Graphics2D g2d = (Graphics2D) g;
+
+            for(int i = 0; i < this.shapes.size(); i++){
+                  g2d.setColor(new Color(0, 0, 0));
+                  g2d.fillRect(50 + (i * 50), 50, 50, 50);
+            }
       }
 
-      public void update() {
-            
+      public ArrayList<Shape> update(ArrayList<Shape> s) {
+            ArrayList<Shape> shapes = s;
+
+            return s;
       }   
       
       public void mouseClicked(MouseEvent e){
             Shape rectangle = new Rectangle(100, 100, 50, 50, 0, this.GRAY);
-            this.order = new createShapeCommand(rectangle);
-            this.history.add(this.order);
-            this.order.execute();
+            Order c = new createShapeCommand(rectangle, this.shapes);
+
       }
 
       public void mouseExited(MouseEvent e){

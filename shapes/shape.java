@@ -1,10 +1,11 @@
 package shapes;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+import shapes.Shape;
 
-import java.util.ArrayList;
-
-public abstract class Shape extends JPanel {
+public class Shape {
       public int x;
       public int y;
       public int width;
@@ -20,5 +21,7 @@ public abstract class Shape extends JPanel {
             this.color = color;
       }
 
-      public abstract void draw();
+      public void draw(ArrayList<Shape> s){
+            
+      }
 }
