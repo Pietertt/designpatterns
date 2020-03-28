@@ -22,12 +22,18 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       private int width;
       private int height;
 
+      // Save width & height to redraw.
+      private int savedWidth;
+      private int savedHeight;
+
       public rectangle(int x, int y, int width, int height, int id){
             //super(x, y, width, height);
             this.x = x;
             this.y = y;
             this.width = width;
+            this.savedWidth= width;
             this.height = height;
+            this.savedHeight = height;
             this.id = id;
       }
 
@@ -60,11 +66,16 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       }
 
       public void setDrawTrue() {
+            this.width = savedWidth;
+            this.height = savedHeight;
             rectDraw = true;
             repaint();
       }
 
       public void setDrawFalse() {
+            // size has to be set to zero to ensure you don't select invisible rectangles
+            this.width = 0;
+            this.height = 0;
             rectDraw = false;
             repaint();
       }
@@ -77,6 +88,10 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       public void setSelectedFalse() {
             selected = false;
             repaint();
+      }
+
+      public boolean getSelected() {
+            return selected;
       }
 
       public boolean getIfSelected(int x, int y) {

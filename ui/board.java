@@ -97,7 +97,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                   selectShapeCommand select = new selectShapeCommand(rectangle);
                   this.commandInvoker.execute(select);
                   selectionMode = true;
-              } else  {
+              } else if(rectangle.getSelected())  {
                   deselectShapeCommand deselect = new deselectShapeCommand(rectangle);
                   this.commandInvoker.execute(deselect);
                   //selectionMode = false;
