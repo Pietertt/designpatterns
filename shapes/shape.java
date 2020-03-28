@@ -4,13 +4,13 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class shape extends JPanel {
+public class shape extends JComponent {
       public int x;
       public int y;
       public int width;
       public int height;
-
       public int[] color;
+
 
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
@@ -25,6 +25,5 @@ public class shape extends JPanel {
       public void select(){
             System.out.println("Selecting this rectangle");
       }
-      
 
 }

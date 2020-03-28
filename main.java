@@ -19,7 +19,7 @@ public class main {
       JFrame frame = new JFrame();      
 
       ui ui = new ui();
-      board board = new board();
+      board board = new board(frame);
       
       // added the board and the UI to the frame
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
@@ -31,13 +31,16 @@ public class main {
       frame.setLocation(board.offsetX, board.offsetY);
       frame.setVisible(true);
 
-      // // the timer which fires 100 times a second
-      Timer timer = new Timer(10, new ActionListener() {
-            public void actionPerformed(ActionEvent event){
-                 board.update();
-            }
-      });
-      timer.setInitialDelay(0);
-      timer.start();
+
+      // Undo button
+      JButton undo = new JButton("UNDO");
+      frame.add(undo, BorderLayout.EAST);
+      undo.addActionListener(actionEvent -> board.undo());
+
+      // Undo button
+      JButton redo = new JButton("REDO");
+      frame.add(redo, BorderLayout.WEST);
+      redo.addActionListener(actionEvent -> board.redo());
+
   }
 }

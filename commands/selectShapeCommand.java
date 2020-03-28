@@ -1,19 +1,20 @@
 package commands;
 
-import java.util.ArrayList;
-
-import java.awt.event.*;
-
 import shapes.*;
 
 public class selectShapeCommand implements order {
-      private rectangle rect;
+      private shape shape;
 
-      public selectShapeCommand(rectangle rect){
-            this.rect = rect;
+      public selectShapeCommand(shape shape){
+            this.shape = shape;
       }
 
       public void execute(){
-            this.rect.select();
+            this.shape.select();
+      }
+
+      @Override
+      public void undo() {
+
       }
 }

@@ -1,26 +1,36 @@
+package ui;
+
+
 import commands.order;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 public class commandInvoker {
-    private List<order> orderList = new ArrayList<order>();
-    private List<order> historyList = new ArrayList<order>();
+    private final Stack<order> undoStack;
+    private final Stack<order> redoStack;
 
-    public void addOrder(order order) {
-        orderList.add(order);
+    public commandInvoker() {
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
     }
 
-    public void takeOrders(List<order> orders) {
-        orderList.addAll(orders);
+    public void execute(order cmd) {
+        undoStack.push(cmd);
+        redoStack.clear();
+        cmd.execute();
     }
 
-    public void placeOrders(){
-
-        for (order order : orderList) {
-            order.execute();
-            historyList.add(order);
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            order cmd = undoStack.pop();
+            cmd.undo();
+            redoStack.push(cmd);
         }
-        orderList.clear();
+    }
+
+    public void redo() {
+        order cmd = redoStack.pop();
+        cmd.execute();
+        undoStack.push(cmd);
     }
 }

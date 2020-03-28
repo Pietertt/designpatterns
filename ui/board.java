@@ -5,10 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-import shapes.rectangle;
-import shapes.ellipse;
-import shapes.handle;
-import shapes.snapshot;
+import shapes.*;
 
 import commands.*;
 
@@ -17,9 +14,14 @@ public class board extends JPanel implements MouseListener {
       private static JFrame frame;
       private static ui ui;
 
-      private ArrayList<snapshot> history = new ArrayList<snapshot>();
+      private ArrayList history = new ArrayList();
+
+      private Stack<order> ordersToExectute = new Stack<>();
 
       private order order;
+
+      // worden de commando's naar verstuurd:
+      private commandInvoker commandInvoker = new commandInvoker();
 
       
 
@@ -45,9 +47,18 @@ public class board extends JPanel implements MouseListener {
       public static int width = 600;
       public static int height = 600;
 
-      public board() {
+      public board(JFrame frame) {
             super.setFocusable(true);
             addMouseListener(this);
+            this.frame = frame;
+      }
+
+      public void undo() {
+            this.commandInvoker.undo();
+      }
+
+      public void redo() {
+            this.commandInvoker.redo();
       }
 
       // paint method which is responsible for painting the window
@@ -57,11 +68,11 @@ public class board extends JPanel implements MouseListener {
       }
 
       public void update() {
-            
+
       }   
       
       public void mouseClicked(MouseEvent e){
-            order.execute();
+            //order.execute();
       }
 
       public void mouseExited(MouseEvent e){
@@ -73,7 +84,18 @@ public class board extends JPanel implements MouseListener {
       } 
 
       public void mouseReleased(MouseEvent e){
+            int x = e.getXOnScreen();
+            int y = e.getYOnScreen();
 
+            rectangle rc = new rectangle(x - 30, y - 50,50,50, 1,GRAY);
+
+            placeShapeCommand place = new placeShapeCommand(rc);
+
+            this.commandInvoker.execute(place);
+            frame.add(place.getShape());
+            frame.revalidate();
+            frame.repaint();
+            //}
       }
 
       public void mousePressed(MouseEvent e){
