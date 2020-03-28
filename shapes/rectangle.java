@@ -81,12 +81,14 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       }
 
       public void setSelectedTrue() {
-            selected = true;
+            if(rectDraw)
+                  selected = true;
             repaint();
       }
 
       public void setSelectedFalse() {
-            selected = false;
+            if(rectDraw)
+                  selected = false;
             repaint();
       }
 

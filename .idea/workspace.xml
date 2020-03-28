@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585431365740</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Apparently it was possible to select invisible rectangles, thus making it impossible to place a rectangle there..">
+      <created>1585432173192</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1585432173192</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +174,7 @@
     <MESSAGE value="~ Dragging redone ~ Not yet working with command pattern" />
     <MESSAGE value="Reverted commit" />
     <MESSAGE value="Small problem with selecting fixed.&#10;* Deselecting added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small problem with selecting fixed.&#10;* Deselecting added" />
+    <MESSAGE value="Apparently it was possible to select invisible rectangles, thus making it impossible to place a rectangle there.." />
+    <option name="LAST_COMMIT_MESSAGE" value="Apparently it was possible to select invisible rectangles, thus making it impossible to place a rectangle there.." />
   </component>
 </project>
