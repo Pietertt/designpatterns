@@ -94,11 +94,11 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            //if(selected && dragging) {
+            if(selected /*&& dragging*/) {
                   this.x = e.getX();
                   this.y = e.getY();
                   repaint();
-            //}
+            }
       }
 
       @Override
