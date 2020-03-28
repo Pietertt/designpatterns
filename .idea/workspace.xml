@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/placeShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/placeShapeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/selectShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/selectShapeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/ellipse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/handle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/handle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/shape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1584867187418</updated>
       <workItem from="1584867189032" duration="9100000" />
-      <workItem from="1585385675753" duration="13442000" />
+      <workItem from="1585385675753" duration="14706000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>
@@ -103,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585393755457</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Bezig met command&#10;~ Selection almost done">
+      <created>1585402752756</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1585402752756</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +125,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Bezig met command&#10;~ Place rectangle afgemaakt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bezig met command&#10;~ Place rectangle afgemaakt" />
+    <MESSAGE value="Bezig met command&#10;~ Selection almost done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bezig met command&#10;~ Selection almost done" />
   </component>
 </project>

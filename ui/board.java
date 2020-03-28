@@ -51,8 +51,13 @@ public class board extends JPanel implements MouseListener {
 
       }   
       
-      public void mouseClicked(MouseEvent e){
-
+      public void mouseClicked(MouseEvent e) {
+          // Reset selectionMode when clicking in an empty area
+          for(rectangle rectangle : shapes) {
+              if (selectionMode && !rectangle.getIfSelected(e.getX(), e.getY())) {
+                  selectionMode = false;
+              }
+          }
       }
 
       public void mouseExited(MouseEvent e){
@@ -64,11 +69,18 @@ public class board extends JPanel implements MouseListener {
       } 
 
       public void mouseReleased(MouseEvent e){
+          // TODO Deselection works but still places a rectangle..
+          if(!selectionMode)
+              for(rectangle rectangle : shapes)
+                  rectangle.setSelectedFalse();
+
+
+            // Place a shape if clicking in an empty area
             if(!selectionMode) {
                   int x = e.getXOnScreen();
                   int y = e.getYOnScreen();
 
-                  rectangle rc = new rectangle(x - 50, y - 50, 50, 50, 1);
+                  rectangle rc = new rectangle(x - 100, y - 50, 50, 50, 1);
 
                   placeShapeCommand place = new placeShapeCommand(rc);
 
@@ -81,25 +93,13 @@ public class board extends JPanel implements MouseListener {
             }
       }
 
-      public void mousePressed(MouseEvent e){
-//          for(rectangle rectangle : shapes) {
-//              Point p = MouseInfo.getPointerInfo().getLocation();
-//              if(rectangle.contains(p)) {
-//                  selectShapeCommand select = new selectShapeCommand(rectangle);
-//                  this.commandInvoker.execute(select);
-//                  selectionMode = true;
-//              }
-//          }
-
-
+      public void mousePressed(MouseEvent e) {
+          // Check if every shape is selected
           for(rectangle rectangle : shapes) {
               if(rectangle.getIfSelected(e.getX(), e.getY())) {
                   selectShapeCommand select = new selectShapeCommand(rectangle);
                   this.commandInvoker.execute(select);
                   selectionMode = true;
-              }
-              else {
-
               }
           }
       }
