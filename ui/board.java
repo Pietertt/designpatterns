@@ -69,14 +69,6 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       } 
 
       public void mouseReleased(MouseEvent e){
-          // Mouse is not dragging
-          //mouseIsDragging = false;
-
-          // TODO Deselection works but still places a rectangle..
-          if(!selectionMode)
-              for(rectangle rectangle : shapes)
-                  rectangle.setSelectedFalse();
-
 
             // Place a shape if clicking in an empty area
             if(!selectionMode) {
@@ -105,6 +97,11 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                   selectShapeCommand select = new selectShapeCommand(rectangle);
                   this.commandInvoker.execute(select);
                   selectionMode = true;
+              } else  {
+                  deselectShapeCommand deselect = new deselectShapeCommand(rectangle);
+                  this.commandInvoker.execute(deselect);
+                  //selectionMode = false;
+                  //rectangle.setSelectedFalse();
               }
           }
       }
