@@ -2,8 +2,10 @@ package shapes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
-public class rectangle extends JComponent implements receiver {
+public class rectangle extends JComponent implements receiver, MouseMotionListener {
       public int id;
 
       // Moet de rectangle getekend worden
@@ -46,6 +48,12 @@ public class rectangle extends JComponent implements receiver {
             }
       }
 
+      public void drag(int x, int y) {
+            this.x = x;
+            this.y = y;
+            repaint();
+      }
+
       public void setDrawTrue() {
             rectDraw = true;
             repaint();
@@ -77,5 +85,19 @@ public class rectangle extends JComponent implements receiver {
                   }
             }
             return false;
+      }
+
+      @Override
+      public void mouseDragged(MouseEvent e) {
+            if(selected) {
+                  this.x = e.getX();
+                  this.y = e.getY();
+                  repaint();
+            }
+      }
+
+      @Override
+      public void mouseMoved(MouseEvent e) {
+
       }
 }

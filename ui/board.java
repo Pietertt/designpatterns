@@ -9,7 +9,7 @@ import shapes.*;
 
 import commands.*;
 
-public class board extends JPanel implements MouseListener {
+public class board extends JPanel implements MouseListener, MouseMotionListener {
 
       private static JFrame frame;
 
@@ -44,7 +44,6 @@ public class board extends JPanel implements MouseListener {
       // paint method which is responsible for painting the window
       @Override
       public void paintComponent(Graphics g) {
-
       }
 
       public void update() {
@@ -90,6 +89,8 @@ public class board extends JPanel implements MouseListener {
                   frame.repaint();
 
                   shapes.add(place.getShape());
+
+                  addMouseMotionListener(place.getShape());
             }
       }
 
@@ -103,4 +104,20 @@ public class board extends JPanel implements MouseListener {
               }
           }
       }
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+//        for(rectangle rectangle : shapes) {
+//            if(rectangle.getIfSelected(e.getX(), e.getY())) {
+//                rectangle.drag(e.getX(), e.getY());
+//                repaint();
+//            }
+//        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
 }

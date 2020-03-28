@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/commands/dragShapeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -88,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1584867187418</updated>
       <workItem from="1584867189032" duration="9100000" />
-      <workItem from="1585385675753" duration="14706000" />
+      <workItem from="1585385675753" duration="19071000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>
@@ -104,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585402752756</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'">
+      <created>1585404102499</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585404102499</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +135,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Bezig met command&#10;~ Place rectangle afgemaakt" />
     <MESSAGE value="Bezig met command&#10;~ Selection almost done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bezig met command&#10;~ Selection almost done" />
+    <MESSAGE value="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'" />
+    <option name="LAST_COMMIT_MESSAGE" value="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'" />
   </component>
 </project>
