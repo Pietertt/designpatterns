@@ -3,18 +3,18 @@ package commands;
 import shapes.*;
 
 public class selectShapeCommand implements order {
-      private shape shape;
+      private rectangle shape;
 
-      public selectShapeCommand(shape shape){
+      public selectShapeCommand(rectangle shape) {
             this.shape = shape;
       }
 
       public void execute(){
-            this.shape.select();
+            shape.setSelectedTrue();
       }
 
       @Override
       public void undo() {
-
+            shape.setSelectedFalse();
       }
 }

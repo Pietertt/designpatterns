@@ -9,17 +9,15 @@ public class shape extends JComponent {
       public int y;
       public int width;
       public int height;
-      public int[] color;
 
 
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
-      public shape(int x, int y, int width, int height, int[] color){
+      public shape(int x, int y, int width, int height){
             this.x = x;
             this.y = y;
             this.width = width;
             this.height = height;
-            this.color = color;
       }
 
       public void select(){

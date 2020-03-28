@@ -19,7 +19,7 @@ public class placeShapeCommand implements order {
         shape.setDrawFalse();
     }
 
-    public shape getShape() {
+    public rectangle getShape() {
         return shape;
     }
 }
