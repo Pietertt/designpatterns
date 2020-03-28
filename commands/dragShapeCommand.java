@@ -11,11 +11,11 @@ public class dragShapeCommand implements order {
 
     @Override
     public void execute() {
-        //shape.drag();
+        //shape.dragIsOn();
     }
 
     @Override
     public void undo() {
-
+        //shape.dragIsOff();
     }
 }

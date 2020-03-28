@@ -14,6 +14,9 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       // Is de rectangle geselecteerd
       private boolean selected = false;
 
+      // Is dragging toggled on
+      private boolean dragging = false;
+
       private int x;
       private int y;
       private int width;
@@ -48,10 +51,12 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
             }
       }
 
-      public void drag(int x, int y) {
-            this.x = x;
-            this.y = y;
-            repaint();
+      public void dragIsOn() {
+            dragging = true;
+      }
+
+      public void dragIsOff() {
+            dragging = false;
       }
 
       public void setDrawTrue() {
@@ -89,11 +94,11 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            if(selected) {
+            //if(selected && dragging) {
                   this.x = e.getX();
                   this.y = e.getY();
                   repaint();
-            }
+            //}
       }
 
       @Override

@@ -21,6 +21,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       // MODUS
       private boolean selectionMode = false;
+      private boolean mouseIsDragging = false;
 
       public static int offsetX = 0;
       public static int offsetY = 0;
@@ -68,6 +69,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       } 
 
       public void mouseReleased(MouseEvent e){
+          // Mouse is not dragging
+          //mouseIsDragging = false;
+
           // TODO Deselection works but still places a rectangle..
           if(!selectionMode)
               for(rectangle rectangle : shapes)
@@ -108,12 +112,14 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-//        for(rectangle rectangle : shapes) {
-//            if(rectangle.getIfSelected(e.getX(), e.getY())) {
-//                rectangle.drag(e.getX(), e.getY());
-//                repaint();
-//            }
-//        }
+        //for(rectangle rectangle : shapes) {
+            //if(rectangle.getIfSelected(e.getX(), e.getY())) {
+                //dragShapeCommand drag = new dragShapeCommand(rectangle);
+                //this.commandInvoker.execute(drag);
+                //mouseIsDragging = true;
+                //repaint();
+           // }
+       // }
     }
 
     @Override
