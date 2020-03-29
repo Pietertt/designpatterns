@@ -45,6 +45,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       // paint method which is responsible for painting the window
       @Override
       public void paintComponent(Graphics g) {
+
       }
 
       public void update() {
@@ -52,6 +53,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       }   
       
       public void mouseClicked(MouseEvent e) {
+
+
+
           // Reset selectionMode when clicking in an empty area
           for(rectangle rectangle : shapes) {
               if (selectionMode && !rectangle.getIfSelected(e.getX(), e.getY())) {
@@ -91,6 +95,15 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mousePressed(MouseEvent e) {
+
+          for(rectangle rectangle : shapes) {
+              if(rectangle.getIfSelected(e.getX(), e.getY())) {
+                  dragShapeCommand drag = new dragShapeCommand(rectangle);
+                  this.commandInvoker.execute(drag);
+              }
+          }
+
+
           // Check if every shape is selected
           for(rectangle rectangle : shapes) {
               if(rectangle.getIfSelected(e.getX(), e.getY())) {
@@ -109,14 +122,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        //for(rectangle rectangle : shapes) {
-            //if(rectangle.getIfSelected(e.getX(), e.getY())) {
-                //dragShapeCommand drag = new dragShapeCommand(rectangle);
-                //this.commandInvoker.execute(drag);
-                //mouseIsDragging = true;
-                //repaint();
-           // }
-       // }
+
     }
 
     @Override

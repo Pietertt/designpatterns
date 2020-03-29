@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.Stack;
 
 public class rectangle extends JComponent implements receiver, MouseMotionListener {
       public int id;
@@ -23,18 +24,24 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       private int height;
 
       // Save width & height to redraw.
+      private Stack<Integer> history;
       private int savedWidth;
       private int savedHeight;
+      private int savedX;
+      private int savedY;
 
       public rectangle(int x, int y, int width, int height, int id){
             //super(x, y, width, height);
             this.x = x;
+            this.savedX = x;
             this.y = y;
+            this.savedY = y;
             this.width = width;
             this.savedWidth= width;
             this.height = height;
             this.savedHeight = height;
             this.id = id;
+            this.history = new Stack<>();
       }
 
       private void setColor(Graphics g) {
@@ -57,13 +64,39 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
             }
       }
 
-      public void dragIsOn() {
-            dragging = true;
+      public void drag() {
+            if(selected) {
+                  this.dragging = true;
+                  history.push(height);
+                  history.push(width);
+                  history.push(y);
+                  history.push(x);
+                  //this.savedX = x;
+                  //this.savedY = y;
+                  //this.savedWidth = width;
+                  //this.savedHeight = height;
+                  repaint();
+            }
       }
 
-      public void dragIsOff() {
-            dragging = false;
+      public void undoDrag() {
+            this.dragging = false;
+            this.x = this.history.pop();
+            this.y = this.history.pop();
+            this.width = this.history.pop();
+            this.height = this.history.pop();
+//            this.x = rectangle.savedX;
+//            this.y = rectangle.savedY;
+//            this.width = rectangle.savedWidth;
+//            this.height = rectangle.savedHeight;
+//            this.x = savedX;
+//            this.y = savedY;
+//            this.width = savedWidth;
+//            this.height = savedHeight;
+            repaint();
       }
+
+
 
       public void setDrawTrue() {
             this.width = savedWidth;
@@ -81,12 +114,14 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       }
 
       public void setSelectedTrue() {
+            // can only select when rectangle is actually drawn
             if(rectDraw)
                   selected = true;
             repaint();
       }
 
       public void setSelectedFalse() {
+            // can only deselect when rectangle is actually drawn
             if(rectDraw)
                   selected = false;
             repaint();
@@ -111,7 +146,7 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            if(selected /*&& dragging*/) {
+            if(selected && dragging) {
                   this.x = e.getX();
                   this.y = e.getY();
                   repaint();
