@@ -24,7 +24,8 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       private int height;
 
       // Save width & height to redraw.
-      private Stack<Integer> history;
+      private Stack<Integer> redoStack;
+      private Stack<Integer> undoStack;
       private int savedWidth;
       private int savedHeight;
       private int savedX;
@@ -41,7 +42,8 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
             this.height = height;
             this.savedHeight = height;
             this.id = id;
-            this.history = new Stack<>();
+            this.undoStack = new Stack<>();
+            this.redoStack = new Stack<>();
       }
 
       private void setColor(Graphics g) {
@@ -67,32 +69,42 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       public void drag() {
             if(selected) {
                   this.dragging = true;
-                  history.push(height);
-                  history.push(width);
-                  history.push(y);
-                  history.push(x);
-                  //this.savedX = x;
-                  //this.savedY = y;
-                  //this.savedWidth = width;
-                  //this.savedHeight = height;
+                  this.undoStack.push(height);
+                  this.undoStack.push(width);
+                  this.undoStack.push(y);
+                  this.undoStack.push(x);
                   repaint();
             }
       }
 
+      public void redoDrag() {
+            this.dragging = true;
+
+            this.undoStack.push(height);
+            this.undoStack.push(width);
+            this.undoStack.push(y);
+            this.undoStack.push(x);
+
+            this.x = this.redoStack.pop();
+            this.y = this.redoStack.pop();
+            this.width = this.redoStack.pop();
+            this.height = this.redoStack.pop();
+            repaint();
+      }
+
       public void undoDrag() {
             this.dragging = false;
-            this.x = this.history.pop();
-            this.y = this.history.pop();
-            this.width = this.history.pop();
-            this.height = this.history.pop();
-//            this.x = rectangle.savedX;
-//            this.y = rectangle.savedY;
-//            this.width = rectangle.savedWidth;
-//            this.height = rectangle.savedHeight;
-//            this.x = savedX;
-//            this.y = savedY;
-//            this.width = savedWidth;
-//            this.height = savedHeight;
+
+            this.redoStack.push(height);
+            this.redoStack.push(width);
+            this.redoStack.push(y);
+            this.redoStack.push(x);
+
+            this.x = this.undoStack.pop();
+            this.y = this.undoStack.pop();
+            this.width = this.undoStack.pop();
+            this.height = this.undoStack.pop();
+
             repaint();
       }
 

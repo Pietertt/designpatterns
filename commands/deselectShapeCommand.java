@@ -17,4 +17,9 @@ public class deselectShapeCommand implements order {
     public void undo() {
         shape.setSelectedTrue();
     }
+
+    @Override
+    public void redo() {
+        shape.setSelectedFalse();
+    }
 }

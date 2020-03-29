@@ -19,6 +19,11 @@ public class placeShapeCommand implements order {
         shape.setDrawFalse();
     }
 
+    @Override
+    public void redo() {
+        shape.setDrawTrue();
+    }
+
     public rectangle getShape() {
         return shape;
     }

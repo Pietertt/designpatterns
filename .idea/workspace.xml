@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="" />
+    <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/deselectShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/deselectShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/dragShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/dragShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/order.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/placeShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/placeShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/selectShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/selectShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/commandInvoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/commandInvoker.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +96,7 @@
       <updated>1584867187418</updated>
       <workItem from="1584867189032" duration="9100000" />
       <workItem from="1585385675753" duration="21268000" />
-      <workItem from="1585480350154" duration="6381000" />
+      <workItem from="1585480350154" duration="12126000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>
@@ -158,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585491261309</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fixes">
+      <created>1585492383028</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1585492383028</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -30,7 +30,7 @@ public class commandInvoker {
 
     public void redo() {
         order cmd = redoStack.pop();
-        cmd.execute();
+        cmd.redo();
         undoStack.push(cmd);
     }
 }

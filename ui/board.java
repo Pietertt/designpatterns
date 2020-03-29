@@ -68,6 +68,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mouseEntered(MouseEvent e){
+          // TODO In Progress: Change mouse when entering a shape
           for(rectangle rectangle : shapes) {
               if(rectangle.getIfSelected(e.getX(), e.getY())) {
                   this.setCursor(new Cursor(Cursor.HAND_CURSOR));

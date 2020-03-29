@@ -17,4 +17,9 @@ public class selectShapeCommand implements order {
       public void undo() {
             shape.setSelectedFalse();
       }
+
+      @Override
+      public void redo() {
+            shape.setSelectedTrue();
+      }
 }
