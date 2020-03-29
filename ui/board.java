@@ -101,7 +101,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
           // If the shape is selected && the mouse is pressed you can drag a rectangle.
           for(rectangle rectangle : shapes) {
-              if(rectangle.getIfSelected(e.getX(), e.getY()) && !rectangle.dragging) {
+              if(rectangle.getIfSelected(e.getX(), e.getY())) {
                   dragShapeCommand drag = new dragShapeCommand(rectangle);
                   this.commandInvoker.execute(drag);
               }
