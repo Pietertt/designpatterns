@@ -54,14 +54,13 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       
       public void mouseClicked(MouseEvent e) {
 
-
-
           // Reset selectionMode when clicking in an empty area
           for(rectangle rectangle : shapes) {
               if (selectionMode && !rectangle.getIfSelected(e.getX(), e.getY())) {
                   selectionMode = false;
               }
           }
+
       }
 
       public void mouseExited(MouseEvent e){
@@ -69,35 +68,40 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mouseEntered(MouseEvent e){
-
+          for(rectangle rectangle : shapes) {
+              if(rectangle.getIfSelected(e.getX(), e.getY())) {
+                  this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+              }
+          }
       } 
 
       public void mouseReleased(MouseEvent e){
 
-            // Place a shape if clicking in an empty area
-            if(!selectionMode) {
-                  int x = e.getXOnScreen();
-                  int y = e.getYOnScreen();
+          // Place a shape if clicking in an empty area
+          if(!selectionMode) {
+              int x = e.getXOnScreen();
+              int y = e.getYOnScreen();
 
-                  rectangle rc = new rectangle(x - 100, y - 50, 50, 50, 1);
+              rectangle rc = new rectangle(x - 100, y - 50, 50, 50, 1);
 
-                  placeShapeCommand place = new placeShapeCommand(rc);
+              placeShapeCommand place = new placeShapeCommand(rc);
 
-                  this.commandInvoker.execute(place);
-                  frame.add(place.getShape());
-                  frame.revalidate();
-                  frame.repaint();
+              this.commandInvoker.execute(place);
+              frame.add(place.getShape());
+              frame.revalidate();
+              frame.repaint();
 
-                  shapes.add(place.getShape());
+              shapes.add(place.getShape());
 
-                  addMouseMotionListener(place.getShape());
-            }
+              addMouseMotionListener(place.getShape());
+          }
       }
 
       public void mousePressed(MouseEvent e) {
 
+          // If the shape is selected && the mouse is pressed you can drag a rectangle.
           for(rectangle rectangle : shapes) {
-              if(rectangle.getIfSelected(e.getX(), e.getY())) {
+              if(rectangle.getIfSelected(e.getX(), e.getY()) && !rectangle.dragging) {
                   dragShapeCommand drag = new dragShapeCommand(rectangle);
                   this.commandInvoker.execute(drag);
               }
@@ -117,6 +121,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                   //rectangle.setSelectedFalse();
               }
           }
+
+
       }
 
 
