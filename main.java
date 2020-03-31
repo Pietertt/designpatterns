@@ -20,31 +20,21 @@ import java.util.ArrayList;
 public class main {
 
       private static ArrayList<Command> commands = new ArrayList<Command>();
-  public static void main(String[] args) {
-      JFrame frame = new JFrame();     
+      public static void main(String[] args) {
+            JFrame frame = new JFrame();     
 
-      ui ui = new ui();
-      board board = new board(frame);
+            ui ui = new ui();
+            board board = new board(frame);
 
-      
-      // added the board and the UI to the frame
-      frame.getContentPane().add(ui, BorderLayout.SOUTH);
-      frame.getContentPane().add(board);
-      
-      // // some window settings
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setSize(board.width, board.height);
-      frame.setLocation(board.offsetX, board.offsetY);
-      frame.setVisible(true);
-
-      // // the timer which fires 100 times a second
-      Timer timer = new Timer(10, new ActionListener() {
-            public void actionPerformed(ActionEvent event){
-                 commands = board.update(commands);
-                 System.out.println(commands.size());
-            }
-      });
-      timer.setInitialDelay(0);
-      timer.start();
-  }
+            
+            // added the board and the UI to the frame
+            frame.getContentPane().add(ui, BorderLayout.SOUTH);
+            frame.getContentPane().add(board);
+            
+            // // some window settings
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(board.width, board.height);
+            frame.setLocation(board.offsetX, board.offsetY);
+            frame.setVisible(true);
+      }
 }

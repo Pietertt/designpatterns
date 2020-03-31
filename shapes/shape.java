@@ -21,7 +21,7 @@ public class Shape extends JPanel {
             this.color = color;
       }
 
-      public void draw(){
+      public void place(){
             repaint();
       }
 

@@ -14,6 +14,10 @@ public class createShapeCommand implements Command {
 
       @Override
       public void execute(){
-            this.shape.draw();
+            this.shape.place();
+      }
+
+      public Shape get(){
+            return this.shape;
       }
 }

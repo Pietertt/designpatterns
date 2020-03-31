@@ -39,23 +39,14 @@ public class board extends JPanel implements MouseListener {
       public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
       }
-
-      public ArrayList<Command> update(ArrayList<Command> commands) {
-            this.commands = commands;
-
-            for(int i = 0; i < commands.size(); i++){
-                  commands.get(i).execute();
-            }
-
-            frame.repaint();
-
-            return this.commands;
-      }   
       
       public void mouseClicked(MouseEvent e){
             Shape rect = new Rectangle(100, 100, 100, 100, 5, this.BLUE);
             Command command = new createShapeCommand(rect);
             this.commands.add(command);
+            this.frame.add(command.get());
+            this.frame.revalidate();
+            this.frame.repaint();
       }
 
       public void mouseExited(MouseEvent e){
