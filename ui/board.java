@@ -29,6 +29,8 @@ public class board extends JPanel implements MouseListener {
       ArrayList<Command> commands = new ArrayList<Command>();
       ArrayList<Shape> shapes = new ArrayList<Shape>();
 
+      private Invoker invoker = new Invoker();
+
       public board(JFrame frame) {
             this.frame = frame;
             super.setFocusable(true);
@@ -44,7 +46,7 @@ public class board extends JPanel implements MouseListener {
             Shape rect = new Rectangle(100, 100, 100, 100, 5, this.BLUE);
             Command command = new createShapeCommand(rect);
             this.commands.add(command);
-            this.frame.add(command.get());
+            this.frame.add(this.invoker.execute(command));
             this.frame.revalidate();
             this.frame.repaint();
       }
@@ -62,6 +64,14 @@ public class board extends JPanel implements MouseListener {
       }
 
       public void mousePressed(MouseEvent e){
+
+      }
+
+      public void mouseDragged(MouseEvent e){
+
+      }
+
+      public void MouseMoved(MouseEvent e){
 
       }
 }
