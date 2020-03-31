@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import javax.swing.Timer;
 
-import commands.Order;
+import commands.Command;
 
 import java.awt.event.*;
 
@@ -19,15 +19,8 @@ import java.util.ArrayList;
 
 public class main {
 
-      private static ArrayList<Shape> shapes = new ArrayList<Shape>();
-      private static ArrayList<Order> history = new ArrayList<Order>();
-
   public static void main(String[] args) {
       JFrame frame = new JFrame();     
-      
-      int[] color = {0, 0, 0};
-      Shape rect = new Rectangle(100, 100, 100, 100, 0, color);
-      history.add(rect);
 
       ui ui = new ui();
       board board = new board(frame);
@@ -45,7 +38,7 @@ public class main {
       // // the timer which fires 100 times a second
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                 board.update(shapes);
+                 board.update();
             }
       });
       timer.setInitialDelay(0);

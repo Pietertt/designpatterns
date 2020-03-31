@@ -4,6 +4,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import shapes.Shape;
 
-public interface Order {
+public interface Command {
       abstract void execute(); 
 }

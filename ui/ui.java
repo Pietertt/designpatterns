@@ -10,9 +10,6 @@ import shapes.*;
 
 public class ui extends JPanel {
 
-      public int mode = 0;
-      public String kind = "";
-
       public ui(){
             JButton rect = new JButton();
             JButton ellipse = new JButton();

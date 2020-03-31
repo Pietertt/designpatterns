@@ -5,7 +5,7 @@ import shapes.Shape;
 import java.awt.*;
 import java.util.*;
 
-public class createShapeCommand implements Order {
+public class createShapeCommand implements Command {
       private Shape shape;
       private ArrayList<Shape> shapes;
 
@@ -16,6 +16,6 @@ public class createShapeCommand implements Order {
 
       @Override
       public void execute(){
-            this.shape.draw();
+            //this.shape.draw();
       }
 }
