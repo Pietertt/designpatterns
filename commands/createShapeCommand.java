@@ -7,15 +7,13 @@ import java.util.*;
 
 public class createShapeCommand implements Command {
       private Shape shape;
-      private ArrayList<Shape> shapes;
 
-      public createShapeCommand(Shape shape, ArrayList<Shape> shapes){
+      public createShapeCommand(Shape shape){
             this.shape = shape;
-            this.shapes = shapes;
-      }
+      }     
 
       @Override
       public void execute(){
-            //this.shape.draw();
+            this.shape.draw();
       }
 }

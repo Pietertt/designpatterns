@@ -19,11 +19,13 @@ import java.util.ArrayList;
 
 public class main {
 
+      private static ArrayList<Command> commands = new ArrayList<Command>();
   public static void main(String[] args) {
       JFrame frame = new JFrame();     
 
       ui ui = new ui();
       board board = new board(frame);
+
       
       // added the board and the UI to the frame
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
@@ -38,7 +40,8 @@ public class main {
       // // the timer which fires 100 times a second
       Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                 board.update();
+                 commands = board.update(commands);
+                 System.out.println(commands.size());
             }
       });
       timer.setInitialDelay(0);

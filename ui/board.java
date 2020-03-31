@@ -3,6 +3,7 @@ package ui;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
+import java.util.ArrayList;
 import java.awt.event.*;
 
 import shapes.Shape;
@@ -25,25 +26,36 @@ public class board extends JPanel implements MouseListener {
       public static int width = 600;
       public static int height = 600;
 
+      ArrayList<Command> commands = new ArrayList<Command>();
+      ArrayList<Shape> shapes = new ArrayList<Shape>();
+
       public board(JFrame frame) {
             this.frame = frame;
             super.setFocusable(true);
             addMouseListener(this);
       }
 
-      // paint method which is responsible for painting the window
       @Override
       public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
       }
 
-      public void update() {
+      public ArrayList<Command> update(ArrayList<Command> commands) {
+            this.commands = commands;
 
-         
+            for(int i = 0; i < commands.size(); i++){
+                  commands.get(i).execute();
+            }
+
+            frame.repaint();
+
+            return this.commands;
       }   
       
       public void mouseClicked(MouseEvent e){
-
+            Shape rect = new Rectangle(100, 100, 100, 100, 5, this.BLUE);
+            Command command = new createShapeCommand(rect);
+            this.commands.add(command);
       }
 
       public void mouseExited(MouseEvent e){
