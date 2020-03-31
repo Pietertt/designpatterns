@@ -7,4 +7,6 @@ import shapes.Shape;
 public interface Command {
       abstract void execute(); 
       abstract Shape get();
+      abstract void undo();
+      abstract void redo();
 }

@@ -13,6 +13,9 @@ public class Shape extends JPanel {
 
       public int[] color;
 
+      private Stack<Integer> undo;
+      private Stack<Integer> redo;
+
       public Shape(int x, int y, int width, int height, int[] color){
             this.x = x;
             this.y = y;

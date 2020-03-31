@@ -23,7 +23,7 @@ public class main {
       public static void main(String[] args) {
             JFrame frame = new JFrame();     
 
-            ui ui = new ui();
+            ui ui = new ui(frame);
             board board = new board(frame);
 
             

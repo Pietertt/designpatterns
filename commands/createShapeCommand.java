@@ -20,4 +20,12 @@ public class createShapeCommand implements Command {
       public Shape get(){
             return this.shape;
       }
+
+      public void undo(){
+
+      }
+
+      public void redo(){
+            
+      }
 }
