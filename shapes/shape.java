@@ -31,7 +31,6 @@ public class Shape extends JPanel {
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            System.out.println("Drawed");
             g.setColor(Color.BLACK);
             g.fillRect(this.x, this.y, this.width, this.height);
       }
