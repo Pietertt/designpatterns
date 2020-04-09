@@ -4,9 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseMotionAdapter;
+
 import java.awt.Dimension;
 
-public class Rectangle extends JComponent {
+public class Rectangle extends JPanel {
       private int x;
       private int y;
       private int width;
@@ -17,21 +25,37 @@ public class Rectangle extends JComponent {
             this.y = y;
             this.width = width;
             this.height = height;
+
+            addMouseListener(new MouseAdapter() {
+                  public void mousePressed(MouseEvent e) {
+                        moveSquare(e.getX(),e.getY());
+                  }
+            });
+      
+            addMouseMotionListener(new MouseAdapter() {
+                  public void mouseDragged(MouseEvent e) {
+                        moveSquare(e.getX(),e.getY());
+                  }
+            });
       }
 
-      @Override
-      public Dimension setPreferredSize() {
-            return new Dimension(this.width, this.height);
+      private void moveSquare(int x, int y) {
+            int OFFSET = 1;
+            if ((this.x != x) || (this.y != y)) {
+                  repaint(this.x, this.y, this.width + OFFSET, this.height + OFFSET);
+                  this.x = x;
+                  this.y = y;
+                  repaint(this.x, this.y, this.width + OFFSET, this.height + OFFSET);
+            } 
       }
 
-      @Override
       public Dimension getPreferredSize() {
-            return new Dimension(this.width, this.height);
+            return new Dimension(600, 600);
       }
-
-      @Override
-      public void paintComponent(Graphics g) {
-            super.paintComponent(g);
+        
+      protected void paintComponent(Graphics g) {
+            super.paintComponent(g);       
+            g.setColor(Color.BLACK);
             g.fillRect(this.x, this.y, this.width, this.height);
-      }
+      }  
 }
