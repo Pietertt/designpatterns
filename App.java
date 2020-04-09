@@ -8,14 +8,15 @@ import javax.imageio.ImageIO;
 import shapes.*;
 import shapes.Rectangle;
 
-class App extends JFrame implements MouseListener {
+class App extends JPanel implements MouseListener {
       private JPanel board = new JPanel();
       private JPanel UI = new JPanel();
+      public JFrame frame = new JFrame();
 
       private JButton rectangle = new JButton();
       private JButton ellipse = new JButton();
 
-      public App() throws IOException {
+      public JPanel init() throws IOException {
 
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
             this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
@@ -31,19 +32,19 @@ class App extends JFrame implements MouseListener {
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
 
-            getContentPane().add(this.board);
-            getContentPane().add(this.UI, BorderLayout.SOUTH);
+            // this.board.add(new Rectangle(100, 100, 100, 100));
 
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(600, 600);
-            setVisible(true);
+            JPanel test = new JPanel();
 
-            board.setFocusable(true);
-            board.addMouseListener(this);
+            test.add(this.UI);
+            test.add(this.board);
+
+            return test;
+
       }
       
       public void mouseClicked(MouseEvent e){
-     
+            System.out.println("Fuu");
       }
 
       public void mouseExited(MouseEvent e){
@@ -71,8 +72,14 @@ class App extends JFrame implements MouseListener {
       }
 
       public static void main(String[] args) throws IOException {
-            JButton b = new JButton("Test");
 
-            app.add(b);
+            App app = new App();
+            app.frame.getContentPane().add(app.init(), BorderLayout.SOUTH);
+
+            app.frame.getContentPane().add(new Rectangle(100, 100, 100, 100));
+
+            app.frame.setDefaultCloseOperation(app.frame.EXIT_ON_CLOSE);
+            app.frame.setSize(600, 600);
+            app.frame.setVisible(true);
       }  
 }
