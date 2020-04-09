@@ -9,14 +9,22 @@ class App extends JFrame implements MouseListener {
       private JPanel board = new JPanel();
       private JPanel UI = new JPanel();
 
-      public App(){
-            Rectangle rect = new Rectangle(100, 200, 100, 100);
+      private JButton rectangle = new JButton();
+      private JButton ellipse = new JButton();
 
-            add(rect);
+      public App(){
+            this.UI.add(this.rectangle);
+            this.UI.add(this.ellipse);
+
+            getContentPane().add(this.board);
+            getContentPane().add(this.UI, BorderLayout.SOUTH);
 
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setSize(600, 600);
             setVisible(true);
+
+            board.setFocusable(true);
+            board.addMouseListener(this);
       }
 
       
