@@ -1,15 +1,28 @@
 package shapes;
 
-public class Rectangle extends Shape {
+import java.awt.Graphics;
+import javax.swing.JPanel;
 
-      public int id;
-      public int[] color;
+public class Rectangle extends JPanel {
+      private int x;
+      private int y;
+      private int width;
+      private int height;
 
-      public Rectangle(int x, int y, int width, int height, int id, int[] rgb){
-            super(x, y, width, height, rgb);
+      public Rectangle(int x, int y, int width, int height){
+            this.x = x;
+            this.y = y;
             this.width = width;
             this.height = height;
-            this.id = id;
-            this.color = rgb;
-      } 
+      }
+
+      public void place(){
+            
+      }
+
+      @Override
+      public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.fillRect(100, 100, 100, 100);
+      }
 }
