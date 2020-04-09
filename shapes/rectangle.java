@@ -13,12 +13,12 @@ public class Rectangle extends JPanel {
 
       @Override
       public Dimension getPreferredSize() {
-            return new Dimension(300, 300);
+            return new Dimension(400, 400);
       }
 
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.fillRect(100, 100, 100, 100);
+            g.fillRect(100, 100, 200, 200);
       }
 }

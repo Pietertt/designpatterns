@@ -13,12 +13,6 @@ public class App {
       private JPanel UI = new JPanel();
       private JPanel board = new JPanel();
 
-      public JPanel generateBoard() {
-            this.board.add(new Rectangle());
-
-            return this.board;
-      }
-
       public JPanel generateUI() throws IOException {
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
             this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
@@ -37,13 +31,18 @@ public class App {
             return this.UI;
       }
 
+      public JPanel generateBoard() {
+            this.board.add(new Rectangle());
+
+            return this.board;
+      }
 
       public static void main(String[] args) throws IOException {
             JFrame frame = new JFrame();
 
             App app = new App();
 
-            frame.getContentPane().add(app.generateBoard());
+            frame.getContentPane().add(app.generateBoard(), BorderLayout.LINE_START);
             frame.getContentPane().add(app.generateUI(), BorderLayout.SOUTH);
 
             frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
