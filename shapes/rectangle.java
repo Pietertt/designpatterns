@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseMotionAdapter;
-
 import java.awt.Dimension;
 
 public class Rectangle extends JPanel {
@@ -25,36 +24,36 @@ public class Rectangle extends JPanel {
             this.y = y;
             this.width = width;
             this.height = height;
+            System.out.println("Spawned");
 
-            addMouseListener(new MouseAdapter() {
-                  public void mousePressed(MouseEvent e) {
-                        moveSquare(e.getX(),e.getY());
-                  }
-            });
+            // this.addMouseListener(new MouseAdapter() {
+            //       public void mousePressed(MouseEvent e) {
+            //             moveSquare(e.getX(),e.getY());
+            //       }
+            // });
       
-            addMouseMotionListener(new MouseAdapter() {
-                  public void mouseDragged(MouseEvent e) {
-                        moveSquare(e.getX(),e.getY());
-                  }
-            });
+            // this.addMouseMotionListener(new MouseAdapter() {
+            //       public void mouseDragged(MouseEvent e) {
+            //             moveSquare(e.getX(),e.getY());
+            //       }
+            // });
       }
 
-      private void moveSquare(int x, int y) {
-            int OFFSET = 1;
-            if ((this.x != x) || (this.y != y)) {
-                  repaint(this.x, this.y, this.width + OFFSET, this.height + OFFSET);
-                  this.x = x;
-                  this.y = y;
-                  repaint(this.x, this.y, this.width + OFFSET, this.height + OFFSET);
-            } 
-      }
+      // private void moveSquare(int x, int y) {
+      //       int offset = 1;
+      //       if ((this.x != x) || (this.y != y)) {
+      //             repaint(this.x, this.y, this.width + offset, this.height + offset);
+      //             this.x = x;
+      //             this.y = y;
+      //             repaint(this.x, this.y, this.width + offset, this.height + offset);
+      //       } 
+      // }
 
-      public Dimension getPreferredSize() {
-            return new Dimension(600, 600);
-      }
+      // public Dimension getPreferredSize() {
+      //       return new Dimension(200, 200); // appropriate constants
+      //     }
         
-      protected void paintComponent(Graphics g) {
-            super.paintComponent(g);       
+      public void draw(Graphics g) {
             g.setColor(Color.BLACK);
             g.fillRect(this.x, this.y, this.width, this.height);
       }  

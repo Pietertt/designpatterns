@@ -1,34 +1,78 @@
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
+import java.io.*;
+import javax.imageio.ImageIO;
+
+import shapes.*;
 import shapes.Rectangle;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseMotionAdapter;
+class App extends JFrame implements MouseListener {
+      private JPanel board = new JPanel();
+      private JPanel UI = new JPanel();
 
-public class App {
+      private JButton rectangle = new JButton();
+      private JButton ellipse = new JButton();
 
-      private void init(){
-            JFrame frame = new JFrame();
-            frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-            frame.add(new Rectangle(50, 50, 20, 20));
-            frame.pack();
-            frame.setVisible(true);
+      public App() throws IOException {
+
+            this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
+            this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
+
+            this.rectangle.setBorderPainted(false);
+            this.rectangle.setFocusPainted(false);
+            this.rectangle.setContentAreaFilled(false);
+
+            this.ellipse.setBorderPainted(false);
+            this.ellipse.setFocusPainted(false);
+            this.ellipse.setContentAreaFilled(false);
+
+            this.UI.add(this.rectangle);
+            this.UI.add(this.ellipse);
+
+            getContentPane().add(this.board);
+            getContentPane().add(this.UI, BorderLayout.SOUTH);
+
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setSize(600, 600);
+            setVisible(true);
+
+            board.setFocusable(true);
+            board.addMouseListener(this);
       }
-      public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable(){
-                  public void run(){
-                        App app = new App();
-                        app.init();
-                  }
-            });
+      
+      public void mouseClicked(MouseEvent e){
+     
       }
+
+      public void mouseExited(MouseEvent e){
+
+      }
+
+      public void mouseEntered(MouseEvent e){
+
+      } 
+
+      public void mouseReleased(MouseEvent e){
+
+      }
+
+      public void mousePressed(MouseEvent e){
+
+      }
+
+      public void mouseDragged(MouseEvent e){
+
+      }
+
+      public void MouseMoved(MouseEvent e){
+
+      }
+
+      public static void main(String[] args) throws IOException {
+            JButton b = new JButton("Test");
+
+            app.add(b);
+      }  
 }
