@@ -1,22 +1,25 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.*;
 
 import shapes.*;
 import shapes.Rectangle;
 
-class App extends JFrame implements MouseListener {
-      private JPanel board = new JPanel();
-      private JPanel UI = new JPanel();
-
+public class App {
       private JButton rectangle = new JButton();
       private JButton ellipse = new JButton();
+      private JPanel UI = new JPanel();
+      private JPanel board = new JPanel();
 
-      public App() throws IOException {
+      public JPanel generateBoard() {
+            this.board.add(new Rectangle());
 
+            return this.board;
+      }
+
+      public JPanel generateUI() throws IOException {
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
             this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
 
@@ -31,49 +34,20 @@ class App extends JFrame implements MouseListener {
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
 
-            
-
-            getContentPane().add(this.board);
-            getContentPane().add(this.UI, BorderLayout.SOUTH);
-
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(600, 600);
-            setVisible(true);
-
-            board.setFocusable(true);
-            board.addMouseListener(this);
+            return this.UI;
       }
 
-      
-      public void mouseClicked(MouseEvent e){
-            System.out.println("Click");
-      }
-
-      public void mouseExited(MouseEvent e){
-
-      }
-
-      public void mouseEntered(MouseEvent e){
-
-      } 
-
-      public void mouseReleased(MouseEvent e){
-
-      }
-
-      public void mousePressed(MouseEvent e){
-
-      }
-
-      public void mouseDragged(MouseEvent e){
-
-      }
-
-      public void MouseMoved(MouseEvent e){
-
-      }
 
       public static void main(String[] args) throws IOException {
+            JFrame frame = new JFrame();
+
             App app = new App();
-      }  
+
+            frame.getContentPane().add(app.generateBoard());
+            frame.getContentPane().add(app.generateUI(), BorderLayout.SOUTH);
+
+            frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.setVisible(true);
+      }
 }
