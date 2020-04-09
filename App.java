@@ -9,7 +9,7 @@ import shapes.*;
 import shapes.Rectangle;
 
 class App extends JPanel implements MouseListener {
-      private JPanel board = new JPanel();
+      public JPanel board = new JPanel();
       private JPanel UI = new JPanel();
       public JFrame frame = new JFrame();
 
@@ -34,17 +34,14 @@ class App extends JPanel implements MouseListener {
 
             // this.board.add(new Rectangle(100, 100, 100, 100));
 
-            JPanel test = new JPanel();
-
-            test.add(this.UI);
-            test.add(this.board);
-
-            return test;
+            return this.UI;
 
       }
       
       public void mouseClicked(MouseEvent e){
-            System.out.println("Fuu");
+            // this.frame.getContentPane().add(new Rectangle(100, 100, 100, 100));
+            // this.frame.revalidate();
+            // this.frame.repaint();
       }
 
       public void mouseExited(MouseEvent e){
@@ -74,9 +71,12 @@ class App extends JPanel implements MouseListener {
       public static void main(String[] args) throws IOException {
 
             App app = new App();
+
             app.frame.getContentPane().add(app.init(), BorderLayout.SOUTH);
 
-            app.frame.getContentPane().add(new Rectangle(100, 100, 100, 100));
+            app.board.add(new Rectangle(100, 100, 100, 100));
+
+            app.frame.getContentPane().add(app.board);
 
             app.frame.setDefaultCloseOperation(app.frame.EXIT_ON_CLOSE);
             app.frame.setSize(600, 600);

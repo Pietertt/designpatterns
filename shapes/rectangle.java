@@ -24,34 +24,29 @@ public class Rectangle extends JPanel {
             this.y = y;
             this.width = width;
             this.height = height;
-            System.out.println("Spawned");
 
             this.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-            moveSquare(e.getX(),e.getY());
-            }
+                  public void mousePressed(MouseEvent e) {
+                        moveSquare(e.getX(), e.getY());
+                  }
             });
 
             this.addMouseMotionListener(new MouseAdapter() {
-            public void mouseDragged(MouseEvent e) {
-            moveSquare(e.getX(),e.getY());
-            }
+                  public void mouseDragged(MouseEvent e) {
+                        moveSquare(e.getX(), e.getY());
+                  }
             });
       }
 
       private void moveSquare(int x, int y) {
-      int offset = 1;
-      if ((this.x != x) || (this.y != y)) {
-      repaint(this.x, this.y, this.width + offset, this.height + offset);
-      this.x = x;
-      this.y = y;
-      repaint(this.x, this.y, this.width + offset, this.height + offset);
+            int offset = 1;
+            if ((this.x != x) || (this.y != y)) {
+                  repaint(this.x, this.y, this.width + offset, this.height + offset);
+                  this.x = x;
+                  this.y = y;
+                  repaint(this.x, this.y, this.width + offset, this.height + offset);
+            }
       }
-      }
-
-      // public Dimension getPreferredSize() {
-      // return new Dimension(200, 200); // appropriate constants
-      // }
 
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
