@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.io.*;
+import javax.imageio.ImageIO;
+
 import shapes.*;
 import shapes.Rectangle;
 
@@ -12,9 +15,23 @@ class App extends JFrame implements MouseListener {
       private JButton rectangle = new JButton();
       private JButton ellipse = new JButton();
 
-      public App(){
+      public App() throws IOException {
+
+            this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
+            this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
+
+            this.rectangle.setBorderPainted(false);
+            this.rectangle.setFocusPainted(false);
+            this.rectangle.setContentAreaFilled(false);
+
+            this.ellipse.setBorderPainted(false);
+            this.ellipse.setFocusPainted(false);
+            this.ellipse.setContentAreaFilled(false);
+
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
+
+            
 
             getContentPane().add(this.board);
             getContentPane().add(this.UI, BorderLayout.SOUTH);
@@ -56,7 +73,7 @@ class App extends JFrame implements MouseListener {
 
       }
 
-      public static void main(String[] args) {
+      public static void main(String[] args) throws IOException {
             App app = new App();
       }  
 }
