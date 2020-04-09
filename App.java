@@ -3,15 +3,21 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.*;
 
 import shapes.*;
 import shapes.Rectangle;
 
-public class App {
-      private JButton rectangle = new JButton();
-      private JButton ellipse = new JButton();
+public class App implements MouseListener {
       private JPanel UI = new JPanel();
       private JPanel board = new JPanel();
+      private JFrame frame = new JFrame();
+      private JButton rectangle = new JButton();
+      private JButton ellipse = new JButton();
+
+      public JFrame generateFrame() {
+            return this.frame;
+      }
 
       public JPanel generateUI() throws IOException {
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -32,17 +38,47 @@ public class App {
       }
 
       public JPanel generateBoard() {
-            this.board.add(new Rectangle());
-
+            this.board.add(new Rectangle(100, 100, 50, 50));
+            this.board.setFocusable(true);
+            this.board.addMouseListener(this);
             return this.board;
       }
 
+      public void mouseClicked(MouseEvent e){
+            this.board.add(new Rectangle(50, 50, 50, 50));
+            this.frame.revalidate();
+            this.frame.repaint();
+      }
+
+      public void mouseExited(MouseEvent e){
+
+      }
+
+      public void mouseEntered(MouseEvent e){
+
+      } 
+
+      public void mouseReleased(MouseEvent e){
+
+      }
+
+      public void mousePressed(MouseEvent e){
+
+      }
+
+      public void mouseDragged(MouseEvent e){
+
+      }
+
+      public void MouseMoved(MouseEvent e){
+
+      }
+
       public static void main(String[] args) throws IOException {
-            JFrame frame = new JFrame();
-
             App app = new App();
+            JFrame frame = app.generateFrame();
 
-            frame.getContentPane().add(app.generateBoard(), BorderLayout.LINE_START);
+            frame.getContentPane().add(app.generateBoard());
             frame.getContentPane().add(app.generateUI(), BorderLayout.SOUTH);
 
             frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
