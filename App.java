@@ -32,8 +32,6 @@ class App {
             App app = new App();
             JFrame frame = new JFrame();
 
-            Rectangle rect = new Rectangle(100, 100, 100, 100);
-            app.board.shapes.add(rect);
             app.generateUI();
 
             frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
