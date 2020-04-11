@@ -57,13 +57,14 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       public void paintComponent(Graphics g) {
             if(rectDraw) {
                   super.paintComponent(g);
-
-                  //Color c = new Color(1.0F, 0.0F, 1.0F);
-                  //g.setColor(c);
                   setColor(g);
                   g.fillRect(x, y, width, height);
                   g.drawRect(x, y, width, height);
             }
+      }
+
+      public void setDraggingFalse() {
+            this.dragging = false;
       }
 
       public void drag() {
@@ -78,7 +79,7 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       }
 
       public void redoDrag() {
-            this.dragging = true;
+            //this.dragging = true;
 
             this.undoStack.push(height);
             this.undoStack.push(width);
@@ -93,7 +94,7 @@ public class rectangle extends JComponent implements receiver, MouseMotionListen
       }
 
       public void undoDrag() {
-            this.dragging = false;
+            //this.dragging = false;
 
             this.redoStack.push(height);
             this.redoStack.push(width);

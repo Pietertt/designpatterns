@@ -71,12 +71,16 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
           // TODO In Progress: Change mouse when entering a shape
           for(rectangle rectangle : shapes) {
               if(rectangle.getIfSelected(e.getX(), e.getY())) {
-                  this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                  rectangle.setCursor(new Cursor(Cursor.HAND_CURSOR));
               }
           }
       } 
 
       public void mouseReleased(MouseEvent e){
+          // er kan niet gedragged worden als dragging false is.
+          for(rectangle rectangle : shapes) {
+              rectangle.setDraggingFalse();
+          }
 
           // Place a shape if clicking in an empty area
           if(!selectionMode) {
