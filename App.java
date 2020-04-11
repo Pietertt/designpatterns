@@ -1,11 +1,15 @@
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import shapes.Rectangle;
 
 class App {
+      private ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
+
       private Board board = new Board();
       private JPanel UI = new JPanel();
 
@@ -27,12 +31,21 @@ class App {
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
       }
+
+      private void generateBoard(){
+            this.board.shapes.add(new Rectangle(100, 100, 100, 100));
+            this.board.shapes.add(new Rectangle(100, 300, 100, 100));
+
+            this.board.setFocusable(true);
+            this.board.addMouseListener(this.board);
+      }
       
       public static void main(String[] args) throws IOException {
             App app = new App();
             JFrame frame = new JFrame();
 
             app.generateUI();
+            app.generateBoard();
 
             frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
             frame.getContentPane().add(app.board);

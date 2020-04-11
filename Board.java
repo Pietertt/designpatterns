@@ -13,12 +13,12 @@ public class Board extends JPanel implements MouseListener {
       public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
       public Board(){
-            setFocusable(true);
-            addMouseListener(this);
+            
       }
 
       public void mouseClicked(MouseEvent e){
-            Rectangle rect = new Rectangle(100, 100, 100, 100);
+            System.out.println("Fuu");
+            Rectangle rect = new Rectangle(0, 0, 100, 100);
             this.shapes.add(rect);
             repaint();
       }
