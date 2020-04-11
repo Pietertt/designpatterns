@@ -16,7 +16,7 @@ class App extends JPanel implements MouseListener {
       private JButton rectangle = new JButton();
       private JButton ellipse = new JButton();
 
-      public JPanel init() throws IOException {
+      public void generateUI() throws IOException {
 
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
             this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
@@ -31,17 +31,18 @@ class App extends JPanel implements MouseListener {
 
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
+      }
 
-            // this.board.add(new Rectangle(100, 100, 100, 100));
-
-            return this.UI;
-
+      public void generateBoard(){
+            this.board.setFocusable(true);
+            this.board.addMouseListener(this);
       }
       
       public void mouseClicked(MouseEvent e){
             // this.frame.getContentPane().add(new Rectangle(100, 100, 100, 100));
             // this.frame.revalidate();
             // this.frame.repaint();
+            System.out.println("Click!");
       }
 
       public void mouseExited(MouseEvent e){
@@ -72,11 +73,15 @@ class App extends JPanel implements MouseListener {
 
             App app = new App();
 
-            app.frame.getContentPane().add(app.init(), BorderLayout.SOUTH);
-
-            app.board.add(new Rectangle(100, 100, 100, 100));
+            app.generateUI();
+            app.generateBoard();
 
             app.frame.getContentPane().add(app.board);
+            app.frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
+
+            // app.board.add(new Rectangle(100, 100, 100, 100));
+
+            // app.frame.getContentPane().add(app.board);
 
             app.frame.setDefaultCloseOperation(app.frame.EXIT_ON_CLOSE);
             app.frame.setSize(600, 600);
