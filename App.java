@@ -1,23 +1,18 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-
+import javax.swing.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 
-import shapes.*;
 import shapes.Rectangle;
 
-class App extends JPanel implements MouseListener {
-      public JPanel board = new JPanel();
+class App {
+      private Board board = new Board();
       private JPanel UI = new JPanel();
-      public JFrame frame = new JFrame();
 
       private JButton rectangle = new JButton();
       private JButton ellipse = new JButton();
 
-      public void generateUI() throws IOException {
-
+      private void generateUI() throws IOException {
             this.rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
             this.ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
 
@@ -32,59 +27,21 @@ class App extends JPanel implements MouseListener {
             this.UI.add(this.rectangle);
             this.UI.add(this.ellipse);
       }
-
-      public void generateBoard(){
-            this.board.setFocusable(true);
-            this.board.addMouseListener(this);
-      }
       
-      public void mouseClicked(MouseEvent e){
-            // this.frame.getContentPane().add(new Rectangle(100, 100, 100, 100));
-            // this.frame.revalidate();
-            // this.frame.repaint();
-            System.out.println("Click!");
-      }
-
-      public void mouseExited(MouseEvent e){
-
-      }
-
-      public void mouseEntered(MouseEvent e){
-
-      } 
-
-      public void mouseReleased(MouseEvent e){
-
-      }
-
-      public void mousePressed(MouseEvent e){
-
-      }
-
-      public void mouseDragged(MouseEvent e){
-
-      }
-
-      public void MouseMoved(MouseEvent e){
-
-      }
-
       public static void main(String[] args) throws IOException {
-
             App app = new App();
+            JFrame frame = new JFrame();
 
+            Rectangle rect = new Rectangle(100, 100, 100, 100);
+            app.board.shapes.add(rect);
             app.generateUI();
-            app.generateBoard();
 
-            app.frame.getContentPane().add(app.board);
-            app.frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
+            frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
+            frame.getContentPane().add(app.board);
 
-            // app.board.add(new Rectangle(100, 100, 100, 100));
+            frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.setVisible(true);
 
-            // app.frame.getContentPane().add(app.board);
-
-            app.frame.setDefaultCloseOperation(app.frame.EXIT_ON_CLOSE);
-            app.frame.setSize(600, 600);
-            app.frame.setVisible(true);
-      }  
+      }
 }
