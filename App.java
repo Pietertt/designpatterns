@@ -9,8 +9,8 @@ import shapes.Rectangle;
 
 class App {
       private ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
-
-      private Board board = new Board();
+      private JFrame frame = new JFrame();
+      private Board board = new Board(frame);
       private JPanel UI = new JPanel();
 
       private JButton rectangle = new JButton();
@@ -33,8 +33,6 @@ class App {
       }
 
       private void generateBoard(){
-            this.board.shapes.add(new Rectangle(100, 100, 100, 100));
-            this.board.shapes.add(new Rectangle(100, 300, 100, 100));
 
             this.board.setFocusable(true);
             this.board.addMouseListener(this.board);
@@ -42,17 +40,15 @@ class App {
       
       public static void main(String[] args) throws IOException {
             App app = new App();
-            JFrame frame = new JFrame();
-
             app.generateUI();
             app.generateBoard();
 
-            frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
-            frame.getContentPane().add(app.board);
+            app.frame.getContentPane().add(app.UI, BorderLayout.SOUTH);
+            app.frame.getContentPane().add(app.board);
 
-            frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-            frame.setSize(600, 600);
-            frame.setVisible(true);
+            app.frame.setDefaultCloseOperation(app.frame.EXIT_ON_CLOSE);
+            app.frame.setSize(600, 600);
+            app.frame.setVisible(true);
 
       }
 }

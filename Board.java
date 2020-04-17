@@ -10,16 +10,20 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Board extends JPanel implements MouseListener {
+      private JFrame frame;
+
       public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
-      public Board(){
-            
+      public Board(JFrame frame){
+            this.frame = frame;
       }
 
       public void mouseClicked(MouseEvent e){
-            System.out.println("Fuu");
             Rectangle rect = new Rectangle(0, 0, 100, 100);
+            rect.addMouseListener(this);
+            rect.setFocusable(true);
             this.shapes.add(rect);
+            this.frame.add(rect);
             repaint();
       }
 
