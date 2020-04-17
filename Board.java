@@ -8,15 +8,15 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
-import shapes.Shape;
+import shapes.*;
 
 public class Board extends JPanel {
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       public Board(){
-            shapes.add(new Shape(100, 100, 100, 100));
-            shapes.add(new Shape(300, 300, 100, 100));
+            shapes.add(new Rectangle(100, 100, 100, 100));
+            shapes.add(new Ellipse(300, 300, 100, 100));
 
             addMouseListener(new MouseAdapter(){
                   public void mousePressed(MouseEvent e){
