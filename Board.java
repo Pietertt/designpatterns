@@ -9,8 +9,12 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
 import shapes.*;
+import commands.Order;
+import commands.DeselectShapeCommand;
+import commands.SelectShapeCommand;
 
 public class Board extends JPanel {
+      private Invoker invoker = new Invoker();
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
@@ -35,11 +39,14 @@ public class Board extends JPanel {
             System.out.println("Got it");
             for(int i = 0; i < this.shapes.size(); i++){
                   Shape shape = this.shapes.get(i);
-                  shape.deselect();
+
+                  Order deselect = new DeselectShapeCommand(shape);
+                  this.invoker.execute(deselect);
                   repaint();
 
                   if (shape.getIfSelected(x, y)) {
-                        shape.select();
+                        Order select = new SelectShapeCommand(shape);
+                        this.invoker.execute(select);
                         repaint();
                   }
             }
@@ -48,11 +55,13 @@ public class Board extends JPanel {
       private void drag(int x, int y){
             for(int i = 0; i < this.shapes.size(); i++){
                   Shape shape = this.shapes.get(i);
-                  shape.deselect();
+                  Order deselect = new DeselectShapeCommand(shape);
+                  this.invoker.execute(deselect);
                   repaint();
       
                   if (shape.getIfSelected(x, y)) {
-                        shape.select();
+                        Order select = new SelectShapeCommand(shape);
+                        this.invoker.execute(select);
                         shape.x = (x - shape.width / 2);
                         shape.y = (y - shape.height / 2);;
                         repaint();
