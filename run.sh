@@ -1,6 +1,4 @@
-javac App.java 
-
-javac shapes/Shape.java
-javac shapes/Rectangle.java
+javac App.java
+javac Board.java
 
 java App

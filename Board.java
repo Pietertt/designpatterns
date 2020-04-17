@@ -1,59 +1,66 @@
-import shapes.*;
-import java.awt.Color;
+import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.*;
-import java.awt.event.*;
 
-public class Board extends JPanel implements MouseListener {
-      private JFrame frame;
+import shapes.Shape;
 
-      public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
+public class Board extends JPanel {
 
-      public Board(JFrame frame){
-            this.frame = frame;
+      public ArrayList<Shape> shapes = new ArrayList<Shape>();
+
+      public Board(){
+            shapes.add(new Shape(100, 100, 100, 100));
+            shapes.add(new Shape(300, 300, 100, 100));
+
+            addMouseListener(new MouseAdapter(){
+                  public void mousePressed(MouseEvent e){
+                      moveSquare(e.getX(),e.getY());
+                  }
+            });
+      
+            addMouseMotionListener(new MouseAdapter(){
+                  public void mouseDragged(MouseEvent e){
+                      moveSquare(e.getX(),e.getY());
+                  }
+            });
       }
 
-      public void mouseClicked(MouseEvent e){
-            Rectangle rect = new Rectangle(0, 0, 100, 100);
-            rect.addMouseListener(this);
-            rect.setFocusable(true);
-            this.shapes.add(rect);
-            this.frame.add(rect);
-            repaint();
+      private void moveSquare(int x, int y){
+            for(int i = 0; i < this.shapes.size(); i++){
+
+                  Shape shape = this.shapes.get(i);
+      
+                  if (shape.getIfSelected(x, y)) {
+      
+                  // The square is moving, repaint background 
+                  // over the old square location. 
+                  // repaint(CURR_X, CURR_Y, CURR_W+OFFSET, CURR_H+OFFSET);
+      
+                  // Update coordinates.
+                  this.shapes.get(i).x = x;
+                  this.shapes.get(i).y = y;
+      
+                  // Repaint the square at the new location.
+                  repaint();
+                  }
+            }
       }
+    
 
-      public void mouseExited(MouseEvent e){
-
-      }
-
-      public void mouseEntered(MouseEvent e){
-
-      } 
-
-      public void mouseReleased(MouseEvent e){
-
-      }
-
-      public void mousePressed(MouseEvent e){
-
-      }
-
-      public void mouseDragged(MouseEvent e){
-
-      }
-
-      public void MouseMoved(MouseEvent e){
-
+      public Dimension getPreferredSize(){
+            return new Dimension(600, 600);
       }
 
       public void paintComponent(Graphics g) {
-            for(Rectangle rect : shapes){
-                  rect.draw(g);
-            }      
-      }
+            super.paintComponent(g);       
+            for(Shape shape : this.shapes){
+                  shape.draw(g);
+            }
+        }  
 }
