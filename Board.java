@@ -43,8 +43,8 @@ public class Board extends JPanel {
                   // repaint(CURR_X, CURR_Y, CURR_W+OFFSET, CURR_H+OFFSET);
       
                   // Update coordinates.
-                  this.shapes.get(i).x = x;
-                  this.shapes.get(i).y = y;
+                  this.shapes.get(i).x = (x - this.shapes.get(i).width / 2);
+                  this.shapes.get(i).y = (y - this.shapes.get(i).height / 2);;
       
                   // Repaint the square at the new location.
                   repaint();
