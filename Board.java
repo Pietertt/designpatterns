@@ -19,35 +19,43 @@ public class Board extends JPanel {
             shapes.add(new Ellipse(300, 300, 100, 100));
 
             addMouseListener(new MouseAdapter(){
-                  public void mousePressed(MouseEvent e){
-                      moveSquare(e.getX(),e.getY());
+                  public void mouseClicked(MouseEvent e){
+                      select(e.getX(), e.getY());
                   }
             });
       
             addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
-                      moveSquare(e.getX(),e.getY());
+                      drag(e.getX(),e.getY());
                   }
             });
       }
 
-      private void moveSquare(int x, int y){
+      private void select(int x, int y){
+            System.out.println("Got it");
             for(int i = 0; i < this.shapes.size(); i++){
-
                   Shape shape = this.shapes.get(i);
+                  shape.deselect();
+                  repaint();
+
+                  if (shape.getIfSelected(x, y)) {
+                        shape.select();
+                        repaint();
+                  }
+            }
+      }
+
+      private void drag(int x, int y){
+            for(int i = 0; i < this.shapes.size(); i++){
+                  Shape shape = this.shapes.get(i);
+                  shape.deselect();
+                  repaint();
       
                   if (shape.getIfSelected(x, y)) {
-      
-                  // The square is moving, repaint background 
-                  // over the old square location. 
-                  // repaint(CURR_X, CURR_Y, CURR_W+OFFSET, CURR_H+OFFSET);
-      
-                  // Update coordinates.
-                  this.shapes.get(i).x = (x - this.shapes.get(i).width / 2);
-                  this.shapes.get(i).y = (y - this.shapes.get(i).height / 2);;
-      
-                  // Repaint the square at the new location.
-                  repaint();
+                        shape.select();
+                        shape.x = (x - shape.width / 2);
+                        shape.y = (y - shape.height / 2);;
+                        repaint();
                   }
             }
       }

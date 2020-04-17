@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 public class Ellipse extends Shape {
+      private boolean selected = false; 
 
       public Ellipse(int x, int y, int width, int height){
             this.x = x;
@@ -12,8 +13,23 @@ public class Ellipse extends Shape {
             this.height = height;
       }
 
+      public void select(){
+            this.selected = true;
+      }
+
+      public void deselect() {
+            this.selected = false;
+      }
+
       public void draw(Graphics g){
-            g.setColor(Color.RED);
-            g.fillOval(this.x, this.y, this.width, this.height);
+           if(this.selected){
+                  g.setColor(Color.RED);
+                  g.fillOval(this.x - 2, this.y - 2, this.width + 4, this.height + 4);
+                  g.setColor(Color.BLUE);
+                  g.fillOval(this.x, this.y, this.width, this.height);
+           } else {
+                  g.setColor(Color.BLUE);
+                  g.fillOval(this.x, this.y, this.width, this.height);
+           }
       }
 }
