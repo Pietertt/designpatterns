@@ -14,7 +14,7 @@ import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
 
 public class Board extends JPanel {
-      private Invoker invoker = new Invoker();
+      public Invoker invoker = new Invoker();
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
@@ -23,7 +23,7 @@ public class Board extends JPanel {
             shapes.add(new Ellipse(300, 300, 100, 100));
 
             addMouseListener(new MouseAdapter(){
-                  public void mouseClicked(MouseEvent e){
+                  public void mousePressed(MouseEvent e){
                       select(e.getX(), e.getY());
                   }
             });
@@ -55,13 +55,8 @@ public class Board extends JPanel {
       private void drag(int x, int y){
             for(int i = 0; i < this.shapes.size(); i++){
                   Shape shape = this.shapes.get(i);
-                  Order deselect = new DeselectShapeCommand(shape);
-                  this.invoker.execute(deselect);
-                  repaint();
       
                   if (shape.getIfSelected(x, y)) {
-                        Order select = new SelectShapeCommand(shape);
-                        this.invoker.execute(select);
                         shape.x = (x - shape.width / 2);
                         shape.y = (y - shape.height / 2);;
                         repaint();

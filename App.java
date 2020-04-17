@@ -3,6 +3,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,8 @@ public class App {
                   JButton rectangle = new JButton();
                   JButton ellipse = new JButton();
 
+                  Board board = new Board();
+
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
                   ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
 
@@ -32,10 +36,22 @@ public class App {
                   UI.add(rectangle);
                   UI.add(ellipse);
 
+                  rectangle.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                              board.invoker.undo();
+                        }
+                  });
+
+                  ellipse.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                              board.invoker.redo();
+                        }
+                  });
+
 
                   frame.getContentPane().add(UI, BorderLayout.SOUTH);
                   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  frame.add(new Board());
+                  frame.add(board);
                   frame.pack();
                   frame.setVisible(true);
             } catch(IOException e){
