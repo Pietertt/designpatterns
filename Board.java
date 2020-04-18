@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -12,19 +13,27 @@ import shapes.*;
 import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
+import commands.DragShapeCommand;
+import commands.PlaceShapeCommand;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
+      private JFrame frame;
+
       public Invoker invoker = new Invoker();
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
-      public Board(){
-            shapes.add(new Rectangle(100, 100, 100, 100));
-            shapes.add(new Ellipse(300, 300, 100, 100));
-            shapes.add(new Ellipse(500, 500, 100, 100));
-
+      public Board(JFrame frame){
+            super.setFocusable(true);
             addMouseListener(this);
-            setFocusable(true);
+            this.frame = frame;
+            // shapes.add(new Rectangle(100, 100, 100, 100));
+            // shapes.add(new Ellipse(300, 300, 100, 100));
+            // shapes.add(new Ellipse(500, 500, 100, 100));
+
+            this.shapes.add(new Rectangle(100, 100, 100, 100));
+            // this.frame.revalidate();
+            // this.frame.repaint();
       }
 
       public void mouseClicked(MouseEvent e){
@@ -53,7 +62,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                         repaint();
 
                         if(shape.selected){
-                              shape.drag(e.getX(), e.getY());
+                              Order drag = new DragShapeCommand(shape);
+                              this.invoker.execute(drag);
                         }
                         
                   } else if(shape.selected){

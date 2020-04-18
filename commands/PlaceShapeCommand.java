@@ -2,15 +2,19 @@ package commands;
 
 import shapes.*;
 
-public class DragShapeCommand implements Order {
+public class PlaceShapeCommand implements Order {
       private Shape shape;
 
-      public DragShapeCommand(Shape shape){
+      public PlaceShapeCommand(Shape shape){
             this.shape = shape;
       }
 
       public void execute(){
-            this.shape.drag();
+          
+      }
+
+      public Shape getShape(){
+            return this.shape;
       }
 
       public void undo(){

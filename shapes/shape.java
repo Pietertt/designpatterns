@@ -1,9 +1,9 @@
 package shapes;
 
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 import java.awt.Graphics;
 
-public abstract class Shape extends JPanel {
+public abstract class Shape extends JComponent {
       public int x;
       public int y;
       public int width;
@@ -40,5 +40,5 @@ public abstract class Shape extends JPanel {
             }
       }
 
-      public abstract void drag(int x, int y);
+      public abstract void draw(Graphics g);
 }

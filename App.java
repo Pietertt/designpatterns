@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import shapes.*;
+
 public class App {
 
       private static void init() {
@@ -22,7 +24,7 @@ public class App {
                   JButton undo = new JButton();
                   JButton redo = new JButton();
 
-                  Board board = new Board();
+                  Board board = new Board(frame);
 
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
                   ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
@@ -64,12 +66,12 @@ public class App {
                         }
                   });
 
-
                   frame.getContentPane().add(UI, BorderLayout.SOUTH);
+                  frame.getContentPane().add(board);
                   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  frame.add(board);
                   frame.pack();
                   frame.setVisible(true);
+
             } catch(IOException e){
                   
             }
