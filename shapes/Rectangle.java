@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 public class Rectangle extends Shape {
-      private boolean selected = false;
-
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;

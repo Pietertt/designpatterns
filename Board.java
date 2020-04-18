@@ -13,7 +13,7 @@ import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener {
       public Invoker invoker = new Invoker();
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -21,49 +21,59 @@ public class Board extends JPanel {
       public Board(){
             shapes.add(new Rectangle(100, 100, 100, 100));
             shapes.add(new Ellipse(300, 300, 100, 100));
+            shapes.add(new Ellipse(500, 500, 100, 100));
 
-            addMouseListener(new MouseAdapter(){
-                  public void mousePressed(MouseEvent e){
-                      select(e.getX(), e.getY());
-                  }
-            });
-      
-            addMouseMotionListener(new MouseAdapter(){
-                  public void mouseDragged(MouseEvent e){
-                      drag(e.getX(),e.getY());
-                  }
-            });
+            addMouseListener(this);
+            setFocusable(true);
       }
 
-      private void select(int x, int y){
-            System.out.println("Got it");
+      public void mouseClicked(MouseEvent e){
+            
+      }
+
+      public void mouseExited(MouseEvent e){
+
+      }
+
+      public void mouseEntered(MouseEvent e){
+
+      } 
+
+      public void mouseReleased(MouseEvent e){
+
+      }
+
+      public void mousePressed(MouseEvent e){
             for(int i = 0; i < this.shapes.size(); i++){
                   Shape shape = this.shapes.get(i);
 
-                  Order deselect = new DeselectShapeCommand(shape);
-                  this.invoker.execute(deselect);
-                  repaint();
-
-                  if (shape.getIfSelected(x, y)) {
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
                         Order select = new SelectShapeCommand(shape);
                         this.invoker.execute(select);
                         repaint();
-                  }
-            }
-      }
-
-      private void drag(int x, int y){
-            for(int i = 0; i < this.shapes.size(); i++){
-                  Shape shape = this.shapes.get(i);
-      
-                  if (shape.getIfSelected(x, y)) {
-                        shape.x = (x - shape.width / 2);
-                        shape.y = (y - shape.height / 2);;
+                  } else if(shape.selected){
+                        Order deselect = new DeselectShapeCommand(shape);
+                        this.invoker.execute(deselect);
                         repaint();
                   }
             }
       }
-    
+
+      public void mouseDragged(MouseEvent e){
+            for(int i = 0; i < this.shapes.size(); i++){
+                  Shape shape = this.shapes.get(i);
+      
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
+                        shape.x = (e.getX() - shape.width / 2);
+                        shape.y = (e.getY() - shape.height / 2);;
+                        repaint();
+                  }
+            }
+      }
+
+      public void MouseMoved(MouseEvent e){
+
+      }    
 
       public Dimension getPreferredSize(){
             return new Dimension(600, 600);

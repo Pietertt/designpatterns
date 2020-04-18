@@ -9,6 +9,8 @@ public abstract class Shape extends JPanel {
       public int width;
       public int height;
 
+      public boolean selected = false;
+
       public boolean getIfSelected(int x, int y){
             for(int i = 0; i < this.width; i++){
                   if(x == this.x + i){
