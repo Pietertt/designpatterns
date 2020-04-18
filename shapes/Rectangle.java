@@ -11,12 +11,8 @@ public class Rectangle extends Shape {
             this.height = height;
       }
 
-      public void select() {
-            this.selected = true;
-      }
-
-      public void deselect() {
-            this.selected = false;
+      public void drag(int x, int y){
+            System.out.println("MOve");
       }
 
       public void draw(Graphics g) {

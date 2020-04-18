@@ -13,7 +13,7 @@ import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
 
-public class Board extends JPanel implements MouseListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public Invoker invoker = new Invoker();
 
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -51,6 +51,11 @@ public class Board extends JPanel implements MouseListener {
                         Order select = new SelectShapeCommand(shape);
                         this.invoker.execute(select);
                         repaint();
+
+                        if(shape.selected){
+                              shape.drag(e.getX(), e.getY());
+                        }
+                        
                   } else if(shape.selected){
                         Order deselect = new DeselectShapeCommand(shape);
                         this.invoker.execute(deselect);
@@ -59,19 +64,13 @@ public class Board extends JPanel implements MouseListener {
             }
       }
 
+      @Override
       public void mouseDragged(MouseEvent e){
-            for(int i = 0; i < this.shapes.size(); i++){
-                  Shape shape = this.shapes.get(i);
-      
-                  if (shape.getIfSelected(e.getX(), e.getY())) {
-                        shape.x = (e.getX() - shape.width / 2);
-                        shape.y = (e.getY() - shape.height / 2);;
-                        repaint();
-                  }
-            }
+            
       }
 
-      public void MouseMoved(MouseEvent e){
+      @Override
+      public void mouseMoved(MouseEvent e){
 
       }    
 

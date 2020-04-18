@@ -10,6 +10,7 @@ public abstract class Shape extends JPanel {
       public int height;
 
       public boolean selected = false;
+      public boolean dragging = false;
 
       public boolean getIfSelected(int x, int y){
             for(int i = 0; i < this.width; i++){
@@ -25,7 +26,19 @@ public abstract class Shape extends JPanel {
             return false;
       }
 
-      public abstract void draw(Graphics g);
-      public abstract void select();
-      public abstract void deselect();
+      public void select() {
+            this.selected = true;
+      }
+
+      public void deselect() {
+            this.selected = false;
+      }
+
+      public void drag(){
+            if(this.selected){
+                  this.dragging = true;
+            }
+      }
+
+      public abstract void drag(int x, int y);
 }
