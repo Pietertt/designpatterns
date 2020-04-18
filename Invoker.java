@@ -9,6 +9,7 @@ public class Invoker {
       public void execute(Order order) {
             this.undoStack.push(order);
             this.redoStack.clear();
+            System.out.println(undoStack.size());
             order.execute();
       }
 

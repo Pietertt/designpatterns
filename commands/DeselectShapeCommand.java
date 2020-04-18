@@ -14,10 +14,10 @@ public class DeselectShapeCommand implements Order {
       }
 
       public void undo(){
-
+            this.shape.select();
       }
 
       public void redo(){
-
+            this.shape.deselect();
       }
 }
