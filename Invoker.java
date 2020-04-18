@@ -21,8 +21,10 @@ public class Invoker {
       }
 
       public void redo() {
-            Order order = this.redoStack.pop();
-            order.redo();
-            this.undoStack.push(order);
+            if(!this.redoStack.isEmpty()){
+                  Order order = this.redoStack.pop();
+                  order.redo();
+                  this.undoStack.push(order);
+            }
       }
 }
