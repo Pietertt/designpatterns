@@ -46,7 +46,14 @@ public class Board extends JPanel implements MouseListener {
             for(Shape shape : this.shapes){
                   if(shape.getIfSelected(e.getX(), e.getY())){
                         SelectShapeCommand select = new SelectShapeCommand(shape);
-                        select.execute();
+                        this.invoker.execute(select);
+                  }
+
+                  if(!shape.getIfSelected(e.getX(), e.getY())){
+                        if(shape.selected){
+                              DeselectShapeCommand deselect = new DeselectShapeCommand(shape);
+                              this.invoker.execute(deselect);
+                        }
                   }
             }
       }
