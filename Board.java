@@ -19,18 +19,17 @@ import shapes.*;
 import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
-import commands.DragShapeCommand;
-import commands.PlaceShapeCommand;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
-      private JFrame frame;
-
       public Invoker invoker = new Invoker();
 
       public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
-      public Board(JFrame frame){
-            super.setFocusable(true);
+      public Board(){
+            shapes.add(new Rectangle(100, 100, 100, 100));
+            shapes.add(new Ellipse(300, 300, 100, 100));
+            shapes.add(new Ellipse(500, 500, 100, 100));
+
             addMouseListener(this);
             this.frame = frame;
 

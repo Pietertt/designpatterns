@@ -5,7 +5,7 @@ import shapes.*;
 public class DragShapeCommand implements Order {
       private Shape shape;
 
-      public DragShapeCommand(Shape shape){
+      public DragShapeCommandShape shape){
             this.shape = shape;
       }
 

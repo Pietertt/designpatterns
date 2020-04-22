@@ -1,9 +1,9 @@
 package shapes;
 
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 import java.awt.Graphics;
 
-public abstract class Shape extends JComponent {
+public abstract class Shape extends JPanel {
       public int x;
       public int y;
       public int width;
@@ -40,5 +40,9 @@ public abstract class Shape extends JComponent {
             }
       }
 
+<<<<<<< HEAD
       //public abstract void draw(Graphics g);
+=======
+      public abstract void drag(int x, int y);
+>>>>>>> parent of 969d2f4... Kut swing doet het niet
 }
