@@ -26,10 +26,6 @@ public class App {
 
                   Board board = new Board(frame);
 
-                  Rectangle rect = new Rectangle(100, 100, 100, 100);
-
-                  frame.add(rect);
-
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
                   ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
                   undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
@@ -75,6 +71,13 @@ public class App {
                   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                   frame.pack();
                   frame.setVisible(true);
+
+                  // Rectangle rect1 = new Rectangle(100, 200, 100, 100);
+
+                  // frame.add(rect1);
+
+                  // frame.revalidate();
+                  // frame.repaint();
 
             } catch(IOException e){
                   

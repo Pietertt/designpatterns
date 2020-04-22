@@ -15,7 +15,7 @@ public class Rectangle extends JPanel {
 
             public boolean selected = false;
             public boolean dragging = false;
-            
+
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;
@@ -38,26 +38,6 @@ public class Rectangle extends JPanel {
                   g.setColor(Color.BLUE);
                   g.fillRect(this.x, this.y, this.width, this.height);
             }
-      }
-
-      public void mouseClicked(MouseEvent e){
-            System.out.println("Click");
-      }
-
-      public void mouseExited(MouseEvent e){
-
-      }
-
-      public void mouseEntered(MouseEvent e){
-
-      } 
-
-      public void mouseReleased(MouseEvent e){
-
-      }
-
-      public void mousePressed(MouseEvent e){
-
       }
 
       // @Override

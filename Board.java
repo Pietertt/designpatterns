@@ -45,7 +45,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mouseClicked(MouseEvent e){
-            
+            Rectangle rect = new Rectangle(e.getX(), e.getY(), 100, 100);
+
+            frame.add(rect);
+            frame.revalidate();
+            frame.repaint();
       }
 
       public void mouseExited(MouseEvent e){
