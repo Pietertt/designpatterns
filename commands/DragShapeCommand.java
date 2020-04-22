@@ -3,9 +3,9 @@ package commands;
 import shapes.*;
 
 public class DragShapeCommand implements Order {
-      private Shape shape;
+      private Rectangle shape;
 
-      public DragShapeCommand(Shape shape){
+      public DragShapeCommand(Rectangle shape){
             this.shape = shape;
       }
 

@@ -20,11 +20,11 @@ import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
 
-public class Board extends JPanel implements MouseListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
       public Invoker invoker = new Invoker();
 
-      public ArrayList<Shape> shapes = new ArrayList<Shape>();
+      public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
       public Board(JFrame frame){
             this.frame = frame;
@@ -34,6 +34,7 @@ public class Board extends JPanel implements MouseListener {
             
             for(int i = 0; i < 5; i++){
                   Rectangle rect = new Rectangle(50 + i * 75, 200, 50, 50);
+                  rect.addMouseMotionListener(this);
                   frame.add(rect);
                   shapes.add(rect);
 
@@ -43,7 +44,7 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e){
-            for(Shape shape : this.shapes){
+            for(Rectangle shape : this.shapes){
                   if(shape.getIfSelected(e.getX(), e.getY())){
                         SelectShapeCommand select = new SelectShapeCommand(shape);
                         this.invoker.execute(select);
@@ -92,8 +93,18 @@ public class Board extends JPanel implements MouseListener {
             // }
       }
 
+      @Override
+      public void mouseDragged(MouseEvent e) {  
+            System.out.println("Detected");
+      }  
+
+      @Override
+      public void mouseMoved(MouseEvent e) {
+            System.out.println("Detected");
+      }  
+
       public void paintComponent(Graphics g) {
-            for(Shape shape : this.shapes){
+            for(Rectangle shape : this.shapes){
                   shape.draw(g);
                   revalidate();
                   repaint();
