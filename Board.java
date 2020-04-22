@@ -20,18 +20,26 @@ import commands.Order;
 import commands.DeselectShapeCommand;
 import commands.SelectShapeCommand;
 
-public class Board extends JPanel implements MouseListener, MouseMotionListener {
+public class Board extends JPanel implements MouseListener {
+      public JFrame frame;
       public Invoker invoker = new Invoker();
 
       public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
-      public Board(){
-            shapes.add(new Rectangle(100, 100, 100, 100));
-            shapes.add(new Ellipse(300, 300, 100, 100));
-            shapes.add(new Ellipse(500, 500, 100, 100));
+      public Board(JFrame frame){
+            this.frame = frame;
 
             addMouseListener(this);
-            this.frame = frame;
+            super.setFocusable(true);
+            
+            for(int i = 0; i < 5; i++){
+                  Rectangle rect = new Rectangle(50 + i * 75, 200, 50, 50);
+                  frame.add(rect);
+                  shapes.add(rect);
+
+                  frame.revalidate();
+                  frame.repaint();
+            }
 
             // Rectangle rectangle = new Rectangle(100, 100, 100, 100);
             // Shape ellipse = new Ellipse(400, 300, 100, 100);
@@ -44,13 +52,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mouseClicked(MouseEvent e){
-            Rectangle rect = new Rectangle(e.getX(), e.getY(), 100, 100);
 
-            frame.add(rect);
-            shapes.add(rect);
-            System.out.println(shapes.size());
-            frame.revalidate();
-            repaint();
       }
 
       public void mouseExited(MouseEvent e){
@@ -86,16 +88,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             //       }
             // }
       }
-
-      @Override
-      public void mouseDragged(MouseEvent e){
-            
-      }
-
-      @Override
-      public void mouseMoved(MouseEvent e){
-
-      }    
 
       public void paintComponent(Graphics g) {
             for(Rectangle shape : this.shapes){

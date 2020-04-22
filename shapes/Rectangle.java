@@ -3,7 +3,6 @@ package shapes;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
-<<<<<<< HEAD
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Dimension;
@@ -17,10 +16,6 @@ public class Rectangle extends JPanel {
             public boolean selected = false;
             public boolean dragging = false;
 
-=======
-
-public class Rectangle extends Shape {
->>>>>>> parent of 969d2f4... Kut swing doet het niet
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;

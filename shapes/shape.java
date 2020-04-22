@@ -40,9 +40,5 @@ public abstract class Shape extends JPanel {
             }
       }
 
-<<<<<<< HEAD
       //public abstract void draw(Graphics g);
-=======
-      public abstract void drag(int x, int y);
->>>>>>> parent of 969d2f4... Kut swing doet het niet
 }
