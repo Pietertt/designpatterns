@@ -32,6 +32,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             // shapes.add(new Ellipse(500, 500, 100, 100));
 
             this.shapes.add(new Rectangle(100, 100, 100, 100));
+            this.shapes.add(new Ellipse(300, 300, 100, 100));
             // this.frame.revalidate();
             // this.frame.repaint();
       }
