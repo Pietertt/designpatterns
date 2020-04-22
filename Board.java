@@ -1,5 +1,11 @@
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -27,14 +33,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             super.setFocusable(true);
             addMouseListener(this);
             this.frame = frame;
-            // shapes.add(new Rectangle(100, 100, 100, 100));
-            // shapes.add(new Ellipse(300, 300, 100, 100));
-            // shapes.add(new Ellipse(500, 500, 100, 100));
 
-            this.shapes.add(new Rectangle(100, 100, 100, 100));
-            this.shapes.add(new Ellipse(300, 300, 100, 100));
+            // Rectangle rectangle = new Rectangle(100, 100, 100, 100);
+            // Shape ellipse = new Ellipse(400, 300, 100, 100);
+
+            // this.frame.add(rectangle);
+
             // this.frame.revalidate();
             // this.frame.repaint();
+            // this.frame.pack();
       }
 
       public void mouseClicked(MouseEvent e){
@@ -90,9 +97,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void paintComponent(Graphics g) {
-            super.paintComponent(g);       
-            for(Shape shape : this.shapes){
-                  shape.draw(g);
-            }
-        }  
+           
+      }  
 }

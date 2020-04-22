@@ -1,12 +1,21 @@
 package shapes;
 
+import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
 import java.awt.Dimension;
 
-public class Rectangle extends Shape implements MouseMotionListener {
+public class Rectangle extends JPanel {
+            public int x;
+            public int y;
+            public int width;
+            public int height;
+
+            public boolean selected = false;
+            public boolean dragging = false;
+            
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;
@@ -18,7 +27,7 @@ public class Rectangle extends Shape implements MouseMotionListener {
             System.out.println("MOve");
       }
 
-      public void draw(Graphics g) {
+      public void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (this.selected) {
                   g.setColor(Color.RED);
@@ -31,13 +40,33 @@ public class Rectangle extends Shape implements MouseMotionListener {
             }
       }
 
-      @Override
-      public void mouseDragged(MouseEvent e) {
-            System.out.println("Dragging");
+      public void mouseClicked(MouseEvent e){
+            System.out.println("Click");
       }
 
-      @Override
-      public void mouseMoved(MouseEvent e) {
+      public void mouseExited(MouseEvent e){
 
       }
+
+      public void mouseEntered(MouseEvent e){
+
+      } 
+
+      public void mouseReleased(MouseEvent e){
+
+      }
+
+      public void mousePressed(MouseEvent e){
+
+      }
+
+      // @Override
+      // public void mouseDragged(MouseEvent e) {
+      //       System.out.println("Dragging");
+      // }
+
+      // @Override
+      // public void mouseMoved(MouseEvent e) {
+
+      // }
 }

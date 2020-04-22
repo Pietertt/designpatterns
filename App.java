@@ -26,6 +26,10 @@ public class App {
 
                   Board board = new Board(frame);
 
+                  Rectangle rect = new Rectangle(100, 100, 100, 100);
+
+                  frame.add(rect);
+
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
                   ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
                   undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
