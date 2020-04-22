@@ -69,7 +69,7 @@ public class App {
                   frame.getContentPane().add(UI, BorderLayout.SOUTH);
                   frame.getContentPane().add(board);
                   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                  frame.pack();
+                  frame.setSize(600, 600);
                   frame.setVisible(true);
 
                   // Rectangle rect1 = new Rectangle(100, 200, 100, 100);

@@ -27,7 +27,7 @@ public class Rectangle extends JPanel {
             System.out.println("MOve");
       }
 
-      public void paintComponent(Graphics g) {
+      public void draw(Graphics g) {
             super.paintComponent(g);
             if (this.selected) {
                   g.setColor(Color.RED);

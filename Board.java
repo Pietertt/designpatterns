@@ -27,7 +27,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public Invoker invoker = new Invoker();
 
-      public ArrayList<Shape> shapes = new ArrayList<Shape>();
+      public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
 
       public Board(JFrame frame){
             super.setFocusable(true);
@@ -48,8 +48,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             Rectangle rect = new Rectangle(e.getX(), e.getY(), 100, 100);
 
             frame.add(rect);
+            shapes.add(rect);
+            System.out.println(shapes.size());
             frame.revalidate();
-            frame.repaint();
+            repaint();
       }
 
       public void mouseExited(MouseEvent e){
@@ -65,25 +67,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mousePressed(MouseEvent e){
-            for(int i = 0; i < this.shapes.size(); i++){
-                  Shape shape = this.shapes.get(i);
+            // for(int i = 0; i < this.shapes.size(); i++){
+            //       Shape shape = this.shapes.get(i);
 
-                  if (shape.getIfSelected(e.getX(), e.getY())) {
-                        Order select = new SelectShapeCommand(shape);
-                        this.invoker.execute(select);
-                        repaint();
+            //       if (shape.getIfSelected(e.getX(), e.getY())) {
+            //             Order select = new SelectShapeCommand(shape);
+            //             this.invoker.execute(select);
+            //             repaint();
 
-                        if(shape.selected){
-                              Order drag = new DragShapeCommand(shape);
-                              this.invoker.execute(drag);
-                        }
+            //             if(shape.selected){
+            //                   Order drag = new DragShapeCommand(shape);
+            //                   this.invoker.execute(drag);
+            //             }
                         
-                  } else if(shape.selected){
-                        Order deselect = new DeselectShapeCommand(shape);
-                        this.invoker.execute(deselect);
-                        repaint();
-                  }
-            }
+            //       } else if(shape.selected){
+            //             Order deselect = new DeselectShapeCommand(shape);
+            //             this.invoker.execute(deselect);
+            //             repaint();
+            //       }
+            // }
       }
 
       @Override
@@ -96,11 +98,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       }    
 
-      public Dimension getPreferredSize(){
-            return new Dimension(600, 600);
-      }
-
       public void paintComponent(Graphics g) {
-           
+            for(Rectangle shape : this.shapes){
+                  shape.draw(g);
+                  revalidate();
+                  repaint();
+            }
       }  
 }
