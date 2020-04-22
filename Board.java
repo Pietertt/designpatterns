@@ -24,7 +24,7 @@ public class Board extends JPanel implements MouseListener {
       public JFrame frame;
       public Invoker invoker = new Invoker();
 
-      public ArrayList<Rectangle> shapes = new ArrayList<Rectangle>();
+      public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       public Board(JFrame frame){
             this.frame = frame;
@@ -40,19 +40,15 @@ public class Board extends JPanel implements MouseListener {
                   frame.revalidate();
                   frame.repaint();
             }
-
-            // Rectangle rectangle = new Rectangle(100, 100, 100, 100);
-            // Shape ellipse = new Ellipse(400, 300, 100, 100);
-
-            // this.frame.add(rectangle);
-
-            // this.frame.revalidate();
-            // this.frame.repaint();
-            // this.frame.pack();
       }
 
       public void mouseClicked(MouseEvent e){
-
+            for(Shape shape : this.shapes){
+                  if(shape.getIfSelected(e.getX(), e.getY())){
+                        SelectShapeCommand select = new SelectShapeCommand(shape);
+                        select.execute();
+                  }
+            }
       }
 
       public void mouseExited(MouseEvent e){
@@ -90,7 +86,7 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void paintComponent(Graphics g) {
-            for(Rectangle shape : this.shapes){
+            for(Shape shape : this.shapes){
                   shape.draw(g);
                   revalidate();
                   repaint();
