@@ -8,8 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 
-import shapes.rectangle;
-import shapes.ellipse;
+import shapes.*;
 
 import ui.board;
 import commands.*;
@@ -93,8 +92,22 @@ public class main {
       frame.setVisible(true);
 
       for(int i = 0; i < 5; i++){
-            rectangle rect = new rectangle(50 + i * 100, 200, 50, 50, 1);
+            shape rect = new rectangle(50 + i * 100, 100, 50, 50, 1);
             placeShapeCommand place = new placeShapeCommand(rect);
+
+            board.commandInvoker.execute(place);
+            frame.add(place.getShape());
+            frame.revalidate();
+            frame.repaint();
+
+            board.shapes.add(place.getShape());
+
+            board.addMouseMotionListener(place.getShape());
+      }
+
+      for(int i = 0; i < 5; i++){
+            shape ell = new ellipse(50 + i * 100, 300, 50, 50, 1);
+            placeShapeCommand place = new placeShapeCommand(ell);
 
             board.commandInvoker.execute(place);
             frame.add(place.getShape());

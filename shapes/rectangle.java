@@ -8,9 +8,7 @@ import java.util.Stack;
 
 public class rectangle extends shape  {
     
-
       public rectangle(int x, int y, int width, int height, int id){
-            //super(x, y, width, height);
             this.x = x;
             this.savedX = x;
             this.y = y;
@@ -32,21 +30,5 @@ public class rectangle extends shape  {
                   g.fillRect(x, y, width, height);
                   g.drawRect(x, y, width, height);
             }
-      }
-
-      
-
-      @Override
-      public void mouseDragged(MouseEvent e) {
-            if(selected && dragging) {
-                  this.x = e.getX();
-                  this.y = e.getY();
-                  repaint();
-            }
-      }
-
-      @Override
-      public void mouseMoved(MouseEvent e) {
-
       }
 }

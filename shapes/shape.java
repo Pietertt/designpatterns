@@ -136,11 +136,15 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
       @Override
       public void mouseDragged(MouseEvent e) {
+            if(selected && dragging) {
+                  this.x = e.getX();
+                  this.y = e.getY();
+                  repaint();
+            }
       }
 
       @Override
       public void mouseMoved(MouseEvent e) {
 
       }
-
 }

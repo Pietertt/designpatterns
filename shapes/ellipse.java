@@ -1,17 +1,34 @@
 package shapes;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.util.Stack;
 
-public class ellipse {
-
+public class ellipse extends shape  {
+    
       public ellipse(int x, int y, int width, int height, int id){
-            
+            this.x = x;
+            this.savedX = x;
+            this.y = y;
+            this.savedY = y;
+            this.width = width;
+            this.savedWidth= width;
+            this.height = height;
+            this.savedHeight = height;
+            this.id = id;
+            this.undoStack = new Stack<>();
+            this.redoStack = new Stack<>();
       }
 
-      // public void setColor(Graphics g) {
-      //       if(this.selected)
-      //             g.setColor(Color.GRAY);
-      //       else
-      //             g.setColor(Color.BLUE);
-      // }
+      @Override
+      public void paintComponent(Graphics g) {
+            if(rectDraw) {
+                  super.paintComponent(g);
+                  setColor(g);
+                  g.fillOval(x, y, width, height);
+                  g.drawRect(x, y, width, height);
+            }
+      }
 }
