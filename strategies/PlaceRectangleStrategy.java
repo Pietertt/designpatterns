@@ -7,7 +7,7 @@ import ui.commandInvoker;
 public class PlaceRectangleStrategy {
       private order order;
       private commandInvoker invoker;
-      public rectangle rectangle;
+      public shape rectangle;
 
       public PlaceRectangleStrategy(commandInvoker invoker){
             this.invoker = invoker;

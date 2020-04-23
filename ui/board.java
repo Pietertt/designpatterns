@@ -16,9 +16,10 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       // worden de commando's naar verstuurd:
       public commandInvoker commandInvoker = new commandInvoker();
+      
 
       // Alle shapes die op de canvas(board) staan
-      public ArrayList<rectangle> shapes = new ArrayList<>();
+      public ArrayList<shape> shapes = new ArrayList<shape>();
 
       // MODUS
       public boolean created = false;
@@ -51,7 +52,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             selectionMode = false;
 
             // Reset selectionMode when clicking in an empty area
-            for (rectangle rectangle : shapes) {
+            for (shape rectangle : shapes) {
                   if (rectangle.getIfSelected(e.getX(), e.getY())) {
                         selectionMode = true;
                   }
@@ -92,7 +93,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mouseEntered(MouseEvent e) {
             // TODO In Progress: Change mouse when entering a shape
-            for (rectangle rectangle : shapes) {
+            for (shape rectangle : shapes) {
                   if (rectangle.getIfSelected(e.getX(), e.getY())) {
                         rectangle.setCursor(new Cursor(Cursor.HAND_CURSOR));
                   }
@@ -101,7 +102,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mouseReleased(MouseEvent e) {
             // er kan niet gedragged worden als dragging false is.
-            for (rectangle rectangle : shapes) {
+            for (shape rectangle : shapes) {
                   rectangle.setDraggingFalse();
             }
       }
@@ -109,7 +110,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       public void mousePressed(MouseEvent e) {
 
             // If the shape is selected && the mouse is pressed you can drag a rectangle.
-            for (rectangle rectangle : shapes) {
+            for (shape rectangle : shapes) {
                   if (rectangle.getIfSelected(e.getX(), e.getY())) {
                         dragShapeCommand drag = new dragShapeCommand(rectangle);
                         this.commandInvoker.execute(drag);
@@ -117,7 +118,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             }
 
             // Check if every shape is selected
-            for (rectangle rectangle : shapes) {
+            for (shape rectangle : shapes) {
                   if (rectangle.getIfSelected(e.getX(), e.getY())) {
                         selectShapeCommand select = new selectShapeCommand(rectangle);
                         this.commandInvoker.execute(select);

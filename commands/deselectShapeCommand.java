@@ -1,11 +1,11 @@
 package commands;
 
-import shapes.rectangle;
+import shapes.*;
 
 public class deselectShapeCommand implements order {
-    private rectangle shape;
+    private shape shape;
 
-    public deselectShapeCommand(rectangle shape) {
+    public deselectShapeCommand(shape shape) {
         this.shape = shape;
     }
 

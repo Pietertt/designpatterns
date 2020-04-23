@@ -1,8 +1,17 @@
 package shapes;
 
-public class ellipse extends shape {
+import java.awt.*;
+
+public class ellipse {
 
       public ellipse(int x, int y, int width, int height, int id){
-            super(x, y, width, height);
+            
       }
+
+      // public void setColor(Graphics g) {
+      //       if(this.selected)
+      //             g.setColor(Color.GRAY);
+      //       else
+      //             g.setColor(Color.BLUE);
+      // }
 }

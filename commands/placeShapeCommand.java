@@ -3,9 +3,9 @@ package commands;
 import shapes.*;
 
 public class placeShapeCommand implements order {
-    private rectangle shape;
+    private shape shape;
 
-    public placeShapeCommand(rectangle shape) {
+    public placeShapeCommand(shape shape) {
         this.shape = shape;
     }
 
@@ -24,7 +24,7 @@ public class placeShapeCommand implements order {
         shape.setDrawTrue();
     }
 
-    public rectangle getShape() {
+    public shape getShape() {
         return shape;
     }
 }
