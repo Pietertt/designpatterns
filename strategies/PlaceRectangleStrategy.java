@@ -18,7 +18,6 @@ public class PlaceRectangleStrategy {
       }
 
       public void place(){
-            System.out.println("Placed");
             placeShapeCommand place = new placeShapeCommand(this.rectangle);
             this.invoker.execute(place);
       }

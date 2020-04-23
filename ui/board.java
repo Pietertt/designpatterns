@@ -67,15 +67,16 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                               // frame.add(place.getShape());
 
                               PlaceRectangleStrategy rectangleStrategy = new PlaceRectangleStrategy(this.commandInvoker);
-                              rectangleStrategy.prepare(e.getX(), e.getY(), 50, 50);
+                              rectangleStrategy.prepare(x, y, 50, 50);
                               rectangleStrategy.place();
+
+                              shapes.add(rectangleStrategy.rectangle);
+                              frame.add(rectangleStrategy.rectangle);
 
 
                               frame.revalidate();
                               frame.repaint();
-                
-                              shapes.add(rectangleStrategy.rectangle);
-                              frame.add(rectangleStrategy.rectangle);
+            
                 
                               addMouseMotionListener(rectangleStrategy.rectangle);
                               this.created = false;
