@@ -12,6 +12,7 @@ import shapes.*;
 
 import ui.board;
 import commands.*;
+import strategies.*;
 
 import io.parser;
 
@@ -36,8 +37,10 @@ public class main {
       rectangle.setContentAreaFilled(false);
 
       JButton ellipse = new JButton();
-      rectangle.addActionListener(actionEvent -> { 
+
+      ellipse.addActionListener(actionEvent -> { 
             board.created = true;
+            board.strategy = new PlaceRectangleStrategy(board.commandInvoker);
       });
 
       try {

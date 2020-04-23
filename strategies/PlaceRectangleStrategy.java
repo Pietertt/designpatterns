@@ -4,11 +4,8 @@ import commands.*;
 import shapes.*;
 import ui.commandInvoker;
 
-public class PlaceRectangleStrategy {
-      private order order;
-      private commandInvoker invoker;
-      public shape rectangle;
-
+public class PlaceRectangleStrategy extends Strategy {
+      
       public PlaceRectangleStrategy(commandInvoker invoker){
             this.invoker = invoker;
       }

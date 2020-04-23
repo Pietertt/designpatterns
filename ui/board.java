@@ -16,6 +16,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       // worden de commando's naar verstuurd:
       public commandInvoker commandInvoker = new commandInvoker();
+      public Strategy strategy = new PlaceRectangleStrategy(commandInvoker);
       
 
       // Alle shapes die op de canvas(board) staan
@@ -67,19 +68,18 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                               // this.commandInvoker.execute(place);
                               // frame.add(place.getShape());
 
-                              PlaceRectangleStrategy rectangleStrategy = new PlaceRectangleStrategy(this.commandInvoker);
-                              rectangleStrategy.prepare(x, y, 50, 50);
-                              rectangleStrategy.place();
+                              this.strategy.prepare(x, y, 50, 50);
+                              this.strategy.place();
 
-                              shapes.add(rectangleStrategy.rectangle);
-                              frame.add(rectangleStrategy.rectangle);
+                              shapes.add(this.strategy.rectangle);
+                              frame.add(this.strategy.rectangle);
 
 
                               frame.revalidate();
                               frame.repaint();
             
                 
-                              addMouseMotionListener(rectangleStrategy.rectangle);
+                              addMouseMotionListener(this.strategy.rectangle);
                               this.created = false;
                           }
                   }
