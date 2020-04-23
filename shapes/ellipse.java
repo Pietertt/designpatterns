@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.Stack;
 
-public class ellipse extends shape  {
+public class ellipse extends Shape  {
     
       public ellipse(int x, int y, int width, int height, int id){
             this.x = x;

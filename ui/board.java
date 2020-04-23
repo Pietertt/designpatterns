@@ -1,7 +1,8 @@
 package ui;
 
 import java.util.*;
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -20,7 +21,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       
 
       // Alle shapes die op de canvas(board) staan
-      public ArrayList<shape> shapes = new ArrayList<shape>();
+      public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       // MODUS
       public boolean created = false;
@@ -53,8 +54,8 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             selectionMode = false;
 
             // Reset selectionMode when clicking in an empty area
-            for (shape rectangle : shapes) {
-                  if (rectangle.getIfSelected(e.getX(), e.getY())) {
+            for (Shape shape : shapes) {
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
                         selectionMode = true;
                   }
             }
@@ -71,15 +72,15 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                               this.strategy.prepare(x, y, 50, 50);
                               this.strategy.place();
 
-                              shapes.add(this.strategy.rectangle);
-                              frame.add(this.strategy.rectangle);
+                              shapes.add(this.strategy.shape);
+                              frame.add(this.strategy.shape);
 
 
                               frame.revalidate();
                               frame.repaint();
             
                 
-                              addMouseMotionListener(this.strategy.rectangle);
+                              addMouseMotionListener(this.strategy.shape);
                               this.created = false;
                           }
                   }
@@ -93,38 +94,38 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mouseEntered(MouseEvent e) {
             // TODO In Progress: Change mouse when entering a shape
-            for (shape rectangle : shapes) {
-                  if (rectangle.getIfSelected(e.getX(), e.getY())) {
-                        rectangle.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            for (Shape shape : shapes) {
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
+                        shape.setCursor(new Cursor(Cursor.HAND_CURSOR));
                   }
             }
       }
 
       public void mouseReleased(MouseEvent e) {
             // er kan niet gedragged worden als dragging false is.
-            for (shape rectangle : shapes) {
-                  rectangle.setDraggingFalse();
+            for (Shape shape : shapes) {
+                  shape.setDraggingFalse();
             }
       }
 
       public void mousePressed(MouseEvent e) {
 
             // If the shape is selected && the mouse is pressed you can drag a rectangle.
-            for (shape rectangle : shapes) {
-                  if (rectangle.getIfSelected(e.getX(), e.getY())) {
-                        dragShapeCommand drag = new dragShapeCommand(rectangle);
+            for (Shape shape : shapes) {
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
+                        dragShapeCommand drag = new dragShapeCommand(shape);
                         this.commandInvoker.execute(drag);
                   }
             }
 
             // Check if every shape is selected
-            for (shape rectangle : shapes) {
-                  if (rectangle.getIfSelected(e.getX(), e.getY())) {
-                        selectShapeCommand select = new selectShapeCommand(rectangle);
+            for (Shape shape : shapes) {
+                  if (shape.getIfSelected(e.getX(), e.getY())) {
+                        selectShapeCommand select = new selectShapeCommand(shape);
                         this.commandInvoker.execute(select);
                         selectionMode = true;
-                  } else if (rectangle.getSelected()) {
-                        deselectShapeCommand deselect = new deselectShapeCommand(rectangle);
+                  } else if (shape.getSelected()) {
+                        deselectShapeCommand deselect = new deselectShapeCommand(shape);
                         this.commandInvoker.execute(deselect);
                         // selectionMode = false;
                         // rectangle.setSelectedFalse();

@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 import java.util.ArrayList;
 
-public abstract class shape extends JComponent implements receiver, MouseMotionListener {
+public abstract class Shape extends JComponent implements receiver, MouseMotionListener {
       public int id;
 
       // Moet de rectangle getekend worden

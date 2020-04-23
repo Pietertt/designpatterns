@@ -11,11 +11,11 @@ public class PlaceEllipseStrategy extends Strategy {
       }
 
       public void prepare(int x, int y, int width, int height){
-            this.rectangle = new ellipse(x, y, width, height, 1);
+            this.shape = new ellipse(x, y, width, height, 1);
       }
 
       public void place(){
-            placeShapeCommand place = new placeShapeCommand(this.rectangle);
+            placeShapeCommand place = new placeShapeCommand(this.shape);
             this.invoker.execute(place);
       }
 }

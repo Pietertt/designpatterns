@@ -1,9 +1,9 @@
 import java.util.*;
-import java.awt.*;
 import javax.swing.*;
 
 import javax.swing.Timer;
 import java.awt.event.*;
+import java.awt.BorderLayout;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -98,7 +98,7 @@ public class main {
       frame.setVisible(true);
 
       for(int i = 0; i < 5; i++){
-            shape rect = new rectangle(50 + i * 100, 100, 50, 50, 1);
+            Shape rect = new rectangle(50 + i * 100, 100, 50, 50, 1);
             placeShapeCommand place = new placeShapeCommand(rect);
 
             board.commandInvoker.execute(place);
@@ -112,7 +112,7 @@ public class main {
       }
 
       for(int i = 0; i < 5; i++){
-            shape ell = new ellipse(50 + i * 100, 300, 50, 50, 1);
+            Shape ell = new ellipse(50 + i * 100, 300, 50, 50, 1);
             placeShapeCommand place = new placeShapeCommand(ell);
 
             board.commandInvoker.execute(place);
