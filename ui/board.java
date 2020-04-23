@@ -14,7 +14,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       private static JFrame frame;
 
       // worden de commando's naar verstuurd:
-      private commandInvoker commandInvoker = new commandInvoker();
+      public commandInvoker commandInvoker = new commandInvoker();
 
       // Alle shapes die op de canvas(board) staan
       private ArrayList<rectangle> shapes = new ArrayList<>();
@@ -32,14 +32,6 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             super.setFocusable(true);
             addMouseListener(this);
             this.frame = frame;
-      }
-
-      public void undo() {
-            this.commandInvoker.undo();
-      }
-
-      public void redo() {
-            this.commandInvoker.redo();
       }
 
       // paint method which is responsible for painting the window
@@ -87,7 +79,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
               int x = e.getXOnScreen();
               int y = e.getYOnScreen();
 
-              rectangle rc = new rectangle(x - 100, y - 50, 50, 50, 1);
+              rectangle rc = new rectangle(x, y, 50, 50, 1);
 
               placeShapeCommand place = new placeShapeCommand(rc);
 

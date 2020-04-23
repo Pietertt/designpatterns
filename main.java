@@ -24,11 +24,33 @@ public class main {
       JPanel ui = new JPanel();
       board board = new board(frame);
 
+      JButton rectangle = new JButton();
+      //rectangle.addActionListener(actionEvent -> board.undo());
+      try {
+            rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
+      } catch(IOException e){
 
+      }
+
+      rectangle.setBorderPainted(false);
+      rectangle.setFocusPainted(false);
+      rectangle.setContentAreaFilled(false);
+
+      JButton ellipse = new JButton();
+      //rectangle.addActionListener(actionEvent -> board.undo());
+      try {
+            ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
+      } catch(IOException e){
+
+      }
+
+      ellipse.setBorderPainted(false);
+      ellipse.setFocusPainted(false);
+      ellipse.setContentAreaFilled(false);
 
       // Undo button
       JButton undo = new JButton();
-      undo.addActionListener(actionEvent -> board.undo());
+      undo.addActionListener(actionEvent -> board.commandInvoker.undo());
       try {
             undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
       } catch(IOException e){
@@ -41,7 +63,7 @@ public class main {
 
       // Undo button
       JButton redo = new JButton();
-      redo.addActionListener(actionEvent -> board.redo());
+      redo.addActionListener(actionEvent -> board.commandInvoker.redo());
       try {
             redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
       } catch(IOException e){
@@ -52,6 +74,8 @@ public class main {
       redo.setFocusPainted(false);
       redo.setContentAreaFilled(false);
 
+      ui.add(rectangle);
+      ui.add(ellipse);
       ui.add(undo);
       ui.add(redo);
 
