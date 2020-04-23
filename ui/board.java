@@ -16,7 +16,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       // worden de commando's naar verstuurd:
       public commandInvoker commandInvoker = new commandInvoker();
-      public Strategy strategy = new PlaceRectangleStrategy(commandInvoker);
+      public Strategy strategy;
       
 
       // Alle shapes die op de canvas(board) staan
