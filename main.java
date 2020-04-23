@@ -37,7 +37,10 @@ public class main {
       rectangle.setContentAreaFilled(false);
 
       JButton ellipse = new JButton();
-      //rectangle.addActionListener(actionEvent -> board.undo());
+      rectangle.addActionListener(actionEvent -> { 
+            board.created = true;
+      });
+
       try {
             ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
       } catch(IOException e){

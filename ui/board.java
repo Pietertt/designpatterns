@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import shapes.*;
+import strategies.*;
 
 import commands.*;
 
@@ -57,23 +58,27 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             }
 
             if(!selectionMode){
-                  if(!this.created){
+                  if(this.created){
                         if(!selectionMode) {
                               int x = e.getX();
                               int y = e.getY();
                 
-                              rectangle rc = new rectangle(x, y, 50, 50, 1);
-                
-                              placeShapeCommand place = new placeShapeCommand(rc);
-                
-                              this.commandInvoker.execute(place);
-                              frame.add(place.getShape());
+                              // this.commandInvoker.execute(place);
+                              // frame.add(place.getShape());
+
+                              PlaceRectangleStrategy rectangleStrategy = new PlaceRectangleStrategy(this.commandInvoker);
+                              rectangleStrategy.prepare(e.getX(), e.getY(), 50, 50);
+                              rectangleStrategy.place();
+
+
                               frame.revalidate();
                               frame.repaint();
                 
-                              shapes.add(place.getShape());
+                              shapes.add(rectangleStrategy.rectangle);
+                              frame.add(rectangleStrategy.rectangle);
                 
-                              addMouseMotionListener(place.getShape());
+                              addMouseMotionListener(rectangleStrategy.rectangle);
+                              this.created = false;
                           }
                   }
             }
