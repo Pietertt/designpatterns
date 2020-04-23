@@ -44,19 +44,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mouseClicked(MouseEvent e){
-            for(Rectangle shape : this.shapes){
-                  if(shape.getIfSelected(e.getX(), e.getY())){
-                        SelectShapeCommand select = new SelectShapeCommand(shape);
-                        this.invoker.execute(select);
-                  }
-
-                  if(!shape.getIfSelected(e.getX(), e.getY())){
-                        if(shape.selected){
-                              DeselectShapeCommand deselect = new DeselectShapeCommand(shape);
-                              this.invoker.execute(deselect);
-                        }
-                  }
-            }
+            
       }
 
       public void mouseExited(MouseEvent e){
@@ -72,25 +60,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mousePressed(MouseEvent e){
-            // for(int i = 0; i < this.shapes.size(); i++){
-            //       Shape shape = this.shapes.get(i);
-
-            //       if (shape.getIfSelected(e.getX(), e.getY())) {
-            //             Order select = new SelectShapeCommand(shape);
-            //             this.invoker.execute(select);
-            //             repaint();
-
-            //             if(shape.selected){
-            //                   Order drag = new DragShapeCommand(shape);
-            //                   this.invoker.execute(drag);
-            //             }
-                        
-            //       } else if(shape.selected){
-            //             Order deselect = new DeselectShapeCommand(shape);
-            //             this.invoker.execute(deselect);
-            //             repaint();
-            //       }
-            // }
+            for(Rectangle shape : this.shapes){
+                  if(shape.getIfSelected(e.getX(), e.getY())){
+                        SelectShapeCommand select = new SelectShapeCommand(shape);
+                        this.invoker.execute(select);
+                  } else if(shape.selected){
+                        DeselectShapeCommand deselect = new DeselectShapeCommand(shape);
+                        this.invoker.execute(deselect);
+                  }
+            }
       }
 
       @Override
