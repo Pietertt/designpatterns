@@ -12,7 +12,7 @@ import shapes.rectangle;
 import shapes.ellipse;
 
 import ui.board;
-import ui.ui;
+import commands.*;
 
 import io.parser;
 
@@ -25,7 +25,7 @@ public class main {
       board board = new board(frame);
 
       JButton rectangle = new JButton();
-      //rectangle.addActionListener(actionEvent -> board.undo());
+      //rectangle.addActionListener(actionEvent -> board.place());
       try {
             rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
       } catch(IOException e){
@@ -88,6 +88,20 @@ public class main {
       frame.setSize(board.width, board.height);
       frame.setLocation(board.offsetX, board.offsetY);
       frame.setVisible(true);
+
+      for(int i = 0; i < 5; i++){
+            rectangle rect = new rectangle(50 + i * 100, 200, 50, 50, 1);
+            placeShapeCommand place = new placeShapeCommand(rect);
+
+            board.commandInvoker.execute(place);
+            frame.add(place.getShape());
+            frame.revalidate();
+            frame.repaint();
+
+            board.shapes.add(place.getShape());
+
+            board.addMouseMotionListener(place.getShape());
+      }
 
   }
 }
