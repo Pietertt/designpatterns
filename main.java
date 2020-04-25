@@ -91,6 +91,10 @@ public class main {
           e.printStackTrace();
       }
 
+      save.setBorderPainted(false);
+      save.setFocusPainted(false);
+      save.setContentAreaFilled(false);
+
       ui.add(rectangle);
       ui.add(ellipse);
       ui.add(undo);
