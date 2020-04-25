@@ -6,6 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
+import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.io.File;
+
 import shapes.Rectangle;
 import UI.Board;
 
@@ -13,14 +19,14 @@ public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
+            JPanel UI = new JPanel();
 
             Board board = new Board();
             frame.add(board);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
-                  board.created = true;
-                  board.strategy = new PlaceRectangleStrategy(board.commandInvoker);
+                  
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -35,8 +41,7 @@ public class main {
             JButton ellipse = new JButton();
 
             ellipse.addActionListener(actionEvent -> {
-                  board.created = true;
-                  board.strategy = new PlaceEllipseStrategy(board.commandInvoker);
+                 
             });
 
             try {
