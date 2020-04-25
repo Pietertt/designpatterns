@@ -4,7 +4,7 @@ import shapes.*;
 
 public class PlaceShapeCommand extends Order {
 
-      public PlaceShapeCommand(Rectangle shape){
+      public PlaceShapeCommand(Shape shape){
             this.shape = shape;
       }
 

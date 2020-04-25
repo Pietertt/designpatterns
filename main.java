@@ -17,6 +17,7 @@ import java.io.File;
 
 import shapes.Rectangle;
 import UI.Board;
+import strategies.*;
 
 public class main {
 
@@ -28,7 +29,7 @@ public class main {
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
-                  
+                  board.strategy = new PlaceRectangleStrategy(board.invoker);     
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -43,7 +44,7 @@ public class main {
             JButton ellipse = new JButton();
 
             ellipse.addActionListener(actionEvent -> {
-                 
+                  board.strategy = new PlaceEllipseStrategy(board.invoker);
             });
 
             try {

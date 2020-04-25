@@ -7,9 +7,12 @@ import java.awt.event.*;
 
 import shapes.*;
 import commands.*;
+import strategies.*;
 
 public class Board extends JPanel implements MouseListener {
       public JFrame frame;
+      public commandInvoker invoker = new commandInvoker();
+      public Strategy strategy;
 
       public Board(JFrame frame){
             super(null);
@@ -24,10 +27,11 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e){
-            Rectangle rectangle = new Rectangle(e.getX(), e.getY(), 50, 50);
-            Order place = new PlaceShapeCommand(rectangle);
-            place.execute();
-            add(place.shape);
+
+            this.strategy.prepare(e.getX(), e.getY(), 50, 50);
+            this.strategy.place();
+            add(this.strategy.shape);
+
             revalidate();
             repaint();
       }
