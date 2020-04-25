@@ -31,7 +31,7 @@ public class rectangle extends Shape  {
 
       @Override
       public void paintComponent(Graphics g) {
-            if(selected){
+            if(!selected){
                  
                         super.paintComponent(g);
                         g.setColor(Color.BLACK);
