@@ -14,7 +14,7 @@ public class Ellipse extends Shape {
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(Color.RED);
-            g.fillOval(0, 0, this.width, this.height);
+            g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+            g.fillOval(4, 4, this.width - 8, this.height - 8);
       }
 }

@@ -14,6 +14,8 @@ public class Board extends JPanel implements MouseListener {
       public commandInvoker invoker = new commandInvoker();
       public Strategy strategy;
 
+      public boolean created = false;
+
       public Board(JFrame frame){
             super(null);
             this.frame = frame;
@@ -27,13 +29,15 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e){
+            if(this.created){
+                  this.strategy.prepare(e.getX(), e.getY(), 50, 50);
+                  this.strategy.place();
+                  add(this.strategy.shape);
 
-            this.strategy.prepare(e.getX(), e.getY(), 50, 50);
-            this.strategy.place();
-            add(this.strategy.shape);
-
-            revalidate();
-            repaint();
+                  revalidate();
+                  repaint();
+                  this.created = false;
+            }
       }
 
       public void mouseExited(MouseEvent e){

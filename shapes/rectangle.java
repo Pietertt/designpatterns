@@ -13,8 +13,16 @@ public class Rectangle extends Shape {
 
       @Override
       public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.setColor(Color.RED);
-            g.fillRect(0, 0, this.width, this.height);
+            if(hasFocus()){
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillRect(4, 4, this.width - 8, this.height - 8);
+                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                  g.drawRect(0, 0, this.width, this.height);
+            } else {
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillRect(4, 4, this.width - 8, this.height - 8);
+            }
       }
 }

@@ -39,9 +39,6 @@ public class ResizableBorder implements Border {
 
     @Override
     public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
-        g.setColor(Color.black);
-        g.drawRect(x + this.size / 2, y + this.size / 2, width - this.size, height - this.size);
-
         if (component.hasFocus()) {
             for (int i = 0; i < locations.length; i++) {
                 var rect = getRectangle(x, y, width, height, locations[i]);

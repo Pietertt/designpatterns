@@ -16,6 +16,9 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
       protected int cursor;
       protected Point start = null;
 
+      int[] gray = { 235, 235, 235 };
+      int[] blue = { 80, 155, 229 };
+
       public void place(){
             JPanel area = new JPanel();
             setOpaque(true);

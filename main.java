@@ -29,6 +29,7 @@ public class main {
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
+                  board.created = true;
                   board.strategy = new PlaceRectangleStrategy(board.invoker);     
             });
             try {
@@ -44,6 +45,7 @@ public class main {
             JButton ellipse = new JButton();
 
             ellipse.addActionListener(actionEvent -> {
+                  board.created = true;
                   board.strategy = new PlaceEllipseStrategy(board.invoker);
             });
 
