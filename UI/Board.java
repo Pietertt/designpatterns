@@ -3,7 +3,9 @@ package UI;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.event.*;
+
 import shapes.*;
+import commands.*;
 
 public class Board extends JPanel implements MouseListener {
       public Board(){
@@ -24,7 +26,12 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mouseClicked(MouseEvent e){
-            System.out.println("Click");
+            Rectangle rectangle = new Rectangle(e.getX(), e.getY(), 50, 50);
+            Order place = new PlaceShapeCommand(rectangle);
+            place.execute();
+            add(place.shape);
+            revalidate();
+            repaint();
       }
 
       public void mouseExited(MouseEvent e){

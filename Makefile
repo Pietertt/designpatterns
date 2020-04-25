@@ -9,6 +9,7 @@ clean:
 	@echo "Cleaning files..."
 	@rm -rf *.class
 	@cd shapes && rm -rf *.class
+	@cd commands && rm -rf *.class
 	@echo "Cleaning done!"
 
 

@@ -11,25 +11,34 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-public class Rectangle extends JComponent {
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+
+public class Rectangle extends JComponent implements MouseListener, MouseMotionListener {
       private int x;
       private int y;
       private int width;
       private int height;
+
+      private int cursor;
+            private Point start = null;
 
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;
             this.width = width;
             this.height = height;
+      }
 
+      public void place(){
             JPanel area = new JPanel();
             area.setBackground(Color.WHITE);
+
             setBounds(this.x, this.y, this.width, this.height);
             setLayout(new BorderLayout());
             add(area);
-            addMouseListener(resizeListener);
-            addMouseMotionListener(resizeListener);
+            addMouseListener(this);
+            addMouseMotionListener(this);
             setBorder(new ResizableBorder());
       }
 
@@ -39,107 +48,94 @@ public class Rectangle extends JComponent {
             }
       }
 
-      MouseInputListener resizeListener = new MouseInputAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                  if (hasFocus()) {
-                        var resizableBorder = (ResizableBorder) getBorder();
-                        setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(e)));
+      public void mouseClicked(MouseEvent e){
+
+      }
+
+      public void mouseExited(MouseEvent e) {
+            setCursor(Cursor.getDefaultCursor());
+      }
+
+      public void mouseReleased(MouseEvent mouseEvent) {
+            start = null;
+      }
+
+      public void mousePressed(MouseEvent e) {
+            var resizableBorder = (ResizableBorder) getBorder();
+            cursor = resizableBorder.getCursor(e);
+            start = e.getPoint();
+
+            requestFocus();
+            repaint();
+      }
+
+      public void mouseDragged(MouseEvent e) {
+            if (start != null) {
+                  int x = getX();
+                  int y = getY();
+                  int width = getWidth();
+                  int height = getHeight();
+                  int dx = e.getX() - start.x;
+                  int dy = e.getY() - start.y;
+
+                  switch (cursor) {
+                        case Cursor.N_RESIZE_CURSOR:
+                              setBounds(x, y + dy, width, height - dy);
+                              resize();
+                              break;
+                        case Cursor.S_RESIZE_CURSOR:
+                              setBounds(x, y, width, height + dy);
+                              start = e.getPoint();
+                              resize();
+                              break;
+                        case Cursor.W_RESIZE_CURSOR:
+                              setBounds(x + dx, y, width - dx, height);
+                              resize();
+                              break;
+                        case Cursor.E_RESIZE_CURSOR:
+                              setBounds(x, y, width + dx, height);
+                              start = e.getPoint();
+                              resize();
+                              break;
+                        case Cursor.NW_RESIZE_CURSOR:
+                              setBounds(x + dx, y + dy, width - dx, height - dy);
+                              resize();
+                              break;
+                        case Cursor.NE_RESIZE_CURSOR:
+                              setBounds(x, y + dy, width + dx, height - dy);
+                              start = new Point(e.getX(), start.y);
+                              break;
+                        case Cursor.SW_RESIZE_CURSOR:
+                              setBounds(x + dx, y, width - dx, height + dy);
+                              start = new Point(start.x, e.getY());
+                              resize();
+                              break;
+                        case Cursor.SE_RESIZE_CURSOR:
+                              setBounds(x, y, width + dx, height + dy);
+                              start = e.getPoint();
+                              resize();
+                              break;
+                        case Cursor.MOVE_CURSOR:
+                              var bounds = getBounds();
+                              bounds.translate(dx, dy);
+                              setBounds(bounds);
+                              resize();
+
                   }
+                  setCursor(Cursor.getPredefinedCursor(cursor));
             }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                  setCursor(Cursor.getDefaultCursor());
-            }
-
-            private int cursor;
-            private Point start = null;
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
+      }
+      
+      public void mouseMoved(MouseEvent e) {
+            if (hasFocus()) {
                   var resizableBorder = (ResizableBorder) getBorder();
-                  cursor = resizableBorder.getCursor(e);
-                  start = e.getPoint();
-
-                  requestFocus();
-                  repaint();
+                  setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(e)));
             }
+      }   
 
-            @Override
-            public void mouseDragged(MouseEvent e) {
+      public void mouseEntered(MouseEvent e){
 
-                  if (start != null) {
+      }
 
-                        int x = getX();
-                        int y = getY();
-                        int width = getWidth();
-                        int height = getHeight();
 
-                        int dx = e.getX() - start.x;
-                        int dy = e.getY() - start.y;
-
-                        switch (cursor) {
-
-                              case Cursor.N_RESIZE_CURSOR:
-                                    setBounds(x, y + dy, width, height - dy);
-                                    resize();
-                                    break;
-
-                              case Cursor.S_RESIZE_CURSOR:
-                                    setBounds(x, y, width, height + dy);
-                                    start = e.getPoint();
-                                    resize();
-                                    break;
-
-                              case Cursor.W_RESIZE_CURSOR:
-                                    setBounds(x + dx, y, width - dx, height);
-                                    resize();
-                                    break;
-
-                              case Cursor.E_RESIZE_CURSOR:
-                                    setBounds(x, y, width + dx, height);
-                                    start = e.getPoint();
-                                    resize();
-                                    break;
-
-                              case Cursor.NW_RESIZE_CURSOR:
-                                    setBounds(x + dx, y + dy, width - dx, height - dy);
-                                    resize();
-                                    break;
-
-                              case Cursor.NE_RESIZE_CURSOR:
-                                    setBounds(x, y + dy, width + dx, height - dy);
-                                    start = new Point(e.getX(), start.y);
-                                    break;
-
-                              case Cursor.SW_RESIZE_CURSOR:
-                                    setBounds(x + dx, y, width - dx, height + dy);
-                                    start = new Point(start.x, e.getY());
-                                    resize();
-                                    break;
-
-                              case Cursor.SE_RESIZE_CURSOR:
-                                    setBounds(x, y, width + dx, height + dy);
-                                    start = e.getPoint();
-                                    resize();
-                                    break;
-
-                              case Cursor.MOVE_CURSOR:
-                                    var bounds = getBounds();
-                                    bounds.translate(dx, dy);
-                                    setBounds(bounds);
-                                    resize();
-                        }
-
-                        setCursor(Cursor.getPredefinedCursor(cursor));
-                  }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-                  start = null;
-            }
-      };
 }

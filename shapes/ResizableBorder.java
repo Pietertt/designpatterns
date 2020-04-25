@@ -38,18 +38,13 @@ public class ResizableBorder implements Border {
     }
 
     @Override
-    public void paintBorder(Component component, Graphics g, int x, int y,
-                            int w, int h) {
-
+    public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
         g.setColor(Color.black);
-        g.drawRect(x + this.size / 2, y + this.size / 2, w - this.size, h - this.size);
+        g.drawRect(x + this.size / 2, y + this.size / 2, width - this.size, height - this.size);
 
         if (component.hasFocus()) {
-
             for (int i = 0; i < locations.length; i++) {
-
-                var rect = getRectangle(x, y, w, h, locations[i]);
-
+                var rect = getRectangle(x, y, width, height, locations[i]);
                 g.setColor(Color.WHITE);
                 g.fillRect(rect.x, rect.y, rect.width - 1, rect.height - 1);
                 g.setColor(Color.BLACK);
@@ -58,52 +53,47 @@ public class ResizableBorder implements Border {
         }
     }
 
-    private Rectangle getRectangle(int x, int y, int w, int h, int location) {
-
+    private Rectangle getRectangle(int x, int y, int width, int height, int location) {
         switch (location) {
-
             case SwingConstants.NORTH:
-                return new Rectangle(x + w / 2 - this.size / 2, y, this.size, this.size);
+                return new Rectangle(x + width / 2 - 4, y, 8, 8);
 
             case SwingConstants.SOUTH:
-                return new Rectangle(x + w / 2 - this.size / 2, y + h - this.size, this.size, this.size);
+                return new Rectangle(x + width / 2 - 4, y + height - 8, 8, 8);
 
             case SwingConstants.WEST:
-                return new Rectangle(x, y + h / 2 - this.size / 2, this.size, this.size);
+                return new Rectangle(x, y + height / 2 - 4, 8, 8);
 
             case SwingConstants.EAST:
-                return new Rectangle(x + w - this.size, y + h / 2 - this.size / 2, this.size, this.size);
+                return new Rectangle(x + width - 8, y + height / 2 - 4, 8, 8);
 
             case SwingConstants.NORTH_WEST:
-                return new Rectangle(x, y, this.size, this.size);
+                return new Rectangle(x, y, 8, 8);
 
             case SwingConstants.NORTH_EAST:
-                return new Rectangle(x + w - this.size, y, this.size, this.size);
+                return new Rectangle(x + width - 8, y, 8, 8);
 
             case SwingConstants.SOUTH_WEST:
-                return new Rectangle(x, y + h - this.size, this.size, this.size);
+                return new Rectangle(x, y + height - 8, 8, 8);
 
             case SwingConstants.SOUTH_EAST:
-                return new Rectangle(x + w - this.size, y + h - this.size, this.size, this.size);
+                return new Rectangle(x + width - 8, y + height - this.size, 8, 8);
+            default:
+                  return new Rectangle(0, 0, 0, 0);
         }
-        return null;
     }
 
-    public int getCursor(MouseEvent me) {
-
-        var c = me.getComponent();
-        int w = c.getWidth();
-        int h = c.getHeight();
+    public int getCursor(MouseEvent e) {
+        Component component = e.getComponent();
+        int width = component.getWidth();
+        int height = component.getHeight();
 
         for (int i = 0; i < locations.length; i++) {
-
-            var rect = getRectangle(0, 0, w, h, locations[i]);
-
-            if (rect.contains(me.getPoint())) {
+            var rect = getRectangle(0, 0, width, height, locations[i]);
+            if (rect.contains(e.getPoint())) {
                 return cursors[i];
             }
         }
-
         return Cursor.MOVE_CURSOR;
     }
 }
