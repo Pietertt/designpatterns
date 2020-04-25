@@ -3,7 +3,7 @@ package commands;
 import shapes.*;
 
 public class placeShapeCommand implements order {
-    private Shape shape;
+    public Shape shape;
 
     public placeShapeCommand(Shape shape) {
         this.shape = shape;
@@ -22,9 +22,5 @@ public class placeShapeCommand implements order {
     @Override
     public void redo() {
         shape.setDrawTrue();
-    }
-
-    public Shape getShape() {
-        return this.shape;
     }
 }

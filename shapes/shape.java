@@ -17,6 +17,8 @@ public abstract class Shape extends JComponent implements receiver, MouseMotionL
       // Is de rectangle geselecteerd
       protected boolean selected = false;
 
+      public boolean creating = false;
+
       // Is dragging toggled on
       public boolean dragging = false;
 
@@ -30,16 +32,11 @@ public abstract class Shape extends JComponent implements receiver, MouseMotionL
       protected Stack<Integer> undoStack;
       protected int savedWidth;
       protected int savedHeight;
+      protected int previousWidth;
+      protected int previousHeight;
       protected int savedX;
       protected int savedY;
-
-      public void setColor(Graphics g) {
-            if(this.selected)
-                  g.setColor(Color.GRAY);
-            else
-                  g.setColor(Color.BLUE);
-      }
-
+      
       public void setDraggingFalse() {
             this.dragging = false;
       }
@@ -103,6 +100,13 @@ public abstract class Shape extends JComponent implements receiver, MouseMotionL
             repaint();
       }
 
+      public void change(int width, int height){
+            this.previousWidth = this.width;
+            this.previousHeight = this.height;
+            this.width = width;
+            this.height = height;
+      }
+
       public void setSelectedTrue() {
             // can only select when rectangle is actually drawn
             if(rectDraw)
@@ -141,6 +145,7 @@ public abstract class Shape extends JComponent implements receiver, MouseMotionL
                   this.y = e.getY();
                   repaint();
             }
+            
       }
 
       @Override

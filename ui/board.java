@@ -65,16 +65,12 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                         if(!selectionMode) {
                               int x = e.getX();
                               int y = e.getY();
-                
-                              // this.commandInvoker.execute(place);
-                              // frame.add(place.getShape());
-
-                              this.strategy.prepare(x, y, 50, 50);
+                              
+                              this.strategy.prepare(x, y, 1, 1);
                               this.strategy.place();
 
                               shapes.add(this.strategy.shape);
                               frame.add(this.strategy.shape);
-
 
                               frame.revalidate();
                               frame.repaint();

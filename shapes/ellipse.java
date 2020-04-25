@@ -24,11 +24,20 @@ public class ellipse extends Shape  {
 
       @Override
       public void paintComponent(Graphics g) {
-            if(rectDraw) {
-                  super.paintComponent(g);
-                  setColor(g);
-                  g.fillOval(x, y, width, height);
-                  g.drawRect(x, y, width, height);
+            if(selected){
+                  if(rectDraw) {
+                        super.paintComponent(g);
+                        g.setColor(Color.BLACK);
+                        g.fillOval(x, y, width, height);
+                        g.drawRect(x, y, width, height);
+                  }
+            } else {
+                  if(rectDraw) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(x, y, width, height);
+                        g.drawRect(x, y, width, height);
+                  }
             }
       }
 }

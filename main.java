@@ -102,13 +102,13 @@ public class main {
             placeShapeCommand place = new placeShapeCommand(rect);
 
             board.commandInvoker.execute(place);
-            frame.add(place.getShape());
+            frame.add(place.shape);
             frame.revalidate();
             frame.repaint();
 
-            board.shapes.add(place.getShape());
+            board.shapes.add(place.shape);
 
-            board.addMouseMotionListener(place.getShape());
+            board.addMouseMotionListener(place.shape);
       }
 
       for(int i = 0; i < 5; i++){
@@ -116,13 +116,13 @@ public class main {
             placeShapeCommand place = new placeShapeCommand(ell);
 
             board.commandInvoker.execute(place);
-            frame.add(place.getShape());
+            frame.add(place.shape);
             frame.revalidate();
             frame.repaint();
 
-            board.shapes.add(place.getShape());
+            board.shapes.add(place.shape);
 
-            board.addMouseMotionListener(place.getShape());
+            board.addMouseMotionListener(place.shape);
       }
 
   }
