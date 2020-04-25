@@ -1,5 +1,6 @@
 package UI;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -8,16 +9,13 @@ import shapes.*;
 import commands.*;
 
 public class Board extends JPanel implements MouseListener {
-      public Board(){
+      public JFrame frame;
+
+      public Board(JFrame frame){
             super(null);
+            this.frame = frame;
             addMouseListener(this);
             setFocusable(true);
-
-            Rectangle rectangle1 = new Rectangle(100, 100, 50, 50);
-            add(rectangle1);
-
-            Rectangle rectangle2 = new Rectangle(400, 100, 50, 50);
-            add(rectangle2);
       }
 
       @Override

@@ -1,10 +1,13 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
+import java.util.*;
+import javax.swing.*;
+
+import javax.swing.Timer;
+import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.awt.*;
 
 import java.awt.event.*;
 import java.awt.BorderLayout;
@@ -21,8 +24,7 @@ public class main {
             JFrame frame = new JFrame();
             JPanel UI = new JPanel();
 
-            Board board = new Board();
-            frame.add(board);
+            Board board = new Board(frame);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
@@ -56,7 +58,7 @@ public class main {
 
             // Undo button
             JButton undo = new JButton();
-            undo.addActionListener(actionEvent -> board.commandInvoker.undo());
+            //undo.addActionListener(actionEvent -> board.commandInvoker.undo());
             try {
                   undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
             } catch (IOException e) {
@@ -69,7 +71,7 @@ public class main {
 
             // Undo button
             JButton redo = new JButton();
-            redo.addActionListener(actionEvent -> board.commandInvoker.redo());
+            //redo.addActionListener(actionEvent -> board.commandInvoker.redo());
             try {
                   redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
             } catch (IOException e) {
@@ -80,13 +82,13 @@ public class main {
             redo.setFocusPainted(false);
             redo.setContentAreaFilled(false);
 
-            ui.add(rectangle);
-            ui.add(ellipse);
-            ui.add(undo);
-            ui.add(redo);
+            UI.add(rectangle);
+            UI.add(ellipse);
+            UI.add(undo);
+            UI.add(redo);
 
             // added the board and the UI to the frame
-            frame.getContentPane().add(ui, BorderLayout.SOUTH);
+            frame.getContentPane().add(UI, BorderLayout.SOUTH);
             frame.getContentPane().add(board);
 
             frame.setLocationRelativeTo(null);

@@ -1,15 +1,8 @@
 package shapes;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
@@ -30,12 +23,19 @@ public class Rectangle extends JComponent implements MouseListener, MouseMotionL
             this.height = height;
       }
 
+      @Override
+      public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.setColor(Color.RED);
+            g.fillRect(0, 0, this.width, this.height);
+            g.drawRect(0, 0, this.width, this.height);
+      }
+
       public void place(){
             JPanel area = new JPanel();
-            area.setBackground(Color.WHITE);
+            setOpaque(true);
 
             setBounds(this.x, this.y, this.width, this.height);
-            setLayout(new BorderLayout());
             add(area);
             addMouseListener(this);
             addMouseMotionListener(this);
@@ -82,44 +82,71 @@ public class Rectangle extends JComponent implements MouseListener, MouseMotionL
                         case Cursor.N_RESIZE_CURSOR:
                               setBounds(x, y + dy, width, height - dy);
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.S_RESIZE_CURSOR:
                               setBounds(x, y, width, height + dy);
                               start = e.getPoint();
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.W_RESIZE_CURSOR:
                               setBounds(x + dx, y, width - dx, height);
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.E_RESIZE_CURSOR:
                               setBounds(x, y, width + dx, height);
                               start = e.getPoint();
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.NW_RESIZE_CURSOR:
                               setBounds(x + dx, y + dy, width - dx, height - dy);
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.NE_RESIZE_CURSOR:
                               setBounds(x, y + dy, width + dx, height - dy);
                               start = new Point(e.getX(), start.y);
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.SW_RESIZE_CURSOR:
                               setBounds(x + dx, y, width - dx, height + dy);
                               start = new Point(start.x, e.getY());
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.SE_RESIZE_CURSOR:
                               setBounds(x, y, width + dx, height + dy);
                               start = e.getPoint();
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
                               break;
                         case Cursor.MOVE_CURSOR:
                               var bounds = getBounds();
                               bounds.translate(dx, dy);
                               setBounds(bounds);
                               resize();
+                              this.width = width;
+                              this.height = height;
+                              repaint();
 
                   }
                   setCursor(Cursor.getPredefinedCursor(cursor));
