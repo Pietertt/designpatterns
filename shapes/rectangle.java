@@ -29,58 +29,61 @@ public class rectangle extends Shape  {
             this.redoStack = new Stack<>();
       }
 
-      private Handle getHandle(int location){
-            switch(location){
-                  case SwingConstants.NORTH:
-                        System.out.println("Fuu");
-                        return new Handle(100, 100, 8, 8);
-
-                  // case SwingConstants.SOUTH:
-                  //       return new Rectangle(x + w / 2 - dist / 2, y + h - dist, dist, dist);
-
-                  // case SwingConstants.WEST:
-                  //       return new Rectangle(x, y + h / 2 - dist / 2, dist, dist);
-
-                  // case SwingConstants.EAST:
-                  //       return new Rectangle(x + w - dist, y + h / 2 - dist / 2, dist, dist);
-
-                  // case SwingConstants.NORTH_WEST:
-                  //       return new Rectangle(x, y, dist, dist);
-
-                  // case SwingConstants.NORTH_EAST:
-                  //       return new Rectangle(x + w - dist, y, dist, dist);
-
-                  // case SwingConstants.SOUTH_WEST:
-                  //       return new Rectangle(x, y + h - dist, dist, dist);
-
-                  // case SwingConstants.SOUTH_EAST:
-                  //       return new Rectangle(x + w - dist, y + h - dist, dist, dist);
-            }
-            
-            return null;
-      }
-
       @Override
       public void paintComponent(Graphics g) {
             if(selected){
-                  if(rectDraw) {
+                 
                         super.paintComponent(g);
                         g.setColor(Color.BLACK);
                         g.fillRect(x, y, width, height);
                         g.drawRect(x, y, width, height);
-                  }
+                  
             } else {
-                  if(rectDraw){
-                        Handle handle = getHandle(locations[0]);
-
-                              g.setColor(Color.BLACK);
-                              g.fillRect(handle.x, handle.y, handle.width, handle.height);
+                        System.out.println();
                         
                         super.paintComponent(g);
                         g.setColor(Color.RED);
                         g.fillRect(x, y, width, height);
                         g.drawRect(x, y, width, height);
-                  }
+
+                        for(int i = 0; i < this.locations.length; i++){
+                              Handle handle = getHandle(this.locations[i]);
+
+                              g.setColor(Color.BLACK);
+                              g.fillRect(handle.x, handle.y, handle.width, handle.height);
+                        }
+                  
             }
+      }
+
+
+      private Handle getHandle(int location){
+            switch(location){
+                  case SwingConstants.NORTH:
+                        return new Handle(this.x + this.width / 2 - 4, this.y - 4, 8, 8);
+
+                  case SwingConstants.SOUTH:
+                        return new Handle(this.x + this.width / 2 - 4, this.y + this.height - 4, 8, 8);
+
+                  case SwingConstants.WEST:
+                        return new Handle(this.x - 4, this.y + this.height / 2 - 4, 8, 8);
+
+                  case SwingConstants.EAST:
+                        return new Handle(this.x + this.width - 4, this.y + this.height / 2 - 4, 8, 8);
+
+                  case SwingConstants.NORTH_WEST:
+                        return new Handle(this.x - 4, this.y - 4, 8, 8);
+
+                  case SwingConstants.NORTH_EAST:
+                        return new Handle(this.x + this.width - 4, this.y - 4, 8, 8);
+
+                  case SwingConstants.SOUTH_WEST:
+                        return new Handle(this.x - 4, this.y + this.height - 4, 8, 8);
+
+                  case SwingConstants.SOUTH_EAST:
+                        return new Handle(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+            }
+            
+            return null;
       }
 }
