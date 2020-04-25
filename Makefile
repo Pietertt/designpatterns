@@ -1,7 +1,7 @@
 compile:
 	@echo "Start compiling..."
 	@javac shapes/ResizableBorder.java shapes/Rectangle.java
-	@javac ResizableComponentEx.java
+	@javac main.java
 	@echo "Compiling done!"
 
 clean:
@@ -13,7 +13,7 @@ clean:
 
 run: compile
 	@echo "Running application..."
-	@java ResizableComponentEx
+	@java main
 	@echo "Closed application!" 
 	@make clean
 	@clear

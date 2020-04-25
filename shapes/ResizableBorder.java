@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 
 public class ResizableBorder implements Border {
 
-    private int dist = 8;
+    private int size = 8;
 
     int locations[] = {
             SwingConstants.NORTH, SwingConstants.SOUTH, SwingConstants.WEST,
@@ -27,13 +27,9 @@ public class ResizableBorder implements Border {
             Cursor.SW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR
     };
 
-    public ResizableBorder(int dist) {
-        this.dist = dist;
-    }
-
     @Override
     public Insets getBorderInsets(Component component) {
-        return new Insets(dist, dist, dist, dist);
+        return new Insets(this.size, this.size, this.size, this.size);
     }
 
     @Override
@@ -46,7 +42,7 @@ public class ResizableBorder implements Border {
                             int w, int h) {
 
         g.setColor(Color.black);
-        g.drawRect(x + dist / 2, y + dist / 2, w - dist, h - dist);
+        g.drawRect(x + this.size / 2, y + this.size / 2, w - this.size, h - this.size);
 
         if (component.hasFocus()) {
 
@@ -67,28 +63,28 @@ public class ResizableBorder implements Border {
         switch (location) {
 
             case SwingConstants.NORTH:
-                return new Rectangle(x + w / 2 - dist / 2, y, dist, dist);
+                return new Rectangle(x + w / 2 - this.size / 2, y, this.size, this.size);
 
             case SwingConstants.SOUTH:
-                return new Rectangle(x + w / 2 - dist / 2, y + h - dist, dist, dist);
+                return new Rectangle(x + w / 2 - this.size / 2, y + h - this.size, this.size, this.size);
 
             case SwingConstants.WEST:
-                return new Rectangle(x, y + h / 2 - dist / 2, dist, dist);
+                return new Rectangle(x, y + h / 2 - this.size / 2, this.size, this.size);
 
             case SwingConstants.EAST:
-                return new Rectangle(x + w - dist, y + h / 2 - dist / 2, dist, dist);
+                return new Rectangle(x + w - this.size, y + h / 2 - this.size / 2, this.size, this.size);
 
             case SwingConstants.NORTH_WEST:
-                return new Rectangle(x, y, dist, dist);
+                return new Rectangle(x, y, this.size, this.size);
 
             case SwingConstants.NORTH_EAST:
-                return new Rectangle(x + w - dist, y, dist, dist);
+                return new Rectangle(x + w - this.size, y, this.size, this.size);
 
             case SwingConstants.SOUTH_WEST:
-                return new Rectangle(x, y + h - dist, dist, dist);
+                return new Rectangle(x, y + h - this.size, this.size, this.size);
 
             case SwingConstants.SOUTH_EAST:
-                return new Rectangle(x + w - dist, y + h - dist, dist, dist);
+                return new Rectangle(x + w - this.size, y + h - this.size, this.size, this.size);
         }
         return null;
     }
