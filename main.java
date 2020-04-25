@@ -5,7 +5,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import shapes.*;
+import shapes.Rectangle;
+import UI.Board;
 
 public class main {
 
@@ -14,7 +15,7 @@ public class main {
       public static void main(String[] args) {
             JFrame frame = new JFrame();
 
-            JPanel board = new JPanel(null);
+            Board board = new Board();
             frame.add(board);
 
             Rectangle rectangle1 = new Rectangle(100, 100, 50, 50);
@@ -33,8 +34,8 @@ public class main {
                   }
             });
 
-            frame.setSize(600, 600);
             frame.setLocationRelativeTo(null);
+            frame.pack();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
       }
