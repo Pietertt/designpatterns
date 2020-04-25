@@ -1,92 +1,165 @@
 package shapes;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.MouseInputListener;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.Stack;
 
-public class rectangle extends Shape  {
-      private int locations[] = {
-            SwingConstants.NORTH, SwingConstants.SOUTH, SwingConstants.WEST,
-            SwingConstants.EAST, SwingConstants.NORTH_WEST,
-            SwingConstants.NORTH_EAST, SwingConstants.SOUTH_WEST,
-            SwingConstants.SOUTH_EAST
-      };
-    
-      public rectangle(int x, int y, int width, int height, int id){
-            this.x = x;
-            this.savedX = x;
-            this.y = y;
-            this.savedY = y;
-            this.width = width;
-            this.savedWidth= width;
-            this.height = height;
-            this.savedHeight = height;
-            this.id = id;
-            this.undoStack = new Stack<>();
-            this.redoStack = new Stack<>();
-      }
+public class Rectangle extends JComponent {
 
-      @Override
-      public void paintComponent(Graphics g) {
-            if(!selected){
-                 
-                        super.paintComponent(g);
-                        g.setColor(Color.BLACK);
-                        g.fillRect(x, y, width, height);
-                        g.drawRect(x, y, width, height);
-                  
-            } else {
-                        System.out.println();
-                        
-                        super.paintComponent(g);
-                        g.setColor(Color.RED);
-                        g.fillRect(x, y, width, height);
-                        g.drawRect(x, y, width, height);
+    public Rectangle(Component comp) {
+        this(comp, new ResizableBorder(8));
+    }
 
-                        for(int i = 0; i < this.locations.length; i++){
-                              Handle handle = getHandle(this.locations[i]);
+    public Rectangle(Component comp, ResizableBorder border) {
 
-                              g.setColor(Color.WHITE);
-                              g.fillRect(handle.x, handle.y, handle.width, handle.height);
+        setLayout(new BorderLayout());
+        add(comp);
+        addMouseListener(resizeListener);
+        addMouseMotionListener(resizeListener);
+        setBorder(border);
+    }
 
-                              g.setColor(Color.BLACK);
-                              g.drawRect(handle.x, handle.y, handle.width, handle.height);
+    private void resize() {
+
+        if (getParent() != null) {
+            getParent().revalidate();
+        }
+    }
+
+    MouseInputListener resizeListener = new MouseInputAdapter() {
+
+        @Override
+        public void mouseMoved(MouseEvent me) {
+
+            if (hasFocus()) {
+
+                var resizableBorder = (ResizableBorder) getBorder();
+                setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(me)));
+            }
+        }
+
+        @Override
+        public void mouseExited(MouseEvent mouseEvent) {
+            setCursor(Cursor.getDefaultCursor());
+        }
+
+        private int cursor;
+        private Point startPos = null;
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+
+            var resizableBorder = (ResizableBorder) getBorder();
+            cursor = resizableBorder.getCursor(me);
+            startPos = me.getPoint();
+
+            requestFocus();
+            repaint();
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent me) {
+
+            if (startPos != null) {
+
+                int x = getX();
+                int y = getY();
+                int w = getWidth();
+                int h = getHeight();
+
+                int dx = me.getX() - startPos.x;
+                int dy = me.getY() - startPos.y;
+
+                switch (cursor) {
+
+                    case Cursor.N_RESIZE_CURSOR:
+
+                        if (!(h - dy < 50)) {
+                            setBounds(x, y + dy, w, h - dy);
+                            resize();
                         }
-                  
+                        break;
+
+                    case Cursor.S_RESIZE_CURSOR:
+
+                        if (!(h + dy < 50)) {
+                            setBounds(x, y, w, h + dy);
+                            startPos = me.getPoint();
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.W_RESIZE_CURSOR:
+
+                        if (!(w - dx < 50)) {
+                            setBounds(x + dx, y, w - dx, h);
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.E_RESIZE_CURSOR:
+
+                        if (!(w + dx < 50)) {
+                            setBounds(x, y, w + dx, h);
+                            startPos = me.getPoint();
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.NW_RESIZE_CURSOR:
+                        if (!(w - dx < 50) && !(h - dy < 50)) {
+                            setBounds(x + dx, y + dy, w - dx, h - dy);
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.NE_RESIZE_CURSOR:
+
+                        if (!(w + dx < 50) && !(h - dy < 50)) {
+                            setBounds(x, y + dy, w + dx, h - dy);
+                            startPos = new Point(me.getX(), startPos.y);
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.SW_RESIZE_CURSOR:
+
+                        if (!(w - dx < 50) && !(h + dy < 50)) {
+                            setBounds(x + dx, y, w - dx, h + dy);
+                            startPos = new Point(startPos.x, me.getY());
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.SE_RESIZE_CURSOR:
+
+                        if (!(w + dx < 50) && !(h + dy < 50)) {
+                            setBounds(x, y, w + dx, h + dy);
+                            startPos = me.getPoint();
+                            resize();
+                        }
+                        break;
+
+                    case Cursor.MOVE_CURSOR:
+
+                        var bounds = getBounds();
+                        bounds.translate(dx, dy);
+                        setBounds(bounds);
+                        resize();
+                }
+
+                setCursor(Cursor.getPredefinedCursor(cursor));
             }
-      }
+        }
 
-
-      private Handle getHandle(int location){
-            switch(location){
-                  case SwingConstants.NORTH:
-                        return new Handle(this.x + this.width / 2 - 4, this.y - 4, 8, 8);
-
-                  case SwingConstants.SOUTH:
-                        return new Handle(this.x + this.width / 2 - 4, this.y + this.height - 4, 8, 8);
-
-                  case SwingConstants.WEST:
-                        return new Handle(this.x - 4, this.y + this.height / 2 - 4, 8, 8);
-
-                  case SwingConstants.EAST:
-                        return new Handle(this.x + this.width - 4, this.y + this.height / 2 - 4, 8, 8);
-
-                  case SwingConstants.NORTH_WEST:
-                        return new Handle(this.x - 4, this.y - 4, 8, 8);
-
-                  case SwingConstants.NORTH_EAST:
-                        return new Handle(this.x + this.width - 4, this.y - 4, 8, 8);
-
-                  case SwingConstants.SOUTH_WEST:
-                        return new Handle(this.x - 4, this.y + this.height - 4, 8, 8);
-
-                  case SwingConstants.SOUTH_EAST:
-                        return new Handle(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
-            }
-            
-            return null;
-      }
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {
+            startPos = null;
+        }
+    };
 }
