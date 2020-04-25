@@ -3,9 +3,9 @@ package commands;
 import shapes.*;
 
 public class selectShapeCommand implements order {
-      private Shape shape;
+      private shape shape;
 
-      public selectShapeCommand(Shape shape) {
+      public selectShapeCommand(shape shape) {
             this.shape = shape;
       }
 

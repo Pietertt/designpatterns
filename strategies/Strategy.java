@@ -7,7 +7,7 @@ import ui.commandInvoker;
 public abstract class Strategy {
       protected order order;
       protected commandInvoker invoker;
-      public Shape shape;
+      public shape shape;
 
       public abstract void prepare(int x, int y, int width, int height);
       public abstract void place();

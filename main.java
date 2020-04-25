@@ -98,7 +98,7 @@ public class main {
       frame.setVisible(true);
 
       for(int i = 0; i < 5; i++){
-            Shape rect = new rectangle(50 + i * 100, 100, 50, 50, 1);
+            shape rect = new rectangle(50 + i * 100, 100, 50, 50, 1);
             placeShapeCommand place = new placeShapeCommand(rect);
 
             board.commandInvoker.execute(place);
@@ -112,7 +112,7 @@ public class main {
       }
 
       for(int i = 0; i < 5; i++){
-            Shape ell = new ellipse(50 + i * 100, 300, 50, 50, 1);
+            shape ell = new ellipse(50 + i * 100, 300, 50, 50, 1);
             placeShapeCommand place = new placeShapeCommand(ell);
 
             board.commandInvoker.execute(place);
