@@ -49,7 +49,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void saveFile() {
-            fileIO io = new fileIO("janek");
+            fileIO.saveFile();
       }
 
       public void update() {
