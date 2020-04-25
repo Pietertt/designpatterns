@@ -2,9 +2,9 @@ package shapes;
 
 import java.awt.*;
 
-public class Rectangle extends Shape {
+public class Ellipse extends Shape {
 
-      public Rectangle(int x, int y, int width, int height) {
+      public Ellipse(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;
             this.width = width;
@@ -15,6 +15,6 @@ public class Rectangle extends Shape {
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setColor(Color.RED);
-            g.fillRect(0, 0, this.width, this.height);
+            g.fillOval(0, 0, this.width, this.height);
       }
 }
