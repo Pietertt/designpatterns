@@ -4,11 +4,11 @@ package UI;
 
  import java.util.Stack;
 
- public class commandInvoker {
+ public class Invoker {
        private final Stack<Order> undoStack;
        private final Stack<Order> redoStack;
 
-       public commandInvoker() {
+       public Invoker() {
              undoStack = new Stack<>();
              redoStack = new Stack<>();
        }

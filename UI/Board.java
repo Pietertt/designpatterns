@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import shapes.*;
 import commands.*;
@@ -11,8 +12,9 @@ import strategies.*;
 
 public class Board extends JPanel implements MouseListener {
       public JFrame frame;
-      public commandInvoker invoker = new commandInvoker();
+      public Invoker invoker = new Invoker();
       public Strategy strategy;
+      public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       public boolean created = false;
 
@@ -33,6 +35,7 @@ public class Board extends JPanel implements MouseListener {
                   this.strategy.prepare(e.getX(), e.getY(), 50, 50);
                   this.strategy.place();
                   add(this.strategy.shape);
+                  this.shapes.add(this.strategy.shape);
 
                   revalidate();
                   repaint();
@@ -53,8 +56,18 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mousePressed(MouseEvent e){
-            requestFocus();
-                        
+            boolean selected = false;
+            for(Shape shape : this.shapes){
+                  if(shape.getIfSelected(e.getX(), e.getY())){
+                        System.out.println("Board");
+                  }
+            }
+
+            if(!selected){
+                  requestFocus();
+                  revalidate();
+                  repaint();
+            }
       }
 
       public void mouseDragged(MouseEvent e){

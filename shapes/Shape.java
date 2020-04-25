@@ -16,6 +16,8 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
       protected int cursor;
       protected Point start = null;
 
+      public boolean selected = false;
+
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
@@ -53,91 +55,94 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
             cursor = resizableBorder.getCursor(e);
             start = e.getPoint();
 
+            this.selected = true;
             requestFocus();
             repaint();
       }
 
       public void mouseDragged(MouseEvent e) {
-            if (start != null) {
-                  int x = getX();
-                  int y = getY();
-                  int width = getWidth();
-                  int height = getHeight();
-                  int dx = e.getX() - start.x;
-                  int dy = e.getY() - start.y;
-
-                  switch (cursor) {
-                        case Cursor.N_RESIZE_CURSOR:
-                              setBounds(x, y + dy, width, height - dy);
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.S_RESIZE_CURSOR:
-                              setBounds(x, y, width, height + dy);
-                              start = e.getPoint();
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.W_RESIZE_CURSOR:
-                              setBounds(x + dx, y, width - dx, height);
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.E_RESIZE_CURSOR:
-                              setBounds(x, y, width + dx, height);
-                              start = e.getPoint();
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.NW_RESIZE_CURSOR:
-                              setBounds(x + dx, y + dy, width - dx, height - dy);
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.NE_RESIZE_CURSOR:
-                              setBounds(x, y + dy, width + dx, height - dy);
-                              start = new Point(e.getX(), start.y);
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.SW_RESIZE_CURSOR:
-                              setBounds(x + dx, y, width - dx, height + dy);
-                              start = new Point(start.x, e.getY());
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.SE_RESIZE_CURSOR:
-                              setBounds(x, y, width + dx, height + dy);
-                              start = e.getPoint();
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.MOVE_CURSOR:
-                              var bounds = getBounds();
-                              bounds.translate(dx, dy);
-                              setBounds(bounds);
-                              resize();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-
+            if(this.selected){
+                  if (start != null) {
+                        int x = getX();
+                        int y = getY();
+                        int width = getWidth();
+                        int height = getHeight();
+                        int dx = e.getX() - start.x;
+                        int dy = e.getY() - start.y;
+      
+                        switch (cursor) {
+                              case Cursor.N_RESIZE_CURSOR:
+                                    setBounds(x, y + dy, width, height - dy);
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.S_RESIZE_CURSOR:
+                                    setBounds(x, y, width, height + dy);
+                                    start = e.getPoint();
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.W_RESIZE_CURSOR:
+                                    setBounds(x + dx, y, width - dx, height);
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.E_RESIZE_CURSOR:
+                                    setBounds(x, y, width + dx, height);
+                                    start = e.getPoint();
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.NW_RESIZE_CURSOR:
+                                    setBounds(x + dx, y + dy, width - dx, height - dy);
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.NE_RESIZE_CURSOR:
+                                    setBounds(x, y + dy, width + dx, height - dy);
+                                    start = new Point(e.getX(), start.y);
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.SW_RESIZE_CURSOR:
+                                    setBounds(x + dx, y, width - dx, height + dy);
+                                    start = new Point(start.x, e.getY());
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.SE_RESIZE_CURSOR:
+                                    setBounds(x, y, width + dx, height + dy);
+                                    start = e.getPoint();
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+                                    break;
+                              case Cursor.MOVE_CURSOR:
+                                    var bounds = getBounds();
+                                    bounds.translate(dx, dy);
+                                    setBounds(bounds);
+                                    resize();
+                                    this.width = width;
+                                    this.height = height;
+                                    repaint();
+      
+                        }
+                        setCursor(Cursor.getPredefinedCursor(cursor));
                   }
-                  setCursor(Cursor.getPredefinedCursor(cursor));
             }
       }
       
@@ -150,5 +155,18 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
 
       public void mouseEntered(MouseEvent e){
 
+      }
+
+      public boolean getIfSelected(int x, int y) {
+            for(int i = 0; i < this.width; i++){
+                  if(x == this.x + i){
+                        for(int j = 0; j < this.height; j++){
+                              if(y == this.y + j){
+                                    return true;
+                              }
+                        }
+                  }
+            }
+            return false;
       }
 }

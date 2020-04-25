@@ -2,11 +2,11 @@ package strategies;
 
 import commands.*;
 import shapes.*;
-import UI.commandInvoker;
+import UI.Invoker;
 
 public class PlaceEllipseStrategy extends Strategy {
 
-      public PlaceEllipseStrategy(commandInvoker invoker) {
+      public PlaceEllipseStrategy(Invoker invoker) {
             this.invoker = invoker;
       }
 

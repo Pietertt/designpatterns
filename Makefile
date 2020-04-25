@@ -1,8 +1,8 @@
 compile:
 	@echo "Start compiling..."
 	@javac shapes/Shape.java shapes/ResizableBorder.java shapes/Rectangle.java shapes/Ellipse.java
-	@javac commands/Order.java commands/PlaceShapeCommand.java
-	@javac UI/Board.java
+	@javac commands/Order.java commands/PlaceShapeCommand.java commands/SelectShapeCommand.java
+	@javac UI/Board.java UI/Invoker.java
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java
 	@javac main.java
 	@echo "Compiling done!"

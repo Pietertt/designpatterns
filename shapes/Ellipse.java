@@ -13,7 +13,7 @@ public class Ellipse extends Shape {
 
       @Override
       public void paintComponent(Graphics g) {
-            if(hasFocus()){
+            if(isFocusOwner()){
                   super.paintComponent(g);
                   g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
                   g.fillOval(4, 4, this.width - 8, this.height - 8);

@@ -2,11 +2,11 @@ package strategies;
 
 import commands.*;
 import shapes.*;
-import UI.commandInvoker;
+import UI.Invoker;
 
 public class PlaceRectangleStrategy extends Strategy {
 
-      public PlaceRectangleStrategy(commandInvoker invoker) {
+      public PlaceRectangleStrategy(Invoker invoker) {
             this.invoker = invoker;
       }
 
