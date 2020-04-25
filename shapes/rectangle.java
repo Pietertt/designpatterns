@@ -34,128 +34,99 @@ public class Rectangle extends JComponent {
       }
 
       private void resize() {
-
-            if (getParent() != null) {
+            if(getParent() != null){
                   getParent().revalidate();
             }
       }
 
       MouseInputListener resizeListener = new MouseInputAdapter() {
-
             @Override
-            public void mouseMoved(MouseEvent me) {
-
+            public void mouseMoved(MouseEvent e) {
                   if (hasFocus()) {
-
                         var resizableBorder = (ResizableBorder) getBorder();
-                        setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(me)));
+                        setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(e)));
                   }
             }
 
             @Override
-            public void mouseExited(MouseEvent mouseEvent) {
+            public void mouseExited(MouseEvent e) {
                   setCursor(Cursor.getDefaultCursor());
             }
 
             private int cursor;
-            private Point startPos = null;
+            private Point start = null;
 
             @Override
-            public void mousePressed(MouseEvent me) {
+            public void mousePressed(MouseEvent e) {
 
                   var resizableBorder = (ResizableBorder) getBorder();
-                  cursor = resizableBorder.getCursor(me);
-                  startPos = me.getPoint();
+                  cursor = resizableBorder.getCursor(e);
+                  start = e.getPoint();
 
                   requestFocus();
                   repaint();
             }
 
             @Override
-            public void mouseDragged(MouseEvent me) {
+            public void mouseDragged(MouseEvent e) {
 
-                  if (startPos != null) {
+                  if (start != null) {
 
                         int x = getX();
                         int y = getY();
-                        int w = getWidth();
-                        int h = getHeight();
+                        int width = getWidth();
+                        int height = getHeight();
 
-                        int dx = me.getX() - startPos.x;
-                        int dy = me.getY() - startPos.y;
+                        int dx = e.getX() - start.x;
+                        int dy = e.getY() - start.y;
 
                         switch (cursor) {
 
                               case Cursor.N_RESIZE_CURSOR:
-
-                                    if (!(h - dy < 50)) {
-                                          setBounds(x, y + dy, w, h - dy);
-                                          resize();
-                                    }
+                                    setBounds(x, y + dy, width, height - dy);
+                                    resize();
                                     break;
 
                               case Cursor.S_RESIZE_CURSOR:
-
-                                    if (!(h + dy < 50)) {
-                                          setBounds(x, y, w, h + dy);
-                                          startPos = me.getPoint();
-                                          resize();
-                                    }
+                                    setBounds(x, y, width, height + dy);
+                                    start = e.getPoint();
+                                    resize();
                                     break;
 
                               case Cursor.W_RESIZE_CURSOR:
-
-                                    if (!(w - dx < 50)) {
-                                          setBounds(x + dx, y, w - dx, h);
-                                          resize();
-                                    }
+                                    setBounds(x + dx, y, width - dx, height);
+                                    resize();
                                     break;
 
                               case Cursor.E_RESIZE_CURSOR:
-
-                                    if (!(w + dx < 50)) {
-                                          setBounds(x, y, w + dx, h);
-                                          startPos = me.getPoint();
-                                          resize();
-                                    }
+                                    setBounds(x, y, width + dx, height);
+                                    start = e.getPoint();
+                                    resize();
                                     break;
 
                               case Cursor.NW_RESIZE_CURSOR:
-                                    if (!(w - dx < 50) && !(h - dy < 50)) {
-                                          setBounds(x + dx, y + dy, w - dx, h - dy);
-                                          resize();
-                                    }
+                                    setBounds(x + dx, y + dy, width - dx, height - dy);
+                                    resize();
                                     break;
 
                               case Cursor.NE_RESIZE_CURSOR:
-
-                                    if (!(w + dx < 50) && !(h - dy < 50)) {
-                                          setBounds(x, y + dy, w + dx, h - dy);
-                                          startPos = new Point(me.getX(), startPos.y);
-                                          resize();
-                                    }
+                                    setBounds(x, y + dy, width + dx, height - dy);
+                                    start = new Point(e.getX(), start.y);
                                     break;
 
                               case Cursor.SW_RESIZE_CURSOR:
-
-                                    if (!(w - dx < 50) && !(h + dy < 50)) {
-                                          setBounds(x + dx, y, w - dx, h + dy);
-                                          startPos = new Point(startPos.x, me.getY());
-                                          resize();
-                                    }
+                                    setBounds(x + dx, y, width - dx, height + dy);
+                                    start = new Point(start.x, e.getY());
+                                    resize();
                                     break;
 
                               case Cursor.SE_RESIZE_CURSOR:
-
-                                    if (!(w + dx < 50) && !(h + dy < 50)) {
-                                          setBounds(x, y, w + dx, h + dy);
-                                          startPos = me.getPoint();
-                                          resize();
-                                    }
+                                    setBounds(x, y, width + dx, height + dy);
+                                    start = e.getPoint();
+                                    resize();
                                     break;
 
                               case Cursor.MOVE_CURSOR:
-
                                     var bounds = getBounds();
                                     bounds.translate(dx, dy);
                                     setBounds(bounds);
@@ -168,7 +139,7 @@ public class Rectangle extends JComponent {
 
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
-                  startPos = null;
+                  start = null;
             }
       };
 }

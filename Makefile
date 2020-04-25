@@ -1,6 +1,7 @@
 compile:
 	@echo "Start compiling..."
 	@javac shapes/ResizableBorder.java shapes/Rectangle.java
+	@javac commands/Order.java commands/PlaceShapeCommand.java
 	@javac main.java
 	@echo "Compiling done!"
 
