@@ -43,9 +43,9 @@ public class ResizableBorder implements Border {
             for (int i = 0; i < locations.length; i++) {
                 var rect = getRectangle(x, y, width, height, locations[i]);
                 g.setColor(Color.WHITE);
-                g.fillRect(rect.x, rect.y, rect.width - 1, rect.height - 1);
-                g.setColor(Color.BLACK);
-                g.drawRect(rect.x, rect.y, rect.width - 1, rect.height - 1);
+                g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
+                g.setColor(new Color(80, 155, 229));
+                g.fillOval(rect.x, rect.y, rect.width, rect.height);
             }
         }
     }

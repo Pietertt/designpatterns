@@ -13,8 +13,16 @@ public class Ellipse extends Shape {
 
       @Override
       public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-            g.fillOval(4, 4, this.width - 8, this.height - 8);
+            if(hasFocus()){
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillOval(4, 4, this.width - 8, this.height - 8);
+                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                  g.drawRect(2, 2, this.width - 4, this.height - 4);
+            } else {
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillOval(4, 4, this.width - 8, this.height - 8);
+            }
       }
 }
