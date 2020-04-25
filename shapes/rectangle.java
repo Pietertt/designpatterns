@@ -49,8 +49,11 @@ public class rectangle extends Shape  {
                         for(int i = 0; i < this.locations.length; i++){
                               Handle handle = getHandle(this.locations[i]);
 
-                              g.setColor(Color.BLACK);
+                              g.setColor(Color.WHITE);
                               g.fillRect(handle.x, handle.y, handle.width, handle.height);
+
+                              g.setColor(Color.BLACK);
+                              g.drawRect(handle.x, handle.y, handle.width, handle.height);
                         }
                   
             }
