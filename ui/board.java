@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.event.*;
 
+import io.fileIO;
 import shapes.*;
 import strategies.*;
 
@@ -45,6 +46,10 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       @Override
       public void paintComponent(Graphics g) {
 
+      }
+
+      public void saveFile() {
+            fileIO io = new fileIO("janek");
       }
 
       public void update() {

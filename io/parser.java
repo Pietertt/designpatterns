@@ -26,4 +26,12 @@ public class parser {
                   return lines;
             }
       }
+
+      public void write(String insert) {
+
+      }
+
+      public void getFileLength() {
+            System.out.println(this.file.length());
+      }
 }

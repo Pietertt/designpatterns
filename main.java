@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 
+import io.fileIO;
 import shapes.*;
 
 import ui.board;
@@ -82,10 +83,19 @@ public class main {
       redo.setFocusPainted(false);
       redo.setContentAreaFilled(false);
 
+      JButton save = new JButton();
+      save.addActionListener(actionEvent -> board.saveFile());
+      try {
+          save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
+      } catch(IOException e) {
+          e.printStackTrace();
+      }
+
       ui.add(rectangle);
       ui.add(ellipse);
       ui.add(undo);
       ui.add(redo);
+      ui.add(save);
 
       // added the board and the UI to the frame
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
