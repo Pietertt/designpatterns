@@ -4,17 +4,85 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 import shapes.Rectangle;
 import UI.Board;
 
 public class main {
-      
+
       public static void main(String[] args) {
             JFrame frame = new JFrame();
 
             Board board = new Board();
             frame.add(board);
+
+            JButton rectangle = new JButton();
+            rectangle.addActionListener(actionEvent -> {
+                  board.created = true;
+                  board.strategy = new PlaceRectangleStrategy(board.commandInvoker);
+            });
+            try {
+                  rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
+            } catch (IOException e) {
+
+            }
+
+            rectangle.setBorderPainted(false);
+            rectangle.setFocusPainted(false);
+            rectangle.setContentAreaFilled(false);
+
+            JButton ellipse = new JButton();
+
+            ellipse.addActionListener(actionEvent -> {
+                  board.created = true;
+                  board.strategy = new PlaceEllipseStrategy(board.commandInvoker);
+            });
+
+            try {
+                  ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
+            } catch (IOException e) {
+
+            }
+
+            ellipse.setBorderPainted(false);
+            ellipse.setFocusPainted(false);
+            ellipse.setContentAreaFilled(false);
+
+            // Undo button
+            JButton undo = new JButton();
+            undo.addActionListener(actionEvent -> board.commandInvoker.undo());
+            try {
+                  undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
+            } catch (IOException e) {
+
+            }
+
+            undo.setBorderPainted(false);
+            undo.setFocusPainted(false);
+            undo.setContentAreaFilled(false);
+
+            // Undo button
+            JButton redo = new JButton();
+            redo.addActionListener(actionEvent -> board.commandInvoker.redo());
+            try {
+                  redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
+            } catch (IOException e) {
+
+            }
+
+            redo.setBorderPainted(false);
+            redo.setFocusPainted(false);
+            redo.setContentAreaFilled(false);
+
+            ui.add(rectangle);
+            ui.add(ellipse);
+            ui.add(undo);
+            ui.add(redo);
+
+            // added the board and the UI to the frame
+            frame.getContentPane().add(ui, BorderLayout.SOUTH);
+            frame.getContentPane().add(board);
 
             frame.setLocationRelativeTo(null);
             frame.pack();
