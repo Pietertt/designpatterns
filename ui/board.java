@@ -124,19 +124,31 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
                   }
             }
 
-            // Check if every shape is selected
-            for (shape shape : shapes) {
-                  if (shape.getIfSelected(e.getX(), e.getY())) {
-                        selectShapeCommand select = new selectShapeCommand(shape);
-                        this.commandInvoker.execute(select);
-                        selectionMode = true;
-                  } else if (shape.getSelected()) {
-                        deselectShapeCommand deselect = new deselectShapeCommand(shape);
-                        this.commandInvoker.execute(deselect);
-                        // selectionMode = false;
-                        // rectangle.setSelectedFalse();
+            if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
+                  for (shape shape : shapes) {
+                        if (shape.getIfSelected(e.getX(), e.getY())) {
+                              selectShapeCommand select = new selectShapeCommand(shape);
+                              this.commandInvoker.execute(select);
+                              selectionMode = true;
+                        }
+                  }
+            } else {
+                  // Check if every shape is selected
+                  for (shape shape : shapes) {
+                        if (shape.getIfSelected(e.getX(), e.getY())) {
+                              selectShapeCommand select = new selectShapeCommand(shape);
+                              this.commandInvoker.execute(select);
+                              selectionMode = true;
+                        } else if (shape.getSelected()) {
+                              deselectShapeCommand deselect = new deselectShapeCommand(shape);
+                              this.commandInvoker.execute(deselect);
+                              // selectionMode = false;
+                              // rectangle.setSelectedFalse();
+                        }
                   }
             }
+
+
 
       }
 
