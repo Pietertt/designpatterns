@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class rectangle extends shape  {
@@ -20,6 +21,7 @@ public class rectangle extends shape  {
             this.id = id;
             this.undoStack = new Stack<>();
             this.redoStack = new Stack<>();
+            this.shapes = new ArrayList<>();
       }
 
       @Override

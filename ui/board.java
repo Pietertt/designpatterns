@@ -24,6 +24,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       // Alle shapes die op de canvas(board) staan
       public ArrayList<shape> shapes;
 
+      // Alle shapes die momenteel geselecteerd zijn
+      public ArrayList<shape> selectedShapes;
+
       // MODUS
       public boolean created = false;
       public boolean drag_creating = false;
@@ -37,6 +40,7 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       public board(JFrame frame) {
             shapes = new ArrayList<shape>();
+            selectedShapes = new ArrayList<shape>();
             super.setFocusable(true);
             addMouseListener(this);
             this.frame = frame;
@@ -126,20 +130,23 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
             if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1) {
                   for (shape shape : shapes) {
-                        if (shape.getIfSelected(e.getX(), e.getY())) {
+                        if (shape.getIfSelected(e.getX(), e.getY()) && !shape.getSelected()) {
                               selectShapeCommand select = new selectShapeCommand(shape);
                               this.commandInvoker.execute(select);
                               selectionMode = true;
+                              selectedShapes.add(shape);
                         }
                   }
             } else {
                   // Check if every shape is selected
                   for (shape shape : shapes) {
                         if (shape.getIfSelected(e.getX(), e.getY())) {
+                              selectedShapes.clear();
                               selectShapeCommand select = new selectShapeCommand(shape);
                               this.commandInvoker.execute(select);
                               selectionMode = true;
                         } else if (shape.getSelected()) {
+                              selectedShapes.clear();
                               deselectShapeCommand deselect = new deselectShapeCommand(shape);
                               this.commandInvoker.execute(deselect);
                               // selectionMode = false;
@@ -161,4 +168,6 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
       public void mouseMoved(MouseEvent e) {
 
       }
+
+
 }

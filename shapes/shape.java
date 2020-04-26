@@ -33,6 +33,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       protected int savedX;
       protected int savedY;
 
+
+      // Group of shapes
+      protected ArrayList<shape> shapes;
+
       public void setColor(Graphics g) {
             if(this.selected)
                   g.setColor(Color.GRAY);
