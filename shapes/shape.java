@@ -35,7 +35,7 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
 
       // Group of shapes
-      protected ArrayList<shape> shapes;
+      public ArrayList<shape> shapes;
 
       public void setColor(Graphics g) {
             if(this.selected)
@@ -126,6 +126,12 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public boolean getIfSelected(int x, int y) {
+            for (shape shape : shapes) {
+                  if(shape.getIfSelected(x,y)) {
+                        return true;
+                  }
+            }
+
             for(int i = 0; i < this.width; i++){
                   if(x == this.x + i){
                         for(int j = 0; j < this.height; j++){
@@ -135,20 +141,43 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
                         }
                   }
             }
+
             return false;
       }
 
       @Override
       public void mouseDragged(MouseEvent e) {
+//            if(selected && dragging) {
+//                  this.x = e.getX();
+//                  this.y = e.getY();
+//                  repaint();
+//            }
+
             if(selected && dragging) {
                   this.x = e.getX();
                   this.y = e.getY();
                   repaint();
+                  if(!shapes.isEmpty()) {
+                        System.out.println("Not empty shapes");
+                        for (shape shape : shapes) {
+                              //shape.x = (this.x + (shape.x - this.x));
+                              //shape.y = (this.y + (shape.y - this.y));
+                              shape.x = this.x + (shape.savedX - this.savedX);
+                              shape.y = this.y + (shape.savedY - this.savedY);
+                              //shape.y = e.getY() + shape.y;
+                              repaint();
+                        }
+                  }
             }
       }
 
       @Override
       public void mouseMoved(MouseEvent e) {
 
+      }
+
+      public void addToGroup(shape shape) {
+            System.out.println("Not empty shapes");
+            shapes.add(shape);
       }
 }

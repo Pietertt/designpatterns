@@ -95,11 +95,25 @@ public class main {
       save.setFocusPainted(false);
       save.setContentAreaFilled(false);
 
+
+      JButton groupShapes = new JButton();
+      groupShapes.addActionListener(actionEvent -> board.groupShapes());
+      try {
+          groupShapes.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
+      } catch(IOException e) {
+          e.printStackTrace();
+      }
+
+      groupShapes.setBorderPainted(false);
+      groupShapes.setFocusPainted(false);
+      groupShapes.setContentAreaFilled(false);
+
       ui.add(rectangle);
       ui.add(ellipse);
       ui.add(undo);
       ui.add(redo);
       ui.add(save);
+      ui.add(groupShapes);
 
       // added the board and the UI to the frame
       frame.getContentPane().add(ui, BorderLayout.SOUTH);
