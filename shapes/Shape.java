@@ -62,7 +62,6 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
             cursor = resizableBorder.getCursor(e);
             start = e.getPoint();
 
-            //this.selected = true;
             requestFocus();
             repaint();
       }
