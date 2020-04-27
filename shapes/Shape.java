@@ -43,6 +43,8 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             addMouseMotionListener(this);
             this.drawed = true;
             repaint();
+
+            undoStack.add(getBounds());
       }
 
       public void remove(){
@@ -73,8 +75,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             java.awt.Rectangle bounds = this.undoStack.pop();
             this.redoStack.add(bounds);
             setBounds(bounds);
-
-
             resize();
             repaint();
       }
@@ -106,13 +106,8 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       } 
 
       public void mouseReleased(MouseEvent e){
-            this.dragging = false;
-            this.moving = false;
-
             Order drag = new DragShapeCommand(this, getBounds());
-            this.invoker.execute(drag);
-
-            
+            this.invoker.execute(drag);            
       }
 
       public void mousePressed(MouseEvent e){
@@ -132,7 +127,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            if(this.selected){
                   if (start != null) {
                         int x = getX();
                         int y = getY();
@@ -143,7 +137,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       
                         switch (cursor) {
                               case Cursor.N_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x, y + dy, width, height - dy);
                                     resize();
                                     this.width = width;
@@ -151,7 +144,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.S_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x, y, width, height + dy);
                                     start = e.getPoint();
                                     resize();
@@ -160,7 +152,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.W_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x + dx, y, width - dx, height);
                                     resize();
                                     this.width = width;
@@ -168,7 +159,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.E_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x, y, width + dx, height);
                                     start = e.getPoint();
                                     resize();
@@ -177,7 +167,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.NW_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x + dx, y + dy, width - dx, height - dy);
                                     resize();
                                     this.width = width;
@@ -185,7 +174,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.NE_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x, y + dy, width + dx, height - dy);
                                     start = new Point(e.getX(), start.y);
                                     this.width = width;
@@ -193,7 +181,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.SW_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x + dx, y, width - dx, height + dy);
                                     start = new Point(start.x, e.getY());
                                     resize();
@@ -202,7 +189,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     repaint();
                                     break;
                               case Cursor.SE_RESIZE_CURSOR:
-                                    this.dragging = true;
                                     setBounds(x, y, width + dx, height + dy);
                                     start = e.getPoint();
                                     resize();
@@ -210,9 +196,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     this.height = height;
                                     repaint();
                                     break;
-                              case Cursor.MOVE_CURSOR:
-                                    this.moving = true;
-                                    
+                              case Cursor.MOVE_CURSOR:                                    
                                     var bounds = getBounds();
                                     bounds.translate(dx, dy);
                                     setBounds(bounds);
@@ -224,7 +208,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                         }
                         setCursor(Cursor.getPredefinedCursor(cursor));
                   }
-            }
       }
 
       

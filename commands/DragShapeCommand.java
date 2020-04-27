@@ -13,13 +13,16 @@ public class DragShapeCommand extends Order {
 
       public void execute(){
             this.shape.drag(this.bounds);
+            System.out.println("Executed");
       }
 
       public void undo(){
             this.shape.undoDrag();
+            System.out.println("Undod");
       }
 
       public void redo(){
             this.shape.redoDrag();
+            System.out.println("Redod");
       }
 }
