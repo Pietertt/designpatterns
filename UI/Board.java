@@ -67,24 +67,18 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mousePressed(MouseEvent e){
-            boolean selected = false;
 
             for(Shape shape : this.shapes){
                   if(shape.getIfSelected(e.getX(), e.getY())){
-                        selected = true;
-                        shape.select();
-                        shape.setBorder(new ResizableBorder());
+                        Order select = new SelectShapeCommand(shape);
+                        this.invoker.execute(select);
 
                   } else {
                         if(shape.selected){
-                              shape.setBorder(BorderFactory.createEmptyBorder());
-                              shape.deselect();                              
+                              Order deselect = new DeselectShapeCommand(shape);
+                              this.invoker.execute(deselect);                      
                         }
                   }
-            }
-
-            if(!selected){
-                  System.out.println("No rectangle selected");
             }
       }
 

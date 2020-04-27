@@ -40,6 +40,7 @@ public abstract class Shape extends JComponent {
 
       public void select(){
             this.selected = true;
+            setBorder(new ResizableBorder());
             // var resizableBorder = (ResizableBorder) getBorder();
             // cursor = resizableBorder.getCursor(e);
             // start = e.getPoint();
@@ -47,6 +48,7 @@ public abstract class Shape extends JComponent {
       }
 
       public void deselect(){
+            setBorder(BorderFactory.createEmptyBorder());
             this.selected = false;
             repaint();
       }
