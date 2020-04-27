@@ -15,7 +15,7 @@ public class PlaceEllipseStrategy extends Strategy {
       }
 
       public void place() {
-            PlaceShapeCommand place = new PlaceShapeCommand(this.shape);
+            PlaceShapeCommand place = new PlaceShapeCommand(this.shape, this.invoker);
             this.invoker.execute(place);
       }
 }

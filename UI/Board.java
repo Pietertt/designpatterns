@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,7 +14,7 @@ import shapes.*;
 import commands.*;
 import strategies.*;
 
-public class Board extends JPanel implements MouseListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
       public Invoker invoker = new Invoker();
       public Strategy strategy;
@@ -25,7 +26,7 @@ public class Board extends JPanel implements MouseListener {
             super(null);
             this.frame = frame;
             addMouseListener(this);
-            setFocusable(true);
+            super.setFocusable(true);
 
             for(int i = 0; i < 5; i++){
                   this.strategy = new PlaceRectangleStrategy(this.invoker);
@@ -67,26 +68,30 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mousePressed(MouseEvent e){
-
             for(Shape shape : this.shapes){
                   if(shape.getIfSelected(e.getX(), e.getY())){
-                        Order select = new SelectShapeCommand(shape);
+                        System.out.println("Click");
+                        Order select = new SelectShapeCommand(shape, e);
                         this.invoker.execute(select);
+                        shape.requestFocus();
 
                   } else {
                         if(shape.selected){
-                              Order deselect = new DeselectShapeCommand(shape);
-                              this.invoker.execute(deselect);                      
+                              Order deselect = new DeselectShapeCommand(shape, e);
+                              this.invoker.execute(deselect);      
+                              requestFocus();                
                         }
                   }
             }
       }
 
-      public void mouseDragged(MouseEvent e){
-
+      @Override
+      public void mouseDragged(MouseEvent e) {
+  
       }
-
-      public void MouseMoved(MouseEvent e){
-
+  
+      @Override
+      public void mouseMoved(MouseEvent e) {
+  
       }
 }

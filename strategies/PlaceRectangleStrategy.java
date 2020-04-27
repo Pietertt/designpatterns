@@ -15,7 +15,7 @@ public class PlaceRectangleStrategy extends Strategy {
       }
 
       public void place() {
-            Order place = new PlaceShapeCommand(this.shape);
+            Order place = new PlaceShapeCommand(this.shape, this.invoker);
             this.invoker.execute(place);
       }
 }

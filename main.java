@@ -94,7 +94,7 @@ public class main {
             frame.getContentPane().add(UI, BorderLayout.SOUTH);
             frame.getContentPane().add(board);
 
-            frame.setLocationRelativeTo(null);
+            frame.setLocation(100, 100);
             frame.pack();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);

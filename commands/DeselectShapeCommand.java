@@ -1,11 +1,14 @@
 package commands;
 
 import shapes.*;
+import java.awt.event.*;
 
 public class DeselectShapeCommand extends Order {
+      private MouseEvent event;
 
-      public DeselectShapeCommand(Shape shape){
+      public DeselectShapeCommand(Shape shape, MouseEvent event){
             this.shape = shape;
+            this.event = event;
       }
 
       public void execute(){
@@ -13,7 +16,7 @@ public class DeselectShapeCommand extends Order {
       }
 
       public void undo(){
-            this.shape.select();
+            this.shape.select(event);
       }
 
       public void redo(){

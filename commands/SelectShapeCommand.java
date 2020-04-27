@@ -1,15 +1,18 @@
 package commands;
 
 import shapes.*;
+import java.awt.event.*;
 
 public class SelectShapeCommand extends Order {
+      private MouseEvent event;
 
-      public SelectShapeCommand(Shape shape){
+      public SelectShapeCommand(Shape shape, MouseEvent event){
             this.shape = shape;
+            this.event = event;
       }
 
       public void execute(){
-            this.shape.select();
+            this.shape.select(this.event);
       }
 
       public void undo(){
@@ -17,6 +20,6 @@ public class SelectShapeCommand extends Order {
       }
 
       public void redo(){
-            this.shape.select();
+            this.shape.select(this.event);
       }
 }
