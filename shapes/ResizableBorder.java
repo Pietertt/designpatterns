@@ -33,7 +33,7 @@ public class ResizableBorder implements Border {
 
       @Override
       public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
-            if (component.hasFocus()) {
+            // if (component.hasFocus()) {
                   for (int i = 0; i < locations.length; i++) {
                         var rect = getRectangle(x, y, width, height, locations[i]);
                         g.setColor(Color.WHITE);
@@ -41,7 +41,7 @@ public class ResizableBorder implements Border {
                         g.setColor(new Color(80, 155, 229));
                         g.fillOval(rect.x, rect.y, rect.width, rect.height);
                   }
-            }
+            //}
       }
 
       private Rectangle getRectangle(int x, int y, int width, int height, int location) {

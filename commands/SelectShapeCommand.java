@@ -9,14 +9,14 @@ public class SelectShapeCommand extends Order {
       }
 
       public void execute(){
-               //this.shape.select();
+         //   this.shape.select();
       }
 
       public void undo(){
-
+            this.shape.deselect();
       }
 
       public void redo(){
-
+       //     this.shape.select();
       }
 }
