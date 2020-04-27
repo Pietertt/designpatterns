@@ -9,8 +9,9 @@ package UI;
        private final Stack<Order> redoStack;
 
        public Invoker() {
-             undoStack = new Stack<>();
-             redoStack = new Stack<>();
+            this.undoStack = new Stack<>();
+            this.redoStack = new Stack<>();
+
        }
 
        public void execute(Order cmd) {

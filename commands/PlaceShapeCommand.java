@@ -9,14 +9,14 @@ public class PlaceShapeCommand extends Order {
       }
 
       public void execute(){
-               this.shape.place();
+            this.shape.place();
       }
 
       public void undo(){
-
+            this.shape.remove();
       }
 
       public void redo(){
-
+            this.shape.place();
       }
 }

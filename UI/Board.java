@@ -56,18 +56,7 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mousePressed(MouseEvent e){
-            boolean selected = false;
-            for(Shape shape : this.shapes){
-                  if(shape.getIfSelected(e.getX(), e.getY())){
-                        System.out.println("Board");
-                  }
-            }
-
-            if(!selected){
-                  requestFocus();
-                  revalidate();
-                  repaint();
-            }
+            System.out.println("Board");
       }
 
       public void mouseDragged(MouseEvent e){

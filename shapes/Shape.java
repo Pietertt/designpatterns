@@ -17,6 +17,7 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
       protected Point start = null;
 
       public boolean selected = false;
+      public boolean drawed = false;
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
@@ -30,6 +31,12 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
             addMouseListener(this);
             addMouseMotionListener(this);
             setBorder(new ResizableBorder());
+            this.drawed = true;
+      }
+
+      public void remove(){
+            this.drawed = false;
+            repaint();
       }
 
       private void resize() {
@@ -55,7 +62,7 @@ public abstract class Shape extends JComponent implements MouseListener, MouseMo
             cursor = resizableBorder.getCursor(e);
             start = e.getPoint();
 
-            this.selected = true;
+            //this.selected = true;
             requestFocus();
             repaint();
       }

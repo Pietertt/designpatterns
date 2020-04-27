@@ -61,7 +61,7 @@ public class main {
 
             // Undo button
             JButton undo = new JButton();
-            //undo.addActionListener(actionEvent -> board.commandInvoker.undo());
+            undo.addActionListener(actionEvent -> board.invoker.undo());
             try {
                   undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
             } catch (IOException e) {
@@ -74,7 +74,7 @@ public class main {
 
             // Undo button
             JButton redo = new JButton();
-            //redo.addActionListener(actionEvent -> board.commandInvoker.redo());
+            redo.addActionListener(actionEvent -> board.invoker.redo());
             try {
                   redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
             } catch (IOException e) {
