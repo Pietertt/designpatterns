@@ -1,6 +1,6 @@
 package shapes;
 
-public class coord {
+public class Location {
       public int x;
       public int y;
       public int width;

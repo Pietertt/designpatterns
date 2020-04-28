@@ -17,8 +17,8 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       protected int width;
       protected int height;
 
-      protected Stack<java.awt.Rectangle> redoStack = new Stack<java.awt.Rectangle>();
-      protected Stack<java.awt.Rectangle> undoStack = new Stack<java.awt.Rectangle>();
+      protected Stack<Location> redoStack;
+      protected Stack<Location> undoStack;
 
       public int cursor;
       public Point start = null;
@@ -44,7 +44,17 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             this.drawed = true;
             repaint();
 
-            undoStack.add(getBounds());
+            this.undoStack = new Stack<Location>();
+            this.redoStack = new Stack<Location>();
+
+            Location location = new Location();
+            location.x = this.x;
+            location.y = this.y;
+            location.width = this.width;
+            location.height = this.height;
+
+            Order drag = new DragShapeCommand(this, location);
+            this.invoker.execute(drag);
       }
 
       public void remove(){
@@ -67,24 +77,29 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             repaint();
       }
 
-      public void drag(java.awt.Rectangle bounds){
-            this.undoStack.add(bounds);
+      public void drag(Location location){
+            this.undoStack.add(location);
       }
 
       public void undoDrag(){
-            java.awt.Rectangle bounds = this.undoStack.pop();
-            this.redoStack.add(bounds);
+            Location location = this.undoStack.pop();
+            this.redoStack.add(location);
+
+            java.awt.Rectangle bounds = new java.awt.Rectangle();
+            bounds.x = location.x;
+            bounds.y = location.y;
+            bounds.width = location.width;
+            bounds.height = location.height;
+
             setBounds(bounds);
+            System.out.println("Bounds set to " + bounds);
+            System.out.println("Current bounds " + getBounds());
             resize();
             repaint();
       }
 
       public void redoDrag(){
-            java.awt.Rectangle bounds = this.redoStack.pop();
-            this.undoStack.add(bounds);
-            setBounds(bounds);
-            resize();
-            repaint();
+            System.out.println("Redo");
       }
 
       private void resize() {
@@ -94,7 +109,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       }
 
       public void mouseClicked(MouseEvent e){
-            
+
       }
 
       public void mouseExited(MouseEvent e){
@@ -106,8 +121,17 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       } 
 
       public void mouseReleased(MouseEvent e){
-            Order drag = new DragShapeCommand(this, getBounds());
-            this.invoker.execute(drag);            
+            if(this.dragging){
+                  Location location = new Location();
+                  location.x = this.x;
+                  location.y = this.y;
+                  location.width = this.width;
+                  location.height = this.height;
+
+                  Order drag = new DragShapeCommand(this, location);
+                  this.invoker.execute(drag);
+                  this.dragging = false;
+            }            
       }
 
       public void mousePressed(MouseEvent e){
@@ -196,7 +220,8 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     this.height = height;
                                     repaint();
                                     break;
-                              case Cursor.MOVE_CURSOR:                                    
+                              case Cursor.MOVE_CURSOR:        
+                                    this.dragging = true;                            
                                     var bounds = getBounds();
                                     bounds.translate(dx, dy);
                                     setBounds(bounds);

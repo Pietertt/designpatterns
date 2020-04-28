@@ -4,25 +4,22 @@ import shapes.*;
 import UI.Invoker;
 
 public class DragShapeCommand extends Order {
-      private java.awt.Rectangle bounds;
+      private Location location;
 
-      public DragShapeCommand(Shape shape, java.awt.Rectangle bounds){
+      public DragShapeCommand(Shape shape, Location location){
             this.shape = shape;
-            this.bounds = bounds;
+            this.location = location;
       }
 
       public void execute(){
-            this.shape.drag(this.bounds);
-            System.out.println("Executed");
+            this.shape.drag(this.location);
       }
 
       public void undo(){
             this.shape.undoDrag();
-            System.out.println("Undod");
       }
 
       public void redo(){
             this.shape.redoDrag();
-            System.out.println("Redod");
       }
 }
