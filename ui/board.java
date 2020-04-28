@@ -185,6 +185,11 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 //                  }
                   selectedShapes.get(i).setRootFalse();
                   selectedShapes.get(0).addToGroup(selectedShapes.get(i));
+                  if(!selectedShapes.get(i).shapes.isEmpty()) {
+                        for(shape shape : selectedShapes.get(i).shapes) {
+                              selectedShapes.get(0).addToGroup(shape);
+                        }
+                  }
 
             }
       }
