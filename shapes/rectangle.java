@@ -17,13 +17,13 @@ public class Rectangle extends Shape {
                   if(this.selected){
                         super.paintComponent(g);
                         g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(4, 4, this.width - 8, this.height - 8);
+                        g.fillRect(4, 4, getWidth() - 8, getHeight() - 8);
                         g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.drawRect(2, 2, this.width - 4, this.height - 4);
+                        g.drawRect(2, 2, getWidth() - 4, getHeight() - 4);
                   } else {
                         super.paintComponent(g);
                         g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(4, 4, this.width - 8, this.height - 8);
+                        g.fillRect(4, 4, getWidth() - 8, getHeight() - 8);
                   }
             }
       }
