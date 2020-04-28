@@ -34,6 +34,13 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       protected int savedY;
 
 
+      //saved for dragging groups
+      private int savedRootX;
+      private int savedRootY;
+      private ArrayList<Integer> savedChildX = new ArrayList<>();
+      private ArrayList<Integer> savedChildY = new ArrayList<>();
+
+
       // Group of shapes
       public ArrayList<shape> shapes;
 
@@ -51,6 +58,9 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       public void drag() {
             if(selected) {
                   this.dragging = true;
+                  for(shape shape : shapes) {
+                        shape.dragging = true;
+                  }
                   this.undoStack.push(height);
                   this.undoStack.push(width);
                   this.undoStack.push(y);
@@ -108,6 +118,16 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void setSelectedTrue() {
+            // save for dragging
+            savedRootX = this.x;
+            savedRootY = this.y;
+            if(!shapes.isEmpty()) {
+                  for(int i = 0; i < shapes.size(); i++) {
+                        savedChildX.add(this.shapes.get(i).x);
+                        savedChildY.add(this.shapes.get(i).y);
+                  }
+            }
+
             // can only select when rectangle is actually drawn
             if(rectDraw)
                   selected = true;
@@ -153,22 +173,27 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 //                  repaint();
 //            }
 
+
             if(selected && dragging) {
                   this.x = e.getX();
                   this.y = e.getY();
                   repaint();
                   if(!shapes.isEmpty()) {
                         System.out.println("Not empty shapes");
+                        int i = 0;
                         for (shape shape : shapes) {
                               //shape.x = (this.x + (shape.x - this.x));
                               //shape.y = (this.y + (shape.y - this.y));
-                              shape.x = this.x + (shape.savedX - this.savedX);
-                              shape.y = this.y + (shape.savedY - this.savedY);
+                              shape.x = this.x + (savedChildX.get(i) - savedRootX);
+                              shape.y = this.y + (savedChildY.get(i) - savedRootY);
+                              i += 1;
                               //shape.y = e.getY() + shape.y;
                               repaint();
                         }
                   }
             }
+
+
       }
 
       @Override
@@ -178,6 +203,6 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
       public void addToGroup(shape shape) {
             System.out.println("Not empty shapes");
-            shapes.add(shape);
+            this.shapes.add(shape);
       }
 }
