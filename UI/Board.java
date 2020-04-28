@@ -29,7 +29,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             super.setFocusable(true);
 
             for(int i = 0; i < 5; i++){
-                  this.strategy = new PlaceRectangleStrategy(this.invoker);
+                  this.strategy = new PlaceRectangleStrategy(this.invoker, this);
                   this.strategy.prepare(50 + i * 75, 200, 50, 50);
                   this.strategy.place();
                   add(this.strategy.shape);
@@ -69,18 +69,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mousePressed(MouseEvent e){
             for(Shape shape : this.shapes){
-                  if(shape.getIfSelected(e.getX(), e.getY())){
-                        System.out.println("Click");
-                        Order select = new SelectShapeCommand(shape, e);
-                        this.invoker.execute(select);
-                        shape.requestFocus();
-
-                  } else {
-                        if(shape.selected){
-                              Order deselect = new DeselectShapeCommand(shape, e);
-                              this.invoker.execute(deselect);      
-                              requestFocus();                
-                        }
+                  if(shape.selected){
+                        Order deselect = new DeselectShapeCommand(shape, e);
+                        this.invoker.execute(deselect);      
+                        requestFocus();                
                   }
             }
       }

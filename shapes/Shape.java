@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.Stack;
 
 import commands.*;
-import UI.Invoker;
+import UI.*;
 
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
@@ -26,6 +26,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public int cursor;
       public Point start = null;
       public Invoker invoker;
+      public Board board;
 
       public boolean selected = false;
       public boolean drawed = false;
@@ -35,8 +36,10 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
-      public void place(Invoker invoker){
+      public void place(Invoker invoker, Board board){
             this.invoker = invoker;
+            this.board = board;
+
             JPanel area = new JPanel();
             setOpaque(true);
 
@@ -59,6 +62,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
       public void select(MouseEvent e){
             this.selected = true;
+
             setBorder(new ResizableBorder());
             repaint();
       }
@@ -159,6 +163,13 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             }
 
             if(!this.selected){
+                  for(Shape shape : board.shapes){
+                        if(shape.selected){  
+                              Order deselect = new DeselectShapeCommand(shape, e);
+                              this.invoker.execute(deselect);
+                        }
+                  }
+
                   Order select = new SelectShapeCommand(this, e);
                   this.invoker.execute(select);
                   requestFocus();

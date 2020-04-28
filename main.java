@@ -30,7 +30,7 @@ public class main {
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.strategy = new PlaceRectangleStrategy(board.invoker);     
+                  board.strategy = new PlaceRectangleStrategy(board.invoker, board);     
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -46,7 +46,7 @@ public class main {
 
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.strategy = new PlaceEllipseStrategy(board.invoker);
+                  board.strategy = new PlaceEllipseStrategy(board.invoker, board);
             });
 
             try {

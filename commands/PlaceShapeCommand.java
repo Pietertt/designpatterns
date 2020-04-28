@@ -2,17 +2,20 @@ package commands;
 
 import shapes.*;
 import UI.Invoker;
+import UI.Board;
 
 public class PlaceShapeCommand extends Order {
       private Invoker invoker;
-
-      public PlaceShapeCommand(Shape shape, Invoker invoker){
+      private Board board;
+      
+      public PlaceShapeCommand(Shape shape, Invoker invoker, Board board){
             this.shape = shape;
             this.invoker = invoker;
+            this.board = board;
       }
 
       public void execute(){
-            this.shape.place(this.invoker);
+            this.shape.place(this.invoker, this.board);
       }
 
       public void undo(){
@@ -20,6 +23,6 @@ public class PlaceShapeCommand extends Order {
       }
 
       public void redo(){
-            this.shape.place(this.invoker);
+            this.shape.place(this.invoker, this.board);
       }
 }
