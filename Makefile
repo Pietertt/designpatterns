@@ -4,6 +4,7 @@ compile:
 	@javac commands/Order.java commands/PlaceShapeCommand.java commands/SelectShapeCommand.java commands/DragShapeCommand.java commands/ResizeShapeCommand.java
 	@javac UI/Board.java UI/Invoker.java
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java
+	@javac io/Parser.java
 	@javac main.java
 	@echo "Compiling done!"
 
@@ -14,6 +15,7 @@ clean:
 	@cd UI && rm -rf *.class
 	@cd commands && rm -rf *.class
 	@cd strategies && rm -rf *.class
+	@cd io && rm -rf *.class
 	@echo "Cleaning done!"
 
 run: compile

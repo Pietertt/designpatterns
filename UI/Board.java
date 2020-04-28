@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import shapes.*;
 import commands.*;
+import io.Parser;
 import strategies.*;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
@@ -28,11 +29,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             addMouseListener(this);
             super.setFocusable(true);
 
-            for(int i = 0; i < 5; i++){
-                  this.strategy = new PlaceRectangleStrategy(this.invoker, this);
-                  this.strategy.prepare(50 + i * 75, 200, 50, 50);
-                  this.strategy.place();
-                  add(this.strategy.shape);
+            Parser parser = new Parser();
+            ArrayList<String> data = parser.read("io/data.txt");
+            ArrayList<Shape> shapes = parser.get(data);
+
+            for(Shape shape : shapes){
+                  if(shape instanceof Rectangle){
+                        this.strategy = new PlaceRectangleStrategy(this.invoker, this);
+                        this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
+                        this.strategy.place();
+                        add(this.strategy.shape);
+                  }
+
+                  
                   this.shapes.add(this.strategy.shape);
             }
       }

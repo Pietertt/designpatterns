@@ -12,10 +12,10 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 
 public abstract class Shape extends JComponent implements MouseMotionListener, MouseListener {
-      protected int x;
-      protected int y;
-      protected int width;
-      protected int height;
+      public int x;
+      public int y;
+      public int width;
+      public int height;
 
       /*
             A class is used to store the x, y, width and height
