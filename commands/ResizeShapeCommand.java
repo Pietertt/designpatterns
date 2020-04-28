@@ -12,14 +12,14 @@ public class ResizeShapeCommand extends Order {
       }
 
       public void execute(){
-            this.shape.resize(this.location);
+            this.shape.drag(this.location);
       }
 
       public void undo(){
-            this.shape.undoResize();
+            this.shape.undoDrag();
       }
 
       public void redo(){
-            this.shape.redoResize();
+            this.shape.redoDrag();
       }
 }

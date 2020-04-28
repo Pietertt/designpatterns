@@ -60,9 +60,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public void select(MouseEvent e){
             this.selected = true;
             setBorder(new ResizableBorder());
-            var resizableBorder = (ResizableBorder) getBorder();
-            cursor = resizableBorder.getCursor(e);
-            start = e.getPoint();
             repaint();
       }
 
@@ -70,19 +67,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             setBorder(BorderFactory.createEmptyBorder());
             this.selected = false;
             repaint();
-      }
-
-      public void resize(Location location){
-            this.redoStack.clear();
-            this.undoStack.add(location);
-      }
-
-      public void undoResize(){
-
-      }
-
-      public void redoResize(){
-
       }
 
       public void drag(Location location){
@@ -179,6 +163,10 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   this.invoker.execute(select);
                   requestFocus();
             }
+
+            var resizableBorder = (ResizableBorder) getBorder();
+            this.cursor = resizableBorder.getCursor(e);
+            this.start = e.getPoint();
       }
 
       @Override
