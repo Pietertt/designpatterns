@@ -34,6 +34,9 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       protected int savedY;
 
 
+      //Is this a root node
+      private boolean root = true;
+
       //saved for dragging groups
       private int savedRootX;
       private int savedRootY;
@@ -191,6 +194,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
             return false;
       }
 
+      public void setRootFalse() {
+            this.root = false;
+      }
+
       @Override
       public void mouseDragged(MouseEvent e) {
 //            if(selected && dragging) {
@@ -200,10 +207,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 //            }
 
 
-            if(selected && dragging) {
+            if(selected && dragging && this.root) {
                   this.x = e.getX();
                   this.y = e.getY();
-                  //repaint();
+                  repaint();
                   if(!shapes.isEmpty()) {
                         System.out.println("Not empty shapes");
                         int i = 0;
@@ -214,11 +221,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
                               shape.y = this.y + (savedChildY.get(i) - savedRootY);
                               i += 1;
                               //shape.y = e.getY() + shape.y;
-
+                              repaint();
                         }
 
                   }
-                  repaint();
+
             }
 
 
