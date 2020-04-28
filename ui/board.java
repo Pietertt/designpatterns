@@ -115,9 +115,9 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
             // er kan niet gedragged worden als dragging false is.
             for (shape shape : shapes) {
                   shape.setDraggingFalse();
-                  for(shape shape2 : shape.shapes) {
-                        shape2.setDraggingFalse();
-                  }
+//                  for(shape shape2 : shape.shapes) {
+//                        shape2.setDraggingFalse();
+//                  }
             }
 
       }

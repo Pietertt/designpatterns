@@ -52,6 +52,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void setDraggingFalse() {
+            for(shape shape : shapes) {
+                  shape.setDraggingFalse();
+            }
+
             this.dragging = false;
       }
 
@@ -118,6 +122,8 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void setSelectedTrue() {
+
+
             // save for dragging
             savedRootX = this.x;
             savedRootY = this.y;
@@ -130,13 +136,21 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
             // can only select when rectangle is actually drawn
             if(rectDraw)
+                  for(shape shape : shapes) {
+                        shape.setSelectedTrue();
+                  }
                   selected = true;
             repaint();
       }
 
       public void setSelectedFalse() {
+
+
             // can only deselect when rectangle is actually drawn
             if(rectDraw)
+                  for(shape shape : shapes) {
+                        shape.setSelectedFalse();
+                  }
                   selected = false;
             repaint();
       }
@@ -177,7 +191,7 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
             if(selected && dragging) {
                   this.x = e.getX();
                   this.y = e.getY();
-                  repaint();
+                  //repaint();
                   if(!shapes.isEmpty()) {
                         System.out.println("Not empty shapes");
                         int i = 0;
@@ -188,9 +202,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
                               shape.y = this.y + (savedChildY.get(i) - savedRootY);
                               i += 1;
                               //shape.y = e.getY() + shape.y;
-                              repaint();
+
                         }
+
                   }
+                  repaint();
             }
 
 
