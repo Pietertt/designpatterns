@@ -291,7 +291,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
                   }
                   setCursor(Cursor.getPredefinedCursor(cursor));
-            }
+            } 
       }
 
       
