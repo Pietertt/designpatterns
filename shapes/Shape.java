@@ -17,6 +17,11 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       protected int width;
       protected int height;
 
+      protected int initX;
+      protected int initY;
+      protected int initWidth;
+      protected int initHeight;
+
       protected Stack<Location> redoStack;
       protected Stack<Location> undoStack;
 
@@ -46,15 +51,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
             this.undoStack = new Stack<Location>();
             this.redoStack = new Stack<Location>();
-
-            Location location = new Location();
-            location.x = this.x;
-            location.y = this.y;
-            location.width = this.width;
-            location.height = this.height;
-
-            Order drag = new DragShapeCommand(this, location);
-            this.invoker.execute(drag);
       }
 
       public void remove(){
@@ -63,6 +59,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       }
 
       public void select(MouseEvent e){
+            System.out.println("Selected");
             this.selected = true;
             setBorder(new ResizableBorder());
             var resizableBorder = (ResizableBorder) getBorder();
@@ -72,18 +69,29 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       }
 
       public void deselect(){
+            System.out.println("Deselected");
             setBorder(BorderFactory.createEmptyBorder());
             this.selected = false;
             repaint();
       }
 
       public void drag(Location location){
+            System.out.println("Dragged");
             this.undoStack.add(location);
       }
 
       public void undoDrag(){
+            for(int i = 0; i < this.undoStack.size(); i++){
+                  System.out.print("\u001B[31m");
+                  System.out.print(" x : " + this.undoStack.get(i).x);
+                  System.out.print(" y : " + this.undoStack.get(i).y);
+                  System.out.print(" width : " + this.undoStack.get(i).width);
+                  System.out.print(" height : " + this.undoStack.get(i).height);
+                  System.out.print("\u001B[39m");
+                  System.out.println();
+            }
+
             Location location = this.undoStack.pop();
-            this.redoStack.add(location);
 
             java.awt.Rectangle bounds = new java.awt.Rectangle();
             bounds.x = location.x;
@@ -92,20 +100,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
             bounds.height = location.height;
 
             setBounds(bounds);
-            System.out.println("Bounds set to " + bounds);
-            System.out.println("Current bounds " + getBounds());
-            resize();
+            //resize();
             repaint();
       }
 
       public void redoDrag(){
             System.out.println("Redo");
-      }
-
-      private void resize() {
-            if(getParent() != null){
-                  getParent().revalidate();
-            }
       }
 
       public void mouseClicked(MouseEvent e){
@@ -123,10 +123,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public void mouseReleased(MouseEvent e){
             if(this.dragging){
                   Location location = new Location();
-                  location.x = this.x;
-                  location.y = this.y;
+                  location.x = getX();
+                  location.y = getY();
                   location.width = this.width;
                   location.height = this.height;
+
+                  System.out.println("Added location: x-" + location.x + " y-" + location.y);
 
                   Order drag = new DragShapeCommand(this, location);
                   this.invoker.execute(drag);
@@ -135,6 +137,17 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       }
 
       public void mousePressed(MouseEvent e){
+            if(this.undoStack.size() == 0){
+                  Location location = new Location();
+                  location.x = getX();
+                  location.y = getY();
+                  location.width = this.width;
+                  location.height = this.height;
+
+                  Order drag = new DragShapeCommand(this, location);
+                  this.invoker.execute(drag);
+            }
+            
             Order select = new SelectShapeCommand(this, e);
             this.invoker.execute(select);
             requestFocus();
@@ -162,7 +175,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                         switch (cursor) {
                               case Cursor.N_RESIZE_CURSOR:
                                     setBounds(x, y + dy, width, height - dy);
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
@@ -170,14 +182,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                               case Cursor.S_RESIZE_CURSOR:
                                     setBounds(x, y, width, height + dy);
                                     start = e.getPoint();
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
                                     break;
                               case Cursor.W_RESIZE_CURSOR:
                                     setBounds(x + dx, y, width - dx, height);
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
@@ -185,14 +195,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                               case Cursor.E_RESIZE_CURSOR:
                                     setBounds(x, y, width + dx, height);
                                     start = e.getPoint();
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
                                     break;
                               case Cursor.NW_RESIZE_CURSOR:
                                     setBounds(x + dx, y + dy, width - dx, height - dy);
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
@@ -207,7 +215,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                               case Cursor.SW_RESIZE_CURSOR:
                                     setBounds(x + dx, y, width - dx, height + dy);
                                     start = new Point(start.x, e.getY());
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
@@ -215,7 +222,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                               case Cursor.SE_RESIZE_CURSOR:
                                     setBounds(x, y, width + dx, height + dy);
                                     start = e.getPoint();
-                                    resize();
                                     this.width = width;
                                     this.height = height;
                                     repaint();
@@ -225,7 +231,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                                     var bounds = getBounds();
                                     bounds.translate(dx, dy);
                                     setBounds(bounds);
-                                    resize();
                                     this.width = getWidth();
                                     this.height = getHeight();
                                     repaint();

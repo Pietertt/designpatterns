@@ -9,6 +9,11 @@ public class Rectangle extends Shape {
             this.y = y;
             this.width = width;
             this.height = height;
+
+            this.initX = x;
+            this.initY = y;
+            this.initWidth = width;
+            this.initHeight = height;
       }
 
       @Override
