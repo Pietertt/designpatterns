@@ -147,10 +147,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   Order drag = new DragShapeCommand(this, location);
                   this.invoker.execute(drag);
             }
-            
-            Order select = new SelectShapeCommand(this, e);
-            this.invoker.execute(select);
-            requestFocus();
+
+            if(!this.selected){
+                  Order select = new SelectShapeCommand(this, e);
+                  this.invoker.execute(select);
+                  requestFocus();
+            }
       }
 
       @Override
