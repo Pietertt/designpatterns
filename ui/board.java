@@ -178,7 +178,13 @@ public class board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void groupShapes() {
             for (int i = 1; i < selectedShapes.size(); i++) {
+//                  for(shape shape : shapes) {
+//                        if (selectedShapes.get(i).equals(shape)) {
+//                              shapes.remove(shape);
+//                        }
+//                  }
                   selectedShapes.get(0).addToGroup(selectedShapes.get(i));
+
             }
       }
 }

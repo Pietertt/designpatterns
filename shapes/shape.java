@@ -107,6 +107,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
 
       public void setDrawTrue() {
+//            for(shape shape : shapes) {
+//                  shape.setDrawTrue();
+//            }
+
             this.width = savedWidth;
             this.height = savedHeight;
             rectDraw = true;
@@ -114,6 +118,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void setDrawFalse() {
+//            for(shape shape : shapes) {
+//                  shape.setDrawFalse();
+//            }
+
             // size has to be set to zero to ensure you don't select invisible rectangles
             this.width = 0;
             this.height = 0;
@@ -127,6 +135,8 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
             // save for dragging
             savedRootX = this.x;
             savedRootY = this.y;
+            savedChildX.clear();
+            savedChildY.clear();
             if(!shapes.isEmpty()) {
                   for(int i = 0; i < shapes.size(); i++) {
                         savedChildX.add(this.shapes.get(i).x);
@@ -135,11 +145,12 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
             }
 
             // can only select when rectangle is actually drawn
-            if(rectDraw)
-                  for(shape shape : shapes) {
+            if(rectDraw) {
+                  for (shape shape : shapes) {
                         shape.setSelectedTrue();
                   }
                   selected = true;
+            }
             repaint();
       }
 
@@ -147,11 +158,12 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
 
             // can only deselect when rectangle is actually drawn
-            if(rectDraw)
-                  for(shape shape : shapes) {
+            if(rectDraw) {
+                  for (shape shape : shapes) {
                         shape.setSelectedFalse();
                   }
                   selected = false;
+            }
             repaint();
       }
 
