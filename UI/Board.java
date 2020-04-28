@@ -35,13 +35,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
             for(Shape shape : shapes){
                   if(shape instanceof Rectangle){
-                        this.strategy = new PlaceRectangleStrategy(this.invoker, this);
-                        this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
-                        this.strategy.place();
-                        add(this.strategy.shape);
+                        this.strategy = new PlaceRectangleStrategy(this.invoker, this);  
                   }
 
-                  
+                  if(shape instanceof Ellipse){
+                        this.strategy = new PlaceEllipseStrategy(this.invoker, this);  
+                  }
+
+                  this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
+                  this.strategy.place();
+                  add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
             }
       }
