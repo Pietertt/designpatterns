@@ -65,8 +65,10 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       public void drag() {
             if(selected) {
                   this.dragging = true;
-                  for(shape shape : shapes) {
-                        shape.dragging = true;
+                  if(!shapes.isEmpty()) {
+                        for (shape shape : shapes) {
+                              shape.drag();
+                        }
                   }
                   this.undoStack.push(height);
                   this.undoStack.push(width);
@@ -78,6 +80,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
       public void redoDrag() {
             //this.dragging = true;
+            if(!shapes.isEmpty()) {
+                  for (shape shape : shapes) {
+                        shape.redoDrag();
+                  }
+            }
 
             this.undoStack.push(height);
             this.undoStack.push(width);
@@ -93,6 +100,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
       public void undoDrag() {
             //this.dragging = false;
+            if(!shapes.isEmpty()) {
+                  for (shape shape : shapes) {
+                        shape.undoDrag();
+                  }
+            }
 
             this.redoStack.push(height);
             this.redoStack.push(width);
