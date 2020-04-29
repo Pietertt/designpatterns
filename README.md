@@ -34,8 +34,8 @@ Implementeer een visitor klasse voor de figuren.<br>
 Verplaatsen, resizen en schrijven naar file moeten door subklassen van deze visitor uitgevoerd worden.<br> 
 Refactor het programma.<br>
 - [x] De visitor klasse is geimplementeerd
-- [ ] Het verplaatsen van shapes wordt geregeld door een visitor
-- [ ] Het resizen van shapes wordt geregeld door een visitor
+- [x] Het verplaatsen van shapes wordt geregeld door een visitor
+- [x] Het resizen van shapes wordt geregeld door een visitor
 - [ ] Het schrijven van shapes naar een bestand wordt geregeld door een visitor
 
 **Stap 5: strategy pattern en singleton pattern**<br>
