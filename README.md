@@ -6,9 +6,9 @@ Run `make run` om de applicatie te starten.__
 Run `make clean` om alle .class bestanden op te ruimen.__
 Run `make compile` om alle bestanden te compileren.__
 
-**Stap 1: eenvoudig tekenprogramma**__
-Maak een eerste versie van de grafische editor die ellipsen en rechthoeken kan tekenen, selecteren, verplaatsen en van grootte veranderen.
-Groepen, bijschriften en file operaties hoeven nu nog niet.
+**Stap 1: eenvoudig tekenprogramma**<br>
+Maak een eerste versie van de grafische editor die ellipsen en rechthoeken kan tekenen, selecteren, verplaatsen en van grootte veranderen.<br>
+Groepen, bijschriften en file operaties hoeven nu nog niet.<br>
 - [x] Tekenen lukt
 - [x] Selecteren lukt
 - [x] Verplaatsen lukt
@@ -20,6 +20,9 @@ Groepen, bijschriften en file operaties hoeven nu nog niet.
 Voeg file IO toe (volgens de grammatica die verderop uitgelegd wordt).<br>
 Zorg ervoor dat alle acties die een gebruiker kan uitvoeren, via command-objecten worden gedaan.<br> 
 Voeg de mogelijkheid toe om acties ongedaan te maken (onbeperkte undo en redo).<br>
+- [x] File IO doet het
+- [x] Alle gebruiker acties worden met het command pattern geregeld
+- [x] Onbeperkte undo / redo werkt
 
 **Stap 3: composite pattern**<br>
 Voeg groepen toe volgens het composite pattern.<br> 
@@ -30,6 +33,10 @@ Bijschriften hoeven nu nog niet.<br>
 Implementeer een visitor klasse voor de figuren.<br>
 Verplaatsen, resizen en schrijven naar file moeten door subklassen van deze visitor uitgevoerd worden.<br> 
 Refactor het programma.<br>
+- [x] De visitor klasse is geimplementeerd
+- [] Het verplaatsen van shapes wordt geregeld door een visitor
+- [] Het resizen van shapes wordt geregeld door een visitor
+- [] Het schrijven van shapes naar een bestand wordt geregeld door een visitor
 
 **Stap 5: strategy pattern en singleton pattern**<br>
 Het verschil tussen een ellips en een rechthoek is eigenlijk alleen de manier van tekenen en hun naam. We kunnen ze dus wel samennemen tot een klasse "basisfiguur".<br>
