@@ -2,9 +2,9 @@
 
 Een GUI geprogrammeerd in Java.
 
-Run `make run` om de applicatie te starten.__
-Run `make clean` om alle .class bestanden op te ruimen.__
-Run `make compile` om alle bestanden te compileren.__
+Run `make run` om de applicatie te starten.<br>
+Run `make clean` om alle .class bestanden op te ruimen.<br>
+Run `make compile` om alle bestanden te compileren.<br>
 
 **Stap 1: eenvoudig tekenprogramma**<br>
 Maak een eerste versie van de grafische editor die ellipsen en rechthoeken kan tekenen, selecteren, verplaatsen en van grootte veranderen.<br>
