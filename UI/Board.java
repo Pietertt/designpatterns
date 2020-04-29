@@ -14,6 +14,7 @@ import shapes.*;
 import commands.*;
 import io.Parser;
 import strategies.*;
+import visitor.*;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
@@ -42,8 +43,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                         this.strategy = new PlaceEllipseStrategy(this.invoker, this);  
                   }
 
+                  Visitor move = new moveVisitor();
+
                   this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
                   this.strategy.place();
+                  this.strategy.shape.accept(move);
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
             }

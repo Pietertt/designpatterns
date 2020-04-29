@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import commands.*;
 import UI.*;
+import visitor.Visitor;
 
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
@@ -35,6 +36,8 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
+
+      public abstract void accept(Visitor visitor);
 
       public void place(Invoker invoker, Board board){
             this.invoker = invoker;
@@ -292,36 +295,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   setCursor(Cursor.getPredefinedCursor(cursor));
             } 
       }
-
-      
-
-
-      // public void mouseClicked(MouseEvent e){
-
-      // }
-
-      // public void mouseExited(MouseEvent e) {
-      //       setCursor(Cursor.getDefaultCursor());
-      // }
-
-      // public void mouseReleased(MouseEvent mouseEvent) {
-      //       start = null;
-      // }
-
-      // public void mousePressed(MouseEvent e) {
-      //       var resizableBorder = (ResizableBorder) getBorder();
-      //       cursor = resizableBorder.getCursor(e);
-      //       start = e.getPoint();
-
-      //       requestFocus();
-      //       repaint();
-      // }
-      
-      
-
-      // public void mouseEntered(MouseEvent e){
-
-      // }
 
       public boolean getIfSelected(int x, int y) {
             for(int i = 0; i < this.width; i++){

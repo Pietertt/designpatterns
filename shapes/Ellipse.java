@@ -2,6 +2,8 @@ package shapes;
 
 import java.awt.*;
 
+import visitor.Visitor;
+
 public class Ellipse extends Shape {
 
       public Ellipse(int x, int y, int width, int height) {
@@ -9,6 +11,10 @@ public class Ellipse extends Shape {
             this.y = y;
             this.width = width;
             this.height = height;
+      }
+
+      public void accept(Visitor visitor){
+            visitor.visitEllipse(this);
       }
 
       @Override
