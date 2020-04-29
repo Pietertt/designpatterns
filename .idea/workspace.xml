@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/io/fileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/io/fileIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/shape.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Kotlin File" />
         <option value="Class" />
       </list>
     </option>
@@ -30,7 +31,11 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1ZTdntzW4UaHmedsHsBI32zxmmM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -95,6 +100,13 @@
       <workItem from="1585677340436" duration="603000" />
       <workItem from="1586420412967" duration="1863000" />
       <workItem from="1586595391518" duration="1199000" />
+      <workItem from="1586639439997" duration="18000" />
+      <workItem from="1586772762057" duration="655000" />
+      <workItem from="1587799855975" duration="8871000" />
+      <workItem from="1587884142241" duration="9285000" />
+      <workItem from="1587971896477" duration="6688000" />
+      <workItem from="1588056883640" duration="11952000" />
+      <workItem from="1588145903945" duration="7009000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>
@@ -210,6 +222,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Bezig met command&#10;~ Place rectangle afgemaakt" />
     <MESSAGE value="Bezig met command&#10;~ Selection almost done" />
     <MESSAGE value="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'" />
