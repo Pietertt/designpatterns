@@ -46,27 +46,6 @@ public class ResizableBorder implements Border {
 
       private Rectangle getRectangle(int x, int y, int width, int height, int location) {
             switch (location) {
-                  case SwingConstants.NORTH:
-                        return new Rectangle(x + width / 2 - 4, y, 8, 8);
-
-                  case SwingConstants.SOUTH:
-                        return new Rectangle(x + width / 2 - 4, y + height - 8, 8, 8);
-
-                  case SwingConstants.WEST:
-                        return new Rectangle(x, y + height / 2 - 4, 8, 8);
-
-                  case SwingConstants.EAST:
-                        return new Rectangle(x + width - 8, y + height / 2 - 4, 8, 8);
-
-                  case SwingConstants.NORTH_WEST:
-                        return new Rectangle(x, y, 8, 8);
-
-                  case SwingConstants.NORTH_EAST:
-                        return new Rectangle(x + width - 8, y, 8, 8);
-
-                  case SwingConstants.SOUTH_WEST:
-                        return new Rectangle(x, y + height - 8, 8, 8);
-
                   case SwingConstants.SOUTH_EAST:
                         return new Rectangle(x + width - 8, y + height - this.size, 8, 8);
                   default:

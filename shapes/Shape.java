@@ -12,11 +12,22 @@ import visitor.Visitor;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 
-public abstract class Shape extends JComponent implements MouseMotionListener, MouseListener {
+import javax.swing.border.Border;
+
+public abstract class Shape extends JComponent implements MouseMotionListener, MouseListener, Border {
       public int x;
       public int y;
       public int width;
       public int height;
+
+      private int size = 8;
+
+      int locations[] = { SwingConstants.NORTH, SwingConstants.SOUTH, SwingConstants.WEST, SwingConstants.EAST,
+                  SwingConstants.NORTH_WEST, SwingConstants.NORTH_EAST, SwingConstants.SOUTH_WEST,
+                  SwingConstants.SOUTH_EAST };
+
+      int cursors[] = { Cursor.N_RESIZE_CURSOR, Cursor.S_RESIZE_CURSOR, Cursor.W_RESIZE_CURSOR, Cursor.E_RESIZE_CURSOR,
+                  Cursor.NW_RESIZE_CURSOR, Cursor.NE_RESIZE_CURSOR, Cursor.SW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR };
 
       /*
             A class is used to store the x, y, width and height
@@ -36,6 +47,52 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
+
+      @Override
+      public Insets getBorderInsets(Component component) {
+            return new Insets(this.size, this.size, this.size, this.size);
+      }
+
+      @Override
+      public boolean isBorderOpaque() {
+            return false;
+      }
+
+      @Override
+      public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
+            // if (component.hasFocus()) {
+                  for (int i = 0; i < locations.length; i++) {
+                        var rect = getRectangle(x, y, width, height, locations[i]);
+                        g.setColor(Color.WHITE);
+                        g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
+                        g.setColor(new Color(80, 155, 229));
+                        g.fillOval(rect.x, rect.y, rect.width, rect.height);
+                  }
+            //}
+      }
+
+      private Rectangle getRectangle(int x, int y, int width, int height, int location) {
+            switch (location) {
+                  case SwingConstants.SOUTH_EAST:
+                        return new Rectangle(x + width - 8, y + height - this.size, 8, 8);
+                  default:
+                        return new Rectangle(0, 0, 0, 0);
+            }
+      }
+
+      public int getCursor(MouseEvent e) {
+            Component component = e.getComponent();
+            int width = component.getWidth();
+            int height = component.getHeight();
+
+            for (int i = 0; i < locations.length; i++) {
+                  var rect = getRectangle(0, 0, width, height, locations[i]);
+                  if (rect.contains(e.getPoint())) {
+                        return cursors[i];
+                  }
+            }
+            return Cursor.MOVE_CURSOR;
+      }
 
       public abstract void accept(Visitor visitor);
 
@@ -66,7 +123,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public void select(MouseEvent e){
             this.selected = true;
 
-            setBorder(new ResizableBorder());
+            setBorder(this);
             repaint();
       }
 
@@ -147,9 +204,9 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   location.width = getWidth();
                   location.height = getHeight();
 
-                  Order drag = new ResizeShapeCommand(this, location);
-                  this.invoker.execute(drag);
-                  this.resizing = false;
+                  // Order drag = new ResizeShapeCommand(this, location);
+                  // this.invoker.execute(drag);
+                  // this.resizing = false;
             }
       }
 
@@ -178,19 +235,18 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   requestFocus();
             }
 
-            var resizableBorder = (ResizableBorder) getBorder();
-            this.cursor = resizableBorder.getCursor(e);
+            var resizableBorder = getBorder();
+            this.cursor = getCursor(e);
             this.start = e.getPoint();
       }
 
       @Override
       public void mouseMoved(MouseEvent e) {
             if (this.selected) {
-                  var resizableBorder = (ResizableBorder) getBorder();
-                  setCursor(Cursor.getPredefinedCursor(resizableBorder.getCursor(e)));
+                  setCursor(Cursor.getPredefinedCursor(getCursor(e)));
             }
+            System.out.println(getCursor(e));
       }   
-
 
       @Override
       public void mouseDragged(MouseEvent e) {
@@ -203,73 +259,6 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   int dy = e.getY() - this.start.y;
 
                   switch (cursor) {
-                        case Cursor.N_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x, y + dy, width, height - dy);
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.S_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x, y, width, height + dy);
-                              start = e.getPoint();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.W_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x + dx, y, width - dx, height);
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.E_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x, y, width + dx, height);
-                              start = e.getPoint();
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.NW_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x + dx, y + dy, width - dx, height - dy);
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.NE_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x, y + dy, width + dx, height - dy);
-                              start = new Point(e.getX(), start.y);
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
-                        case Cursor.SW_RESIZE_CURSOR:
-                              this.resizing = true;
-                              this.dragging = false;
-
-                              setBounds(x + dx, y, width - dx, height + dy);
-                              start = new Point(start.x, e.getY());
-                              this.width = width;
-                              this.height = height;
-                              repaint();
-                              break;
                         case Cursor.SE_RESIZE_CURSOR:
                               this.resizing = true;
                               this.dragging = false;

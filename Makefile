@@ -17,6 +17,7 @@ clean:
 	@cd commands && rm -rf *.class
 	@cd strategies && rm -rf *.class
 	@cd io && rm -rf *.class
+	@cd visitor && rm -rf *.class
 	@echo "Cleaning done!"
 
 run: compile
