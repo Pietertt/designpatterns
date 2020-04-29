@@ -21,7 +21,7 @@ Groepen, bijschriften en file operaties hoeven nu nog niet.
 Voeg file IO toe (volgens de grammatica die verderop uitgelegd wordt).
 Zorg ervoor dat alle acties die een gebruiker kan uitvoeren, via command-objecten worden gedaan. Voeg de mogelijkheid toe om acties ongedaan te maken (onbeperkte undo en redo).
 
-**Stap 3: composite pattern**__
+**Stap 3: composite pattern**<br>
 Voeg groepen toe volgens het composite pattern. 
 Pas ook de file IO aan.
 Bijschriften hoeven nu nog niet.
