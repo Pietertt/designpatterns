@@ -14,12 +14,9 @@ public class ResizableBorder implements Border {
 
       private int size = 8;
 
-      int locations[] = { SwingConstants.NORTH, SwingConstants.SOUTH, SwingConstants.WEST, SwingConstants.EAST,
-                  SwingConstants.NORTH_WEST, SwingConstants.NORTH_EAST, SwingConstants.SOUTH_WEST,
-                  SwingConstants.SOUTH_EAST };
+      int locations[] = { SwingConstants.SOUTH_EAST };
 
-      int cursors[] = { Cursor.N_RESIZE_CURSOR, Cursor.S_RESIZE_CURSOR, Cursor.W_RESIZE_CURSOR, Cursor.E_RESIZE_CURSOR,
-                  Cursor.NW_RESIZE_CURSOR, Cursor.NE_RESIZE_CURSOR, Cursor.SW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR };
+      int cursors[] = { Cursor.SE_RESIZE_CURSOR };
 
       @Override
       public Insets getBorderInsets(Component component) {
@@ -33,37 +30,25 @@ public class ResizableBorder implements Border {
 
       @Override
       public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
-            // if (component.hasFocus()) {
-                  for (int i = 0; i < locations.length; i++) {
-                        var rect = getRectangle(x, y, width, height, locations[i]);
-                        g.setColor(Color.WHITE);
-                        g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
-                        g.setColor(new Color(80, 155, 229));
-                        g.fillOval(rect.x, rect.y, rect.width, rect.height);
-                  }
-            //}
-      }
-
-      private Rectangle getRectangle(int x, int y, int width, int height, int location) {
-            switch (location) {
-                  case SwingConstants.SOUTH_EAST:
-                        return new Rectangle(x + width - 8, y + height - this.size, 8, 8);
-                  default:
-                        return new Rectangle(0, 0, 0, 0);
-            }
+            var rect = new Rectangle(x + width - 8, y + height - this.size, 8, 8);
+            g.setColor(Color.WHITE);
+            g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
+            g.setColor(new Color(80, 155, 229));
+            g.fillOval(rect.x, rect.y, rect.width, rect.height);      
       }
 
       public int getCursor(MouseEvent e) {
             Component component = e.getComponent();
             int width = component.getWidth();
+            System.out.println(width);
             int height = component.getHeight();
 
-            for (int i = 0; i < locations.length; i++) {
-                  var rect = getRectangle(0, 0, width, height, locations[i]);
-                  if (rect.contains(e.getPoint())) {
-                        return cursors[i];
-                  }
+            var rect = new Rectangle(0 + width - 8, 0 + height - this.size, 8, 8);
+            System.out.println(rect);
+            if (rect.contains(e.getPoint())) {
+                  return Cursor.SE_RESIZE_CURSOR;
             }
+            
             return Cursor.MOVE_CURSOR;
       }
 }

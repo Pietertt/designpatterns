@@ -23,11 +23,12 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       private int size = 8;
 
       int locations[] = { SwingConstants.NORTH, SwingConstants.SOUTH, SwingConstants.WEST, SwingConstants.EAST,
-                  SwingConstants.NORTH_WEST, SwingConstants.NORTH_EAST, SwingConstants.SOUTH_WEST,
-                  SwingConstants.SOUTH_EAST };
+            SwingConstants.NORTH_WEST, SwingConstants.NORTH_EAST, SwingConstants.SOUTH_WEST,
+            SwingConstants.SOUTH_EAST };
 
-      int cursors[] = { Cursor.N_RESIZE_CURSOR, Cursor.S_RESIZE_CURSOR, Cursor.W_RESIZE_CURSOR, Cursor.E_RESIZE_CURSOR,
-                  Cursor.NW_RESIZE_CURSOR, Cursor.NE_RESIZE_CURSOR, Cursor.SW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR };
+int cursors[] = { Cursor.N_RESIZE_CURSOR, Cursor.S_RESIZE_CURSOR, Cursor.W_RESIZE_CURSOR, Cursor.E_RESIZE_CURSOR,
+            Cursor.NW_RESIZE_CURSOR, Cursor.NE_RESIZE_CURSOR, Cursor.SW_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR };
+
 
       /*
             A class is used to store the x, y, width and height
@@ -87,6 +88,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
 
             for (int i = 0; i < locations.length; i++) {
                   var rect = getRectangle(0, 0, width, height, locations[i]);
+                  System.out.println(width);
                   if (rect.contains(e.getPoint())) {
                         return cursors[i];
                   }
@@ -123,7 +125,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public void select(MouseEvent e){
             this.selected = true;
 
-            setBorder(this);
+            setBorder(new ResizableBorder());
             repaint();
       }
 
@@ -235,18 +237,20 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
                   requestFocus();
             }
 
-            var resizableBorder = getBorder();
-            this.cursor = getCursor(e);
+            var resizableBorder = (ResizableBorder) getBorder();
+            this.cursor = resizableBorder.getCursor(e);
             this.start = e.getPoint();
       }
 
       @Override
       public void mouseMoved(MouseEvent e) {
             if (this.selected) {
-                  setCursor(Cursor.getPredefinedCursor(getCursor(e)));
+                  var resizableBorder = (ResizableBorder) getBorder();
+                  var cursor = resizableBorder.getCursor(e);
+                  setCursor(Cursor.getPredefinedCursor(cursor));
             }
-            System.out.println(getCursor(e));
       }   
+
 
       @Override
       public void mouseDragged(MouseEvent e) {
