@@ -1,5 +1,6 @@
 package io;
 
+import shapes.ellipse;
 import shapes.rectangle;
 import shapes.shape;
 import ui.board;
@@ -32,11 +33,12 @@ public class fileIO {
 
     private static String saveGrammarCorrectly(board board) {
         StringBuilder grammar = new StringBuilder();
+        int countIdent = 1;
         for(shape shape : board.shapes) {
-            if(shape.getClass().equals(rectangle.class)) {
+            if(shape.getClass().equals(rectangle.class) && shape.shapes.isEmpty() && shape.isRoot()) {
                 grammar.append("rectangle " + shape.getX() + " " + shape.getY() + " "
                         + shape.getWidth() + " " + shape.getHeight()+ "\n");
-            } else {
+            } else if(shape.getClass().equals(ellipse.class) && shape.shapes.isEmpty() && shape.isRoot()) {
                 grammar.append("ellipse " + shape.getX() + " " + shape.getY() + " "
                         + shape.getWidth() + " " + shape.getHeight()+ "\n");
             }
@@ -45,18 +47,34 @@ public class fileIO {
                 for(shape shape1 : shape.shapes) {
                     countGroup++;
                 }
-                grammar.append(" ");
+
                 grammar.append("group " + countGroup + "\n");
-                grammar.append(" ");
+                countIdent++;
+
+                if(shape.getClass().equals(rectangle.class) && !shape.shapes.isEmpty() && shape.isRoot()) {
+                    grammar.append(" ".repeat(Math.max(0, countIdent)));
+                    grammar.append("rectangle " + shape.getX() + " " + shape.getY() + " "
+                            + shape.getWidth() + " " + shape.getHeight()+ "\n");
+                } else if(shape.getClass().equals(ellipse.class) && !shape.shapes.isEmpty() && shape.isRoot()) {
+                    grammar.append(" ".repeat(Math.max(0, countIdent)));
+                    grammar.append("ellipse " + shape.getX() + " " + shape.getY() + " "
+                            + shape.getWidth() + " " + shape.getHeight()+ "\n");
+                }
+
                 for(shape shape1 : shape.shapes) {
                     if(shape1.getClass().equals(rectangle.class)) {
+                        grammar.append(" ".repeat(Math.max(0, countIdent)));
+
                         grammar.append("rectangle " + shape1.getX() + " " + shape1.getY() + " "
                                 + shape1.getWidth() + " " + shape1.getHeight() + "\n");
                     } else {
+                        grammar.append(" ".repeat(Math.max(0, countIdent)));
+
                         grammar.append("ellipse " + shape1.getX() + " " + shape1.getY() + " "
                                 + shape1.getWidth() + " " + shape1.getHeight()+ "\n");
                     }
                 }
+                countIdent++;
             }
         }
         return grammar.toString();
