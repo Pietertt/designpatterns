@@ -5,15 +5,17 @@ import javax.imageio.ImageIO;
 import java.io.File;
 
 import UI.Board;
+import UI.Layers;
 import strategies.*;
 
 public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
+            JPanel layers = new Layers();
             JPanel UI = new JPanel();
 
-            Board board = new Board(frame);
+            Board board = new Board(frame, layers);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
@@ -106,6 +108,7 @@ public class main {
             UI.add(group);
 
             // added the board and the UI to the frame
+            frame.getContentPane().add(layers, BorderLayout.EAST);
             frame.getContentPane().add(UI, BorderLayout.SOUTH);
             frame.getContentPane().add(board);
 

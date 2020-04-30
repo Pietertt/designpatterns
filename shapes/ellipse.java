@@ -13,6 +13,10 @@ public class Ellipse extends Shape {
             this.height = height;
       }
 
+      public String print(){
+            return "ellipse";
+      }
+
       public void accept(Visitor visitor){
             visitor.visitEllipse(this);
       }

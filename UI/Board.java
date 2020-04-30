@@ -1,12 +1,11 @@
 package UI;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -18,15 +17,20 @@ import visitor.*;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
+      public JPanel layers;
+      public JLabel label = new JLabel("<html>");
+
       public Invoker invoker = new Invoker();
       public Strategy strategy;
       public ArrayList<Shape> shapes = new ArrayList<Shape>();
 
       public boolean created = false;
 
-      public Board(JFrame frame){
+      public Board(JFrame frame, JPanel layers){
             super(null);
             this.frame = frame;
+            this.layers = layers;
+            this.layers.add(this.label);
             addMouseListener(this);
             super.setFocusable(true);
 
@@ -50,9 +54,16 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.strategy.place();
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
+
+                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
             }
+            // this.label.setText(label.getText() + "</html>");
+            this.layers.revalidate();
+            this.layers.repaint();
+
       }
 
       @Override
@@ -69,6 +80,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.strategy.place();
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
+
+                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  this.layers.revalidate();
+                  this.layers.repaint();
+
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
 
@@ -108,5 +124,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       @Override
       public void mouseMoved(MouseEvent e) {
   
+      }
+
+      @Override
+      public void paintComponent(Graphics g) {
+
       }
 }

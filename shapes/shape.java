@@ -37,6 +37,7 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       int[] blue = { 80, 155, 229 };
 
       public abstract void accept(Visitor visitor);
+      public abstract String print();
 
       public void place(Invoker invoker, Board board) {
             this.invoker = invoker;

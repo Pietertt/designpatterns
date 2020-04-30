@@ -12,6 +12,10 @@ public class Rectangle extends Shape {
             this.height = height;
       }
 
+      public String print(){
+            return "rectangle";
+      }
+
       public void accept(Visitor visitor){
             visitor.visitRectangle(this);
       }
