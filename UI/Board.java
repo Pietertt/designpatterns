@@ -50,8 +50,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   Visitor move = new moveVisitor();
                   Visitor resize = new resizeVisitor();
 
-                  this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
-                  this.strategy.place();
+                  this.strategy.place(shape.x, shape.y, shape.width, shape.height);
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
 
@@ -60,7 +59,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
             }
-            // this.label.setText(label.getText() + "</html>");
+
             this.layers.revalidate();
             this.layers.repaint();
 
@@ -76,8 +75,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   Visitor move = new moveVisitor();
                   Visitor resize = new resizeVisitor();
 
-                  this.strategy.prepare(e.getX(), e.getY(), 50, 50);
-                  this.strategy.place();
+                  this.strategy.place(e.getX(), e.getY(), 50, 50);
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
 

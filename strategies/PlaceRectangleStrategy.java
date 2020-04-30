@@ -12,11 +12,8 @@ public class PlaceRectangleStrategy extends Strategy {
             this.board = board;
       }
 
-      public void prepare(int x, int y, int width, int height) {
+      public void place(int x, int y, int width, int height) {
             this.shape = new Rectangle(x, y, width, height);
-      }
-
-      public void place() {
             Order place = new PlaceShapeCommand(this.shape, this.invoker, this.board);
             this.invoker.execute(place);
       }

@@ -11,7 +11,6 @@ public abstract class Strategy {
       protected Board board;
       public Shape shape;
 
-      public abstract void prepare(int x, int y, int width, int height);
-      public abstract void place();
+      public abstract void place(int x, int y, int width, int height);
 
 }

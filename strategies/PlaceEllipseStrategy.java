@@ -12,12 +12,9 @@ public class PlaceEllipseStrategy extends Strategy {
             this.board = board;
       }
 
-      public void prepare(int x, int y, int width, int height) {
+      public void place(int x, int y, int width, int height) {
             this.shape = new Ellipse(x, y, width, height);
-      }
-
-      public void place() {
-            PlaceShapeCommand place = new PlaceShapeCommand(this.shape, this.invoker, this.board);
+            Order place = new PlaceShapeCommand(this.shape, this.invoker, this.board);
             this.invoker.execute(place);
       }
 }
