@@ -73,10 +73,37 @@ public class main {
             redo.setFocusPainted(false);
             redo.setContentAreaFilled(false);
 
+            JButton save = new JButton();
+            //save.addActionListener(actionEvent -> board.saveFile());
+            try {
+                  save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
+            } catch(IOException e) {
+                  e.printStackTrace();
+            }
+
+            save.setBorderPainted(false);
+            save.setFocusPainted(false);
+            save.setContentAreaFilled(false);
+
+
+            JButton group = new JButton();
+            //groupShapes.addActionListener(actionEvent -> board.groupShapes());
+            try {
+                  group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
+            } catch(IOException e) {
+                  e.printStackTrace();
+            }
+
+            group.setBorderPainted(false);
+            group.setFocusPainted(false);
+            group.setContentAreaFilled(false);
+
             UI.add(rectangle);
             UI.add(ellipse);
             UI.add(undo);
             UI.add(redo);
+            UI.add(save);
+            UI.add(group);
 
             // added the board and the UI to the frame
             frame.getContentPane().add(UI, BorderLayout.SOUTH);
