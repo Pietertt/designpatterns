@@ -14,7 +14,7 @@ public class resizeVisitor implements Visitor {
       public void visitRectangle(Rectangle rectangle){
             rectangle.addMouseListener(new MouseAdapter(){
                   public void mouseReleased(MouseEvent e){
-                        if(rectangle.resizing){
+                        if (rectangle.resizing) {
                               Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
                               Order drag = new ResizeShapeCommand(rectangle, location);
                               rectangle.invoker.execute(drag);
@@ -26,24 +26,16 @@ public class resizeVisitor implements Visitor {
             rectangle.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
                         if (rectangle.start != null) {
-                              int x = rectangle.getX();
-                              int y = rectangle.getY();
-                              int width = rectangle.getWidth();
-                              int height = rectangle.getHeight();
-                              int dx = e.getX() - rectangle.start.x;
-                              int dy = e.getY() - rectangle.start.y;
-
                               if(rectangle.cursor == Cursor.SE_RESIZE_CURSOR){
                                     rectangle.resizing = true;
                                     rectangle.dragging = false;
       
-                                    rectangle.setBounds(x, y, width + dx, height + dy);
+                                    rectangle.setBounds(rectangle.getX(), rectangle.getY(), rectangle.getWidth() + e.getX() - rectangle.start.x, rectangle.getHeight() + e.getY() - rectangle.start.y);
                                     rectangle.start = e.getPoint();
-                                    rectangle.width = width;
-                                    rectangle.height = height;
+                                    rectangle.width = rectangle.getWidth();
+                                    rectangle.height = rectangle.getHeight();
                                     rectangle.repaint();
                               }
-
                         }
                   }
             });   
@@ -64,24 +56,16 @@ public class resizeVisitor implements Visitor {
             ellipse.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
                         if (ellipse.start != null) {
-                              int x = ellipse.getX();
-                              int y = ellipse.getY();
-                              int width = ellipse.getWidth();
-                              int height = ellipse.getHeight();
-                              int dx = e.getX() - ellipse.start.x;
-                              int dy = e.getY() - ellipse.start.y;
-
                               if(ellipse.cursor == Cursor.SE_RESIZE_CURSOR){
                                     ellipse.resizing = true;
                                     ellipse.dragging = false;
       
-                                    ellipse.setBounds(x, y, width + dx, height + dy);
+                                    ellipse.setBounds(ellipse.getX(), ellipse.getY(), ellipse.getWidth() + e.getX() - ellipse.start.x, ellipse.getHeight() + e.getY() - ellipse.start.y);
                                     ellipse.start = e.getPoint();
-                                    ellipse.width = width;
-                                    ellipse.height = height;
+                                    ellipse.width = ellipse.getWidth();
+                                    ellipse.height = ellipse.getHeight();
                                     ellipse.repaint();
                               }
-
                         }
                   }
             });   

@@ -16,15 +16,16 @@ public class moveVisitor implements Visitor {
             rectangle.addMouseListener(new MouseAdapter(){
                   public void mouseReleased(MouseEvent e){
                         /*
-                              Pollution of the undo/redo history is prevented by only adding 
-                              DragShapeCommand when the shape has been dragged
+                              * Pollution of the undo/redo history is prevented by only adding
+                              * DragShapeCommand when the shape has been dragged
                         */
-                        if(rectangle.dragging){
+                        if (rectangle.dragging) {
                               Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+
                               Order drag = new DragShapeCommand(rectangle, location);
                               rectangle.invoker.execute(drag);
                               rectangle.dragging = false;
-                        }  
+                        }
                   }
 
                   public void mousePressed(MouseEvent e){
@@ -42,15 +43,12 @@ public class moveVisitor implements Visitor {
             rectangle.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
                         if (rectangle.start != null) {
-                              int dx = e.getX() - rectangle.start.x;
-                              int dy = e.getY() - rectangle.start.y;
-            
                               if(rectangle.cursor == Cursor.MOVE_CURSOR){
                                     rectangle.resizing = false;  
                                     rectangle.dragging = true;      
 
                                     var bounds = rectangle.getBounds();
-                                    bounds.translate(dx, dy);
+                                    bounds.translate(e.getX() - rectangle.start.x, e.getY() - rectangle.start.y);
                                     rectangle.setBounds(bounds);
                                     rectangle.width = rectangle.getWidth();
                                     rectangle.height = rectangle.getHeight();
@@ -91,15 +89,12 @@ public class moveVisitor implements Visitor {
             ellipse.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
                         if (ellipse.start != null) {
-                              int dx = e.getX() - ellipse.start.x;
-                              int dy = e.getY() - ellipse.start.y;
-            
                               if(ellipse.cursor == Cursor.MOVE_CURSOR){
                                     ellipse.resizing = false;  
                                     ellipse.dragging = true;      
 
                                     var bounds = ellipse.getBounds();
-                                    bounds.translate(dx, dy);
+                                    bounds.translate(e.getX() - ellipse.start.x, e.getY() - ellipse.start.y);
                                     ellipse.setBounds(bounds);
                                     ellipse.width = ellipse.getWidth();
                                     ellipse.height = ellipse.getHeight();
