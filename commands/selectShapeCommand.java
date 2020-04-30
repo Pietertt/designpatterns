@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class SelectShapeCommand extends Order {
       private MouseEvent event;
 
-      public SelectShapeCommand(Shape shape, MouseEvent event){
+      public SelectShapeCommand(BaseShape shape, MouseEvent event){
             this.shape = shape;
             this.event = event;
       }

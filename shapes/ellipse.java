@@ -4,7 +4,7 @@ import java.awt.*;
 
 import visitor.Visitor;
 
-public class Ellipse extends Shape {
+public class Ellipse extends BaseShape {
 
       public Ellipse(int x, int y, int width, int height) {
             this.x = x;

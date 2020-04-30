@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import visitor.Visitor;
 
-public class Rectangle extends Shape {
+public class Rectangle extends BaseShape {
 
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;

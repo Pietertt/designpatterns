@@ -9,7 +9,7 @@ public abstract class Strategy {
       protected Order order;
       protected Invoker invoker;
       protected Board board;
-      public Shape shape;
+      public BaseShape shape;
 
       public abstract void place(int x, int y, int width, int height);
 

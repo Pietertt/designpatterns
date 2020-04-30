@@ -6,7 +6,7 @@ import UI.Invoker;
 public class ResizeShapeCommand extends Order {
       private Location location;
 
-      public ResizeShapeCommand(Shape shape, Location location){
+      public ResizeShapeCommand(BaseShape shape, Location location){
             this.shape = shape;
             this.location = location;
       }

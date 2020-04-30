@@ -8,7 +8,7 @@ public class PlaceShapeCommand extends Order {
       private Invoker invoker;
       private Board board;
       
-      public PlaceShapeCommand(Shape shape, Invoker invoker, Board board){
+      public PlaceShapeCommand(BaseShape shape, Invoker invoker, Board board){
             this.shape = shape;
             this.invoker = invoker;
             this.board = board;

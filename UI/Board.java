@@ -22,7 +22,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public Invoker invoker = new Invoker();
       public Strategy strategy;
-      public ArrayList<Shape> shapes = new ArrayList<Shape>();
+      public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
 
       public boolean created = false;
 
@@ -36,9 +36,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
             Parser parser = new Parser();
             ArrayList<String> data = parser.read("io/data.txt");
-            ArrayList<Shape> shapes = parser.get(data);
+            ArrayList<BaseShape> shapes = parser.get(data);
 
-            for(Shape shape : shapes){
+            for(BaseShape shape : shapes){
                   if(shape instanceof Rectangle){
                         this.strategy = new PlaceRectangleStrategy(this.invoker, this);  
                   }
@@ -122,7 +122,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mousePressed(MouseEvent e){
-            for(Shape shape : this.shapes){
+            for(BaseShape shape : this.shapes){
                   if(shape.selected){
                         Order deselect = new DeselectShapeCommand(shape, e);
                         this.invoker.execute(deselect);      
