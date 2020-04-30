@@ -12,8 +12,8 @@ public class Rectangle extends BaseShape {
             this.height = height;
       }
 
-      public String print(){
-            return "rectangle";
+      public void print(){
+            System.out.println("rectangle");
       }
 
       public void accept(Visitor visitor){

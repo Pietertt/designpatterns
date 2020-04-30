@@ -11,19 +11,26 @@ import UI.*;
 import shapes.*;
 import visitor.Visitor;
 
-public class Group extends JComponent implements Graphic {
-      private ArrayList<Graphic> children = new ArrayList<Graphic>();
+public class Group extends BaseShape {
+      private ArrayList<BaseShape> children = new ArrayList<BaseShape>();
 
-      public void add(Graphic graphic){
+      public void addd(BaseShape graphic){
             this.children.add(graphic);
       }
 
-      public void remove(Graphic graphic){
+      public void remove(Shape graphic){
             this.children.remove(graphic);
       }
 
       public void accept(Visitor visitor){
 
+      }
+
+      public void print(){
+            
+            for(BaseShape shape : this.children){
+                  shape.print();
+            }
       }
 
       public void place(Invoker invoker, Board board) {

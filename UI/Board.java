@@ -54,13 +54,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
 
-                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
                   
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
             }
 
-            Graphic group = new Group();
+            Group group = new Group();
 
             for(int i = 0; i < 3; i++){
                   Visitor move = new moveVisitor();
@@ -70,15 +70,20 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
 
-                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
                   
                   add(this.strategy.shape);
-                  //group.add(this.strategy.shape);
-                  this.shapes.add(this.strategy.shape);
+                  group.addd(this.strategy.shape);
             }
+
+            this.shapes.add(group);
 
             this.layers.revalidate();
             this.layers.repaint();
+
+            for(BaseShape shape : this.shapes){
+                  shape.print();
+            }
 
       }
 
@@ -96,7 +101,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.strategy.shape.accept(move);
                   this.strategy.shape.accept(resize);
 
-                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
                   this.layers.revalidate();
                   this.layers.repaint();
 

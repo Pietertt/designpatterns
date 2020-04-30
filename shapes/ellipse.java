@@ -13,8 +13,8 @@ public class Ellipse extends BaseShape {
             this.height = height;
       }
 
-      public String print(){
-            return "ellipse";
+      public void print(){
+            System.out.println("ellipse");
       }
 
       public void accept(Visitor visitor){
