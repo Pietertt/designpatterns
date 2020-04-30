@@ -12,7 +12,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.border.Border;
 
-public class Shape extends JComponent implements MouseMotionListener, MouseListener, Graphic {
+public abstract class Shape extends JComponent implements MouseMotionListener, MouseListener, Graphic {
       public int x;
       public int y;
       public int width;
@@ -35,6 +35,9 @@ public class Shape extends JComponent implements MouseMotionListener, MouseListe
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
+
+      public abstract void accept(Visitor visitor);
+      public abstract String print();
 
       public void place(Invoker invoker, Board board) {
             this.invoker = invoker;
