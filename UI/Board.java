@@ -60,6 +60,23 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   this.shapes.add(this.strategy.shape);
             }
 
+            Graphic group = new Group();
+
+            for(int i = 0; i < 3; i++){
+                  Visitor move = new moveVisitor();
+                  Visitor resize = new resizeVisitor();
+
+                  this.strategy.place(i * 100, 400, 50, 50);
+                  this.strategy.shape.accept(move);
+                  this.strategy.shape.accept(resize);
+
+                  this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+                  
+                  add(this.strategy.shape);
+                  //group.add(this.strategy.shape);
+                  this.shapes.add(this.strategy.shape);
+            }
+
             this.layers.revalidate();
             this.layers.repaint();
 

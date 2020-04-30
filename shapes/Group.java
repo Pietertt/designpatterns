@@ -22,6 +22,10 @@ public class Group extends JComponent implements Graphic {
             this.children.remove(graphic);
       }
 
+      public void accept(Visitor visitor){
+
+      }
+
       public void place(Invoker invoker, Board board) {
             
       }
