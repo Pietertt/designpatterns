@@ -37,6 +37,9 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       private boolean root = true;
 
       //saved for dragging groups
+      private int distanceToRootX;
+      private int distanceToRootY;
+
       private int savedRootX;
       private int savedRootY;
       private ArrayList<Integer> savedChildX = new ArrayList<>();
@@ -44,7 +47,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
 
       // Group of shapes
+      //TODO Misschien een idee voor groepen:
+      // public ArrayList<ArrayList<shape>> .... Arraylist in de arraylist dus.
       public ArrayList<shape> shapes;
+
+      //public ArrayList<ArrayList<shape>> shapes;
 
       public void setColor(Graphics g) {
             if(this.selected)
@@ -54,11 +61,13 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void setDraggingFalse() {
-            for(shape shape : shapes) {
-                  shape.setDraggingFalse();
-            }
-
             this.dragging = false;
+
+//            if(!shapes.isEmpty()) {
+//                  for (shape shape : shapes) {
+//                        shape.setDraggingFalse();
+//                  }
+//            }
       }
 
       public void drag() {
@@ -128,49 +137,39 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
 
       public void setDrawTrue() {
-//            for(shape shape : shapes) {
-//                  shape.setDrawTrue();
-//            }
-
             this.width = savedWidth;
             this.height = savedHeight;
             rectDraw = true;
             repaint();
+
+//            for(shape shape : shapes) {
+//                  shape.setDrawTrue();
+//            }
       }
 
       public void setDrawFalse() {
-//            for(shape shape : shapes) {
-//                  shape.setDrawFalse();
-//            }
-
             // size has to be set to zero to ensure you don't select invisible rectangles
             this.width = 0;
             this.height = 0;
             rectDraw = false;
             repaint();
+
+//            for(shape shape : shapes) {
+//                  shape.setDrawFalse();
+//            }
       }
 
       public void setSelectedTrue() {
 
 
-            // save for dragging
-            savedRootX = this.x;
-            savedRootY = this.y;
-            savedChildX.clear();
-            savedChildY.clear();
-
-            if(!shapes.isEmpty()) {
-                  for(int i = 0; i < shapes.size(); i++) {
-                        savedChildX.add(this.shapes.get(i).x);
-                        savedChildY.add(this.shapes.get(i).y);
-                  }
-            }
 
             // can only select when rectangle is actually drawn
             if(rectDraw) {
                   selected = true;
-                  for (shape shape : shapes) {
-                        shape.setSelectedTrue();
+                  if(!shapes.isEmpty()) {
+                        for (shape shape : shapes) {
+                              shape.setSelectedTrue();
+                        }
                   }
             }
             repaint();
@@ -178,12 +177,13 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
 
       public void setSelectedFalse() {
 
-
             // can only deselect when rectangle is actually drawn
             if(rectDraw) {
                   selected = false;
-                  for (shape shape : shapes) {
-                        shape.setSelectedFalse();
+                  if(!shapes.isEmpty()) {
+                        for (shape shape : shapes) {
+                              shape.setSelectedFalse();
+                        }
                   }
             }
             repaint();
@@ -205,9 +205,11 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
                   }
             }
 
-            for (shape shape : shapes) {
-                  if(shape.getIfSelected(x,y)) {
-                        return true;
+            if(!shapes.isEmpty()) {
+                  for (shape shape : shapes) {
+                        if (shape.getIfSelected(x, y)) {
+                              return true;
+                        }
                   }
             }
 
@@ -233,21 +235,40 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
                   repaint();
                   if(!shapes.isEmpty()) {
                         System.out.println("Not empty shapes");
-                        int i = 0;
-                        for (shape shape : shapes) {
+                        //int i = 0;
+                        dragAllChildren();
+                        //for (shape shape : shapes) {
                               //shape.x = (this.x + (shape.x - this.x));
                               //shape.y = (this.y + (shape.y - this.y));
-                              shape.x = this.x + (savedChildX.get(i) - savedRootX);
-                              shape.y = this.y + (savedChildY.get(i) - savedRootY);
-                              i += 1;
+                              //shape.x = this.x + (savedChildX.get(i) - savedRootX);
+                              //shape.y = this.y + (savedChildY.get(i) - savedRootY);
+                              //i += 1;
                               //shape.y = e.getY() + shape.y;
-                              repaint();
-                        }
+                              //repaint();
+                        //}
 
                   }
 
             }
 
+
+      }
+
+      private void dragAllChildren() {
+
+            int i = 0;
+            for (shape shapes : shapes) {
+                  shapes.x = this.x + shapes.distanceToRootX;
+                  shapes.y = this.y + shapes.distanceToRootY;
+                  //shapes.x = this.x + (savedChildX.get(i) - savedRootX);
+                  //shapes.y = this.y + (savedChildY.get(i) - savedRootY);
+
+                  if(!shapes.shapes.isEmpty()) {
+                        shapes.dragAllChildren();
+                  }
+
+                  i += 1;
+            }
 
       }
 
@@ -257,8 +278,36 @@ public abstract class shape extends JComponent implements receiver, MouseMotionL
       }
 
       public void addToGroup(shape shape) {
-            System.out.println("Not empty shapes");
-            this.shapes.add(shape);
+
+
+
+            System.out.println("Add to group");
+            shapes.add(shape);
+            shape.distanceToRootX = shape.x - this.x;
+            shape.distanceToRootY = shape.y - this.y;
+
+
+            //TODO klopt dit wel...?
+//            if(!shape.shapes.isEmpty()) {
+//                  for (int i = 0; i < this.shapes.size(); i++)
+//                        shape.addToGroup(shape.shapes.get(i));
+//            }
+
+
+            //TODO er gaat hier iets mis denk ik..
+
+            // save for dragging
+//            savedRootX = this.x;
+//            savedRootY = this.y;
+//            savedChildX.clear();
+//            savedChildY.clear();
+//
+//            if(!shapes.isEmpty()) {
+//                  for(int i = 0; i < shapes.size(); i++) {
+//                        savedChildX.add(this.shapes.get(i).x);
+//                        savedChildY.add(this.shapes.get(i).y);
+//                  }
+//            }
       }
 
       public boolean isRoot() {
