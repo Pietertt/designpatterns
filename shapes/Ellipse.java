@@ -4,13 +4,17 @@ import java.awt.*;
 
 import visitor.Visitor;
 
-public class Ellipse extends Shape {
+public class Ellipse extends BaseShape {
 
       public Ellipse(int x, int y, int width, int height) {
             this.x = x;
             this.y = y;
             this.width = width;
             this.height = height;
+      }
+
+      public void print(){
+            System.out.println("ellipse");
       }
 
       public void accept(Visitor visitor){

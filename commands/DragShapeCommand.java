@@ -6,7 +6,7 @@ import UI.Invoker;
 public class DragShapeCommand extends Order {
       private Location location;
 
-      public DragShapeCommand(Shape shape, Location location){
+      public DragShapeCommand(BaseShape shape, Location location){
             this.shape = shape;
             this.location = location;
       }
