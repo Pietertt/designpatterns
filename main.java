@@ -7,15 +7,16 @@ import java.io.File;
 import UI.Board;
 import UI.Layers;
 import strategies.*;
+import shapes.*;
 
 public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
-            JPanel layers = new Layers();
+            // JPanel layers = new Layers();
             JPanel UI = new JPanel();
 
-            Board board = new Board(frame, layers);
+            Board board = new Board(frame);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
@@ -108,13 +109,17 @@ public class main {
             UI.add(group);
 
             // added the board and the UI to the frame
-            frame.getContentPane().add(layers, BorderLayout.EAST);
-            frame.getContentPane().add(UI, BorderLayout.SOUTH);
+            //frame.getContentPane().add(layers, BorderLayout.EAST);
             frame.getContentPane().add(board);
+            frame.getContentPane().add(UI, BorderLayout.SOUTH);
 
-            frame.setLocation(1000, 0);
-            frame.pack();
+            //frame.setLocation(1000, 0);
+            //frame.pack();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(600, 600);
+            frame.setLocation(1000, 0);
             frame.setVisible(true);
+
+            board.init();
       }
 }

@@ -18,7 +18,7 @@ public class Ellipse extends BaseShape {
       }
 
       public void accept(Visitor visitor){
-            visitor.visitEllipse(this);
+            // visitor.visitEllipse(this);
       }
 
       @Override

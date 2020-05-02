@@ -17,7 +17,6 @@ import visitor.*;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
-      public JPanel layers;
       public JLabel label = new JLabel("<html>");
 
       public Invoker invoker = new Invoker();
@@ -26,92 +25,99 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public boolean created = false;
 
-      public Board(JFrame frame, JPanel layers){
-            super(null);
+      public Board(JFrame frame){
+            //super(null);
             this.frame = frame;
-            this.layers = layers;
-            this.layers.add(this.label);
+            //this.layers.add(this.label);
             addMouseListener(this);
             super.setFocusable(true);
 
-            Parser parser = new Parser();
-            ArrayList<String> data = parser.read("io/data.txt");
-            ArrayList<BaseShape> shapes = parser.get(data);
+            // Parser parser = new Parser();
+            // ArrayList<String> data = parser.read("io/data.txt");
+            // ArrayList<BaseShape> shapes = parser.get(data);
 
-            for(BaseShape shape : shapes){
-                  if(shape instanceof Rectangle){
-                        this.strategy = new PlaceRectangleStrategy(this.invoker, this);  
-                  }
+            // for(BaseShape shape : shapes){
+            //       if(shape instanceof Rectangle){
+            //             this.strategy = new PlaceRectangleStrategy(this.invoker, this);  
+            //       }
 
-                  if(shape instanceof Ellipse){
-                        this.strategy = new PlaceEllipseStrategy(this.invoker, this);  
-                  }
+            //       if(shape instanceof Ellipse){
+            //             this.strategy = new PlaceEllipseStrategy(this.invoker, this);  
+            //       }
 
-                  Visitor move = new moveVisitor();
-                  Visitor resize = new resizeVisitor();
+            //       Visitor move = new moveVisitor();
+            //       Visitor resize = new resizeVisitor();
 
-                  this.strategy.place(shape.x, shape.y, shape.width, shape.height);
-                  this.strategy.shape.accept(move);
-                  this.strategy.shape.accept(resize);
+            //       this.strategy.place(shape.x, shape.y, shape.width, shape.height);
+            //       this.strategy.shape.accept(move);
+            //       this.strategy.shape.accept(resize);
 
-                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+            //       //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
                   
-                  add(this.strategy.shape);
-                  this.shapes.add(this.strategy.shape);
-            }
+            //       add(this.strategy.shape);
+            //       this.shapes.add(this.strategy.shape);
+            // }
 
-            Group group = new Group();
+            // Group group = new Group();
 
-            for(int i = 0; i < 3; i++){
-                  Visitor move = new moveVisitor();
-                  Visitor resize = new resizeVisitor();
+            // for(int i = 0; i < 3; i++){
+            //       Visitor move = new moveVisitor();
+            //       Visitor resize = new resizeVisitor();
 
-                  this.strategy.place(i * 100, 400, 50, 50);
-                  this.strategy.shape.accept(move);
-                  this.strategy.shape.accept(resize);
+            //       this.strategy.place(i * 100, 400, 50, 50);
+            //       this.strategy.shape.accept(move);
+            //       this.strategy.shape.accept(resize);
 
-                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+            //       //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
                   
-                  add(this.strategy.shape);
-                  group.addd(this.strategy.shape);
-            }
+            //       add(this.strategy.shape);
+            //       group.addd(this.strategy.shape);
+            // }
 
-            this.shapes.add(group);
+            // this.shapes.add(group);
 
-            this.layers.revalidate();
-            this.layers.repaint();
+            // this.layers.revalidate();
+            // this.layers.repaint();
 
-            for(BaseShape shape : this.shapes){
-                  shape.print();
-            }
-
+            // for(BaseShape shape : this.shapes){
+            //       shape.print();
+            // }
       }
 
-      @Override
-      public Dimension getPreferredSize() {
-            return new Dimension(500, 500);
+      // @Override
+      // public Dimension getPreferredSize() {
+      //       return new Dimension(500, 500);
+      // }
+
+      public void init(){
+            for(int i = 0; i < 5; i++){
+                  BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
+                  frame.add(rect);
+                  frame.revalidate();
+                  frame.repaint();
+            }
       }
 
       public void mouseClicked(MouseEvent e){
-            if(this.created){
-                  Visitor move = new moveVisitor();
-                  Visitor resize = new resizeVisitor();
+            // if(this.created){
+            //       Visitor move = new moveVisitor();
+            //       Visitor resize = new resizeVisitor();
 
-                  this.strategy.place(e.getX(), e.getY(), 50, 50);
-                  this.strategy.shape.accept(move);
-                  this.strategy.shape.accept(resize);
+            //       this.strategy.place(e.getX(), e.getY(), 50, 50);
+            //       this.strategy.shape.accept(move);
+            //       this.strategy.shape.accept(resize);
 
-                  //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
-                  this.layers.revalidate();
-                  this.layers.repaint();
+            //       //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+            //       this.layers.revalidate();
+            //       this.layers.repaint();
 
-                  add(this.strategy.shape);
-                  this.shapes.add(this.strategy.shape);
+            //       add(this.strategy.shape);
+            //       this.shapes.add(this.strategy.shape);
 
-                  revalidate();
-                  repaint();
-                  this.created = false;
-            }
+            //       revalidate();
+            //       repaint();
+            //       this.created = false;
+            // }
       }
 
       public void mouseExited(MouseEvent e){

@@ -1,9 +1,16 @@
 package shapes;
 
 import java.awt.*;
+
+import javax.swing.JComponent;
+
 import visitor.Visitor;
 
 public class Rectangle extends BaseShape {
+      // public int x;
+      // public int y;
+      // public int width;
+      // public int height;
 
       public Rectangle(int x, int y, int width, int height) {
             this.x = x;
@@ -17,23 +24,24 @@ public class Rectangle extends BaseShape {
       }
 
       public void accept(Visitor visitor){
-            visitor.visitRectangle(this);
+            // visitor.visitRectangle(this);
       }
 
       @Override
       public void paintComponent(Graphics g) {
-            if(this.drawed){
-                  if(this.selected){
+            System.out.println(this.x);
+            // if(this.drawed){
+            //       if(this.selected){
+            //             super.paintComponent(g);
+            //             g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+            //             g.fillRect(4, 4, getWidth() - 8, getHeight() - 8);
+            //             g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+            //             g.drawRect(2, 2, getWidth() - 4, getHeight() - 4);
+            //       } else {
                         super.paintComponent(g);
-                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(4, 4, getWidth() - 8, getHeight() - 8);
-                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.drawRect(2, 2, getWidth() - 4, getHeight() - 4);
-                  } else {
-                        super.paintComponent(g);
-                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(4, 4, getWidth() - 8, getHeight() - 8);
-                  }
-            }
+                        g.setColor(/* new Color(/* this.gray[0], this.gray[1], this.gray[2])*/ Color.BLACK);
+                        g.fillRect(this.x, this.y, this.width - 8, this.height - 8);
+            //       }
+            // }
       }
 }
