@@ -116,6 +116,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                         Order select = new SelectShapeCommand(shape, e);
                         this.invoker.execute(select);
                   }
+
+                  if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                        System.out.println("Dragging...");
+                  }
+
+                  // if(!shape.getIfSelected(e.getX(), e.getY())){
+                  //       if(!shape.getHandleIfSelected(e.getX(), e.getY())){
+                  //             if(shape.selected){
+                  //                   Order deselect = new DeselectShapeCommand(shape, e);
+                  //                   this.invoker.execute(deselect);
+                  //             }
+                  //       }
+                  // }
             }
             // if(this.created){
             //       Visitor move = new moveVisitor();
@@ -151,13 +164,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void mousePressed(MouseEvent e){
-            for(BaseShape shape : this.shapes){
-                  if(shape.selected){
-                        Order deselect = new DeselectShapeCommand(shape, e);
-                        this.invoker.execute(deselect);      
-                        requestFocus();                
-                  }
-            }
+           
       }
 
       @Override

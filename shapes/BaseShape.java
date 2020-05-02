@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public abstract class BaseShape extends JComponent /*implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
+public abstract class BaseShape extends JComponent implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
       public int x;
       public int y;
       public int width;
@@ -38,6 +38,14 @@ public abstract class BaseShape extends JComponent /*implements MouseMotionListe
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
+
+      public BaseShape(){
+            addMouseMotionListener(this);
+            setFocusable(true);
+            this.requestFocus();
+      }
+
+      public abstract boolean getHandleIfSelected(int x, int y);
 
       // public abstract void accept(Visitor visitor);
       // public abstract void print();
@@ -158,19 +166,20 @@ public abstract class BaseShape extends JComponent /*implements MouseMotionListe
       // //       this.start = e.getPoint();
       // // }
 
-      // @Override
-      // public void mouseMoved(MouseEvent e) {
-      //       if (this.selected) {
-      //             var resizableBorder = (ResizableBorder) getBorder();
-      //             var cursor = resizableBorder.getCursor(e);
-      //             setCursor(Cursor.getPredefinedCursor(cursor));
-      //       }
-      // }
+      @Override
+      public void mouseMoved(MouseEvent e) {
+            // if (this.selected) {
+            //       var resizableBorder = (ResizableBorder) getBorder();
+            //       var cursor = resizableBorder.getCursor(e);
+            //       setCursor(Cursor.getPredefinedCursor(cursor));
+            // }
+            System.out.println("moved");
+      }
 
-      // @Override
-      // public void mouseDragged(MouseEvent e) {
+      @Override
+      public void mouseDragged(MouseEvent e) {
 
-      // }
+      }
 
       public boolean getIfSelected(int x, int y) {
             for (int i = 0; i < this.width; i++) {
