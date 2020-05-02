@@ -86,15 +86,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             // }
       }
 
-      // @Override
-      // public Dimension getPreferredSize() {
-      //       return new Dimension(500, 500);
-      // }
-
       public void init(){
             for(int i = 0; i < 5; i++){
-                  BaseShape rect = new BaseShape(50 + i * 75, 200, 50, 50);
-
+                  BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
                   this.frame.add(rect);
                   this.shapes.add(rect);
                   frame.revalidate();

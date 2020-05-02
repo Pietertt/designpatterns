@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class BaseShape extends JComponent /*implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
+public abstract class BaseShape extends JComponent /*implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
       public int x;
       public int y;
       public int width;
@@ -42,12 +42,6 @@ public class BaseShape extends JComponent /*implements MouseMotionListener /* Mo
       // public abstract void accept(Visitor visitor);
       // public abstract void print();
 
-      public BaseShape(int x, int y, int width, int height){
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-      }
             //setOpaque(true);
             //addMouseMotionListener(this);
             //this.drawed = true;
