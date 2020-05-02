@@ -14,112 +14,116 @@ public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
-            JPanel layers = new Layers();
-            JPanel UI = new JPanel();
+            JPanel test = new JPanel();
+            //JPanel layers = new Layers();
+            //JPanel UI = new JPanel();
 
             Board board = new Board(frame);
 
-            JButton rectangle = new JButton();
-            rectangle.addActionListener(actionEvent -> {
-                  board.created = true;
-                  board.strategy = new PlaceRectangleStrategy(board.invoker, board);     
-            });
-            try {
-                  rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
-            } catch (IOException e) {
+            // JButton rectangle = new JButton();
+            // rectangle.addActionListener(actionEvent -> {
+            //       board.created = true;
+            //       //board.strategy = new PlaceRectangleStrategy(board.invoker, board);     
+            // });
+            // try {
+            //       rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
+            // } catch (IOException e) {
 
-            }
+            // }
 
-            rectangle.setBorderPainted(false);
-            rectangle.setFocusPainted(false);
-            rectangle.setContentAreaFilled(false);
+            // rectangle.setBorderPainted(false);
+            // rectangle.setFocusPainted(false);
+            // rectangle.setContentAreaFilled(false);
 
-            JButton ellipse = new JButton();
+            // JButton ellipse = new JButton();
 
-            ellipse.addActionListener(actionEvent -> {
-                  board.created = true;
-                  board.strategy = new PlaceEllipseStrategy(board.invoker, board);
-            });
+            // ellipse.addActionListener(actionEvent -> {
+            //       //board.created = true;
+            //       //board.strategy = new PlaceEllipseStrategy(board.invoker, board);
+            // });
 
-            try {
-                  ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
-            } catch (IOException e) {
+            // try {
+            //       ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
+            // } catch (IOException e) {
 
-            }
+            // }
 
-            ellipse.setBorderPainted(false);
-            ellipse.setFocusPainted(false);
-            ellipse.setContentAreaFilled(false);
+            // ellipse.setBorderPainted(false);
+            // ellipse.setFocusPainted(false);
+            // ellipse.setContentAreaFilled(false);
 
-            // Undo button
-            JButton undo = new JButton();
-            undo.addActionListener(actionEvent -> board.invoker.undo());
-            try {
-                  undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
-            } catch (IOException e) {
+            // // Undo button
+            // JButton undo = new JButton();
+            // undo.addActionListener(actionEvent -> board.invoker.undo());
+            // try {
+            //       undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
+            // } catch (IOException e) {
 
-            }
+            // }
 
-            undo.setBorderPainted(false);
-            undo.setFocusPainted(false);
-            undo.setContentAreaFilled(false);
+            // undo.setBorderPainted(false);
+            // undo.setFocusPainted(false);
+            // undo.setContentAreaFilled(false);
 
-            // Undo button
-            JButton redo = new JButton();
-            redo.addActionListener(actionEvent -> board.invoker.redo());
-            try {
-                  redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
-            } catch (IOException e) {
+            // // Undo button
+            // JButton redo = new JButton();
+            // redo.addActionListener(actionEvent -> board.invoker.redo());
+            // try {
+            //       redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
+            // } catch (IOException e) {
 
-            }
+            // }
 
-            redo.setBorderPainted(false);
-            redo.setFocusPainted(false);
-            redo.setContentAreaFilled(false);
+            // redo.setBorderPainted(false);
+            // redo.setFocusPainted(false);
+            // redo.setContentAreaFilled(false);
 
-            JButton save = new JButton();
-            //save.addActionListener(actionEvent -> board.saveFile());
-            try {
-                  save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
-            } catch(IOException e) {
-                  e.printStackTrace();
-            }
+            // JButton save = new JButton();
+            // //save.addActionListener(actionEvent -> board.saveFile());
+            // try {
+            //       save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
+            // } catch(IOException e) {
+            //       e.printStackTrace();
+            // }
 
-            save.setBorderPainted(false);
-            save.setFocusPainted(false);
-            save.setContentAreaFilled(false);
+            // save.setBorderPainted(false);
+            // save.setFocusPainted(false);
+            // save.setContentAreaFilled(false);
 
 
-            JButton group = new JButton();
-            //groupShapes.addActionListener(actionEvent -> board.groupShapes());
-            try {
-                  group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
-            } catch(IOException e) {
-                  e.printStackTrace();
-            }
+            // JButton group = new JButton();
+            // //groupShapes.addActionListener(actionEvent -> board.groupShapes());
+            // try {
+            //       group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
+            // } catch(IOException e) {
+            //       e.printStackTrace();
+            // }
 
-            group.setBorderPainted(false);
-            group.setFocusPainted(false);
-            group.setContentAreaFilled(false);
+            // group.setBorderPainted(false);
+            // group.setFocusPainted(false);
+            // group.setContentAreaFilled(false);
 
-            UI.add(rectangle);
-            UI.add(ellipse);
-            UI.add(undo);
-            UI.add(redo);
-            UI.add(save);
-            UI.add(group);
+            // UI.add(rectangle);
+            // UI.add(ellipse);
+            // UI.add(undo);
+            // UI.add(redo);
+            // UI.add(save);
+            // UI.add(group);
 
-            // added the board and the UI to the frame
-            frame.getContentPane().add(layers, BorderLayout.EAST);
-            frame.getContentPane().add(UI, BorderLayout.SOUTH);
-            frame.getContentPane().add(board);
+            // // added the board and the UI to the frame
+            // //frame.getContentPane().add(layers, BorderLayout.EAST);
+            // frame.getContentPane().add(UI, BorderLayout.SOUTH);
+            frame.getContentPane().add(test);
 
             frame.setLocation(1000, 0);
             frame.setSize(600, 600);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
 
-            board.init();
+            BaseShape rect = new Rectangle(200, 200, 50, 50);
+            frame.add(rect);
+            frame.revalidate();
+            frame.repaint();
 
       }
 }

@@ -17,23 +17,22 @@ import io.Parser;
 import strategies.*;
 import visitor.*;
 
-public class Board extends JPanel implements MouseListener, MouseMotionListener {
+public class Board extends JPanel /*implements MouseListener, MouseMotionListener */{
       public JFrame frame;
-      public JLabel label = new JLabel("<html>");
 
       public Invoker invoker = new Invoker();
-      public Strategy strategy;
       public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
 
-      public boolean created = false;
+      //public boolean created = false;
 
       public Board(JFrame frame){
             //super(null);
+            System.out.println("Fucking hell");
             this.frame = frame;
             //this.layers.add(this.label);
-            addMouseListener(this);
-            addMouseMotionListener(this);
-            super.setFocusable(true);
+            // addMouseListener(this);
+            // addMouseMotionListener(this);
+            // super.setFocusable(true);
 
             // Parser parser = new Parser();
             // ArrayList<String> data = parser.read("io/data.txt");
@@ -87,118 +86,118 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             // }
       }
 
-      public void init(){
-            for(int i = 0; i < 5; i++){
-                  BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
-                  this.frame.add(rect);
-                  this.shapes.add(rect);
-            }
-            frame.revalidate();
-            frame.repaint();
-      }
+      // public void init(){
+      //       for(int i = 0; i < 5; i++){
+      //             BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
+      //             this.frame.add(rect);
+      //             this.shapes.add(rect);
+      //       }
+      //       frame.revalidate();
+      //       frame.repaint();
+      // }
 
-      // Border blackline = BorderFactory.createTitledBorder("Title");
-      // JPanel panel = new JPanel();
-      // LayoutManager layout = new FlowLayout();  
-      // panel.setLayout(layout);       
+      // // Border blackline = BorderFactory.createTitledBorder("Title");
+      // // JPanel panel = new JPanel();
+      // // LayoutManager layout = new FlowLayout();  
+      // // panel.setLayout(layout);       
 
-      // JPanel panel1 = new JPanel();
-      // String spaces = "                   ";
+      // // JPanel panel1 = new JPanel();
+      // // String spaces = "                   ";
 
-      // panel1.add(new JLabel(spaces + "Title border to JPanel" + spaces));  
-      // panel1.setBorder(blackline);
+      // // panel1.add(new JLabel(spaces + "Title border to JPanel" + spaces));  
+      // // panel1.setBorder(blackline);
 
-      // panel.add(panel1);
-      // frame.getContentPane().add(panel, BorderLayout.CENTER);    
+      // // panel.add(panel1);
+      // // frame.getContentPane().add(panel, BorderLayout.CENTER);    
 
-      public void mouseClicked(MouseEvent e){
+      // public void mouseClicked(MouseEvent e){
             
-            // if(this.created){
-            //       Visitor move = new moveVisitor();
-            //       Visitor resize = new resizeVisitor();
+      //       // if(this.created){
+      //       //       Visitor move = new moveVisitor();
+      //       //       Visitor resize = new resizeVisitor();
 
-            //       this.strategy.place(e.getX(), e.getY(), 50, 50);
-            //       this.strategy.shape.accept(move);
-            //       this.strategy.shape.accept(resize);
+      //       //       this.strategy.place(e.getX(), e.getY(), 50, 50);
+      //       //       this.strategy.shape.accept(move);
+      //       //       this.strategy.shape.accept(resize);
 
-            //       //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
-            //       this.layers.revalidate();
-            //       this.layers.repaint();
+      //       //       //this.label.setText(label.getText() + this.strategy.shape.print() + "<br>");
+      //       //       this.layers.revalidate();
+      //       //       this.layers.repaint();
 
-            //       add(this.strategy.shape);
-            //       this.shapes.add(this.strategy.shape);
+      //       //       add(this.strategy.shape);
+      //       //       this.shapes.add(this.strategy.shape);
 
-            //       revalidate();
-            //       repaint();
-            //       this.created = false;
-            // }
-      }
+      //       //       revalidate();
+      //       //       repaint();
+      //       //       this.created = false;
+      //       // }
+      // }
 
-      public void mouseExited(MouseEvent e){
+      // public void mouseExited(MouseEvent e){
 
-      }
+      // }
 
-      public void mouseEntered(MouseEvent e){
+      // public void mouseEntered(MouseEvent e){
 
-      } 
+      // } 
 
-      public void mouseReleased(MouseEvent e){
-            for(BaseShape shape : this.shapes){
-                  if(shape.dragging){
-                        shape.dragging = false;
-                  }
+      // public void mouseReleased(MouseEvent e){
+      //       for(BaseShape shape : this.shapes){
+      //             if(shape.dragging){
+      //                   shape.dragging = false;
+      //             }
 
-                  if(shape.resizing){
-                        shape.resizing = false;
-                  }
-            }
-      }
+      //             if(shape.resizing){
+      //                   shape.resizing = false;
+      //             }
+      //       }
+      // }
 
-      public void mousePressed(MouseEvent e){
-            for(BaseShape shape : this.shapes){
-                  if(shape.drawed){
-                        if(shape.getIfSelected(e.getX(), e.getY())){
-                              Order select = new SelectShapeCommand(shape, e);
-                              this.invoker.execute(select);
-                        }
+      // public void mousePressed(MouseEvent e){
+      //       for(BaseShape shape : this.shapes){
+      //             if(shape.drawed){
+      //                   if(shape.getIfSelected(e.getX(), e.getY())){
+      //                         Order select = new SelectShapeCommand(shape, e);
+      //                         this.invoker.execute(select);
+      //                   }
       
-                        if(shape.selected){
-                              if(shape.getIfSelected(e.getX(), e.getY())){
-                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                    this.invoker.execute(drag);
-                              } else {
-                                    if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                          Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                          this.invoker.execute(resize);
-                                    } else {
-                                          Order deselect = new DeselectShapeCommand(shape, e);
-                                          this.invoker.execute(deselect);
-                                    }
-                              }
-                        }
-                  }
-            }
-      }
+      //                   if(shape.selected){
+      //                         if(shape.getIfSelected(e.getX(), e.getY())){
+      //                               Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+      //                               this.invoker.execute(drag);
+      //                         } else {
+      //                               if(shape.getHandleIfSelected(e.getX(), e.getY())){
+      //                                     Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+      //                                     this.invoker.execute(resize);
+      //                               } else {
+      //                                     Order deselect = new DeselectShapeCommand(shape, e);
+      //                                     this.invoker.execute(deselect);
+      //                               }
+      //                         }
+      //                   }
+      //             }
+      //       }
+      // }
 
-      @Override
-      public void mouseMoved(MouseEvent e){
+      // @Override
+      // public void mouseMoved(MouseEvent e){
 
-      }
+      // }
 
-      @Override
-      public void mouseDragged(MouseEvent e){
-            for(BaseShape shape : this.shapes){
-                  if(shape.resizing){
-                        shape.width = e.getX() - shape.start.x;
-                        shape.height = e.getY() - shape.start.y;
-                        shape.repaint();
-                  }
+      // @Override
+      // public void mouseDragged(MouseEvent e){
+      //       for(BaseShape shape : this.shapes){
+      //             if(shape.resizing){
+      //                   shape.width = e.getX() - shape.start.x;
+      //                   shape.height = e.getY() - shape.start.y;
+      //                   shape.repaint();
+      //             }
 
-                  if(shape.dragging){
-                        shape.x = e.getX();
-                        shape.y = e.getY();
-                        shape.repaint();
-                  }
-            }
-      }
+      //             if(shape.dragging){
+      //                   shape.x = e.getX();
+      //                   shape.y = e.getY();
+      //                   shape.repaint();
+      //             }
+      //       }
+      // }
 }
