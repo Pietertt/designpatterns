@@ -17,7 +17,7 @@ import io.Parser;
 import strategies.*;
 import visitor.*;
 
-public class Board extends JPanel implements MouseListener, MouseMotionListener {
+public class Board extends JPanel implements MouseListener {
       public JFrame frame;
       public JLabel label = new JLabel("<html>");
 
@@ -117,9 +117,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                         this.invoker.execute(select);
                   }
 
-                  if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                        System.out.println("Dragging...");
+                  if(shape.selected){
+                        if(!shape.getIfSelected(e.getX(), e.getY())){
+                              if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                                    System.out.println("Dragging");
+                              } else {
+                                    Order deselect = new DeselectShapeCommand(shape, e);
+                                    this.invoker.execute(deselect);
+                              }
+                        }
                   }
+
+                  // if(!shape.getIfSelected(e.getY(), e.getY())){
+                  //       if(!shape.getHandleIfSelected(e.getX(), e.getY())){
+                  //             if(shape.selected){
+                  //                   Order deselect = new DeselectShapeCommand(shape, e);
+                  //                   this.invoker.execute(deselect);
+                  //             }
+                  //       }
+                  // }
 
                   // if(!shape.getIfSelected(e.getX(), e.getY())){
                   //       if(!shape.getHandleIfSelected(e.getX(), e.getY())){
@@ -165,16 +181,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mousePressed(MouseEvent e){
            
-      }
-
-      @Override
-      public void mouseDragged(MouseEvent e) {
-  
-      }
-  
-      @Override
-      public void mouseMoved(MouseEvent e) {
-  
       }
 
       @Override

@@ -2,6 +2,7 @@ package shapes;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import javax.swing.JComponent;
 
@@ -15,6 +16,7 @@ public class Rectangle extends BaseShape {
             this.y = y;
             this.width = width;
             this.height = height;
+            setLayout(new FlowLayout());  
             
             this.handle = new Handle(this.x + this.width, this.y + this.height, 12, 12);
       }

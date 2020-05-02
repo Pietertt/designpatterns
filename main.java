@@ -6,6 +6,8 @@ import java.io.File;
 
 import UI.Board;
 import UI.Layers;
+import shapes.BaseShape;
+import shapes.Rectangle;
 import strategies.*;
 
 public class main {
@@ -118,5 +120,6 @@ public class main {
             frame.setVisible(true);
 
             board.init();
+
       }
 }
