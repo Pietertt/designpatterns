@@ -7,19 +7,19 @@ public class DeselectShapeCommand extends Order {
       private MouseEvent event;
 
       public DeselectShapeCommand(BaseShape shape, MouseEvent event){
-            // this.shape = shape;
-            // this.event = event;
+            this.shape = shape;
+            this.event = event;
       }
 
       public void execute(){
-            // this.shape.deselect();
+            this.shape.deselect();
       }
 
       public void undo(){
-            // this.shape.select(event);
+            this.shape.select(event);
       }
 
       public void redo(){
-            // this.shape.deselect();
+            this.shape.deselect();
       }
 }

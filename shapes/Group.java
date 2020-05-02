@@ -11,7 +11,7 @@ import UI.*;
 import shapes.*;
 import visitor.Visitor;
 
-public class Group extends BaseShape {
+public class Group /*extends BaseShape*/ {
       private ArrayList<BaseShape> children = new ArrayList<BaseShape>();
 
       public void addd(BaseShape graphic){
@@ -28,9 +28,9 @@ public class Group extends BaseShape {
 
       public void print(){
             
-            for(BaseShape shape : this.children){
-                  shape.print();
-            }
+            // for(BaseShape shape : this.children){
+            //       shape.print();
+            // }
       }
 
       public void place(Invoker invoker, Board board) {

@@ -1,8 +1,10 @@
 package UI;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -91,14 +93,36 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void init(){
             for(int i = 0; i < 5; i++){
-                  BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
-                  frame.add(rect);
+                  BaseShape rect = new BaseShape(50 + i * 75, 200, 50, 50);
+
+                  this.frame.add(rect);
+                  this.shapes.add(rect);
                   frame.revalidate();
                   frame.repaint();
             }
       }
 
+      // Border blackline = BorderFactory.createTitledBorder("Title");
+      // JPanel panel = new JPanel();
+      // LayoutManager layout = new FlowLayout();  
+      // panel.setLayout(layout);       
+
+      // JPanel panel1 = new JPanel();
+      // String spaces = "                   ";
+
+      // panel1.add(new JLabel(spaces + "Title border to JPanel" + spaces));  
+      // panel1.setBorder(blackline);
+
+      // panel.add(panel1);
+      // frame.getContentPane().add(panel, BorderLayout.CENTER);    
+
       public void mouseClicked(MouseEvent e){
+            for(BaseShape shape : this.shapes){
+                  if(shape.getIfSelected(e.getX(), e.getY())){
+                        Order select = new SelectShapeCommand(shape, e);
+                        this.invoker.execute(select);
+                  }
+            }
             // if(this.created){
             //       Visitor move = new moveVisitor();
             //       Visitor resize = new resizeVisitor();

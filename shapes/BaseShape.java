@@ -2,6 +2,8 @@ package shapes;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.util.Stack;
 import commands.*;
@@ -11,8 +13,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
-public abstract class BaseShape extends JComponent /*implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
+public class BaseShape extends JComponent /*implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
       public int x;
       public int y;
       public int width;
@@ -36,21 +39,24 @@ public abstract class BaseShape extends JComponent /*implements MouseMotionListe
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
-      public abstract void accept(Visitor visitor);
-      public abstract void print();
+      // public abstract void accept(Visitor visitor);
+      // public abstract void print();
 
-      public BaseShape(){
-            
+      public BaseShape(int x, int y, int width, int height){
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+      }
+            //setOpaque(true);
             //addMouseMotionListener(this);
             //this.drawed = true;
             //repaint();
-      }
 
       // public void place(Invoker invoker, Board board) {
       //       this.invoker = invoker;
       //       this.board = board;
       //       // JPanel area = new JPanel();
-      //       // setOpaque(true);
 
       //       // setBounds(this.x, this.y, this.width, this.height);
       //       // add(area);
@@ -66,18 +72,31 @@ public abstract class BaseShape extends JComponent /*implements MouseMotionListe
       //       repaint();
       // }
 
-      // public void select(MouseEvent e) {
-      //       this.selected = true;
+      public void select(MouseEvent e) {
+            this.selected = true;
+            repaint();
+      }
 
-      //       setBorder(new ResizableBorder());
-      //       repaint();
-      // }
+      public void deselect() {
+            this.selected = false;
+            this.setBorder(BorderFactory.createEmptyBorder());
+            repaint();
+      }
 
-      // public void deselect() {
-      //       setBorder(BorderFactory.createEmptyBorder());
-      //       this.selected = false;
-      //       repaint();
-      // }
+      @Override
+      public void paintComponent(Graphics g) {
+            if(this.selected){
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillRect(this.x, this.y, this.width - 8, this.height - 8);
+                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                  g.drawRect(this.x, this.y, this.width - 4, this.height - 4);
+            } else {
+                  super.paintComponent(g);
+                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                  g.fillRect(this.x, this.y, this.width - 8, this.height - 8);
+            }
+      }
 
       // public void drag(Location location) {
       //       this.redoStack.clear();
@@ -159,16 +178,16 @@ public abstract class BaseShape extends JComponent /*implements MouseMotionListe
 
       // }
 
-      // public boolean getIfSelected(int x, int y) {
-      //       for (int i = 0; i < this.width; i++) {
-      //             if (x == this.x + i) {
-      //                   for (int j = 0; j < this.height; j++) {
-      //                         if (y == this.y + j) {
-      //                               return true;
-      //                         }
-      //                   }
-      //             }
-      //       }
-      //       return false;
-      // }
+      public boolean getIfSelected(int x, int y) {
+            for (int i = 0; i < this.width; i++) {
+                  if (x == this.x + i) {
+                        for (int j = 0; j < this.height; j++) {
+                              if (y == this.y + j) {
+                                    return true;
+                              }
+                        }
+                  }
+            }
+            return false;
+      }
 }

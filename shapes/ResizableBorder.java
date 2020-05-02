@@ -19,16 +19,23 @@ public class ResizableBorder implements Border {
 
       @Override
       public boolean isBorderOpaque() {
-            return false;
+            return true;
       }
 
       @Override
       public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
-            var rect = new Rectangle(x + width - 8, y + height - 8, 8, 8);
+            /*var rect = new Rectangle(x + width - 8, y + height - 8, 8, 8);*/
             g.setColor(Color.WHITE);
-            g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
+            System.out.println(x);
+            System.out.println(y);
+            System.out.println(width);
+            System.out.println(height);
+            // g.fillOval(rect.x - 2, rect.y - 2, rect.width + 4, rect.height + 4);
+            // g.setColor(new Color(80, 155, 229));
+            // g.fillOval(rect.x, rect.y, rect.width, rect.height);
+            g.fillOval(100, 100, 100, 100);
             g.setColor(new Color(80, 155, 229));
-            g.fillOval(rect.x, rect.y, rect.width, rect.height);      
+            g.fillOval(100, 100, 100, 100);      
       }
 
       public int getCursor(MouseEvent e) {
