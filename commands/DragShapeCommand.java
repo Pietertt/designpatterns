@@ -7,19 +7,19 @@ public class DragShapeCommand extends Order {
       private Location location;
 
       public DragShapeCommand(BaseShape shape, Location location){
-            // this.shape = shape;
-            // this.location = location;
+            this.shape = shape;
+            this.location = location;
       }
 
       public void execute(){
-            // this.shape.drag(this.location);
+            this.shape.drag(this.location);
       }
 
       public void undo(){
-            // this.shape.undoDrag();
+            this.shape.undoDrag();
       }
 
       public void redo(){
-            // this.shape.redoDrag();
+            this.shape.redoDrag();
       }
 }

@@ -17,7 +17,7 @@ import io.Parser;
 import strategies.*;
 import visitor.*;
 
-public class Board extends JPanel implements MouseListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
       public JLabel label = new JLabel("<html>");
 
@@ -32,6 +32,7 @@ public class Board extends JPanel implements MouseListener {
             this.frame = frame;
             //this.layers.add(this.label);
             addMouseListener(this);
+            addMouseMotionListener(this);
             super.setFocusable(true);
 
             // Parser parser = new Parser();
@@ -91,9 +92,9 @@ public class Board extends JPanel implements MouseListener {
                   BaseShape rect = new Rectangle(50 + i * 75, 200, 50, 50);
                   this.frame.add(rect);
                   this.shapes.add(rect);
-                  frame.revalidate();
-                  frame.repaint();
             }
+            frame.revalidate();
+            frame.repaint();
       }
 
       // Border blackline = BorderFactory.createTitledBorder("Title");
@@ -111,41 +112,7 @@ public class Board extends JPanel implements MouseListener {
       // frame.getContentPane().add(panel, BorderLayout.CENTER);    
 
       public void mouseClicked(MouseEvent e){
-            for(BaseShape shape : this.shapes){
-                  if(shape.getIfSelected(e.getX(), e.getY())){
-                        Order select = new SelectShapeCommand(shape, e);
-                        this.invoker.execute(select);
-                  }
-
-                  if(shape.selected){
-                        if(!shape.getIfSelected(e.getX(), e.getY())){
-                              if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                    System.out.println("Dragging");
-                              } else {
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.invoker.execute(deselect);
-                              }
-                        }
-                  }
-
-                  // if(!shape.getIfSelected(e.getY(), e.getY())){
-                  //       if(!shape.getHandleIfSelected(e.getX(), e.getY())){
-                  //             if(shape.selected){
-                  //                   Order deselect = new DeselectShapeCommand(shape, e);
-                  //                   this.invoker.execute(deselect);
-                  //             }
-                  //       }
-                  // }
-
-                  // if(!shape.getIfSelected(e.getX(), e.getY())){
-                  //       if(!shape.getHandleIfSelected(e.getX(), e.getY())){
-                  //             if(shape.selected){
-                  //                   Order deselect = new DeselectShapeCommand(shape, e);
-                  //                   this.invoker.execute(deselect);
-                  //             }
-                  //       }
-                  // }
-            }
+            
             // if(this.created){
             //       Visitor move = new moveVisitor();
             //       Visitor resize = new resizeVisitor();
@@ -176,15 +143,62 @@ public class Board extends JPanel implements MouseListener {
       } 
 
       public void mouseReleased(MouseEvent e){
+            for(BaseShape shape : this.shapes){
+                  if(shape.dragging){
+                        shape.dragging = false;
+                  }
 
+                  if(shape.resizing){
+                        shape.resizing = false;
+                  }
+            }
       }
 
       public void mousePressed(MouseEvent e){
-           
+            for(BaseShape shape : this.shapes){
+                  if(shape.drawed){
+                        if(shape.getIfSelected(e.getX(), e.getY())){
+                              Order select = new SelectShapeCommand(shape, e);
+                              this.invoker.execute(select);
+                        }
+      
+                        if(shape.selected){
+                              if(shape.getIfSelected(e.getX(), e.getY())){
+                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                                    this.invoker.execute(drag);
+                              } else {
+                                    if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                                          Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                                          this.invoker.execute(resize);
+                                    } else {
+                                          Order deselect = new DeselectShapeCommand(shape, e);
+                                          this.invoker.execute(deselect);
+                                    }
+                              }
+                        }
+                  }
+            }
       }
 
       @Override
-      public void paintComponent(Graphics g) {
+      public void mouseMoved(MouseEvent e){
 
+      }
+
+      @Override
+      public void mouseDragged(MouseEvent e){
+            for(BaseShape shape : this.shapes){
+                  if(shape.resizing){
+                        shape.width = e.getX() - shape.start.x;
+                        shape.height = e.getY() - shape.start.y;
+                        shape.repaint();
+                  }
+
+                  if(shape.dragging){
+                        shape.x = e.getX();
+                        shape.y = e.getY();
+                        shape.repaint();
+                  }
+            }
       }
 }

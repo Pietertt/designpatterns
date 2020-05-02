@@ -28,24 +28,28 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
       public Stack<Location> undoStack = new Stack<Location>();
 
       public int cursor;
-      public Point start = null;
+      public Location start = null;
       public Invoker invoker;
       public Board board;
-      public boolean selected = false;
-      public boolean drawed = false;
+      public boolean selected = true;
+      public boolean drawed = true;
       public boolean dragging = false;
       public boolean resizing = false;
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
-      public BaseShape(){
-            addMouseMotionListener(this);
-            setFocusable(true);
-            this.requestFocus();
-      }
+      // public BaseShape(){
+      //       addMouseMotionListener(this);
+      //       setFocusable(true);
+      //       this.requestFocus();
+      // }
 
       public abstract boolean getHandleIfSelected(int x, int y);
+      public abstract void resize(Location location);
+      public abstract void drag(Location location);
+      public abstract void undoDrag();
+      public abstract void redoDrag();
 
       // public abstract void accept(Visitor visitor);
       // public abstract void print();
