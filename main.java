@@ -1,128 +1,31 @@
-import javax.swing.*;
-import java.awt.BorderLayout;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import UI.Board;
-import UI.Layers;
-import shapes.BaseShape;
 import shapes.Rectangle;
-import strategies.*;
 
 public class main {
+      private JFrame frame;
+      private Board board;
 
-      public static void main(String[] args) {
-            JFrame frame = new JFrame();
-            //JPanel layers = new Layers();
-            //JPanel UI = new JPanel();
+      public void init(){
+            this.frame = new JFrame();
+            this.board = new Board(this.frame);
 
-            JPanel test = new JPanel();
+            this.frame.getContentPane().add(this.board);
+            this.frame.setLocation(1000, 0);
+            this.frame.setSize(600, 600);
+            this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.frame.setVisible(true);
 
-            // JButton rectangle = new JButton();
-            // rectangle.addActionListener(actionEvent -> {
-            //       board.created = true;
-            //       //board.strategy = new PlaceRectangleStrategy(board.invoker, board);     
-            // });
-            // try {
-            //       rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
-            // } catch (IOException e) {
+            Rectangle rect = new Rectangle(100, 100, 100, 100);
+            this.frame.add(rect);
+            this.frame.revalidate();
+            this.frame.repaint();
+      }
 
-            // }
-
-            // rectangle.setBorderPainted(false);
-            // rectangle.setFocusPainted(false);
-            // rectangle.setContentAreaFilled(false);
-
-            // JButton ellipse = new JButton();
-
-            // ellipse.addActionListener(actionEvent -> {
-            //       //board.created = true;
-            //       //board.strategy = new PlaceEllipseStrategy(board.invoker, board);
-            // });
-
-            // try {
-            //       ellipse.setIcon(new ImageIcon(ImageIO.read(new File("img/ellipse.png"))));
-            // } catch (IOException e) {
-
-            // }
-
-            // ellipse.setBorderPainted(false);
-            // ellipse.setFocusPainted(false);
-            // ellipse.setContentAreaFilled(false);
-
-            // // Undo button
-            // JButton undo = new JButton();
-            // undo.addActionListener(actionEvent -> board.invoker.undo());
-            // try {
-            //       undo.setIcon(new ImageIcon(ImageIO.read(new File("img/undo.png"))));
-            // } catch (IOException e) {
-
-            // }
-
-            // undo.setBorderPainted(false);
-            // undo.setFocusPainted(false);
-            // undo.setContentAreaFilled(false);
-
-            // // Undo button
-            // JButton redo = new JButton();
-            // redo.addActionListener(actionEvent -> board.invoker.redo());
-            // try {
-            //       redo.setIcon(new ImageIcon(ImageIO.read(new File("img/redo.png"))));
-            // } catch (IOException e) {
-
-            // }
-
-            // redo.setBorderPainted(false);
-            // redo.setFocusPainted(false);
-            // redo.setContentAreaFilled(false);
-
-            // JButton save = new JButton();
-            // //save.addActionListener(actionEvent -> board.saveFile());
-            // try {
-            //       save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
-            // } catch(IOException e) {
-            //       e.printStackTrace();
-            // }
-
-            // save.setBorderPainted(false);
-            // save.setFocusPainted(false);
-            // save.setContentAreaFilled(false);
-
-
-            // JButton group = new JButton();
-            // //groupShapes.addActionListener(actionEvent -> board.groupShapes());
-            // try {
-            //       group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
-            // } catch(IOException e) {
-            //       e.printStackTrace();
-            // }
-
-            // group.setBorderPainted(false);
-            // group.setFocusPainted(false);
-            // group.setContentAreaFilled(false);
-
-            // UI.add(rectangle);
-            // UI.add(ellipse);
-            // UI.add(undo);
-            // UI.add(redo);
-            // UI.add(save);
-            // UI.add(group);
-
-            // // added the board and the UI to the frame
-            // //frame.getContentPane().add(layers, BorderLayout.EAST);
-            // frame.getContentPane().add(UI, BorderLayout.SOUTH);
-            //frame.getContentPane().add(test);
-
-            frame.setLocation(1000, 0);
-            frame.setSize(600, 600);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-
-            BaseShape rect = new Rectangle(200, 200, 50, 50);
-            frame.add(rect);
-            frame.revalidate();
-            frame.repaint();
-
+      public static void main(String[] args){
+            main main = new main();
+            main.init();
       }
 }

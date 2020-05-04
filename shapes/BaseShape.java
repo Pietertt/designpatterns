@@ -31,8 +31,8 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
       public Location start = null;
       public Invoker invoker;
       public Board board;
-      public boolean selected = true;
-      public boolean drawed = true;
+      public boolean selected = false;
+      public boolean drawed = false;
       public boolean dragging = false;
       public boolean resizing = false;
 
