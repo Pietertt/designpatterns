@@ -7,10 +7,7 @@ import visitor.Visitor;
 public class Ellipse extends BaseShape {
 
       public Ellipse(int x, int y, int width, int height) {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            super(x, y, width, height);
       }
 
       @Override

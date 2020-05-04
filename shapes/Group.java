@@ -11,15 +11,21 @@ import UI.*;
 import shapes.*;
 import visitor.Visitor;
 
-public class Group /*extends BaseShape*/ {
+public class Group extends BaseShape {
       private ArrayList<BaseShape> children = new ArrayList<BaseShape>();
+      public Board board;
 
-      public void addd(BaseShape graphic){
-            this.children.add(graphic);
+      public Group(int x, int y, int width, int height, Board board){
+            super(x, y, width, height);
+            this.board = board;
       }
 
-      public void remove(Shape graphic){
-            this.children.remove(graphic);
+      public void addd(BaseShape shape){
+            this.children.add(shape);
+      }
+
+      public void remove(Shape shape){
+            this.children.remove(shape);
       }
 
       public void accept(Visitor visitor){
@@ -33,20 +39,34 @@ public class Group /*extends BaseShape*/ {
             // }
       }
 
-      public void place(Invoker invoker, Board board) {
-            
+      public void place() {
+            this.drawed = true;
+            repaint();
       }
 
       public void remove() {
             
       }
 
-      public void select(MouseEvent e) {
-            
+      public void select() {
+
+            this.selected = true;
+            repaint();
+
+            for(BaseShape shape : this.children){
+                  Order select = new SelectShapeCommand(shape);
+                  board.invoker.execute(select);
+            }
       }
 
       public void deselect() {
-            
+            this.selected = false;
+            repaint();
+
+            for(BaseShape shape : this.children){
+                  Order deselect = new DeselectShapeCommand(shape);
+                  board.invoker.execute(deselect);
+            }
       }
 
       public void drag(Location location) {
@@ -59,5 +79,27 @@ public class Group /*extends BaseShape*/ {
 
       public void redoDrag() {
             
+      }
+
+      @Override
+      public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if(this.drawed){
+                  if(this.selected){
+                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                        g.fillRect(this.x, this.y, this.width, this.height);
+                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                        g.drawRect(this.x, this.y, this.width, this.height);
+      
+                        g.setColor(Color.WHITE);
+                        g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
+      
+                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                        g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+                  } else {
+                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
+                        g.fillRect(this.x, this.y, this.width, this.height);
+                  }
+            }
       }
 }

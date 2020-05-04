@@ -40,21 +40,39 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             this.strategy = new PlaceEllipseStrategy(this.invoker, this);
 
             for(int i = 0; i < 5; i++){
-                  BaseShape ellipse = new Ellipse(50 + i * 100, 300, 50, 50);
-                  Order place = new PlaceShapeCommand(ellipse);
-                  this.invoker.execute(place);
-                  this.shapes.add(ellipse);
-                  this.frame.add(ellipse);
+                  this.strategy.place(50 + i * 100, 300, 50, 50);
+                  this.shapes.add(this.strategy.shape);
+                  this.frame.add(this.strategy.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
             }
+
+            Group group = new Group(100, 400, 50, 50, this);
+            group.place();
+
+            this.strategy.place(200, 400, 50, 50);
+            group.addd(this.strategy.shape);
+            this.frame.add(this.strategy.shape);
+            this.frame.revalidate();
+            this.frame.repaint();
+
+            this.strategy.place(300, 400, 50, 50);
+            group.addd(this.strategy.shape);
+            this.frame.add(this.strategy.shape);
+            this.frame.revalidate();
+            this.frame.repaint();
+
+            this.shapes.add(group);
+            this.frame.add(group);
+            this.frame.revalidate();
+            this.frame.repaint();
       }
 
       public void mousePressed(MouseEvent e){
             for(BaseShape shape : this.shapes){
                   if(shape.drawed){
                         if(shape.getIfSelected(e.getX(), e.getY())){
-                              Order select = new SelectShapeCommand(shape, e);
+                              Order select = new SelectShapeCommand(shape);
                               this.invoker.execute(select);
                         }
       
@@ -67,7 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                                           Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                                           this.invoker.execute(resize);
                                     } else {
-                                          Order deselect = new DeselectShapeCommand(shape, e);
+                                          Order deselect = new DeselectShapeCommand(shape);
                                           this.invoker.execute(deselect);
                                     }
                               }

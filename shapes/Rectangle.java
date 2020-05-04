@@ -5,10 +5,7 @@ import java.awt.*;
 public class Rectangle extends BaseShape {
 
       public Rectangle(int x, int y, int width, int height) {
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            super(x, y, width, height);
       }
 
       @Override

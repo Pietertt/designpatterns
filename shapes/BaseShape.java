@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public abstract class BaseShape extends JComponent /*Shape*/ {
+public abstract class BaseShape extends JComponent implements Shape {
       public int x;
       public int y;
       public int width;
@@ -36,6 +36,13 @@ public abstract class BaseShape extends JComponent /*Shape*/ {
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
+
+      public BaseShape(int x, int y, int width, int height){
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+      }
 
       public void place(){
             this.drawed = true;
@@ -89,7 +96,7 @@ public abstract class BaseShape extends JComponent /*Shape*/ {
       // public abstract void print();
 
 
-      public void select(MouseEvent e) {
+      public void select() {
             this.selected = true;
             repaint();
       }
