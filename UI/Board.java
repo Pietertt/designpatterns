@@ -3,7 +3,8 @@ package UI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import shapes.Rectangle;
+import commands.*;
+import shapes.*;
 
 import java.awt.event.*;
 
@@ -11,21 +12,26 @@ public class Board extends JPanel implements MouseListener {
       public JFrame frame;
       public Invoker invoker = new Invoker();
 
-      public Board(JFrame frame){            
+      public Board(JFrame frame){        
+            setOpaque(false);    
             super.setFocusable(true);
             this.frame = frame;
             addMouseListener(this);
       }
 
       public void init(){
-            
+            for(int i = 0; i < 5; i++){
+                  Rectangle rectangle = new Rectangle(50 + i * 100, 100, 50, 50);
+                  Order place = new PlaceShapeCommand(rectangle);
+                  this.invoker.execute(place);
+                  this.frame.add(rectangle);
+                  this.frame.revalidate();
+                  this.frame.repaint();
+            }
       }
 
       public void mousePressed(MouseEvent e){
-            Rectangle rectangle = new Rectangle(100, 100, 100, 100);
-            this.frame.add(rectangle);
-            this.frame.revalidate();
-            this.frame.repaint();
+            
       }
 
       public void mouseReleased(MouseEvent e){
