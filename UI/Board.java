@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import commands.*;
 import shapes.*;
+import strategies.*;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       public JFrame frame;
       public Invoker invoker = new Invoker();
       public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
+      public Strategy strategy;
+
+      public boolean created = false;
 
       public Board(JFrame frame){        
             setOpaque(false);    
@@ -23,12 +27,24 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       }
 
       public void init(){
+            this.strategy = new PlaceRectangleStrategy(this.invoker, this);
+
             for(int i = 0; i < 5; i++){
-                  BaseShape rectangle = new Rectangle(50 + i * 100, 100, 50, 50);
-                  Order place = new PlaceShapeCommand(rectangle);
+                  this.strategy.place(50 + i * 100, 100, 50, 50);
+                  this.shapes.add(this.strategy.shape);
+                  this.frame.add(this.strategy.shape);
+                  this.frame.revalidate();
+                  this.frame.repaint();
+            }
+
+            this.strategy = new PlaceEllipseStrategy(this.invoker, this);
+
+            for(int i = 0; i < 5; i++){
+                  BaseShape ellipse = new Ellipse(50 + i * 100, 300, 50, 50);
+                  Order place = new PlaceShapeCommand(ellipse);
                   this.invoker.execute(place);
-                  this.shapes.add(rectangle);
-                  this.frame.add(rectangle);
+                  this.shapes.add(ellipse);
+                  this.frame.add(ellipse);
                   this.frame.revalidate();
                   this.frame.repaint();
             }

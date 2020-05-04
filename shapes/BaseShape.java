@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public abstract class BaseShape extends JComponent implements MouseMotionListener /* MouseListener, */ /*Shape*/ {
+public abstract class BaseShape extends JComponent /*Shape*/ {
       public int x;
       public int y;
       public int width;
@@ -27,10 +27,8 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
       public Stack<Location> redoStack = new Stack<Location>();
       public Stack<Location> undoStack = new Stack<Location>();
 
-      public int cursor;
       public Location start = null;
-      public Invoker invoker;
-      public Board board;
+
       public boolean selected = false;
       public boolean drawed = false;
       public boolean dragging = false;
@@ -39,46 +37,57 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
-      // public BaseShape(){
-      //       addMouseMotionListener(this);
-      //       setFocusable(true);
-      //       this.requestFocus();
-      // }
+      public void place(){
+            this.drawed = true;
+            repaint();
+      }
 
-      public abstract void place();
-      public abstract void remove();
-      public abstract void resize(Location location);
-      public abstract void drag(Location location);
-      public abstract void undoDrag();
-      public abstract void redoDrag();
-      public abstract boolean getHandleIfSelected(int x, int y);
+      public void remove(){
+            this.drawed = false;
+            repaint();
+      }
+
+      public void drag(Location location){
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.dragging = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
+      }
+
+      public void resize(Location location){
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.resizing = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
+      }
+
+     public void undoDrag() {
+            Location location = this.undoStack.pop();
+            this.redoStack.add(location);
+            this.x = location.x;
+            this.y = location.y;
+            this.width = location.width;
+            this.height = location.height;
+            repaint();
+      }
+
+      public void redoDrag() {
+            if (this.redoStack.size() > 0) {
+                  Location location = this.redoStack.pop();
+                  this.undoStack.add(location);
+                  this.x = location.x;
+                  this.y = location.y;
+                  this.width = location.width;
+                  this.height = location.height;
+                  repaint();
+            }
+      }
 
       // public abstract void accept(Visitor visitor);
       // public abstract void print();
 
-            //setOpaque(true);
-            //addMouseMotionListener(this);
-            //this.drawed = true;
-            //repaint();
-
-      // public void place(Invoker invoker, Board board) {
-      //       this.invoker = invoker;
-      //       this.board = board;
-      //       // JPanel area = new JPanel();
-
-      //       // setBounds(this.x, this.y, this.width, this.height);
-      //       // add(area);
-      //       //addMouseListener(this);
-      // }
-
-      // public void remove() {
-      //       /*
-      //        * Sets the drawed flag to false. The shape is hidden by doing this. Repaint is
-      //        * immediatly called to redraw the shape
-      //        */
-      //       this.drawed = false;
-      //       repaint();
-      // }
 
       public void select(MouseEvent e) {
             this.selected = true;
@@ -91,92 +100,24 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
             repaint();
       }
 
-      // public void drag(Location location) {
-      //       this.redoStack.clear();
-      //       this.undoStack.add(location);
-      // }
-
-      // public void undoDrag() {
-      //       Location location = this.undoStack.pop();
-      //       this.redoStack.add(location);
-      //       java.awt.Rectangle bounds = new java.awt.Rectangle();
-      //       bounds.x = location.x;
-      //       bounds.y = location.y;
-      //       bounds.width = location.width;
-      //       bounds.height = location.height;
-      //       setBounds(bounds);
-      //       repaint();
-      // }
-
-      // public void redoDrag() {
-      //       if (this.redoStack.size() > 0) {
-      //             Location location = this.redoStack.pop();
-      //             this.undoStack.add(location);
-      //             java.awt.Rectangle bounds = new java.awt.Rectangle();
-      //             bounds.x = location.x;
-      //             bounds.y = location.y;
-      //             bounds.width = location.width;
-      //             bounds.height = location.height;
-      //             setBounds(bounds);
-      //             repaint();
-      //       }
-      // }
-
-      // // public void mouseClicked(MouseEvent e) {
-
-      // // }
-
-      // // public void mouseExited(MouseEvent e) {
-
-      // // }
-
-      // // public void mouseEntered(MouseEvent e) {
-
-      // // }
-
-      // // public void mouseReleased(MouseEvent e) {
-
-      // // }
-
-      // // public void mousePressed(MouseEvent e) {
-      // //       if (!this.selected) {
-      // //             for (BaseShape shape : board.shapes) {
-      // //                   if (shape.selected) {
-      // //                         Order deselect = new DeselectShapeCommand(shape, e);
-      // //                         this.invoker.execute(deselect);
-      // //                   }
-      // //             }
-
-      // //             Order select = new SelectShapeCommand(this, e);
-      // //             this.invoker.execute(select);
-      // //             requestFocus();
-      // //       }
-
-      // //       var resizableBorder = (ResizableBorder) getBorder();
-      // //       this.cursor = resizableBorder.getCursor(e);
-      // //       this.start = e.getPoint();
-      // // }
-
-      @Override
-      public void mouseMoved(MouseEvent e) {
-            // if (this.selected) {
-            //       var resizableBorder = (ResizableBorder) getBorder();
-            //       var cursor = resizableBorder.getCursor(e);
-            //       setCursor(Cursor.getPredefinedCursor(cursor));
-            // }
-            System.out.println("moved");
-      }
-
-      @Override
-      public void mouseDragged(MouseEvent e) {
-
-      }
-
       public boolean getIfSelected(int x, int y) {
             for (int i = 0; i < this.width; i++) {
                   if (x == this.x + i) {
                         for (int j = 0; j < this.height; j++) {
                               if (y == this.y + j) {
+                                    return true;
+                              }
+                        }
+                  }
+            }
+            return false;
+      }
+
+      public boolean getHandleIfSelected(int x, int y){
+            for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+                  for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
+                        if(i == x){
+                              if(j == y){
                                     return true;
                               }
                         }

@@ -5,9 +5,6 @@ import UI.Invoker;
 import UI.Board;
 
 public class PlaceShapeCommand extends Order {
-      private Invoker invoker;
-      private Board board;
-      
       public PlaceShapeCommand(BaseShape shape){
             this.shape = shape;
       }
