@@ -20,14 +20,13 @@ import visitor.*;
 public class Board extends JPanel /*implements MouseListener, MouseMotionListener */{
       public JFrame frame;
 
-      public Invoker invoker = new Invoker();
-      public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
+      // public Invoker invoker = new Invoker();
+      // public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
 
       //public boolean created = false;
 
       public Board(JFrame frame){
             //super(null);
-            System.out.println("Fucking hell");
             this.frame = frame;
             //this.layers.add(this.label);
             // addMouseListener(this);

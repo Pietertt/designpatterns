@@ -79,7 +79,6 @@ public class Rectangle extends BaseShape {
 
       @Override
       public void paintComponent(Graphics g) {
-            System.out.println("Kut swing donder op");
             if(this.selected){
                   super.paintComponent(g);
                   g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
@@ -92,8 +91,6 @@ public class Rectangle extends BaseShape {
 
                   g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
                   g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
-
-                  
             } else {
                   super.paintComponent(g);
                   g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));

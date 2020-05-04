@@ -14,11 +14,10 @@ public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
-            JPanel test = new JPanel();
             //JPanel layers = new Layers();
             //JPanel UI = new JPanel();
 
-            Board board = new Board(frame);
+            JPanel test = new JPanel();
 
             // JButton rectangle = new JButton();
             // rectangle.addActionListener(actionEvent -> {
@@ -113,7 +112,7 @@ public class main {
             // // added the board and the UI to the frame
             // //frame.getContentPane().add(layers, BorderLayout.EAST);
             // frame.getContentPane().add(UI, BorderLayout.SOUTH);
-            frame.getContentPane().add(test);
+            //frame.getContentPane().add(test);
 
             frame.setLocation(1000, 0);
             frame.setSize(600, 600);
