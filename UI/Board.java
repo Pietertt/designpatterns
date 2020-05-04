@@ -9,7 +9,7 @@ import shapes.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class Board extends JPanel implements MouseListener {
+public class Board extends JPanel implements MouseListener, MouseMotionListener {
       public JFrame frame;
       public Invoker invoker = new Invoker();
       public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
@@ -19,6 +19,7 @@ public class Board extends JPanel implements MouseListener {
             super.setFocusable(true);
             this.frame = frame;
             addMouseListener(this);
+            addMouseMotionListener(this);
       }
 
       public void init(){
@@ -60,7 +61,15 @@ public class Board extends JPanel implements MouseListener {
       }
 
       public void mouseReleased(MouseEvent e){
-            
+            for(BaseShape shape : this.shapes){
+                  if(shape.dragging){
+                        shape.dragging = false;
+                  }
+
+                  if(shape.resizing){
+                        shape.resizing = false;
+                  }
+            }
       }
 
       public void mouseEntered(MouseEvent e){
@@ -74,6 +83,29 @@ public class Board extends JPanel implements MouseListener {
       public void mouseClicked(MouseEvent e){
             
       }
+
+      @Override
+      public void mouseMoved(MouseEvent e){
+
+      }
+
+      @Override
+      public void mouseDragged(MouseEvent e){
+            for(BaseShape shape : this.shapes){
+                  if(shape.resizing){
+                        shape.width = e.getX() - shape.start.x;
+                        shape.height = e.getY() - shape.start.y;
+                        shape.repaint();
+                  }
+
+                  if(shape.dragging){
+                        shape.x = e.getX();
+                        shape.y = e.getY();
+                        shape.repaint();
+                  }
+            }
+      }
+
 
 
 }
