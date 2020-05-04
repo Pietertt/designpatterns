@@ -91,21 +91,6 @@ public abstract class BaseShape extends JComponent implements MouseMotionListene
             repaint();
       }
 
-      @Override
-      public void paintComponent(Graphics g) {
-            if(this.selected){
-                  super.paintComponent(g);
-                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                  g.fillRect(this.x, this.y, this.width - 8, this.height - 8);
-                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                  g.drawRect(this.x, this.y, this.width - 4, this.height - 4);
-            } else {
-                  super.paintComponent(g);
-                  g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                  g.fillRect(this.x, this.y, this.width - 8, this.height - 8);
-            }
-      }
-
       // public void drag(Location location) {
       //       this.redoStack.clear();
       //       this.undoStack.add(location);
