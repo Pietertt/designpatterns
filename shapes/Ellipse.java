@@ -59,6 +59,14 @@ public class Ellipse extends BaseShape {
             }
       }
 
+      public void resize(Location location){
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.resizing = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
+      }
+
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);

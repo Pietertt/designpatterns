@@ -101,6 +101,19 @@ public class Group extends BaseShape {
             repaint();
       }
 
+      public void resize(Location location){
+            for(BaseShape shape : this.children){
+                  Order select = new SelectShapeCommand(shape);
+                  board.invoker.execute(select);
+            }
+
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.resizing = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();     
+      }
+
       public void undoDrag() {
             Location location = this.undoStack.pop();
             this.redoStack.add(location);
