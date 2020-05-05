@@ -50,6 +50,15 @@ public class Group extends BaseShape {
       }
 
       public void move(Location location){
+            for(BaseShape shape : this.children){
+                  Location childLocation = new Location();
+                  childLocation.x = (shape.x - this.x) + location.x;
+                  childLocation.y = (shape.y - this.y) + location.y;
+                  childLocation.width = shape.width;
+                  childLocation.height = shape.height;
+                  shape.move(childLocation);
+            }
+
             this.x = location.x;
             this.y = location.y;
             this.width = location.width;
@@ -83,10 +92,6 @@ public class Group extends BaseShape {
             this.dragging = true;
             this.start = new Location(location.x, location.y, location.width, location.height);
             repaint();
-
-            for(BaseShape shape : this.children){
-                  shape.drag(location);
-            }
       }
 
       public void undoDrag() {
