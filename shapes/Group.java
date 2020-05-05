@@ -87,11 +87,12 @@ public class Group extends BaseShape {
       }
 
       public void drag(Location location){
-            // for(BaseShape shape : this.children){
-            //       Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
-            //       Order drag = new DragShapeCommand(shape, childLocation);
-            //       this.board.invoker.execute(drag);
-            // }
+            for(BaseShape shape : this.children){
+                  Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
+                  Order drag = new DragShapeCommand(shape, childLocation);
+                  this.board.invoker.execute(drag);
+                  shape.dragging = false;
+            }
 
             this.redoStack.clear();
             this.undoStack.add(location);
@@ -101,10 +102,6 @@ public class Group extends BaseShape {
       }
 
       public void undoDrag() {
-            // for(BaseShape shape : this.children){
-            //       shape.undoDrag();
-            // }
-
             Location location = this.undoStack.pop();
             this.redoStack.add(location);
             this.x = location.x;
