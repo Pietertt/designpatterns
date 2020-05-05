@@ -48,16 +48,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             }
 
             Group group = new Group(100, 400, 50, 50, this);
-            group.place();
+            Order place = new PlaceShapeCommand(group);
+            this.invoker.execute(place);
 
             this.strategy.place(200, 400, 50, 50);
             group.addd(this.strategy.shape);
+            this.shapes.add(this.strategy.shape);
             this.frame.add(this.strategy.shape);
             this.frame.revalidate();
             this.frame.repaint();
 
             this.strategy.place(300, 400, 50, 50);
             group.addd(this.strategy.shape);
+            this.shapes.add(this.strategy.shape);
             this.frame.add(this.strategy.shape);
             this.frame.revalidate();
             this.frame.repaint();
@@ -127,15 +130,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       public void mouseDragged(MouseEvent e){
             for(BaseShape shape : this.shapes){
                   if(shape.resizing){
-                        shape.width = e.getX() - shape.start.x;
-                        shape.height = e.getY() - shape.start.y;
-                        shape.repaint();
+                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
+                        shape.move(location);
                   }
 
                   if(shape.dragging){
-                        shape.x = e.getX();
-                        shape.y = e.getY();
-                        shape.repaint();
+                        Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+                        shape.move(location);
                   }
             }
       }

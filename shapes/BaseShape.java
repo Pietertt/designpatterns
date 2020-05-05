@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.sound.sampled.Line;
 import javax.swing.*;
+
+import java.util.ArrayList;
 import java.util.Stack;
 import commands.*;
 import UI.*;
@@ -44,23 +46,12 @@ public abstract class BaseShape extends JComponent implements Shape {
             this.height = height;
       }
 
-      public void place(){
-            this.drawed = true;
-            repaint();
-      }
-
-      public void remove(){
-            this.drawed = false;
-            repaint();
-      }
-
-      public void drag(Location location){
-            this.redoStack.clear();
-            this.undoStack.add(location);
-            this.dragging = true;
-            this.start = new Location(location.x, location.y, location.width, location.height);
-            repaint();
-      }
+      public abstract void place();
+      public abstract void remove();
+      public abstract void drag(Location location);
+      public abstract void undoDrag();
+      public abstract void redoDrag();
+      public abstract void move(Location location);
 
       public void resize(Location location){
             this.redoStack.clear();
@@ -70,27 +61,6 @@ public abstract class BaseShape extends JComponent implements Shape {
             repaint();
       }
 
-     public void undoDrag() {
-            Location location = this.undoStack.pop();
-            this.redoStack.add(location);
-            this.x = location.x;
-            this.y = location.y;
-            this.width = location.width;
-            this.height = location.height;
-            repaint();
-      }
-
-      public void redoDrag() {
-            if (this.redoStack.size() > 0) {
-                  Location location = this.redoStack.pop();
-                  this.undoStack.add(location);
-                  this.x = location.x;
-                  this.y = location.y;
-                  this.width = location.width;
-                  this.height = location.height;
-                  repaint();
-            }
-      }
 
       // public abstract void accept(Visitor visitor);
       // public abstract void print();
