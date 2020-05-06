@@ -6,6 +6,8 @@ import visitor.Visitor;
 import shapes.Location;
 import java.awt.event.*;
 
+import javax.swing.BorderFactory;
+
 public class Ellipse extends BaseShape {
 
       public Ellipse(int x, int y, int width, int height) {
@@ -62,6 +64,12 @@ public class Ellipse extends BaseShape {
 
       public void select(MouseEvent e) {
             this.selected = true;
+            repaint();
+      }
+
+      public void deselect(MouseEvent e) {
+            this.selected = false;
+            this.setBorder(BorderFactory.createEmptyBorder());
             repaint();
       }
 

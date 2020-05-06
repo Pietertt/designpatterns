@@ -74,8 +74,6 @@ public class Group extends BaseShape {
                               this.board.invoker.execute(deselect);
                         }
                   }
-                  this.selected = true;
-                  repaint();
             } else {
                   for(BaseShape shape : this.children){
                         if(shape.drawed){
@@ -85,33 +83,36 @@ public class Group extends BaseShape {
                               }
                         }
 
-                        if(!shape.getIfSelected(e.getX(), e.getY())){
-                              if(shape.selected){
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.board.invoker.execute(deselect);
+                        if(shape.selected){
+                              if(shape.getIfSelected(e.getX(), e.getY())){
+                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                                    this.board.invoker.execute(drag);
+                              } else {
+                                    if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                                          Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                                          this.board.invoker.execute(resize);
+                                    } else {
+                                          Order deselect = new DeselectShapeCommand(shape, e);
+                                          this.board.invoker.execute(deselect);
+                                    }
                               }
                         }
                   }
-
-                  this.selected = false;
-                  repaint();
             }
-            
-
-            // for(BaseShape shape : this.children){
-            //       Order select = new SelectShapeCommand(shape);
-            //       board.invoker.execute(select);
-            // }
+            this.selected = true;
+            repaint();
       }
 
-      public void deselect() {
+      public void deselect(MouseEvent e) {
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        Order deselect = new DeselectShapeCommand(shape, e);
+                        board.invoker.execute(deselect);
+                  }
+            }
+
             this.selected = false;
             repaint();
-
-            // for(BaseShape shape : this.children){
-            //       Order deselect = new DeselectShapeCommand(shape);
-            //       board.invoker.execute(deselect);
-            // }
       }
 
       public void drag(Location location){
@@ -236,14 +237,23 @@ public class Group extends BaseShape {
 
             if(this.drawed){
                   if(this.selected){
-                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.drawRect(this.x, this.y, this.width, this.height);
-      
-                        g.setColor(Color.WHITE);
-                        g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
-      
-                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+                        boolean selected = false;
+                        for(BaseShape shape : this.children){
+                              if(shape.selected){
+                                    selected = true;
+                              }
+                        }
+
+                        if(!selected){
+                              g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                              g.drawRect(this.x, this.y, this.width, this.height);
+            
+                              g.setColor(Color.WHITE);
+                              g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
+            
+                              g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                              g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+                        }
                   }
             }
       }

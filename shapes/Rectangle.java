@@ -3,6 +3,8 @@ package shapes;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.BorderFactory;
+
 public class Rectangle extends BaseShape {
 
       public Rectangle(int x, int y, int width, int height) {
@@ -59,6 +61,12 @@ public class Rectangle extends BaseShape {
 
       public void select(MouseEvent e) {
             this.selected = true;
+            repaint();
+      }
+
+      public void deselect(MouseEvent e) {
+            this.selected = false;
+            this.setBorder(BorderFactory.createEmptyBorder());
             repaint();
       }
 

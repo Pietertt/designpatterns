@@ -62,11 +62,7 @@ public abstract class BaseShape extends JComponent implements Shape {
 
       public abstract void select(MouseEvent e);
 
-      public void deselect(MouseEvent e) {
-            this.selected = false;
-            this.setBorder(BorderFactory.createEmptyBorder());
-            repaint();
-      }
+      public abstract void deselect(MouseEvent e);
 
       public abstract boolean getIfSelected(int x, int y);
 
