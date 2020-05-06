@@ -1,12 +1,13 @@
 package UI;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import commands.*;
 import shapes.*;
+import shapes.Shape;
 import strategies.*;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       public Strategy strategy;
 
       public boolean created = false;
+
+      // New window to edit ornaments
+      private JFrame RectangleOrnamentWindow;
+      private JButton submit;
 
       public Board(JFrame frame){        
             setOpaque(false);    
@@ -85,6 +90,58 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                               if(shape.getIfSelected(e.getX(), e.getY())){
                                     Order select = new SelectShapeCommand(shape, e);
                                     this.invoker.execute(select);
+                                    if (e.getClickCount() == 2) {
+                                          RectangleOrnamentWindow = new JFrame("New Window");
+                                          RectangleOrnamentWindow.pack();
+                                          RectangleOrnamentWindow.setVisible(true);
+                                          JPanel p = new JPanel();
+
+                                          JTextField textTop = new JTextField(25);
+                                          JLabel labelTop = new JLabel("Top side: ");
+                                          p.add(labelTop);
+                                          p.add(textTop);
+
+                                          JTextField textBottom = new JTextField(25);
+                                          JLabel labelBottom = new JLabel("Bottom side: ");
+                                          p.add(labelBottom);
+                                          p.add(textBottom);
+
+                                          JTextField textLeft = new JTextField(25);
+                                          JLabel labelLeft = new JLabel("Left side: ");
+                                          p.add(labelLeft);
+                                          p.add(textLeft);
+
+                                          JTextField textRight = new JTextField(25);
+                                          JLabel labelRight = new JLabel("Right side: ");
+                                          p.add(labelRight);
+                                          p.add(textRight);
+
+                                          submit = new JButton("Submit");
+                                          submit.addActionListener(arg0 -> {
+                                                if(!textTop.getText().isEmpty() || !textBottom.getText().isEmpty() ||
+                                                        !textLeft.getText().isEmpty() || !textRight.getText().isEmpty()) {
+
+                                                      Shape base =  new TextShapeDecorator(shape,
+                                                              textBottom.getText(), textTop.getText(),
+                                                              textLeft.getText(), textRight.getText());
+                                                      for (Component component : shape.getComponents()) {
+                                                            shape.remove(component);
+                                                      }
+                                                      shape.add((JComponent) base);
+                                                      this.frame.repaint();
+                                                      JOptionPane.showMessageDialog(null, "Ornament(s) added");
+                                                }
+                                                else
+                                                      JOptionPane.showMessageDialog(null, "All fields empty\n " +
+                                                              "Fill in at least one field to submit ornament");
+                                          });
+                                          p.add(submit);
+
+                                          RectangleOrnamentWindow.add(p);
+
+                                          RectangleOrnamentWindow.setSize(400,200);
+
+                                    }
                               }
                         //}
       
