@@ -50,20 +50,36 @@ public class Group extends BaseShape {
       }
 
       public void move(Location location){
+            boolean selected = false;
             for(BaseShape shape : this.children){
-                  Location childLocation = new Location();
-                  childLocation.x = (shape.x - this.x) + location.x;
-                  childLocation.y = (shape.y - this.y) + location.y;
-                  childLocation.width = shape.width;
-                  childLocation.height = shape.height;
-                  shape.move(childLocation);
+                  if(shape.selected){
+                        selected = true;
+                        Location childLocation = new Location();
+                        childLocation.x = location.x;
+                        childLocation.y = location.y;
+                        childLocation.width = shape.width;
+                        childLocation.height = shape.height;
+
+                        shape.move(childLocation);
+                  }
             }
-            
-            this.x = location.x;
-            this.y = location.y;
-            this.width = location.width;
-            this.height = location.height;
-            repaint();
+
+            if(!selected){
+                  for(BaseShape shape : this.children){
+                        Location childLocation = new Location();
+                        childLocation.x = (shape.x - this.x) + location.x;
+                        childLocation.y = (shape.y - this.y) + location.y;
+                        childLocation.width = shape.width;
+                        childLocation.height = shape.height;
+                        shape.move(childLocation);
+                  }
+                  
+                  this.x = location.x;
+                  this.y = location.y;
+                  this.width = location.width;
+                  this.height = location.height;
+                  repaint();
+            }
       }
 
       public void select(MouseEvent e) {
