@@ -4,6 +4,7 @@ import java.awt.*;
 
 import visitor.Visitor;
 import shapes.Location;
+import java.awt.event.*;
 
 public class Ellipse extends BaseShape {
 
@@ -57,6 +58,11 @@ public class Ellipse extends BaseShape {
                   this.height = location.height;
                   repaint();
             }
+      }
+
+      public void select(MouseEvent e) {
+            this.selected = true;
+            repaint();
       }
 
       public void resize(Location location){

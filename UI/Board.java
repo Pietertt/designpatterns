@@ -53,14 +53,21 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
             this.strategy.place(200, 400, 50, 50);
             group.addd(this.strategy.shape);
-            this.shapes.add(this.strategy.shape);
+            //this.shapes.add(this.strategy.shape);
             this.frame.add(this.strategy.shape);
             this.frame.revalidate();
             this.frame.repaint();
 
             this.strategy.place(300, 400, 50, 50);
             group.addd(this.strategy.shape);
-            this.shapes.add(this.strategy.shape);
+            //this.shapes.add(this.strategy.shape);
+            this.frame.add(this.strategy.shape);
+            this.frame.revalidate();
+            this.frame.repaint();
+
+            this.strategy.place(500, 200, 50, 50);
+            group.addd(this.strategy.shape);
+            //this.shapes.add(this.strategy.shape);
             this.frame.add(this.strategy.shape);
             this.frame.revalidate();
             this.frame.repaint();
@@ -76,7 +83,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   if(shape.drawed){
                         //if(!shape.selected){
                               if(shape.getIfSelected(e.getX(), e.getY())){
-                                    Order select = new SelectShapeCommand(shape);
+                                    Order select = new SelectShapeCommand(shape, e);
                                     this.invoker.execute(select);
                               }
                         //}
@@ -90,7 +97,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                                           Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                                           this.invoker.execute(resize);
                                     } else {
-                                          Order deselect = new DeselectShapeCommand(shape);
+                                          Order deselect = new DeselectShapeCommand(shape, e);
                                           this.invoker.execute(deselect);
                                     }
                               }

@@ -1,6 +1,7 @@
 package shapes;
 
 import java.awt.*;
+import java.awt.event.*;
 
 public class Rectangle extends BaseShape {
 
@@ -54,6 +55,11 @@ public class Rectangle extends BaseShape {
                   this.height = location.height;
                   repaint();
             }
+      }
+
+      public void select(MouseEvent e) {
+            this.selected = true;
+            repaint();
       }
 
       public void resize(Location location){
