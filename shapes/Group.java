@@ -136,13 +136,68 @@ public class Group extends BaseShape {
             }
       }
 
+      public int X(){
+            this.x = this.children.get(0).x;
+            for(BaseShape shape : this.children){
+                  if(shape.x < this.x){
+                        this.x = shape.x;
+                  }
+            }
+
+            return this.x;
+      }
+
+      public int Y(){
+            this.y = this.children.get(0).y;
+            for(BaseShape shape : this.children){
+                  if(shape.y < this.y){
+                        this.y = shape.y;
+                  }
+            }
+
+            return this.y;
+      }
+
+      public int Width(){
+            int maxWidth = 0;
+            int x = this.X();
+
+            for(BaseShape shape : this.children){
+                  int relative = shape.x - x;
+                  int width = relative + shape.width;
+                  if(width > maxWidth){
+                        maxWidth = width;
+                  }
+            }
+
+            return maxWidth;
+      }
+
+      public int Height(){
+            int maxHeight = 0;
+            int y = this.Y();
+
+            for(BaseShape shape : this.children){
+                  int relative = shape.y - y;
+                  int height = relative + shape.height;
+                  if(height > maxHeight){
+                        maxHeight = height;
+                  }
+            }
+
+            return maxHeight;
+      }
+
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
+            this.x = this.X();
+            this.y = this.Y();
+            this.width = this.Width();
+            this.height = this.Height();
+
             if(this.drawed){
                   if(this.selected){
-                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(this.x, this.y, this.width, this.height);
                         g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
                         g.drawRect(this.x, this.y, this.width, this.height);
       
@@ -151,9 +206,6 @@ public class Group extends BaseShape {
       
                         g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
                         g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
-                  } else {
-                        g.setColor(new Color(this.gray[0], this.gray[1], this.gray[2]));
-                        g.fillRect(this.x, this.y, this.width, this.height);
                   }
             }
       }
