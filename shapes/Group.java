@@ -188,6 +188,16 @@ public class Group extends BaseShape {
             return maxHeight;
       }
 
+      public boolean getIfSelected(int x, int y) {
+            for(BaseShape shape : this.children){
+                  if(shape.getIfSelected(x, y)){
+                        return true;
+                  }
+            }
+
+            return false;
+      }
+
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);

@@ -67,6 +67,19 @@ public class Ellipse extends BaseShape {
             repaint();
       }
 
+      public boolean getIfSelected(int x, int y) {
+            for (int i = 0; i < this.width; i++) {
+                  if (x == this.x + i) {
+                        for (int j = 0; j < this.height; j++) {
+                              if (y == this.y + j) {
+                                    return true;
+                              }
+                        }
+                  }
+            }
+            return false;
+      }
+
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
