@@ -86,8 +86,20 @@ public class Group extends BaseShape {
             if(e.getClickCount() == 1){
                   for(BaseShape shape : this.children){
                         if(shape.selected){
-                              Order deselect = new DeselectShapeCommand(shape, e);
-                              this.board.invoker.execute(deselect);
+                              if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                                    System.out.println("Resizing...");
+                                    Location location = new Location();
+                                    location.x = shape.x;
+                                    location.y = shape.y;
+                                    location.width = 100;
+                                    location.height = 100;
+
+                                    Order resize = new ResizeShapeCommand(shape, location);
+                                    this.board.invoker.execute(resize);
+                              } else {
+                                    Order deselect = new DeselectShapeCommand(shape, e);
+                                    this.board.invoker.execute(deselect);   
+                              }
                         }
                   }
             } else {
@@ -122,8 +134,10 @@ public class Group extends BaseShape {
       public void deselect(MouseEvent e) {
             for(BaseShape shape : this.children){
                   if(shape.selected){
-                        Order deselect = new DeselectShapeCommand(shape, e);
-                        board.invoker.execute(deselect);
+                        //if(!shape.getHandleIfSelected(e.getX(), e.getY())){
+                              Order deselect = new DeselectShapeCommand(shape, e);
+                              this.board.invoker.execute(deselect);
+                        //}
                   }
             }
 
