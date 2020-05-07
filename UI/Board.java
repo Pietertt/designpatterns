@@ -81,25 +81,18 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       public void mousePressed(MouseEvent e){
             for(BaseShape shape : this.shapes){
                   if(shape.drawed){
-                        //if(!shape.selected){
                               if(shape.getIfSelected(e.getX(), e.getY())){
                                     Order select = new SelectShapeCommand(shape, e);
                                     this.invoker.execute(select);
                               }
-                        //}
       
                         if(shape.selected){
                               if(shape.getIfSelected(e.getX(), e.getY())){
                                     Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                                     this.invoker.execute(drag);
                               } else {
-                                    if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                          Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                          this.invoker.execute(resize);
-                                    } else {
-                                          Order deselect = new DeselectShapeCommand(shape, e);
-                                          this.invoker.execute(deselect);
-                                    }
+                                    Order deselect = new DeselectShapeCommand(shape, e);
+                                    this.invoker.execute(deselect);
                               }
                         }
                   }

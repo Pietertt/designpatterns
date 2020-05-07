@@ -129,13 +129,8 @@ public class Group extends BaseShape {
                                     Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                                     this.board.invoker.execute(drag);
                               } else {
-                                    if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                          Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                          this.board.invoker.execute(resize);
-                                    } else {
-                                          Order deselect = new DeselectShapeCommand(shape, e);
-                                          this.board.invoker.execute(deselect);
-                                    }
+                                    Order deselect = new DeselectShapeCommand(shape, e);
+                                    this.board.invoker.execute(deselect);
                               }
                         }
                   }
@@ -147,11 +142,9 @@ public class Group extends BaseShape {
       public void deselect(MouseEvent e) {
             for(BaseShape shape : this.children){
                   if(shape.selected){
-                        //if(!shape.getHandleIfSelected(e.getX(), e.getY())){
-                              Order deselect = new DeselectShapeCommand(shape, e);
-                              this.board.invoker.execute(deselect);
-                              shape.dragging = false;
-                        //}
+                        Order deselect = new DeselectShapeCommand(shape, e);
+                        this.board.invoker.execute(deselect);
+                        shape.dragging = false;
                   }
             }
 
@@ -164,7 +157,7 @@ public class Group extends BaseShape {
                   // Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
                   // Order drag = new DragShapeCommand(shape, childLocation);
                   // this.board.invoker.execute(drag);
-                  //shape.dragging = false;
+                  // shape.dragging = false;
             }
 
             this.redoStack.clear();
@@ -180,11 +173,11 @@ public class Group extends BaseShape {
             //       board.invoker.execute(select);
             // }
 
-            this.redoStack.clear();
-            this.undoStack.add(location);
-            this.resizing = true;
-            this.start = new Location(location.x, location.y, location.width, location.height);
-            repaint();     
+            // this.redoStack.clear();
+            // this.undoStack.add(location);
+            // this.resizing = true;
+            // this.start = new Location(location.x, location.y, location.width, location.height);
+            // repaint();     
       }
 
       public void undoDrag() {
