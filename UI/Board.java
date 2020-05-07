@@ -94,7 +94,17 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                                           RectangleOrnamentWindow = new JFrame("New Window");
                                           RectangleOrnamentWindow.pack();
                                           RectangleOrnamentWindow.setVisible(true);
+
+                                          String[] labels = {"Top side: ", "Bottom side: ", "Left side: ", "Right side: "};
+
                                           JPanel p = new JPanel();
+                                          //Lay out the panel.
+                                          GridLayout grid = new GridLayout();
+                                          grid.setColumns(2);
+                                          grid.setRows(5);
+                                          grid.setHgap(5);
+                                          grid.setVgap(5);
+                                          p.setLayout(grid);
 
                                           JTextField textTop = new JTextField(25);
                                           JLabel labelTop = new JLabel("Top side: ");
