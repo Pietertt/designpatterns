@@ -3,10 +3,10 @@ package commands;
 import shapes.*;
 import UI.Invoker;
 
-public class save extends Order {
+public class SaveShapeCommand extends Order {
       private Location location;
 
-      public save(BaseShape shape, Location location){
+      public SaveShapeCommand(BaseShape shape, Location location){
             this.shape = shape;
             this.location = location;
       }

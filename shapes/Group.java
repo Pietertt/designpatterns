@@ -32,13 +32,6 @@ public class Group extends BaseShape {
 
       }
 
-      public void print(){
-            
-            // for(BaseShape shape : this.children){
-            //       shape.print();
-            // }
-      }
-
       public void place() {
             this.drawed = true;
             repaint();
@@ -55,20 +48,12 @@ public class Group extends BaseShape {
                   if(shape.selected){
                         selected = true;
                         if(shape.dragging){
-                              Location childLocation = new Location();
-                              childLocation.x = location.x;
-                              childLocation.y = location.y;
-                              childLocation.width = shape.width;
-                              childLocation.height = shape.height;
+                              Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
                               shape.move(childLocation);
                         }
 
                         if(shape.resizing){
-                              Location childLocation = new Location();
-                              childLocation.x = shape.x;
-                              childLocation.y = shape.y;
-                              childLocation.width = location.x - shape.start.x;
-                              childLocation.height = location.y - shape.start.y;
+                              Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
                               shape.move(childLocation);
                         }
                   }                  
@@ -76,11 +61,7 @@ public class Group extends BaseShape {
 
             if(!selected){
                   for(BaseShape shape : this.children){
-                        Location childLocation = new Location();
-                        childLocation.x = (shape.x - this.x) + location.x;
-                        childLocation.y = (shape.y - this.y) + location.y;
-                        childLocation.width = shape.width;
-                        childLocation.height = shape.height;
+                        Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
                         shape.move(childLocation);
                   }
                   
@@ -97,13 +78,7 @@ public class Group extends BaseShape {
                   for(BaseShape shape : this.children){
                         if(shape.selected){
                               if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                    
-                                    Location location = new Location();
-                                    location.x = shape.x;
-                                    location.y = shape.y;
-                                    location.width = shape.width;
-                                    location.height = shape.height;
-
+                                    Location location = new Location(shape.x, shape.y, shape.width, shape.height);
                                     Order resize = new ResizeShapeCommand(shape, location);
                                     this.board.invoker.execute(resize);
                                     shape.dragging = false;
@@ -144,7 +119,6 @@ public class Group extends BaseShape {
                   if(shape.selected){
                         Order deselect = new DeselectShapeCommand(shape, e);
                         this.board.invoker.execute(deselect);
-                        shape.dragging = false;
                   }
             }
 
@@ -155,7 +129,7 @@ public class Group extends BaseShape {
       public void drag(Location location){
             for(BaseShape shape : this.children){
                   Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
-                  Order drag = new save(shape, childLocation);
+                  Order drag = new SaveShapeCommand(shape, childLocation);
                   this.board.invoker.execute(drag);
             }
 
