@@ -212,8 +212,10 @@ public class Group extends BaseShape {
       public int X(){
             this.x = this.children.get(0).x;
             for(BaseShape shape : this.children){
-                  if(shape.x < this.x){
-                        this.x = shape.x;
+                  if(shape.drawed){
+                        if(shape.x < this.x){
+                              this.x = shape.x;
+                        }
                   }
             }
 
@@ -223,8 +225,10 @@ public class Group extends BaseShape {
       public int Y(){
             this.y = this.children.get(0).y;
             for(BaseShape shape : this.children){
-                  if(shape.y < this.y){
-                        this.y = shape.y;
+                  if(shape.drawed){
+                        if(shape.y < this.y){
+                              this.y = shape.y;
+                        }
                   }
             }
 
@@ -238,8 +242,10 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   int relative = shape.x - x;
                   int width = relative + shape.width;
-                  if(width > maxWidth){
-                        maxWidth = width;
+                  if(shape.drawed){
+                        if(width > maxWidth){
+                              maxWidth = width;
+                        }
                   }
             }
 
@@ -253,8 +259,10 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   int relative = shape.y - y;
                   int height = relative + shape.height;
-                  if(height > maxHeight){
-                        maxHeight = height;
+                  if(shape.drawed){
+                        if(height > maxHeight){
+                              maxHeight = height;
+                        }
                   }
             }
 
