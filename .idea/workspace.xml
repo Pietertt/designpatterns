@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/shapes/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Ellipse.java" afterDir="false" />
+    <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/shapes/ShapeDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shapes/TextShapeDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sbt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sbt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,8 +22,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Kotlin File" />
         <option value="Class" />
       </list>
     </option>
@@ -27,33 +32,27 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
-  <component name="ProjectId" id="1ZTdntzW4UaHmedsHsBI32zxmmM" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1bX2oVit4Aq7Wj0U7UuoqYKymAt" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main" />
-      <module name="graphicsEditorTest" />
+      <module name="designpatterns" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -67,7 +66,7 @@
   <component name="SbtLocalSettings">
     <option name="projectSyncType">
       <map>
-        <entry key="$PROJECT_DIR$/../bigproject" value="PREVIEW" />
+        <entry key="D:/bigproject" value="PREVIEW" />
       </map>
     </option>
   </component>
@@ -76,126 +75,17 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="" />
-      <created>1584867187418</created>
+      <changelist id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="" />
+      <created>1588764292284</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1584867187418</updated>
-      <workItem from="1584867189032" duration="9100000" />
-      <workItem from="1585385675753" duration="21268000" />
-      <workItem from="1585480350154" duration="13143000" />
-      <workItem from="1585586644475" duration="2060000" />
-      <workItem from="1585677340436" duration="603000" />
-      <workItem from="1586420412967" duration="1863000" />
-      <workItem from="1586595391518" duration="1199000" />
-      <workItem from="1586639439997" duration="18000" />
-      <workItem from="1586772762057" duration="655000" />
-      <workItem from="1587799855975" duration="8871000" />
-      <workItem from="1587884142241" duration="9285000" />
-      <workItem from="1587971896477" duration="6688000" />
-      <workItem from="1588056883640" duration="11952000" />
-      <workItem from="1588145903945" duration="7009000" />
-      <workItem from="1588249072508" duration="158000" />
+      <updated>1588764292284</updated>
+      <workItem from="1588764295177" duration="228000" />
     </task>
-    <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
-      <created>1585393755457</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1585393755457</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Bezig met command&#10;~ Selection almost done">
-      <created>1585402752756</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1585402752756</updated>
-    </task>
-    <task id="LOCAL-00003" summary="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'">
-      <created>1585404102499</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1585404102499</updated>
-    </task>
-    <task id="LOCAL-00004" summary="~ Dragging redone ~ Not yet working with command pattern">
-      <created>1585420861196</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1585420861196</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Reverted commit">
-      <created>1585423779534</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1585423779534</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Small problem with selecting fixed.&#10;* Deselecting added">
-      <created>1585431365740</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1585431365740</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Apparently it was possible to select invisible rectangles, thus making it impossible to place a rectangle there..">
-      <created>1585432173192</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1585432173192</updated>
-    </task>
-    <task id="LOCAL-00008" summary="...">
-      <created>1585432456585</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1585432456585</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Command pattern, dragging works but still get an error code">
-      <created>1585484553232</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1585484553232</updated>
-    </task>
-    <task id="LOCAL-00010" summary="fixes">
-      <created>1585491261309</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1585491261309</updated>
-    </task>
-    <task id="LOCAL-00011" summary="fixes">
-      <created>1585492383028</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1585492383028</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Dragging redo kinda works.. I guess.">
-      <created>1585504914036</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1585504914036</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -207,21 +97,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Bezig met command&#10;~ Place rectangle afgemaakt" />
-    <MESSAGE value="Bezig met command&#10;~ Selection almost done" />
-    <MESSAGE value="~ Selection and placing rectangles kinda done, still need to add some 'user friendly things'" />
-    <MESSAGE value="~ Dragging redone ~ Not yet working with command pattern" />
-    <MESSAGE value="Reverted commit" />
-    <MESSAGE value="Small problem with selecting fixed.&#10;* Deselecting added" />
-    <MESSAGE value="Apparently it was possible to select invisible rectangles, thus making it impossible to place a rectangle there.." />
-    <MESSAGE value="..." />
-    <MESSAGE value="Command pattern, dragging works but still get an error code" />
-    <MESSAGE value="fixes" />
-    <MESSAGE value="Dragging redo kinda works.. I guess." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dragging redo kinda works.. I guess." />
   </component>
 </project>
