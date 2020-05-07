@@ -14,7 +14,6 @@ public class main {
 
       public static void main(String[] args) {
             JFrame frame = new JFrame();
-            //JPanel layers = new Layers();
             JPanel UI = new JPanel();
 
             Board board = new Board(frame);
@@ -110,7 +109,6 @@ public class main {
             UI.add(group);
 
             // // added the board and the UI to the frame
-            //frame.getContentPane().add(board);
             frame.getContentPane().add(UI, BorderLayout.SOUTH);
             frame.getContentPane().add(board);
 
@@ -120,10 +118,5 @@ public class main {
             frame.setVisible(true);
 
             board.init();
-
-            // Rectangle rect = new Rectangle(100, 100, 100, 100);
-            // frame.getContentPane().add(rect);
-            // frame.revalidate();
-            // frame.repaint();
       }
 }

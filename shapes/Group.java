@@ -184,7 +184,6 @@ public class Group extends BaseShape {
                         }
                   }
             }
-
             return this.x;
       }
 
@@ -197,7 +196,6 @@ public class Group extends BaseShape {
                         }
                   }
             }
-
             return this.y;
       }
 
@@ -214,7 +212,6 @@ public class Group extends BaseShape {
                         }
                   }
             }
-
             return maxWidth;
       }
 
@@ -231,7 +228,6 @@ public class Group extends BaseShape {
                         }
                   }
             }
-
             return maxHeight;
       }
 
@@ -241,7 +237,6 @@ public class Group extends BaseShape {
                         return true;
                   }
             }
-
             return false;
       }
 
