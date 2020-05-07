@@ -154,10 +154,9 @@ public class Group extends BaseShape {
 
       public void drag(Location location){
             for(BaseShape shape : this.children){
-                  // Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
-                  // Order drag = new DragShapeCommand(shape, childLocation);
-                  // this.board.invoker.execute(drag);
-                  // shape.dragging = false;
+                  Location childLocation = new Location(shape.x, shape.y, shape.width, shape.height);
+                  Order drag = new save(shape, childLocation);
+                  this.board.invoker.execute(drag);
             }
 
             this.redoStack.clear();
