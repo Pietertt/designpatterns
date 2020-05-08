@@ -90,7 +90,7 @@ public class main {
 
 
             JButton group = new JButton();
-            //groupShapes.addActionListener(actionEvent -> board.groupShapes());
+            group.addActionListener(actionEvent -> board.group());
             try {
                   group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
             } catch(IOException e) {

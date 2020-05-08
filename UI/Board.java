@@ -82,6 +82,29 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.frame.repaint();
       }
 
+      public void group(){
+            System.out.println(this.shifted);
+            ArrayList<BaseShape> grouped = new ArrayList<BaseShape>();
+            for(int i = 0; i < this.shapes.size(); i++){
+                  if(this.shapes.get(i).selected){
+                        
+                  }
+            }
+
+            this.shifted = false;
+
+
+            // Group group = new Group(0, 0, 0, 0, this);
+            
+            // for(BaseShape shape : grouped){
+            //       group.addd(shape);
+            // }
+
+            // this.shapes.add(group);
+            // revalidate();
+            // repaint();
+      }
+
       public void mousePressed(MouseEvent e) {
             if (this.created) {
                   this.strategy.place(e.getX(), e.getY(), 50, 50);
@@ -175,7 +198,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                           if(!this.shifted){
                                                 Order deselect = new DeselectShapeCommand(shape, e);
                                                 this.invoker.execute(deselect);
-                                          }
+                                          } 
                                     }
                               }
                         }
