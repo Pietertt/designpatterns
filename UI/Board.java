@@ -180,13 +180,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mouseReleased(MouseEvent e){
             for(BaseShape shape : this.shapes){
-                  if(shape.dragging){
-                        shape.dragging = false;
-                  }
-
-                  if(shape.resizing){
-                        shape.resizing = false;
-                  }
+                  shape.clear();
             }
       }
 

@@ -53,6 +53,7 @@ public abstract class BaseShape extends JComponent implements Shape {
       public abstract void redoDrag();
       public abstract void move(Location location);
       public abstract void resize(Location location);
+      public abstract void clear();
 
 
 
