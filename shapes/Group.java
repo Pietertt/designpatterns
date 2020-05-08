@@ -14,6 +14,8 @@ import visitor.Visitor;
 public class Group extends BaseShape {
       private ArrayList<BaseShape> children = new ArrayList<BaseShape>();
       public Board board;
+      private JFrame RectangleOrnamentWindow;
+      private JButton submit;
 
       public Group(int x, int y, int width, int height, Board board){
             super(x, y, width, height);
@@ -74,45 +76,58 @@ public class Group extends BaseShape {
       }
 
       public void select(MouseEvent e) {
-            if(e.getClickCount() == 1){
+            if(this.selected){
                   for(BaseShape shape : this.children){
-                        if(shape.selected){
-                              if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                                    Location location = new Location(shape.x, shape.y, shape.width, shape.height);
-                                    Order resize = new ResizeShapeCommand(shape, location);
-                                    this.board.invoker.execute(resize);
-                                    shape.dragging = false;
-
-                              } else {
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.board.invoker.execute(deselect);   
-                              }
+                        if(shape.getIfSelected(e.getX(), e.getY())){
+                              Order select = new SelectShapeCommand(shape, e);
+                              this.board.invoker.execute(select);
                         }
-                  }
-            } else {
-                  for(BaseShape shape : this.children){
-                        if(shape.drawed){
-                              if(shape.getIfSelected(e.getX(), e.getY())){
-                                    Order select = new SelectShapeCommand(shape, e);
-                                    this.board.invoker.execute(select);
-                                    shape.resizing = false;
-                              }
-                        }
-
-                        if(shape.selected){
-                              if(shape.getIfSelected(e.getX(), e.getY())){
-                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                    this.board.invoker.execute(drag);
-                              } else {
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.board.invoker.execute(deselect);
-                              }
+                       
+                        if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                              System.out.println("Got it");
                         }
                   }
             }
+
             this.selected = true;
-            repaint();
+            
       }
+            // if(e.getClickCount() == 1){
+            //       for(BaseShape shape : this.children){
+            //             if(shape.selected){
+            //                   if(shape.getHandleIfSelected(e.getX(), e.getY())){
+            //                         Location location = new Location(shape.x, shape.y, shape.width, shape.height);
+            //                         Order resize = new ResizeShapeCommand(shape, location);
+            //                         this.board.invoker.execute(resize);
+            //                         shape.dragging = false;
+
+            //                   } else {
+            //                         Order deselect = new DeselectShapeCommand(shape, e);
+            //                         this.board.invoker.execute(deselect);   
+            //                   }
+            //             }
+            //       }
+            // } else {
+            //       for(BaseShape shape : this.children){
+            //             if(shape.drawed){
+            //                   if(shape.getIfSelected(e.getX(), e.getY())){
+            //                         Order select = new SelectShapeCommand(shape, e);
+            //                         this.board.invoker.execute(select);
+            //                         shape.resizing = false;
+            //                   }
+            //             }
+
+            //             if(shape.selected){
+            //                   if(shape.getIfSelected(e.getX(), e.getY())){
+            //                         Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+            //                         this.board.invoker.execute(drag);
+            //                   } else {
+            //                         Order deselect = new DeselectShapeCommand(shape, e);
+            //                         this.board.invoker.execute(deselect);
+            //                   }
+            //             }
+            //       }
+            // }
 
       public void deselect(MouseEvent e) {
             for(BaseShape shape : this.children){
