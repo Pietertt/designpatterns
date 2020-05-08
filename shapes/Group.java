@@ -88,8 +88,10 @@ public class Group extends BaseShape {
                               }
                         } else {
                               if(shape.selected){
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.board.invoker.execute(deselect);
+                                    if(!board.shifted){
+                                          Order deselect = new DeselectShapeCommand(shape, e);
+                                          this.board.invoker.execute(deselect);
+                                    }
                               }
                         }
                        
