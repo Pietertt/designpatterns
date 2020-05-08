@@ -66,7 +66,7 @@ public class Group extends BaseShape {
                         Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
                         shape.move(childLocation);
                   }
-                  
+
                   this.x = location.x;
                   this.y = location.y;
                   this.width = location.width;
@@ -115,6 +115,11 @@ public class Group extends BaseShape {
       }
 
       public void drag(Location location){
+            for(BaseShape shape : this.children){
+                  Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                  this.board.invoker.execute(save);
+            }
+
             this.redoStack.clear();
             this.undoStack.add(location);
             this.dragging = true;
