@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
       public JFrame frame;
+      public Layers layers;
       public Invoker invoker = new Invoker();
       public ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
       public Strategy strategy;
@@ -25,10 +26,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
-      public Board(JFrame frame) {
+      public Board(JFrame frame, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
             this.frame = frame;
+            this.layers = layers;
             addMouseListener(this);
             addMouseMotionListener(this);
             addKeyListener(this);
@@ -81,6 +83,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
+            
+            this.layers.update(this.shapes);
       }
 
       public void group(){
@@ -105,9 +109,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             }
 
             this.shapes.add(group);
+            this.layers.update(this.shapes);
+            
             this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
+
       }
 
       public void mousePressed(MouseEvent e) {
@@ -118,7 +125,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.frame.add(this.strategy.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
-                  this.created = false;
+                  this.created = false;   
+                  
+                  this.layers.update(this.shapes);
             }
 
             for (BaseShape shape : this.shapes) {

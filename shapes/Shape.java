@@ -15,4 +15,5 @@ public interface Shape {
       public void resize(Location location);
       public void undoDrag();
       public void redoDrag();
+      public void print(Layers layers);
 }

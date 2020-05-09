@@ -2,6 +2,10 @@ package shapes;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.util.ArrayList;
@@ -161,6 +165,24 @@ public class Group extends BaseShape {
                   this.width = location.width;
                   this.height = location.height;
                   repaint();
+            }
+      }
+
+      public void print(Layers layers){
+            JLabel label = new JLabel();
+            label.setText("Group");
+            try {
+                  ImageIcon image = new ImageIcon(ImageIO.read(new File("img/group.png")));
+                  label.setIcon(image);
+                  layers.add(Box.createRigidArea(new Dimension(10, 10)));
+                  layers.add(label);
+            } catch(IOException e){
+
+            }
+
+            for(BaseShape shape : this.children){
+                  shape.print(layers);
+                  
             }
       }
 
