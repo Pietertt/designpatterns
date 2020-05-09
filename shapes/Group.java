@@ -75,7 +75,21 @@ public class Group extends BaseShape {
                   }
 
                   if(this.resizing){
-                        System.out.println(location.width / this.start.width);
+                        float percentageWidth = (float)location.width / (float)this.start.width;
+                        float percentageHeight = (float)location.height / (float)this.start.height;
+
+                        for(BaseShape shape : this.children){
+                              Location childLocation = new Location();
+                              childLocation.x = shape.x;
+                              childLocation.y = shape.y;
+                              childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+                              childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+
+                              System.out.println(shape.start.width);
+
+                              shape.move(childLocation);
+                        }
+
                   }
             }
       }
