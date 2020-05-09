@@ -164,6 +164,10 @@ public class Group extends BaseShape {
             }
       }
 
+      public String print(){
+            return "group";
+      }
+
       public int X(){
             this.x = this.children.get(0).x;
             for(BaseShape shape : this.children){

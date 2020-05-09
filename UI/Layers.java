@@ -1,10 +1,14 @@
 package UI;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.util.ArrayList;
 
 import shapes.BaseShape;
 
@@ -12,17 +16,18 @@ public class Layers extends JPanel {
       public JFrame frame;
       public Board board;
 
-      public Layers(JFrame frame, Board board){
-            this.frame = frame;
-            this.board = board;
-            GridLayout layout = new GridLayout(0, 1, 0, 0);
-            setLayout(layout);
-            update();
+      public Layers(){
+            setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 10));
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
       }
 
-      public void update(){
-            for(int i = 0; i < 10; i++){
-                  add(new Item("Button 1"));
+      public void update(ArrayList<BaseShape> shapes){
+            removeAll();
+            for(BaseShape shape : shapes){
+                  add(new Item(shape));
+                  add(Box.createRigidArea(new Dimension(10, 10)));
             }
+            revalidate();
+            repaint();
       }
 }

@@ -12,13 +12,13 @@ import shapes.Rectangle;
 import strategies.*;
 import java.awt.*;
 
-public class App extends JFrame implements KeyListener {
+public class App extends JFrame {
 
       public App(){
             JPanel UI = new JPanel();
 
-            Board board = new Board(this);
-            Layers layers = new Layers(this, board);
+            Layers layers = new Layers();
+            Board board = new Board(this, layers);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
@@ -121,21 +121,6 @@ public class App extends JFrame implements KeyListener {
             setVisible(true);
 
             board.init();
-            //layers.update();
-      }
-
-      public void keyTyped(KeyEvent e) {
-
-      }
-
-      public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == 16) {
-                  System.out.println("Shifted");
-            }
-      }
-
-      public void keyReleased(KeyEvent e) {
-            //this.shifted = false;
       }
 
       public static void main(String[] args) {

@@ -87,6 +87,10 @@ public class Ellipse extends BaseShape {
             this.resizing = false;
       }
 
+      public String print(){
+            return "ellipse";
+      }
+
       public boolean getIfSelected(int x, int y) {
             for (int i = 0; i < this.width; i++) {
                   if (x == this.x + i) {

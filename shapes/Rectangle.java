@@ -83,6 +83,10 @@ public class Rectangle extends BaseShape {
             this.resizing = false;
       }
 
+      public String print(){
+            return "rectangle";
+      }
+
       public boolean getIfSelected(int x, int y) {
             for (int i = 0; i < this.width; i++) {
                   if (x == this.x + i) {
