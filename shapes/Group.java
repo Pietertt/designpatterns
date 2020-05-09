@@ -210,62 +210,6 @@ public class Group extends BaseShape {
             }
       }
 
-      public int X(){
-            this.x = this.children.get(0).x;
-            for(BaseShape shape : this.children){
-                  if(shape.drawed){
-                        if(shape.x < this.x){
-                              this.x = shape.x;
-                        }
-                  }
-            }
-            return this.x;
-      }
-
-      public int Y(){
-            this.y = this.children.get(0).y;
-            for(BaseShape shape : this.children){
-                  if(shape.drawed){
-                        if(shape.y < this.y){
-                              this.y = shape.y;
-                        }
-                  }
-            }
-            return this.y;
-      }
-
-      public int Width(){
-            int maxWidth = 0;
-            int x = this.X();
-
-            for(BaseShape shape : this.children){
-                  int relative = shape.x - x;
-                  int width = relative + shape.width;
-                  if(shape.drawed){
-                        if(width > maxWidth){
-                              maxWidth = width;
-                        }
-                  }
-            }
-            return maxWidth;
-      }
-
-      public int Height(){
-            int maxHeight = 0;
-            int y = this.Y();
-
-            for(BaseShape shape : this.children){
-                  int relative = shape.y - y;
-                  int height = relative + shape.height;
-                  if(shape.drawed){
-                        if(height > maxHeight){
-                              maxHeight = height;
-                        }
-                  }
-            }
-            return maxHeight;
-      }
-
       public boolean getIfSelected(int x, int y) {
             for(BaseShape shape : this.children){
                   if(shape.getIfSelected(x, y)){
@@ -276,8 +220,8 @@ public class Group extends BaseShape {
       }
 
       public boolean getHandleIfSelected(int x, int y){
-            for(int i = this.X() + this.Width() - 6; i < this.X() + this.Width() + 6; i++){
-                  for(int j = this.Y() + this.Height() - 6; j < this.Y() + this.Height() + 6; j++){
+            for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+                  for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
                         if(i == x){
                               if(j == y){
                                     return true;
@@ -291,31 +235,58 @@ public class Group extends BaseShape {
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            this.x = this.X();
-            this.y = this.Y();
-            this.width = this.Width();
-            this.height = this.Height();
 
-            if(this.drawed){
-                  if(this.selected){
-                        boolean selected = false;
-                        for(BaseShape shape : this.children){
-                              if(shape.selected){
-                                    selected = true;
-                              }
-                        }
-
-                        if(!selected){
-                              g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                              g.drawRect(this.x, this.y, this.width, this.height);
-            
-                              g.setColor(Color.WHITE);
-                              g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
-            
-                              g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                              g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+            this.x = this.children.get(0).x;
+            for(BaseShape shape : this.children){
+                  if(shape.drawed){
+                        if(shape.x < this.x){
+                              this.x = shape.x;
                         }
                   }
+            }
+
+            this.y = this.children.get(0).y;
+            for(BaseShape shape : this.children){
+                  if(shape.drawed){
+                        if(shape.y < this.y){
+                              this.y = shape.y;
+                        }
+                  }
+            }
+
+            int maxWidth = 0;
+            for(BaseShape shape : this.children){
+                  int relative = shape.x - this.x;
+                  int width = relative + shape.width;
+                  if(shape.drawed){
+                        if(width > maxWidth){
+                              maxWidth = width;
+                        }
+                  }
+            }
+            this.width = maxWidth;
+
+            int maxHeight = 0;
+            for(BaseShape shape : this.children){
+                  int relative = shape.y - this.y;
+                  int height = relative + shape.height;
+                  if(shape.drawed){
+                        if(height > maxHeight){
+                              maxHeight = height;
+                        }
+                  }
+            }
+            this.height = maxHeight;
+
+            if(selected){
+                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                  g.drawRect(this.x, this.y, this.width, this.height);
+
+                  g.setColor(Color.WHITE);
+                  g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
+
+                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                  g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
             }
       }
 }
