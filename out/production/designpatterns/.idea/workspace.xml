@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/commands/SaveShapeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/BaseShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/BaseShape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Ellipse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +59,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="App" />
+      <module name="designpatterns" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main" />
       <module name="designpatterns" />
@@ -60,6 +76,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.main" />
       </list>
     </recent_temporary>
@@ -82,7 +99,9 @@
       <option name="presentableId" value="Default" />
       <updated>1588764292284</updated>
       <workItem from="1588764295177" duration="1412000" />
-      <workItem from="1588855095533" duration="281000" />
+      <workItem from="1588855095533" duration="4360000" />
+      <workItem from="1588922040479" duration="1937000" />
+      <workItem from="1589019400911" duration="568000" />
     </task>
     <servers />
   </component>

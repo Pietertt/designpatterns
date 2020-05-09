@@ -53,6 +53,7 @@ public abstract class BaseShape extends JComponent implements Shape {
       public abstract void redoDrag();
       public abstract void move(Location location);
       public abstract void resize(Location location);
+      public abstract void clear();
 
 
 
@@ -65,6 +66,13 @@ public abstract class BaseShape extends JComponent implements Shape {
       public abstract void deselect(MouseEvent e);
 
       public abstract boolean getIfSelected(int x, int y);
+
+      public void save(Location location){
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
+      }
 
       public boolean getHandleIfSelected(int x, int y){
             for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){

@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.awt.event.*;
 
 import UI.Board;
 import UI.Layers;
@@ -10,14 +11,12 @@ import shapes.BaseShape;
 import shapes.Rectangle;
 import strategies.*;
 
-public class main {
+public class App extends JFrame implements KeyListener {
 
-      public static void main(String[] args) {
-            JFrame frame = new JFrame();
-            //JPanel layers = new Layers();
+      public App(){
             JPanel UI = new JPanel();
 
-            Board board = new Board(frame);
+            Board board = new Board(this);
 
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
@@ -91,7 +90,7 @@ public class main {
 
 
             JButton group = new JButton();
-            //groupShapes.addActionListener(actionEvent -> board.groupShapes());
+            group.addActionListener(actionEvent -> board.group());
             try {
                   group.setIcon(new ImageIcon(ImageIO.read(new File("img/group.png"))));
             } catch(IOException e) {
@@ -110,20 +109,32 @@ public class main {
             UI.add(group);
 
             // // added the board and the UI to the frame
-            //frame.getContentPane().add(board);
-            frame.getContentPane().add(UI, BorderLayout.SOUTH);
-            frame.getContentPane().add(board);
+            getContentPane().add(UI, BorderLayout.SOUTH);
+            getContentPane().add(board);
 
-            frame.setLocation(1000, 0);
-            frame.setSize(600, 600);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
+            setLocation(1000, 0);
+            setSize(600, 600);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(true);
 
             board.init();
+      }
 
-            // Rectangle rect = new Rectangle(100, 100, 100, 100);
-            // frame.getContentPane().add(rect);
-            // frame.revalidate();
-            // frame.repaint();
+      public void keyTyped(KeyEvent e) {
+
+      }
+
+      public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == 16) {
+                  System.out.println("Shifted");
+            }
+      }
+
+      public void keyReleased(KeyEvent e) {
+            //this.shifted = false;
+      }
+
+      public static void main(String[] args) {
+            App app = new App();
       }
 }

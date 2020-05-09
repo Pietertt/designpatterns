@@ -74,11 +74,17 @@ public class Ellipse extends BaseShape {
       }
 
       public void resize(Location location){
+            this.dragging = false;
             this.redoStack.clear();
             this.undoStack.add(location);
             this.resizing = true;
             this.start = new Location(location.x, location.y, location.width, location.height);
             repaint();
+      }
+
+      public void clear(){
+            this.dragging = false;
+            this.resizing = false;
       }
 
       public boolean getIfSelected(int x, int y) {
