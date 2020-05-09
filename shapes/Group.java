@@ -66,16 +66,17 @@ public class Group extends BaseShape {
             }
 
             if(!selected){
-                  for(BaseShape shape : this.children){
-                        Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
-                        shape.move(childLocation);
+                  if(this.dragging){
+                        for(BaseShape shape : this.children){
+                              Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
+                              shape.move(childLocation);
+                        }
+                        repaint();
                   }
 
-                  this.x = location.x;
-                  this.y = location.y;
-                  this.width = location.width;
-                  this.height = location.height;
-                  repaint();
+                  if(this.resizing){
+                        System.out.println(location.width / this.start.width);
+                  }
             }
       }
 
@@ -132,7 +133,16 @@ public class Group extends BaseShape {
       }
 
       public void resize(Location location){
-            
+            for(BaseShape shape : this.children){
+                  Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                  this.board.invoker.execute(save);
+            }
+
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.resizing = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
       }
 
       public void clear(){

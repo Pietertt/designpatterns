@@ -256,8 +256,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public void mouseDragged(MouseEvent e) {
             for (BaseShape shape : this.shapes) {
                   if (shape.resizing) {
-                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x,
-                                    e.getY() - shape.start.y);
+                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
                         shape.move(location);
                   }
 
