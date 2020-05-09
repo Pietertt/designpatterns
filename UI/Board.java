@@ -21,6 +21,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       public boolean created = false;
       public boolean shifted = false;
+      public boolean cmd = false;
+      public boolean ctrl = false;
 
       // New window to edit ornaments
       private JFrame RectangleOrnamentWindow;
@@ -57,30 +59,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.frame.repaint();
             }
 
-            Group group = new Group(100, 400, 50, 50, this);
-            Order place = new PlaceShapeCommand(group);
-            this.invoker.execute(place);
-
-            this.strategy.place(200, 400, 50, 50);
-            group.addd(this.strategy.shape);
-            this.frame.add(this.strategy.shape);
-            this.frame.revalidate();
-            this.frame.repaint();
-
-            this.strategy.place(300, 400, 50, 50);
-            group.addd(this.strategy.shape);
-            this.frame.add(this.strategy.shape);
-            this.frame.revalidate();
-            this.frame.repaint();
-
-            this.strategy.place(500, 200, 50, 50);
-            group.addd(this.strategy.shape);
-            this.frame.add(this.strategy.shape);
-            this.frame.revalidate();
-            this.frame.repaint();
-
-            this.shapes.add(group);
-            this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
             
@@ -110,7 +88,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             this.shapes.add(group);
             this.layers.update(this.shapes);
-            
+
             this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
@@ -247,10 +225,26 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             if (e.getKeyCode() == 16) {
                   this.shifted = true;
             }
+
+            if(e.getKeyCode() == 157){
+                  this.cmd = true;
+            }
+
+            if(e.getKeyCode() == 17){
+                  this.ctrl = true;
+            }
+
+            if(e.getKeyCode() == 71){
+                  if((this.cmd) || (this.ctrl)){
+                        this.group();
+                  }
+            }
       }
 
       public void keyReleased(KeyEvent e) {
             this.shifted = false;
+            this.cmd = false;
+            this.ctrl = false;
       }
 
       @Override
