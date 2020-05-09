@@ -6,7 +6,7 @@ compile:
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java
 	@javac io/Parser.java
 	@javac visitor/moveVisitor.java visitor/Visitor.java visitor/resizeVisitor.java
-	@javac main.java
+	@javac App.java
 	@echo "Compiling done!"
 
 clean:
@@ -22,7 +22,7 @@ clean:
 
 run: compile
 	@echo "Running application..."
-	@java main
+	@java App
 	@echo "Closed application!" 
 	@make clean
 	@clear

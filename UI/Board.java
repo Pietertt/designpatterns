@@ -10,6 +10,7 @@ import strategies.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Board extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
       public JFrame frame;
@@ -83,29 +84,34 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void group(){
-            System.out.println(this.shifted);
             ArrayList<BaseShape> grouped = new ArrayList<BaseShape>();
-            for(int i = 0; i < this.shapes.size(); i++){
-                  if(this.shapes.get(i).selected){
-                        
+            Iterator<BaseShape> i = this.shapes.iterator();
+            while (i.hasNext()) {
+                  BaseShape shape = i.next();
+                  if(shape.selected){
+                        grouped.add(shape);
+                        shape.selected = false;
+                        shape.repaint();
+                        i.remove();
                   }
             }
 
-            this.shifted = false;
-
-
-            // Group group = new Group(0, 0, 0, 0, this);
+            Group group = new Group(100, 100, 100, 100, this);
+            Order place = new PlaceShapeCommand(group);
+            this.invoker.execute(place);
             
-            // for(BaseShape shape : grouped){
-            //       group.addd(shape);
-            // }
+            for(BaseShape shape : grouped){
+                  group.addd(shape);
+            }
 
-            // this.shapes.add(group);
-            // revalidate();
-            // repaint();
+            this.shapes.add(group);
+            this.frame.add(group);
+            this.frame.revalidate();
+            this.frame.repaint();
       }
 
       public void mousePressed(MouseEvent e) {
+            requestFocus();
             if (this.created) {
                   this.strategy.place(e.getX(), e.getY(), 50, 50);
                   this.shapes.add(this.strategy.shape);

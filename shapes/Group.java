@@ -12,7 +12,7 @@ import shapes.*;
 import visitor.Visitor;
 
 public class Group extends BaseShape {
-      private ArrayList<BaseShape> children = new ArrayList<BaseShape>();
+      public ArrayList<BaseShape> children = new ArrayList<BaseShape>();
       public Board board;
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
