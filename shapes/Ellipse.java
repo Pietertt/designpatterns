@@ -5,8 +5,17 @@ import java.awt.*;
 import visitor.Visitor;
 import shapes.Location;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
+
+import UI.Layers;
 
 public class Ellipse extends BaseShape {
 
@@ -87,8 +96,18 @@ public class Ellipse extends BaseShape {
             this.resizing = false;
       }
 
-      public String print(){
-            return "ellipse";
+      public void print(Layers layers){
+            JLabel label = new JLabel();
+            label.setBorder(new EmptyBorder(0, 30, 0, 0));
+            label.setText("Ellipse");
+            try {
+                  ImageIcon image = new ImageIcon(ImageIO.read(new File("img/ellipse.png")));
+                  label.setIcon(image);
+                  layers.add(Box.createRigidArea(new Dimension(10, 10)));
+                  layers.add(label);
+            } catch(IOException e){
+
+            }
       }
 
       public boolean getIfSelected(int x, int y) {

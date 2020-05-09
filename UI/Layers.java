@@ -24,8 +24,9 @@ public class Layers extends JPanel {
       public void update(ArrayList<BaseShape> shapes){
             removeAll();
             for(BaseShape shape : shapes){
-                  add(new Item(shape));
-                  add(Box.createRigidArea(new Dimension(10, 10)));
+                  // add(new Item(shape));
+                  // add(Box.createRigidArea(new Dimension(10, 10)));
+                  shape.print(this);
             }
             revalidate();
             repaint();

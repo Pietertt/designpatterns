@@ -1,6 +1,9 @@
 package shapes;
 
 import javax.swing.*;
+
+import UI.Layers;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -103,8 +106,8 @@ public class TextShapeDecorator extends ShapeDecorator {
       }
 
       @Override
-      public String print() {
-            return "";
+      public void print(Layers layers){
+
       }
 
       @Override

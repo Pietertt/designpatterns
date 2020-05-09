@@ -17,13 +17,13 @@ import java.awt.Color;
 public class Item extends JLabel {
 
       public Item(BaseShape shape) {
-            setBackground(Color.YELLOW);
-            setText(shape.print().substring(0, 1).toUpperCase() + shape.print().substring(1));
-            try {
-                  ImageIcon image = new ImageIcon(ImageIO.read(new File("img/" + shape.print() + ".png")));
-                  setIcon(image);
-            } catch (IOException e) {
-                  e.printStackTrace();
-            }
+            // setBackground(Color.YELLOW);
+            // //setText(shape.print().substring(0, 1).toUpperCase() + shape.print().substring(1));
+            // try {
+            //       //ImageIcon image = new ImageIcon(ImageIO.read(new File("img/" + shape.print() + ".png")));
+            //       //setIcon(image);
+            // } catch (IOException e) {
+            //       e.printStackTrace();
+            // }
       }
 }
