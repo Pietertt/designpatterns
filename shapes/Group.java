@@ -80,26 +80,24 @@ public class Group extends BaseShape {
       }
 
       public void select(MouseEvent e) {
-            if(this.selected){
-                  for(BaseShape shape : this.children){
+            for(BaseShape shape : this.children){
+                  if(this.selected){
                         if(shape.getIfSelected(e.getX(), e.getY())){
-                              if(shape.selected){
-                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                                    this.board.invoker.execute(drag);
-                              } else {
-                                    Order select = new SelectShapeCommand(shape, e);
-                                    this.board.invoker.execute(select);
-                              }
+                              shape.clear();
+                              Order select = new SelectShapeCommand(shape, e);
+                              this.board.invoker.execute(select);
+
+                              Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                              this.board.invoker.execute(drag);
                         } else {
-                              if(shape.selected){
-                                    if(!board.shifted){
-                                          Order deselect = new DeselectShapeCommand(shape, e);
-                                          this.board.invoker.execute(deselect);
-                                    }
-                              }
+                              if(!board.shifted){
+                                    Order deselect = new DeselectShapeCommand(shape, e);
+                                    this.board.invoker.execute(deselect);
+                              } 
                         }
-                       
+
                         if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                              shape.clear();
                               Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                               this.board.invoker.execute(resize);
                         }
