@@ -119,6 +119,19 @@ public class Rectangle extends BaseShape {
             return false;
       }
 
+      public boolean getHandleIfSelected(int x, int y){
+            for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+                  for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
+                        if(i == x){
+                              if(j == y){
+                                    return true;
+                              }
+                        }
+                  }
+            }
+            return false;
+      }
+
       @Override
       public void paintComponent(Graphics g) {
             super.paintComponent(g);

@@ -75,16 +75,5 @@ public abstract class BaseShape extends JComponent implements Shape {
             repaint();
       }
 
-      public boolean getHandleIfSelected(int x, int y){
-            for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
-                  for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
-                        if(i == x){
-                              if(j == y){
-                                    return true;
-                              }
-                        }
-                  }
-            }
-            return false;
-      }
+      public abstract boolean getHandleIfSelected(int x, int y);
 }

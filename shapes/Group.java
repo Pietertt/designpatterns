@@ -49,55 +49,70 @@ public class Group extends BaseShape {
       }
 
       public void move(Location location){
-            boolean selected = false;
-            for(BaseShape shape : this.children){
-                  if(shape.selected){
-                        selected = true;
-                        if(shape.dragging){
-                              Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                              shape.move(childLocation);
-                        }
+            //System.out.println(location.x + " " + location.y + " " + location.width + " " + location.height);
 
-                        if(shape.resizing){
-                              Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
-                              shape.move(childLocation);
-                        }
-                  }                  
+            if(this.dragging){
+                  for(BaseShape shape : this.children){
+                        System.out.println("Fired");
+                        Location childLocation = new Location();
+                        childLocation.x = 100;
+                        childLocation.y = 100;
+                        childLocation.width = 100;
+                        childLocation.height = 100;
+
+                        shape.move(childLocation);
+                  }
             }
 
-            if(!selected){
-                  if(this.dragging){
-                        for(BaseShape shape : this.children){
-                              Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
-                              shape.move(childLocation);
-                        }
-                        repaint();
-                  }
+            if(this.resizing){
 
-                  if(this.resizing){                        
-                        // float percentageX = (float)location.x / (float)this.start.x;
-                        // float percentageY = (float)location.y / (float)this.start.y;
+            }
 
-                        float percentageWidth = (float)location.width / (float)this.start.width;
-                        float percentageHeight = (float)location.height / (float)this.start.height;
+            // boolean selected = false;
+            // for(BaseShape shape : this.children){
+            //       if(shape.selected){
+            //             selected = true;
+            //             if(shape.dragging){
+            //                   Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+            //                   shape.move(childLocation);
+            //             }
 
-                        for(BaseShape shape : this.children){
-                              float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
-                              float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+            //             if(shape.resizing){
+            //                   Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
+            //                   shape.move(childLocation);
+            //             }
+            //       }                  
+            // }
 
-                              Location childLocation = new Location();
-                              childLocation.x = this.start.x + Math.round(diffX);
-                              childLocation.y = this.start.y + Math.round(diffY);
-                              childLocation.width = Math.round((float)shape.start.width * percentageWidth);
-                              childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+            // if(!selected){
+            //       if(this.dragging){
+            //             for(BaseShape shape : this.children){
+            //                   Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
+            //                   shape.move(childLocation);
+            //             }
+            //             repaint();
+            //       }
 
-                              System.out.println(this.start.x + Math.round(diffX));
+            //       if(this.resizing){                        
+            //             float percentageWidth = (float)location.width / (float)this.start.width;
+            //             float percentageHeight = (float)location.height / (float)this.start.height;
+
+            //             for(BaseShape shape : this.children){
+            //                   float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+            //                   float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+
+            //                   Location childLocation = new Location();
+            //                   childLocation.x = this.start.x + Math.round(diffX);
+            //                   childLocation.y = this.start.y + Math.round(diffY);
+            //                   childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+            //                   childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+
+            //                   System.out.println(this.start.x + Math.round(diffX));
                              
-                              shape.move(childLocation);
-                        }
-
-                  }
-            }
+            //                   shape.move(childLocation);
+            //             }
+            //       }
+            // }
       }
 
       public void select(MouseEvent e) {
@@ -274,6 +289,19 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   if(shape.getIfSelected(x, y)){
                         return true;
+                  }
+            }
+            return false;
+      }
+
+      public boolean getHandleIfSelected(int x, int y){
+            for(int i = this.X() + this.Width() - 6; i < this.X() + this.Width() + 6; i++){
+                  for(int j = this.Y() + this.Height() - 6; j < this.Y() + this.Height() + 6; j++){
+                        if(i == x){
+                              if(j == y){
+                                    return true;
+                              }
+                        }
                   }
             }
             return false;
