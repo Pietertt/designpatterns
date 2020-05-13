@@ -68,7 +68,15 @@ public class Group extends BaseShape {
             if(!selected){
                   if(this.dragging){
                         for(BaseShape shape : this.children){
-                              Location childLocation = new Location((shape.x - this.x) + location.x, (shape.y - this.y) + location.y, shape.width, shape.height);
+                              int dx = location.x - this.start.x + shape.start.x;
+                              int dy = location.y - this.start.y + shape.start.y;
+
+                              Location childLocation = new Location();
+                              childLocation.x = dx;
+                              childLocation.y = dy;
+                              childLocation.width = shape.width;
+                              childLocation.height = shape.height;
+
                               shape.move(childLocation);
                         }
                         repaint();
