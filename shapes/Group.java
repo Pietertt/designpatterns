@@ -53,18 +53,17 @@ public class Group extends BaseShape {
       }
 
       public void drag(Location location){
-            boolean selected = false;
-            for(BaseShape shape : this.children){
-                  if(shape.selected){
-                        selected = true;
-                        Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                        shape.drag(childLocation);
-                  }
-            }
-
-            if(!selected){
+            if(this.isChildSelected()){
                   for(BaseShape shape : this.children){
-                        System.out.println(shape.start);
+                        if(shape.selected){
+                              if(!shape.resizing){
+                              Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+                              shape.drag(childLocation);
+                              }
+                        }
+                  }
+            } else {
+                  for(BaseShape shape : this.children){
                         int dx = location.x - this.start.x + shape.start.x;
                         int dy = location.y - this.start.y + shape.start.y;
 
@@ -75,49 +74,59 @@ public class Group extends BaseShape {
                         childLocation.height = shape.height;
 
                         shape.drag(childLocation);
+                        
                   }
                   repaint();
             }
       }
 
       public void resize(Location location){
-            boolean selected = false;
-            for(BaseShape shape : this.children){
-                  if(shape.selected){
-                        selected = true;
-                        Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
-                        shape.resize(childLocation);
-                  }
-            }
+           
+            
+            // boolean selected = false;
+            // for(BaseShape shape : this.children){
+            //       if(shape.selected){
+            //             if(!shape.dragging){
+            //                   System.out.println("Resizing...");
+            //             selected = true;
+            //             Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
+            //             shape.resize(childLocation);
+            //             }
+            //       }
+            // }
 
-            if(!selected){
-                  float percentageWidth = (float)location.width / (float)this.start.width;
-                  float percentageHeight = (float)location.height / (float)this.start.height;
+            // if(!selected){
+            //       float percentageWidth = (float)location.width / (float)this.start.width;
+            //       float percentageHeight = (float)location.height / (float)this.start.height;
 
-                  for(BaseShape shape : this.children){
-                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
-                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+            //       for(BaseShape shape : this.children){
+            //             float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+            //             float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
 
-                        Location childLocation = new Location();
-                        childLocation.x = this.start.x + Math.round(diffX);
-                        childLocation.y = this.start.y + Math.round(diffY);
-                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
-                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
-                        shape.resize(childLocation);
-                  }
-            }
+            //             Location childLocation = new Location();
+            //             childLocation.x = this.start.x + Math.round(diffX);
+            //             childLocation.y = this.start.y + Math.round(diffY);
+            //             childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+            //             childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
+            //             shape.resize(childLocation);
+            //       }
+            // }
+            System.out.println("Resizing");
       }
 
       public void select(MouseEvent e) {
             for(BaseShape shape : this.children){
                   if(this.selected){
                         if(shape.getIfSelected(e.getX(), e.getY())){
-                              shape.clear();
-                              Order select = new SelectShapeCommand(shape, e);
-                              this.board.invoker.execute(select);
+                              if(!shape.getHandleIfSelected(e.getX(), e.getY())){
+                                    System.out.println("Shape selected");
+                                    shape.clear();
+                                    Order select = new SelectShapeCommand(shape, e);
+                                    this.board.invoker.execute(select);
 
-                              Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                              this.board.invoker.execute(drag);
+                                    Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                                    this.board.invoker.execute(drag);
+                              }
                         } else {
                               if(!board.shifted){
                                     Order deselect = new DeselectShapeCommand(shape, e);
@@ -126,6 +135,7 @@ public class Group extends BaseShape {
                         }
 
                         if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                              System.out.println("Handle selected");
                               shape.clear();
                               Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                               this.board.invoker.execute(resize);
@@ -148,24 +158,35 @@ public class Group extends BaseShape {
       }
 
       public void dragCommand(Location location){
-            for(BaseShape shape : this.children){
-                  Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                  this.board.invoker.execute(save);
+            
+            if(!this.isChildSelected()){
+                  System.out.println("Dragging group");
+                  for(BaseShape shape : this.children){
+                        Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                        this.board.invoker.execute(save);
+                  }
+                  this.redoStack.clear();
+                  this.undoStack.add(location);
+                  this.dragging = true;
+                  this.start = new Location(location.x, location.y, location.width, location.height);
+                  repaint();
+            } else {
+                  for(BaseShape shape : this.children){
+                        Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                        this.board.invoker.execute(save);
+                  }
             }
-
-            this.redoStack.clear();
-            this.undoStack.add(location);
-            this.dragging = true;
-            this.start = new Location(location.x, location.y, location.width, location.height);
-            repaint();
+                  
       }
 
       public void resizeCommand(Location location){
+            System.out.println("Resizing group");
             for(BaseShape shape : this.children){
                   Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                   this.board.invoker.execute(save);
             }
 
+            this.dragging = false;
             this.redoStack.clear();
             this.undoStack.add(location);
             this.resizing = true;
@@ -232,16 +253,20 @@ public class Group extends BaseShape {
       }
 
       public boolean getHandleIfSelected(int x, int y){
-            for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
-                  for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
-                        if(i == x){
-                              if(j == y){
-                                    return true;
+            if(!this.isChildSelected()){
+                  for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+                        for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
+                              if(i == x){
+                                    if(j == y){
+                                          return true;
+                                    }
                               }
                         }
                   }
+                  return false;
+            } else {
+                  return false;
             }
-            return false;
       }
 
       public int getx(){
@@ -296,24 +321,36 @@ public class Group extends BaseShape {
             return maxHeight;
       }
 
+      public boolean isChildSelected(){
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        return true;
+                  }
+            }
+
+            return false;
+      }
+
       @Override
       public void paintComponent(Graphics g) {
-            super.paintComponent(g);
+            if(!this.isChildSelected()){
+                  super.paintComponent(g);
 
-            this.x = this.getx();
-            this.y = this.gety();
-            this.width = this.getwidth();
-            this.height = this.getheight();
+                  this.x = this.getx();
+                  this.y = this.gety();
+                  this.width = this.getwidth();
+                  this.height = this.getheight();
 
-            if(selected){
-                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                  g.drawRect(this.x, this.y, this.width, this.height);
+                  if(this.selected){
+                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                        g.drawRect(this.x, this.y, this.width, this.height);
 
-                  g.setColor(Color.WHITE);
-                  g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
+                        g.setColor(Color.WHITE);
+                        g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
 
-                  g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                  g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
+                        g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
+                  }
             }
       }
 }
