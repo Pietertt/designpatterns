@@ -35,6 +35,7 @@ public class Rectangle extends BaseShape {
             this.y = location.y;
             this.width = location.width;
             this.height = location.height;
+            System.out.println(location.x + " " + location.y);
             repaint();
       }
 

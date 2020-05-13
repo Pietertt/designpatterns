@@ -78,7 +78,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   }
             }
 
-            Group group = new Group(100, 100, 100, 100, this);
+            Group group = new Group(0, 0, 0, 0, this);
             Order place = new PlaceShapeCommand(group);
             this.invoker.execute(place);
             
