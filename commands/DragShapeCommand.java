@@ -12,7 +12,7 @@ public class DragShapeCommand extends Order {
       }
 
       public void execute(){
-            this.shape.drag(this.location);
+            this.shape.dragCommand(this.location);
       }
 
       public void undo(){

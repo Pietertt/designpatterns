@@ -63,7 +63,6 @@ public class Group extends BaseShape {
             }
 
             if(!selected){
-                  System.out.println(this.dragging + " " + this.resizing);
                   for(BaseShape shape : this.children){
                         System.out.println(shape.start);
                         int dx = location.x - this.start.x + shape.start.x;
