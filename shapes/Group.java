@@ -52,72 +52,61 @@ public class Group extends BaseShape {
             repaint();
       }
 
-      public void move(Location location){
+      public void drag(Location location){
             boolean selected = false;
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         selected = true;
                         Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                        shape.move(childLocation);
+                        shape.drag(childLocation);
                   }
             }
 
-            // for(BaseShape shape : this.children){
-            //       if(shape.selected){
-            //             selected = true;
-            //             if(shape.dragging){
-            //                   Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-            //                   shape.move(childLocation);
-            //             }
+            if(!selected){
+                  System.out.println(this.dragging + " " + this.resizing);
+                  for(BaseShape shape : this.children){
+                        System.out.println(shape.start);
+                        int dx = location.x - this.start.x + shape.start.x;
+                        int dy = location.y - this.start.y + shape.start.y;
 
-            //             if(shape.resizing){
-            //                   Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
-            //                   shape.move(childLocation);
-            //             }
-            //       }                  
-            // }
+                        Location childLocation = new Location();
+                        childLocation.x = dx;
+                        childLocation.y = dy;
+                        childLocation.width = shape.width;
+                        childLocation.height = shape.height;
 
-            // if(!selected){
-                  //if(this.dragging){
-                  if(!selected){
-                        for(BaseShape shape : this.children){
-                              int dx = location.x - this.start.x + shape.start.x;
-                              int dy = location.y - this.start.y + shape.start.y;
-
-                              Location childLocation = new Location();
-                              childLocation.x = dx;
-                              childLocation.y = dy;
-                              childLocation.width = shape.width;
-                              childLocation.height = shape.height;
-
-                              shape.move(childLocation);
-                              //System.out.println(childLocation.x + " " + childLocation.y); 
-
-                        }
-                        repaint();
+                        shape.drag(childLocation);
                   }
-                  //}
+                  repaint();
+            }
+      }
 
-                  // if(this.resizing){                        
-                  //       float percentageWidth = (float)location.width / (float)this.start.width;
-                  //       float percentageHeight = (float)location.height / (float)this.start.height;
+      public void resize(Location location){
+            boolean selected = false;
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        selected = true;
+                        Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
+                        shape.resize(childLocation);
+                  }
+            }
 
-                  //       for(BaseShape shape : this.children){
-                  //             float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
-                  //             float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+            if(!selected){
+                  float percentageWidth = (float)location.width / (float)this.start.width;
+                  float percentageHeight = (float)location.height / (float)this.start.height;
 
-                  //             Location childLocation = new Location();
-                  //             childLocation.x = this.start.x + Math.round(diffX);
-                  //             childLocation.y = this.start.y + Math.round(diffY);
-                  //             childLocation.width = Math.round((float)shape.start.width * percentageWidth);
-                  //             childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+                  for(BaseShape shape : this.children){
+                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
 
-                  //             System.out.println(this.start.x + Math.round(diffX));
-                             
-                  //             shape.move(childLocation);
-                  //       }
-                  // }
-            // }
+                        Location childLocation = new Location();
+                        childLocation.x = this.start.x + Math.round(diffX);
+                        childLocation.y = this.start.y + Math.round(diffY);
+                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
+                        shape.resize(childLocation);
+                  }
+            }
       }
 
       public void select(MouseEvent e) {
@@ -159,7 +148,7 @@ public class Group extends BaseShape {
             repaint();
       }
 
-      public void drag(Location location){
+      public void dragCommand(Location location){
             for(BaseShape shape : this.children){
                   Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                   this.board.invoker.execute(save);
@@ -172,7 +161,7 @@ public class Group extends BaseShape {
             repaint();
       }
 
-      public void resize(Location location){
+      public void resizeCommand(Location location){
             for(BaseShape shape : this.children){
                   Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
                   this.board.invoker.execute(save);

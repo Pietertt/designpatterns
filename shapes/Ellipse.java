@@ -33,7 +33,7 @@ public class Ellipse extends BaseShape {
             repaint();
       }
 
-      public void move(Location location){
+      public void resize(Location location){
             this.x = location.x;
             this.y = location.y;
             this.width = location.width;
@@ -42,6 +42,14 @@ public class Ellipse extends BaseShape {
       }
 
       public void drag(Location location){
+            this.x = location.x;
+            this.y = location.y;
+            this.width = location.width;
+            this.height = location.height;
+            repaint();
+      }
+
+      public void dragCommand(Location location){
             this.redoStack.clear();
             this.undoStack.add(location);
             this.dragging = true;
@@ -82,7 +90,7 @@ public class Ellipse extends BaseShape {
             repaint();
       }
 
-      public void resize(Location location){
+      public void resizeCommand(Location location){
             this.dragging = false;
             this.redoStack.clear();
             this.undoStack.add(location);
