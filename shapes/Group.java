@@ -53,7 +53,15 @@ public class Group extends BaseShape {
       }
 
       public void move(Location location){
-            // boolean selected = false;
+            boolean selected = false;
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        selected = true;
+                        Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+                        shape.move(childLocation);
+                  }
+            }
+
             // for(BaseShape shape : this.children){
             //       if(shape.selected){
             //             selected = true;
@@ -70,7 +78,8 @@ public class Group extends BaseShape {
             // }
 
             // if(!selected){
-                 // if(this.dragging){
+                  //if(this.dragging){
+                  if(!selected){
                         for(BaseShape shape : this.children){
                               int dx = location.x - this.start.x + shape.start.x;
                               int dy = location.y - this.start.y + shape.start.y;
@@ -86,7 +95,8 @@ public class Group extends BaseShape {
 
                         }
                         repaint();
-                 // }
+                  }
+                  //}
 
                   // if(this.resizing){                        
                   //       float percentageWidth = (float)location.width / (float)this.start.width;
