@@ -6,6 +6,7 @@ import commands.*;
 import shapes.*;
 import shapes.Shape;
 import strategies.*;
+import visitor.moveVisitor;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -99,6 +100,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             requestFocus();
             if (this.created) {
                   this.strategy.place(e.getX(), e.getY(), 50, 50);
+
+                  System.out.println("shape made");
+                  moveVisitor move = new moveVisitor();
+                  this.strategy.shape.accept(move);
+
                   this.shapes.add(this.strategy.shape);
                   this.frame.add(this.strategy.shape);
                   this.frame.revalidate();
@@ -191,7 +197,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                           if(!this.shifted){
                                                 Order deselect = new DeselectShapeCommand(shape, e);
                                                 this.invoker.execute(deselect);
-                                          } 
+                                          }
                                     }
                               }
                         }
@@ -254,18 +260,18 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            for (BaseShape shape : this.shapes) {
-                  if (shape.resizing) {
-                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x,
-                                    e.getY() - shape.start.y);
-                        shape.move(location);
-                  }
-
-                  if (shape.dragging) {
-                        Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                        shape.move(location);
-                  }
-            }
+//            for (BaseShape shape : this.shapes) {
+//                  if (shape.resizing) {
+//                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x,
+//                                    e.getY() - shape.start.y);
+//                        shape.move(location);
+//                  }
+//
+//                  if (shape.dragging) {
+//                        Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+//                        shape.move(location);
+//                  }
+//            }
       }
 
 }

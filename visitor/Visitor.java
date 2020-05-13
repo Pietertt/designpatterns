@@ -3,6 +3,7 @@ package visitor;
 import shapes.*;
 
 public interface Visitor {
-      // public void visitRectangle(Rectangle rectangle);
-      // public void visitEllipse(Ellipse ellipse);
+       void visitRectangle(Rectangle rectangle);
+       void visitEllipse(Ellipse ellipse);
+       void visit(BaseShape shape);
 }

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import UI.Layers;
+import visitor.Visitor;
 
 public class Rectangle extends BaseShape {
 
@@ -104,6 +105,11 @@ public class Rectangle extends BaseShape {
             } catch(IOException e){
 
             }
+      }
+
+      @Override
+      public void accept(Visitor visitor) {
+            visitor.visitRectangle(this);
       }
 
       public boolean getIfSelected(int x, int y) {

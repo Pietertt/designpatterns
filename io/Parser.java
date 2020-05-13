@@ -37,11 +37,12 @@ public class Parser {
       }
 
       private static String saveGrammarCorrectly(Board board) {
-            StringBuilder grammar = new StringBuilder();
-            int countIdent = 1;
-            for(BaseShape baseShape : board.group();)
-            for(Shape shape : board.shapes) {
-            }
-            return grammar.toString();
+//            StringBuilder grammar = new StringBuilder();
+//            int countIdent = 1;
+//            for(BaseShape baseShape : board.group();)
+//            for(Shape shape : board.shapes) {
+//            }
+//            return grammar.toString();
+            return "";
       }
 }

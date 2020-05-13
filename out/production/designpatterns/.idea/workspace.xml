@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/commands/SaveShapeCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/io/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/io/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/designpatterns/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/BaseShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/BaseShape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Ellipse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Group.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/Visitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/moveVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/moveVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/resizeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/resizeVisitor.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +100,10 @@
       <workItem from="1588764295177" duration="1412000" />
       <workItem from="1588855095533" duration="4360000" />
       <workItem from="1588922040479" duration="1937000" />
-      <workItem from="1589019400911" duration="568000" />
+      <workItem from="1589019400911" duration="1629000" />
+      <workItem from="1589027939762" duration="4969000" />
+      <workItem from="1589094580502" duration="12052000" />
+      <workItem from="1589364783532" duration="1197000" />
     </task>
     <servers />
   </component>

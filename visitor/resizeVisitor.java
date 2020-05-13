@@ -11,7 +11,21 @@ import shapes.Shape;
 import commands.*;
 
 public class resizeVisitor implements Visitor {
-      // public void visitRectangle(Rectangle rectangle){
+    @Override
+    public void visitRectangle(Rectangle rectangle) {
+
+    }
+
+    @Override
+    public void visitEllipse(Ellipse ellipse) {
+
+    }
+
+    @Override
+    public void visit(BaseShape shape) {
+
+    }
+    // public void visitRectangle(Rectangle rectangle){
       //       rectangle.addMouseListener(new MouseAdapter(){
       //             public void mouseReleased(MouseEvent e){
       //                   if (rectangle.resizing) {

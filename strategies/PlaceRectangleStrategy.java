@@ -4,6 +4,7 @@ import commands.*;
 import shapes.*;
 import UI.Board;
 import UI.Invoker;
+import visitor.moveVisitor;
 
 public class PlaceRectangleStrategy extends Strategy {
 
@@ -13,7 +14,9 @@ public class PlaceRectangleStrategy extends Strategy {
       }
 
       public void place(int x, int y, int width, int height) {
+
             this.shape = new Rectangle(x, y, width, height);
+
             Order place = new PlaceShapeCommand(this.shape);
             this.invoker.execute(place);
       }
