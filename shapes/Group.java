@@ -115,7 +115,8 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         s = true;
-                        Location childLocation = new Location(shape.x, shape.y, location.width, location.height);
+                        Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
+                        System.out.println(shape.start.x - location.x);
                         shape.resize(childLocation);
                   }
             }
@@ -165,7 +166,6 @@ public class Group extends BaseShape {
             //             shape.resize(childLocation);
             //       }
             // }
-            System.out.println("Resizing");
       }
 
       public void select(MouseEvent e) {
