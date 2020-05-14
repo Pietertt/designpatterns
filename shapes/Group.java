@@ -114,7 +114,25 @@ public class Group extends BaseShape {
             boolean s = false;
             for(BaseShape shape : this.children){
                   if(shape.selected){
+                        s = true;
                         Location childLocation = new Location(shape.x, shape.y, location.width, location.height);
+                        shape.resize(childLocation);
+                  }
+            }
+
+            if(s == false){
+                  float percentageWidth = (float)location.width / (float)this.start.width;
+                  float percentageHeight = (float)location.height / (float)this.start.height;
+
+                  for(BaseShape shape : this.children){
+                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+
+                        Location childLocation = new Location();
+                        childLocation.x = this.start.x + Math.round(diffX);
+                        childLocation.y = this.start.y + Math.round(diffY);
+                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
                         shape.resize(childLocation);
                   }
             }
@@ -156,6 +174,9 @@ public class Group extends BaseShape {
                         if(shape.getIfSelected(e.getX(), e.getY())){
                               Order select = new SelectShapeCommand(shape, e);
                               this.board.invoker.execute(select);
+                        } else {
+                              Order deselect = new DeselectShapeCommand(shape, e);
+                              this.board.invoker.execute(deselect);     
                         }
 
                         if(shape.getHandleIfSelected(e.getX(), e.getY())){
@@ -327,9 +348,23 @@ public class Group extends BaseShape {
       }
 
       public boolean getHandleIfSelected(int x, int y){
+            boolean s = false;
             for(BaseShape shape : this.children){
                   if(shape.getHandleIfSelected(x, y)){
+                        s = true;
                         return true;
+                  }
+            }
+
+            if(s == false){
+                  for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+                        for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
+                              if(i == x){
+                                    if(j == y){
+                                          return true;
+                                    }
+                              }
+                        }
                   }
             }
             return false;
