@@ -250,6 +250,8 @@ public class Group extends BaseShape {
             this.resizing = false;
 
             for(BaseShape shape : this.children){
+                  Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                  this.board.invoker.execute(save);
                   shape.clear();
             }
       }
