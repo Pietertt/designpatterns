@@ -31,7 +31,6 @@ public class Rectangle extends BaseShape {
       }
 
       public void resize(Location location){
-            System.out.println("Resizing");
             this.x = location.x;
             this.y = location.y;
             this.width = location.width;
@@ -40,7 +39,6 @@ public class Rectangle extends BaseShape {
       }
 
       public void drag(Location location){
-            System.out.println("Dragging");
             this.x = location.x;
             this.y = location.y;
             this.width = location.width;
@@ -49,7 +47,6 @@ public class Rectangle extends BaseShape {
       }
 
       public void dragCommand(Location location){
-            this.resizing = false;
             this.redoStack.clear();
             this.undoStack.add(location);
             this.dragging = true;
@@ -92,7 +89,6 @@ public class Rectangle extends BaseShape {
 
       public void resizeCommand(Location location){
             System.out.println("Resizing is true");
-            this.dragging = false;
             this.redoStack.clear();
             this.undoStack.add(location);
             this.resizing = true;
