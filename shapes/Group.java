@@ -111,7 +111,13 @@ public class Group extends BaseShape {
       }
 
       public void resize(Location location){
-           System.out.println("Resizing");
+            boolean s = false;
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        Location childLocation = new Location(shape.x, shape.y, location.width, location.height);
+                        shape.resize(childLocation);
+                  }
+            }
             
             // boolean selected = false;
             // for(BaseShape shape : this.children){
