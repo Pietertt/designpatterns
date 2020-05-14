@@ -102,11 +102,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.strategy.place(e.getX(), e.getY(), 50, 50);
 
                   System.out.println("shape made");
-                  moveVisitor move = new moveVisitor();
+                  moveVisitor move = new moveVisitor(this);
                   this.strategy.shape.accept(move);
 
                   this.shapes.add(this.strategy.shape);
+
                   this.frame.add(this.strategy.shape);
+
                   this.frame.revalidate();
                   this.frame.repaint();
                   this.created = false;   

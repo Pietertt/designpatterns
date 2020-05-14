@@ -58,9 +58,7 @@ public abstract class BaseShape extends JComponent implements Shape {
 
 
 
-       public void accept(Visitor visitor) {
-             visitor.visit(this);
-       }
+       public abstract void accept(Visitor visitor);
       // public abstract void print();
 
 

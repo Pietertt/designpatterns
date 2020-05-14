@@ -14,19 +14,17 @@ import commands.*;
 
 public class moveVisitor implements Visitor {
 //    public Invoker invoker;
-//    public Board board;
+    public Board board;
 //    public boolean shifted;
 
-//    public moveVisitor(Board board) {
-//        this.board = board;
-//        this.invoker = board.invoker;
-//        this.shifted = board.shifted;
-//    }
+    public moveVisitor(Board board) {
+        this.board = board;
+    }
 
 
     @Override
     public void visitRectangle(Rectangle rectangle) {
-        System.out.println("Dragged in visitor -- Rectangle");
+        System.out.println("In visitRectangle..");
 //        rectangle.addMouseListener(new MouseAdapter() {
 //
 //            public void mouseReleased(MouseEvent e) {
@@ -55,6 +53,7 @@ public class moveVisitor implements Visitor {
 //                }
 //            }
 //        });
+
         rectangle.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,6 +76,10 @@ public class moveVisitor implements Visitor {
                 }
             }
         });
+
+        rectangle.setBorder(BorderFactory.createTitledBorder("Node"));
+
+        this.board.add(rectangle);
     }
 
     @Override
