@@ -11,8 +11,10 @@ public interface Shape {
       public void remove();
       public void select(MouseEvent e);
       public void deselect(MouseEvent e);
-      public void drag(Location location);
+      public void dragCommand(Location location);
+      public void resizeCommand(Location location);
       public void resize(Location location);
+      public void drag(Location location);
       public void undoDrag();
       public void redoDrag();
       public void print(Layers layers);

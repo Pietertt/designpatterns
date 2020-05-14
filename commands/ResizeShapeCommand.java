@@ -12,7 +12,7 @@ public class ResizeShapeCommand extends Order {
       }
 
       public void execute(){
-            this.shape.resize(this.location);
+            this.shape.resizeCommand(this.location);
       }
 
       public void undo(){

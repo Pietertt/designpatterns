@@ -28,6 +28,14 @@ public class TextShapeDecorator extends ShapeDecorator {
             decoratedShape.place();
       }
 
+      public void resize(Location location){
+
+      }
+
+      public void drag(Location location){
+       
+      }
+
       @Override
       protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -86,13 +94,13 @@ public class TextShapeDecorator extends ShapeDecorator {
       }
 
       @Override
-      public void drag(Location location) {
-            decoratedShape.drag(location);
+      public void dragCommand(Location location) {
+            decoratedShape.dragCommand(location);
       }
 
       @Override
-      public void resize(Location location) {
-            decoratedShape.resize(location);
+      public void resizeCommand(Location location) {
+            decoratedShape.resizeCommand(location);
       }
 
       @Override

@@ -61,21 +61,21 @@ public class moveVisitor implements Visitor {
             }
         });
 
-        rectangle.addMouseMotionListener(new MouseAdapter() {
-            public void mouseDragged(MouseEvent e) {
-                System.out.println("Dragged in visitor");
-                if (rectangle.resizing) {
-                    Location location = new Location(rectangle.x, rectangle.y, e.getX() - rectangle.start.x,
-                            e.getY() - rectangle.start.y);
-                    rectangle.move(location);
-                }
-
-                if (rectangle.dragging) {
-                    Location location = new Location(e.getX(), e.getY(), rectangle.width, rectangle.height);
-                    rectangle.move(location);
-                }
-            }
-        });
+//        rectangle.addMouseMotionListener(new MouseAdapter() {
+//            public void mouseDragged(MouseEvent e) {
+//                System.out.println("Dragged in visitor");
+//                if (rectangle.resizing) {
+//                    Location location = new Location(rectangle.x, rectangle.y, e.getX() - rectangle.start.x,
+//                            e.getY() - rectangle.start.y);
+//                    rectangle.move(location);
+//                }
+//
+//                if (rectangle.dragging) {
+//                    Location location = new Location(e.getX(), e.getY(), rectangle.width, rectangle.height);
+//                    rectangle.move(location);
+//                }
+//            }
+//        });
 
         rectangle.setBorder(BorderFactory.createTitledBorder("Node"));
 
@@ -89,21 +89,21 @@ public class moveVisitor implements Visitor {
 
     @Override
     public void visit(BaseShape shape) {
-        System.out.println("Dragged in visitor");
-        shape.addMouseMotionListener(new MouseAdapter() {
-            public void mouseDragged(MouseEvent e) {
-
-                if (shape.resizing) {
-                    Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x,
-                            e.getY() - shape.start.y);
-                    shape.move(location);
-                }
-
-                if (shape.dragging) {
-                    Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                    shape.move(location);
-                }
-            }
-        });
+//        System.out.println("Dragged in visitor");
+//        shape.addMouseMotionListener(new MouseAdapter() {
+//            public void mouseDragged(MouseEvent e) {
+//
+//                if (shape.resizing) {
+//                    Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x,
+//                            e.getY() - shape.start.y);
+//                    shape.move(location);
+//                }
+//
+//                if (shape.dragging) {
+//                    Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+//                    shape.move(location);
+//                }
+//            }
+//        });
     }
 }
