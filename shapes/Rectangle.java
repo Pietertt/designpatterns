@@ -139,6 +139,7 @@ public class Rectangle extends BaseShape {
                   for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
                         if(i == x){
                               if(j == y){
+                                    System.out.println("Selected handle");
                                     return true;
                               }
                         }

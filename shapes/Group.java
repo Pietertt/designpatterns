@@ -58,7 +58,8 @@ public class Group extends BaseShape {
                   if(shape.selected){
                         Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
                         shape.drag(childLocation);
-                        s = true;
+                        System.out.println(shape.handle);
+                        s = true; 
                   }
             }
 
@@ -110,7 +111,32 @@ public class Group extends BaseShape {
       }
 
       public void resize(Location location){
-           
+            boolean s = false;
+            for(BaseShape shape : this.children){
+                  if(shape.selected){
+                        s = true;
+                        Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
+                        System.out.println(shape.start.x - location.x);
+                        shape.resize(childLocation);
+                  }
+            }
+
+            if(s == false){
+                  float percentageWidth = (float)location.width / (float)this.start.width;
+                  float percentageHeight = (float)location.height / (float)this.start.height;
+
+                  for(BaseShape shape : this.children){
+                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+
+                        Location childLocation = new Location();
+                        childLocation.x = this.start.x + Math.round(diffX);
+                        childLocation.y = this.start.y + Math.round(diffY);
+                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
+                        shape.resize(childLocation);
+                  }
+            }
             
             // boolean selected = false;
             // for(BaseShape shape : this.children){
@@ -140,24 +166,40 @@ public class Group extends BaseShape {
             //             shape.resize(childLocation);
             //       }
             // }
-            System.out.println("Resizing");
       }
 
       public void select(MouseEvent e) {
-
             for(BaseShape shape : this.children){
                   if(this.selected){
                         if(shape.getIfSelected(e.getX(), e.getY())){
                               Order select = new SelectShapeCommand(shape, e);
                               this.board.invoker.execute(select);
                         } else {
-                              if(shape.selected){
-                                    Order deselect = new DeselectShapeCommand(shape, e);
-                                    this.board.invoker.execute(deselect);
-                              }
+                              Order deselect = new DeselectShapeCommand(shape, e);
+                              this.board.invoker.execute(deselect);     
                         }
+
+                        if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                              System.out.println("resizing execute");
+                              Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
+                              this.board.invoker.execute(resize);
+                        } 
                   }
-            }
+
+                        
+                        //  else {
+                        //       if(shape.selected){
+                        //             if(shape.getHandleIfSelected(e.getX(), e.getY())){
+                        //                   shape.dragging = false;
+                        //                   System.out.println("Handle selected");
+                        //             } else {
+                        //                   Order deselect = new DeselectShapeCommand(shape, e);
+                        //                   this.board.invoker.execute(deselect);
+                        //             }
+                        //       }
+                        // }
+                  }
+            
 
             this.selected = true;
 
@@ -238,11 +280,11 @@ public class Group extends BaseShape {
             //       this.board.invoker.execute(save);
             // }
 
-            // this.redoStack.clear();
-            // this.undoStack.add(location);
-            // this.resizing = true;
-            // this.start = new Location(location.x, location.y, location.width, location.height);
-            // repaint();
+            this.redoStack.clear();
+            this.undoStack.add(location);
+            this.resizing = true;
+            this.start = new Location(location.x, location.y, location.width, location.height);
+            repaint();
       }
 
       public void clear(){
@@ -306,7 +348,15 @@ public class Group extends BaseShape {
       }
 
       public boolean getHandleIfSelected(int x, int y){
-            if(!this.isChildSelected()){
+            boolean s = false;
+            for(BaseShape shape : this.children){
+                  if(shape.getHandleIfSelected(x, y)){
+                        s = true;
+                        return true;
+                  }
+            }
+
+            if(s == false){
                   for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
                         for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
                               if(i == x){
@@ -316,10 +366,22 @@ public class Group extends BaseShape {
                               }
                         }
                   }
-                  return false;
-            } else {
-                  return false;
             }
+            return false;
+            // if(!this.isChildSelected()){
+            //       for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
+            //             for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
+            //                   if(i == x){
+            //                         if(j == y){
+            //                               return true;
+            //                         }
+            //                   }
+            //             }
+            //       }
+            //       return false;
+            // } else {
+            //       return false;
+            // }
       }
 
       public int getx(){

@@ -35,6 +35,7 @@ public abstract class BaseShape extends JComponent implements Shape {
       public boolean drawed = false;
       public boolean dragging = false;
       public boolean resizing = false;
+      public boolean handle = false;
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
