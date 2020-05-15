@@ -10,6 +10,13 @@ import java.awt.Graphics;
 
 public final class PlaceEllipseStrategy extends Strategy {
 
+      public static Strategy getInstance(){
+            if(strategy == null){
+                  strategy = new PlaceEllipseStrategy();
+            }
+            return strategy;
+      }
+
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
                   g.setColor(new Color(gray[0], gray[1], gray[2]));

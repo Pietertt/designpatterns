@@ -17,7 +17,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public Layers layers;
       public Invoker invoker = new Invoker();
       private ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
-      private Strategy strategy;
+      private Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
+      private Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
 
       public boolean created = false;
       public boolean shifted = false;
@@ -43,7 +44,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             for (int i = 0; i < 5; i++) {
                   BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
-                  shape.setStrategy(new PlaceRectangleStrategy());
+                  shape.setStrategy(this.ellipseStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
                   this.shapes.add(place.shape);
@@ -54,7 +55,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             for (int i = 0; i < 5; i++) {
                   BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
-                  shape.setStrategy(new PlaceEllipseStrategy());
+                  shape.setStrategy(this.rectangleStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
                   this.shapes.add(place.shape);
@@ -93,10 +94,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.frame.revalidate();
             this.frame.repaint();
 
-      }
-
-      public void setStrategy(Strategy strategy){
-            this.strategy = strategy;
       }
 
       public void mousePressed(MouseEvent e) {
