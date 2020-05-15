@@ -79,35 +79,6 @@ public class Group extends BaseShape {
                   }
                   repaint();      
             }
-
-
-
-
-            // if(this.isChildSelected()){
-            //       for(BaseShape shape : this.children){
-            //             if(shape.selected){
-            //                   System.out.println("Dragging child");
-            //                   Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-            //                   shape.drag(childLocation);
-                              
-            //             }
-            //       }
-            // } else {
-            //       for(BaseShape shape : this.children){
-            //             int dx = location.x - this.start.x + shape.start.x;
-            //             int dy = location.y - this.start.y + shape.start.y;
-
-            //             Location childLocation = new Location();
-            //             childLocation.x = dx;
-            //             childLocation.y = dy;
-            //             childLocation.width = shape.width;
-            //             childLocation.height = shape.height;
-
-            //             shape.drag(childLocation);
-                        
-            //       }
-            //       repaint();
-            // }
       }
 
       public void resize(Location location){
@@ -137,35 +108,6 @@ public class Group extends BaseShape {
                         shape.resize(childLocation);
                   }
             }
-            
-            // boolean selected = false;
-            // for(BaseShape shape : this.children){
-            //       if(shape.selected){
-            //             if(!shape.dragging){
-            //                   System.out.println("Resizing...");
-            //             selected = true;
-            //             Location childLocation = new Location(shape.x, shape.y, location.x - shape.start.x, location.y - shape.start.y);
-            //             shape.resize(childLocation);
-            //             }
-            //       }
-            // }
-
-            // if(!selected){
-            //       float percentageWidth = (float)location.width / (float)this.start.width;
-            //       float percentageHeight = (float)location.height / (float)this.start.height;
-
-            //       for(BaseShape shape : this.children){
-            //             float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
-            //             float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
-
-            //             Location childLocation = new Location();
-            //             childLocation.x = this.start.x + Math.round(diffX);
-            //             childLocation.y = this.start.y + Math.round(diffY);
-            //             childLocation.width = Math.round((float)shape.start.width * percentageWidth);
-            //             childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
-            //             shape.resize(childLocation);
-            //       }
-            // }
       }
 
       public void select(MouseEvent e) {
@@ -185,52 +127,8 @@ public class Group extends BaseShape {
                               this.board.invoker.execute(resize);
                         } 
                   }
-
-                        
-                        //  else {
-                        //       if(shape.selected){
-                        //             if(shape.getHandleIfSelected(e.getX(), e.getY())){
-                        //                   shape.dragging = false;
-                        //                   System.out.println("Handle selected");
-                        //             } else {
-                        //                   Order deselect = new DeselectShapeCommand(shape, e);
-                        //                   this.board.invoker.execute(deselect);
-                        //             }
-                        //       }
-                        // }
-                  }
-            
-
+            }
             this.selected = true;
-
-
-            // for(BaseShape shape : this.children){
-            //       if(this.selected){
-            //             if(shape.getIfSelected(e.getX(), e.getY())){
-            //                   if(!shape.getHandleIfSelected(e.getX(), e.getY())){
-            //                         System.out.println("Shape selected");
-            //                         Order select = new SelectShapeCommand(shape, e);
-            //                         this.board.invoker.execute(select);
-
-            //                         Order drag = new DragShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-            //                         this.board.invoker.execute(drag);
-            //                   }
-            //             } else {
-            //                   if(!board.shifted){
-            //                         Order deselect = new DeselectShapeCommand(shape, e);
-            //                         this.board.invoker.execute(deselect);
-            //                   } 
-            //             }
-
-            //             if(shape.getHandleIfSelected(e.getX(), e.getY())){
-            //                   System.out.println("Handle selected");
-            //                   shape.clear();
-            //                   Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-            //                   this.board.invoker.execute(resize);
-            //             }
-            //       }
-            // }
-            // this.selected = true;
       }
 
       public void deselect(MouseEvent e) {
@@ -251,35 +149,9 @@ public class Group extends BaseShape {
             this.dragging = true;
             this.start = new Location(location.x, location.y, location.width, location.height);
             repaint();
-
-            
-            // if(!this.isChildSelected()){
-            //       System.out.println("Dragging group");
-            //       for(BaseShape shape : this.children){
-            //             Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-            //             this.board.invoker.execute(save);
-            //       }
-            //       this.redoStack.clear();
-            //       this.undoStack.add(location);
-            //       this.dragging = true;
-            //       this.start = new Location(location.x, location.y, location.width, location.height);
-            //       repaint();
-            // } else {
-            //       for(BaseShape shape : this.children){
-            //             Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-            //             this.board.invoker.execute(save);
-            //       }
-            // }
-                  
       }
 
       public void resizeCommand(Location location){
-            // System.out.println("Resizing group");
-            // for(BaseShape shape : this.children){
-            //       Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-            //       this.board.invoker.execute(save);
-            // }
-
             this.redoStack.clear();
             this.undoStack.add(location);
             this.resizing = true;
@@ -368,20 +240,6 @@ public class Group extends BaseShape {
                   }
             }
             return false;
-            // if(!this.isChildSelected()){
-            //       for(int i = this.x + this.width - 6; i < this.x + this.width + 6; i++){
-            //             for(int j = this.y + this.height - 6; j < this.y + this.height + 6; j++){
-            //                   if(i == x){
-            //                         if(j == y){
-            //                               return true;
-            //                         }
-            //                   }
-            //             }
-            //       }
-            //       return false;
-            // } else {
-            //       return false;
-            // }
       }
 
       public int getx(){
