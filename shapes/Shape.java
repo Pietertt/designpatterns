@@ -150,9 +150,7 @@ public class Shape extends BaseShape {
       public void paintComponent(Graphics g) {
             super.paintComponent(g);
             if(this.drawed){
-                  // if(this.selected){
-                       this.strategy.execute(this.x, this.y, this.width, this.height, g);
-                  // }
+                  this.strategy.execute(this.x, this.y, this.width, this.height, g, this.selected);
             }
       }
 }
