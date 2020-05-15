@@ -6,7 +6,6 @@ import java.awt.Cursor;
 import javax.swing.*;
 
 import shapes.*;
-import shapes.Rectangle;
 import shapes.Shape;
 import commands.*;
 

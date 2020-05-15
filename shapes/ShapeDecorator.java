@@ -3,7 +3,7 @@ package shapes;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class ShapeDecorator extends JComponent implements Shape {
+public abstract class ShapeDecorator extends JComponent {
     protected BaseShape decoratedShape;
 
     public ShapeDecorator(BaseShape decoratedShape) {

@@ -39,30 +39,33 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void init() {
-            this.setStrategy(new PlaceRectangleStrategy(this.invoker, this));
+            // this.strategy = PlaceEllipseStrategy.getInstance(this);
 
             for (int i = 0; i < 5; i++) {
-                  this.strategy.place(50 + i * 100, 100, 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
+                  BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
+                  shape.setStrategy(new Strategy());
+                  Order place = new PlaceShapeCommand(shape);
+                  this.invoker.execute(place);
+                  this.shapes.add(place.shape);
+                  this.frame.add(place.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
             }
 
-            this.setStrategy(new PlaceEllipseStrategy(this.invoker, this));
+            // this.setStrategy(new PlaceEllipseStrategy(this));
 
-            for (int i = 0; i < 5; i++) {
-                  this.strategy.place(50 + i * 100, 300, 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
-            }
+            // for (int i = 0; i < 5; i++) {
+            //       this.strategy.place(50 + i * 100, 300, 50, 50);
+            //       this.shapes.add(this.strategy.shape);
+            //       this.frame.add(this.strategy.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
+            // }
 
-            this.frame.revalidate();
-            this.frame.repaint();
+            // this.frame.revalidate();
+            // this.frame.repaint();
             
-            this.layers.update(this.shapes);
+            // this.layers.update(this.shapes);
       }
 
       public void group(){
@@ -101,20 +104,22 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       public void mousePressed(MouseEvent e) {
             requestFocus();
-            if (this.created) {
-                  this.strategy.place(e.getX(), e.getY(), 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
-                  this.created = false;   
+            // if (this.created) {
+            //       this.strategy.place(e.getX(), e.getY(), 50, 50);
+            //       this.shapes.add(this.strategy.shape);
+            //       this.frame.add(this.strategy.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
+            //       this.created = false;   
                   
-                  this.layers.update(this.shapes);
-            }
+            //       this.layers.update(this.shapes);
+            // }
 
             for (BaseShape shape : this.shapes) {
                   if (shape.drawed) {
+                        System.out.println(shape.x + " " + shape.y + " " + e.getX() + " " + shape.getY());
                         if (shape.getIfSelected(e.getX(), e.getY())) {
+                              System.out.println("selected");
                               Order select = new SelectShapeCommand(shape, e);
                               this.invoker.execute(select);
                               if (e.getClickCount() == 2) {
@@ -159,7 +164,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                                       || !textLeft.getText().isEmpty()
                                                       || !textRight.getText().isEmpty()) {
 
-                                                Shape base = new TextShapeDecorator(shape, textBottom.getText(),
+                                                TextShapeDecorator base = new TextShapeDecorator(shape, textBottom.getText(),
                                                             textTop.getText(), textLeft.getText(), textRight.getText());
                                                 for (Component component : shape.getComponents()) {
                                                       shape.remove(component);

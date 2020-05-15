@@ -8,7 +8,6 @@ import java.awt.event.*;
 import UI.Board;
 import UI.Layers;
 import shapes.BaseShape;
-import shapes.Rectangle;
 import strategies.*;
 import java.awt.*;
 
@@ -23,7 +22,7 @@ public class App extends JFrame {
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.setStrategy(new PlaceRectangleStrategy(board.invoker, board));     
+                  // board.setStrategy(new PlaceRectangleStrategy(board.invoker, board));     
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -39,7 +38,7 @@ public class App extends JFrame {
 
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.setStrategy(new PlaceEllipseStrategy(board.invoker, board));
+                  // board.setStrategy(new PlaceEllipseStrategy(board.invoker, board));
             });
 
             try {

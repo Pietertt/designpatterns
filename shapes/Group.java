@@ -13,6 +13,7 @@ import java.util.Stack;
 import commands.*;
 import UI.*;
 import shapes.*;
+import strategies.Strategy;
 import visitor.Visitor;
 
 public class Group extends BaseShape {
@@ -28,6 +29,10 @@ public class Group extends BaseShape {
             // this.width = this.getwidth();
             // this.height = this.getheight();
             this.board = board;
+      }
+
+      public void setStrategy(Strategy strategy){
+            this.strategy = strategy;
       }
 
       public void addd(BaseShape shape){
@@ -58,7 +63,6 @@ public class Group extends BaseShape {
                   if(shape.selected){
                         Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
                         shape.drag(childLocation);
-                        System.out.println(shape.handle);
                         s = true; 
                   }
             }

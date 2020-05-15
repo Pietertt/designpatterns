@@ -78,42 +78,34 @@ public class TextShapeDecorator extends ShapeDecorator {
             }
       }
 
-      @Override
       public void remove() {
             decoratedShape.remove();
       }
 
-      @Override
       public void select(MouseEvent e) {
             decoratedShape.select(e);
       }
 
-      @Override
       public void deselect(MouseEvent e) {
             decoratedShape.deselect(e);
       }
 
-      @Override
       public void dragCommand(Location location) {
             decoratedShape.dragCommand(location);
       }
 
-      @Override
       public void resizeCommand(Location location) {
             decoratedShape.resizeCommand(location);
       }
 
-      @Override
       public void undoDrag() {
             decoratedShape.undoDrag();
       }
 
-      @Override
       public void redoDrag() {
             decoratedShape.redoDrag();
       }
 
-      @Override
       public void print(Layers layers){
 
       }

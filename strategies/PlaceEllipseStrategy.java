@@ -5,16 +5,20 @@ import shapes.*;
 import UI.Invoker;
 import UI.Board;
 
-public class PlaceEllipseStrategy extends Strategy {
+public final class PlaceEllipseStrategy {
 
-      public PlaceEllipseStrategy(Invoker invoker, Board board) {
-            this.invoker = invoker;
-            this.board = board;
-      }
+      // public PlaceEllipseStrategy(Board board) {
+      //       this.board = board;
+      // }
 
-      public void place(int x, int y, int width, int height) {
-            this.shape = new Ellipse(x, y, width, height);
-            Order place = new PlaceShapeCommand(this.shape);
-            this.invoker.execute(place);
-      }
+      // public Strategy getInstance(Board board) {
+      //       if(strategy == null){
+      //             strategy = new PlaceEllipseStrategy(board);
+      //       }
+      //       return strategy;
+      // }
+
+      // public void execute(int x, int y, int width, int height) {
+            
+      // }
 }
