@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public final class PlaceRectangleStrategy extends Strategy {
+      public static Strategy strategy;
 
       private PlaceRectangleStrategy(){
 
@@ -21,7 +22,9 @@ public final class PlaceRectangleStrategy extends Strategy {
             return strategy;
       }
 
-
+      public String toString(){
+            return "Rectangle";
+      }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){

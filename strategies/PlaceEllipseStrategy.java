@@ -9,12 +9,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public final class PlaceEllipseStrategy extends Strategy {
+      public static Strategy strategy;
+
+      private PlaceEllipseStrategy(){
+
+      }
 
       public static Strategy getInstance(){
             if(strategy == null){
                   strategy = new PlaceEllipseStrategy();
             }
             return strategy;
+      }
+
+      public String toString(){
+            return "Ellipse";
       }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){

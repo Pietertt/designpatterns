@@ -16,5 +16,7 @@ public abstract class Strategy {
             return strategy;
       }
 
+      public abstract String toString();
+
       public abstract void execute(int x, int y, int width, int height, Graphics g, boolean selected);
 }
