@@ -43,7 +43,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             for (int i = 0; i < 5; i++) {
                   BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
-                  shape.setStrategy(new Strategy());
+                  shape.setStrategy(new PlaceRectangleStrategy());
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
                   this.shapes.add(place.shape);
@@ -52,20 +52,17 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.frame.repaint();
             }
 
-            // this.setStrategy(new PlaceEllipseStrategy(this));
-
-            // for (int i = 0; i < 5; i++) {
-            //       this.strategy.place(50 + i * 100, 300, 50, 50);
-            //       this.shapes.add(this.strategy.shape);
-            //       this.frame.add(this.strategy.shape);
-            //       this.frame.revalidate();
-            //       this.frame.repaint();
-            // }
-
-            // this.frame.revalidate();
-            // this.frame.repaint();
-            
-            // this.layers.update(this.shapes);
+            for (int i = 0; i < 5; i++) {
+                  BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
+                  shape.setStrategy(new PlaceEllipseStrategy());
+                  Order place = new PlaceShapeCommand(shape);
+                  this.invoker.execute(place);
+                  this.shapes.add(place.shape);
+                  this.frame.add(place.shape);
+                  this.frame.revalidate();
+                  this.frame.repaint();
+            }
+            this.layers.update(this.shapes);
       }
 
       public void group(){
@@ -117,7 +114,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             for (BaseShape shape : this.shapes) {
                   if (shape.drawed) {
-                        System.out.println(shape.x + " " + shape.y + " " + e.getX() + " " + shape.getY());
                         if (shape.getIfSelected(e.getX(), e.getY())) {
                               System.out.println("selected");
                               Order select = new SelectShapeCommand(shape, e);

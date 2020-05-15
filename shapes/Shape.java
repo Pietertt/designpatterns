@@ -93,7 +93,6 @@ public class Shape extends BaseShape {
       }
 
       public void resizeCommand(Location location){
-            System.out.println("Resizing is true");
             this.redoStack.clear();
             this.undoStack.add(location);
             this.resizing = true;
