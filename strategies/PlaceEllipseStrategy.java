@@ -44,20 +44,4 @@ public final class PlaceEllipseStrategy extends Strategy {
                   g.fillOval(x, y, width, height);
             }
       }
-      // private PlaceRectangleStrategy(Board board) {
-      //       this.board = board;
-      // }
-
-      // public Strategy getInstance(Board board) {
-      //       if(strategy == null){
-      //             strategy = new PlaceRectangleStrategy(board);
-      //       }
-      //       return strategy;
-      // }
-
-      // public void execute(int x, int y, int width, int height) {
-      //       this.shape = new Rectangle(x, y, width, height);
-      //       Order place = new PlaceShapeCommand(this.shape);
-      //       this.board.invoker.execute(place);
-      // }
 }
