@@ -22,7 +22,7 @@ public class App extends JFrame {
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
-                  // board.setStrategy(new PlaceRectangleStrategy(board.invoker, board));     
+                  board.currentStrategy = board.rectangleStrategy;
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -38,7 +38,7 @@ public class App extends JFrame {
 
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
-                  // board.setStrategy(new PlaceEllipseStrategy(board.invoker, board));
+                  board.currentStrategy = board.ellipseStrategy;
             });
 
             try {
@@ -50,6 +50,23 @@ public class App extends JFrame {
             ellipse.setBorderPainted(false);
             ellipse.setFocusPainted(false);
             ellipse.setContentAreaFilled(false);
+
+            JButton triangle = new JButton();
+
+            triangle.addActionListener(actionEvent -> {
+                  board.created = true;
+                  board.currentStrategy = board.triangleStrategy;
+            });
+
+            try {
+                  triangle.setIcon(new ImageIcon(ImageIO.read(new File("img/triangle.png"))));
+            } catch (IOException e) {
+
+            }
+
+            triangle.setBorderPainted(false);
+            triangle.setFocusPainted(false);
+            triangle.setContentAreaFilled(false);
 
             // Undo button
             JButton undo = new JButton();
@@ -104,6 +121,7 @@ public class App extends JFrame {
 
             UI.add(rectangle);
             UI.add(ellipse);
+            UI.add(triangle);
             UI.add(undo);
             UI.add(redo);
             UI.add(save);
