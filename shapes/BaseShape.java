@@ -36,6 +36,8 @@ public abstract class BaseShape extends JComponent {
 
       public Strategy strategy;
 
+      public ArrayList<BaseShape> children = new ArrayList<BaseShape>();
+
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 

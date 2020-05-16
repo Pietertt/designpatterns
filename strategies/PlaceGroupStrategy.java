@@ -26,6 +26,13 @@ public final class PlaceGroupStrategy extends Strategy {
             return "group";
       }
 
+      public String grammar(BaseShape shape){
+            StringBuilder text = new StringBuilder();
+            text.append("group " + shape.children.size() + "\n");
+            
+            return text.toString();
+      }
+
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
                   g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
