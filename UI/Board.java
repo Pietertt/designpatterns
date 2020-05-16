@@ -281,6 +281,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.accept(dragVisitor);
             }
 
+            dragVisitor.drag(new Location(e.getX(), e.getY(), dragVisitor.selectedShape.width, dragVisitor.selectedShape.height));
+
+            
+
             // for (BaseShape shape : this.shapes) {
             //       if (shape.resizing) {
             //             Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);

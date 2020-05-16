@@ -25,7 +25,7 @@ public class Shape extends BaseShape {
       public void accept(Visitor visitor){
             visitor.visit(this); 
       }
-
+      
       public void place(){
             this.drawed = true;
             repaint();

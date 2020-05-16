@@ -9,7 +9,7 @@ import shapes.*;
 import shapes.Shape;
 import commands.*;
 
-public class resizeVisitor extends Visitor {
+public class resizeVisitor  {
       public void visit(Shape shape){
 
       }

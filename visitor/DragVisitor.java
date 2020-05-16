@@ -12,13 +12,24 @@ import shapes.Shape;
 import commands.*;
 
 public class DragVisitor extends Visitor {
+      public BaseShape selectedShape;
 
       public void visit(Shape shape){
-            System.out.println("Shape dragged");
+            if(shape.selected){
+                  this.selectedShape = shape;
+            }
       }
 
       public void visit(Group group){
             System.out.println("Group dragged");
+      }
+
+      public void drag(Location location){      
+            selectedShape.x = location.x;
+            selectedShape.y = location.y;
+            selectedShape.width = location.width;
+            selectedShape.height = location.height;
+            selectedShape.repaint();
       }
 
       // public void visitRectangle(Rectangle rectangle){

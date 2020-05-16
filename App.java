@@ -5,8 +5,8 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.event.*;
 
-import UI.Board;
-import UI.Layers;
+import UI.*;
+import IO.*;
 import shapes.BaseShape;
 import strategies.*;
 import java.awt.*;
@@ -138,6 +138,8 @@ public class App extends JFrame {
             setVisible(true);
 
             board.init();
+
+            fileIO.saveFile();
       }
 
       public static void main(String[] args) {
