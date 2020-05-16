@@ -310,24 +310,16 @@ public class Group extends BaseShape {
 
       @Override
       public void paintComponent(Graphics g) {
-            if(!this.isChildSelected()){
-                  super.paintComponent(g);
+            super.paintComponent(g);                  
+            
+            this.x = this.getx();
+            this.y = this.gety();
+            this.width = this.getwidth();
+            this.height = this.getheight();
 
-                  this.x = this.getx();
-                  this.y = this.gety();
-                  this.width = this.getwidth();
-                  this.height = this.getheight();
-
-                  if(this.selected){
-                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.drawRect(this.x, this.y, this.width, this.height);
-
-                        g.setColor(Color.WHITE);
-                        g.fillOval(this.x + this.width - 6, this.y + this.height - 6, 12, 12);
-
-                        g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
-                        g.fillOval(this.x + this.width - 4, this.y + this.height - 4, 8, 8);
-                  }
+            if(this.isChildSelected()){
+                  this.strategy.execute(this.x, this.y, this.width, this.height, g, this.selected);
             }
+
       }
 }

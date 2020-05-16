@@ -18,6 +18,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public Layers layers;
       public Invoker invoker = new Invoker();
       private ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
+      public Strategy groupStrategy = PlaceGroupStrategy.getInstance();
       public Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
       public Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
       public Strategy triangleStrategy = PlaceTriangleStrategy.getInstance();
@@ -84,6 +85,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void group(){
+            this.currentStrategy = this.groupStrategy;
+
             ArrayList<BaseShape> grouped = new ArrayList<BaseShape>();
             Iterator<BaseShape> i = this.shapes.iterator();
             while (i.hasNext()) {
@@ -97,6 +100,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             }
 
             Group group = new Group(0, 0, 0, 0, this);
+            group.setStrategy(this.currentStrategy);
             Order place = new PlaceShapeCommand(group);
             this.invoker.execute(place);
             
@@ -110,6 +114,17 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
+
+
+            // this.currentStrategy = this.triangleStrategy;
+            //       BaseShape shape = new Shape(50 + 75 * i, 300, 50, 50);
+            //       shape.setStrategy(this.currentStrategy);
+            //       Order place = new PlaceShapeCommand(shape);
+            //       this.invoker.execute(place);
+            //       this.shapes.add(place.shape);
+            //       this.frame.add(place.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
 
       }
 
