@@ -14,6 +14,8 @@ import commands.*;
 import UI.*;
 import shapes.*;
 import visitor.Visitor;
+import visitor.moveVisitor;
+import visitor.resizeVisitor;
 
 public class Group extends BaseShape {
       public ArrayList<BaseShape> children = new ArrayList<BaseShape>();
@@ -21,13 +23,19 @@ public class Group extends BaseShape {
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
-      public Group(int x, int y, int width, int height, Board board){
+      // Visitors
+      private moveVisitor moveVisitor;
+      private resizeVisitor resizeVisitor;
+
+      public Group(int x, int y, int width, int height, Board board, moveVisitor moveVisitor, resizeVisitor resizeVisitor){
             super(x, y, width, height);
             // this.x = this.getx();
             // this.y = this.gety();
             // this.width = this.getwidth();
             // this.height = this.getheight();
             this.board = board;
+            this.moveVisitor = moveVisitor;
+            this.resizeVisitor = resizeVisitor;
       }
 
       public void addd(BaseShape shape){
@@ -39,7 +47,7 @@ public class Group extends BaseShape {
       }
 
       public void accept(Visitor visitor){
-
+            visitor.visitGroup(this);
       }
 
       public void place() {
@@ -57,29 +65,39 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                        shape.drag(childLocation);
-                        System.out.println(shape.handle);
-                        s = true; 
+                        //shape.drag(childLocation);
                   }
             }
-
-            if(s == false){
-                  for(BaseShape shape : this.children){
-                        int dx = location.x - this.start.x + shape.start.x;
-                        int dy = location.y - this.start.y + shape.start.y;
-
-                        Location childLocation = new Location();
-                        childLocation.x = dx;
-                        childLocation.y = dy;
-                        childLocation.width = shape.width;
-                        childLocation.height = shape.height;
-
-                        shape.drag(childLocation);
-                        
-                  }
-                  repaint();      
-            }
-
+//            boolean s = false;
+//            for(BaseShape shape : this.children){
+//                  if(shape.selected){
+//                        Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+//                        shape.drag(childLocation);
+//                        //moveVisitor.setLocation(childLocation);
+//                        //shape.accept(moveVisitor);
+//                        System.out.println(shape.handle);
+//                        s = true;
+//                  }
+//            }
+//
+//            if(s == false){
+//                  for(BaseShape shape : this.children){
+//                        int dx = location.x - this.start.x + shape.start.x;
+//                        int dy = location.y - this.start.y + shape.start.y;
+//
+//                        Location childLocation = new Location();
+//                        childLocation.x = dx;
+//                        childLocation.y = dy;
+//                        childLocation.width = shape.width;
+//                        childLocation.height = shape.height;
+//
+//                        shape.drag(childLocation);
+//                        //moveVisitor.setLocation(childLocation);
+//                        //shape.accept(moveVisitor);
+//
+//                  }
+//                  repaint();
+//            }
 
 
 

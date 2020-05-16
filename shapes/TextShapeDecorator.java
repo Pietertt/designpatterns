@@ -3,6 +3,7 @@ package shapes;
 import javax.swing.*;
 
 import UI.Layers;
+import visitor.Visitor;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -115,6 +116,11 @@ public class TextShapeDecorator extends ShapeDecorator {
 
       @Override
       public void print(Layers layers){
+
+      }
+
+      @Override
+      public void accept(Visitor visitor) {
 
       }
 

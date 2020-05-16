@@ -115,7 +115,7 @@ public class App extends JFrame {
             getContentPane().add(layers, BorderLayout.EAST);
             getContentPane().add(board);
 
-            setLocation(1000, 0);
+            setLocation(500, 0);
             setSize(800, 600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);

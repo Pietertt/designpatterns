@@ -14,8 +14,9 @@ public interface Shape {
       public void dragCommand(Location location);
       public void resizeCommand(Location location);
       public void resize(Location location);
-      public void drag(Location location);
+//      public void drag(Location location);
       public void undoDrag();
       public void redoDrag();
       public void print(Layers layers);
+      void accept(Visitor visitor);
 }

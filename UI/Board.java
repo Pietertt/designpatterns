@@ -7,6 +7,7 @@ import shapes.*;
 import shapes.Shape;
 import strategies.*;
 import visitor.moveVisitor;
+import visitor.resizeVisitor;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -29,6 +30,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
+      // Visitors
+      public moveVisitor moveVisitor;
+      public resizeVisitor resizeVisitor;
+
       public Board(JFrame frame, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
@@ -37,6 +42,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             addMouseListener(this);
             addMouseMotionListener(this);
             addKeyListener(this);
+            this.moveVisitor = new moveVisitor(this, this.frame);
       }
 
       public void init() {
@@ -79,7 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   }
             }
 
-            Group group = new Group(0, 0, 0, 0, this);
+            Group group = new Group(0, 0, 0, 0, this, this.moveVisitor, this.resizeVisitor);
             Order place = new PlaceShapeCommand(group);
             this.invoker.execute(place);
             
@@ -101,9 +107,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             if (this.created) {
                   this.strategy.place(e.getX(), e.getY(), 50, 50);
 
-                  System.out.println("shape made");
-                  moveVisitor move = new moveVisitor(this, this.frame);
-                  this.strategy.shape.accept(move);
+                  //System.out.println("shape made");
+                  //moveVisitor move = new moveVisitor(this, this.frame);
+                  //this.strategy.shape.accept(move);
 
                   this.shapes.add(this.strategy.shape);
 
@@ -111,8 +117,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
                   this.frame.revalidate();
                   this.frame.repaint();
-                  this.created = false;   
-                  
+                  this.created = false;
+
                   this.layers.update(this.shapes);
             }
 
@@ -263,14 +269,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       @Override
       public void mouseDragged(MouseEvent e) {
             for (BaseShape shape : this.shapes) {
+
                   if (shape.resizing) {
                         Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
                         shape.resize(location);
                   }
 
                   if (shape.dragging) {
-                        Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                        shape.drag(location);
+                      // Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+                      // shape.drag(location);
+
+                      Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+                      moveVisitor.setLocation(location);
+                      shape.accept(moveVisitor);
                   }
             }
       }

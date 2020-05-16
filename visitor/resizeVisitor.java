@@ -22,6 +22,11 @@ public class resizeVisitor implements Visitor {
     }
 
     @Override
+    public void visitGroup(Group group) {
+
+    }
+
+    @Override
     public void visit(BaseShape shape) {
 
     }

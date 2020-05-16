@@ -39,13 +39,13 @@ public class Rectangle extends BaseShape {
             repaint();
       }
 
-      public void drag(Location location){
-            this.x = location.x;
-            this.y = location.y;
-            this.width = location.width;
-            this.height = location.height;
-            repaint();
-      }
+//      public void drag(Location location){
+////            this.x = location.x;
+////            this.y = location.y;
+////            this.width = location.width;
+////            this.height = location.height;
+////            repaint();
+//      }
 
       public void dragCommand(Location location){
             this.redoStack.clear();
