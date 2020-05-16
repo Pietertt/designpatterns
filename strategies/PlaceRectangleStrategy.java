@@ -27,7 +27,7 @@ public final class PlaceRectangleStrategy extends Strategy {
       }
 
       public String grammar(BaseShape shape){
-            return "rectangle" + "\n";
+            return "rectangle\n";
       }
 
       public String grammar(Group shape){

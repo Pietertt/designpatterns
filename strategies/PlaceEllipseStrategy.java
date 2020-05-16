@@ -27,7 +27,7 @@ public final class PlaceEllipseStrategy extends Strategy {
       }
 
       public String grammar(BaseShape shape){
-            return "ellipse" + "\n";
+            return "ellipse\n";
       }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
