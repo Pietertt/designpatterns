@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+import visitor.*;
 
 import UI.Layers;
 import strategies.Strategy;
@@ -19,6 +20,10 @@ public class Shape extends BaseShape {
 
       public Shape(int x, int y, int width, int height) {
             super(x, y, width, height);
+      }
+
+      public void accept(Visitor visitor){
+            visitor.visit(this); 
       }
 
       public void place(){

@@ -5,7 +5,7 @@ compile:
 	@javac UI/Board.java UI/Invoker.java UI/Layers.java UI/Item.java
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java
 	@javac io/Parser.java
-	@javac visitor/moveVisitor.java visitor/Visitor.java visitor/resizeVisitor.java
+	@javac visitor/DragVisitor.java visitor/Visitor.java visitor/resizeVisitor.java
 	@javac App.java
 	@echo "Compiling done!"
 

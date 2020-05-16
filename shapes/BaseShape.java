@@ -60,6 +60,7 @@ public abstract class BaseShape extends JComponent {
       public abstract void select(MouseEvent e);
       public abstract void deselect(MouseEvent e);
       public abstract boolean getIfSelected(int x, int y);
+      public abstract void accept(Visitor visitor);
 
       public void save(Location location){
             this.redoStack.clear();

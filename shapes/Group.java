@@ -44,7 +44,7 @@ public class Group extends BaseShape {
       }
 
       public void accept(Visitor visitor){
-
+            visitor.visit(this); 
       }
 
       public void place() {

@@ -1,8 +1,9 @@
 package visitor;
 
 import shapes.*;
+import java.awt.event.*;
 
-public interface Visitor {
-      // public void visitRectangle(Rectangle rectangle);
-      // public void visitEllipse(Ellipse ellipse);
+public abstract class Visitor {
+      public abstract void visit(Shape shape);
+      public abstract void visit(Group group);
 }

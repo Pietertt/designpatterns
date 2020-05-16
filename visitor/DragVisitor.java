@@ -1,15 +1,25 @@
 package visitor;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.Cursor;
 import javax.swing.*;
+import java.awt.event.*;
 
 import shapes.*;
 import shapes.Shape;
 import commands.*;
 
-public class moveVisitor implements Visitor {
+public class DragVisitor extends Visitor {
+
+      public void visit(Shape shape){
+            System.out.println("Shape dragged");
+      }
+
+      public void visit(Group group){
+            System.out.println("Group dragged");
+      }
 
       // public void visitRectangle(Rectangle rectangle){
       //       rectangle.addMouseListener(new MouseAdapter(){

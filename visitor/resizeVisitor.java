@@ -9,7 +9,14 @@ import shapes.*;
 import shapes.Shape;
 import commands.*;
 
-public class resizeVisitor implements Visitor {
+public class resizeVisitor extends Visitor {
+      public void visit(Shape shape){
+
+      }
+
+      public void visit(Group group){
+            
+      }
       // public void visitRectangle(Rectangle rectangle){
       //       rectangle.addMouseListener(new MouseAdapter(){
       //             public void mouseReleased(MouseEvent e){

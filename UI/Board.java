@@ -6,6 +6,7 @@ import commands.*;
 import shapes.*;
 import shapes.Shape;
 import strategies.*;
+import visitor.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -20,6 +21,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
       public Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
       public Strategy triangleStrategy = PlaceTriangleStrategy.getInstance();
+
+      public Visitor dragVisitor = new DragVisitor();
 
       public Strategy currentStrategy = this.rectangleStrategy;
 
@@ -272,17 +275,23 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       @Override
       public void mouseDragged(MouseEvent e) {
-            for (BaseShape shape : this.shapes) {
-                  if (shape.resizing) {
-                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
-                        shape.resize(location);
-                  }
-
-                  if (shape.dragging) {
-                        Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                        shape.drag(location);
-                  }
+            DragVisitor dragVisitor = new DragVisitor();
+            
+            for(BaseShape shape : this.shapes){
+                  shape.accept(dragVisitor);
             }
+
+            // for (BaseShape shape : this.shapes) {
+            //       if (shape.resizing) {
+            //             Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
+            //             shape.resize(location);
+            //       }
+
+            //       if (shape.dragging) {
+            //             Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
+            //             shape.drag(location);
+            //       }
+            // }
       }
 
 }

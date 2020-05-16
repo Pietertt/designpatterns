@@ -33,9 +33,9 @@ Bijschriften hoeven nu nog niet.<br>
 Implementeer een visitor klasse voor de figuren.<br>
 Verplaatsen, resizen en schrijven naar file moeten door subklassen van deze visitor uitgevoerd worden.<br> 
 Refactor het programma.<br>
-- [x] De visitor klasse is geimplementeerd
-- [x] Het verplaatsen van shapes wordt geregeld door een visitor
-- [x] Het resizen van shapes wordt geregeld door een visitor
+- [ ] De visitor klasse is geimplementeerd
+- [ ] Het verplaatsen van shapes wordt geregeld door een visitor
+- [ ] Het resizen van shapes wordt geregeld door een visitor
 - [ ] Het schrijven van shapes naar een bestand wordt geregeld door een visitor
 
 **Stap 5: strategy pattern en singleton pattern**<br>
@@ -44,6 +44,9 @@ Een basisfiguur bevat coordinaten en een pointer naar een strategy object (zijn 
 De delegate kan tekenen en heeft een toString methode.<br>
 Er zijn maar 2 delegates nodig: voor een ellips en voor een rechthoek. Dit kunnen singleton objecten zijn. <br>
 Refactor het programma.<br>
+- [x] De vormen zijn samengevoegd in de klasse "basisfiguur"
+- [x] Het tekenen van vormen wordt geregeld door het strategy pattern
+- [x] De delegates zijn singleton objecten
 
 **Stap 6: decorator pattern**<br>
 Nu moeten er bijschriften bij de figuren geplaatst kunnen worden (soms ernaast, soms erboven, soms eronder).<br>
