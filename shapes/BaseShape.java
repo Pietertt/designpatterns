@@ -64,6 +64,8 @@ public abstract class BaseShape extends JComponent {
       public abstract boolean getIfSelected(int x, int y);
       public abstract void accept(Visitor visitor);
 
+      public abstract String toString();
+
       public void save(Location location){
             this.redoStack.clear();
             this.undoStack.add(location);

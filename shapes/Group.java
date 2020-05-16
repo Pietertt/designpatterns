@@ -38,6 +38,16 @@ public class Group extends BaseShape {
             this.children.add(shape);
       }
 
+      public String toString(){
+            int tab = 0;
+            String result = "";
+
+            for(BaseShape shape : this.children){
+                  shape.toString()
+            }
+            
+      }
+
       public void remove(Shape shape){
             this.children.remove(shape);
       }

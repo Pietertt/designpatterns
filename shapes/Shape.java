@@ -22,6 +22,10 @@ public class Shape extends BaseShape {
             super(x, y, width, height);
       }
 
+      public String toString(){
+            return "Shape";
+      }
+
       public void accept(Visitor visitor){
             visitor.visit(this); 
       }

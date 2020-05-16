@@ -315,11 +315,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void export(){
-            ExportVisitor exportVisitor = new ExportVisitor();
-            for(BaseShape shape : this.shapes){
-                  shape.accept(exportVisitor);
-            }
+            // ExportVisitor exportVisitor = new ExportVisitor();
+            // for(BaseShape shape : this.shapes){
+            //       shape.accept(exportVisitor);
+            // }
 
-            System.out.println(exportVisitor.export());
+            // System.out.println(exportVisitor.export());
+
+            for(BaseShape shape : this.shapes){
+                  System.out.println(shape.toString());
+            }
       }
 }
