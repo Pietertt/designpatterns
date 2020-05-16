@@ -25,10 +25,13 @@ public final class PlaceGroupStrategy extends Strategy {
       public String toString(){
             return "group";
       }
-
+      
       public String grammar(BaseShape shape){
             StringBuilder text = new StringBuilder();
             text.append("group " + shape.children.size() + "\n");
+            for(BaseShape child : shape.children){
+                  text.append("\t" + child.strategy.grammar(child));
+            }
             
             return text.toString();
       }

@@ -27,7 +27,7 @@ public final class PlaceTriangleStrategy extends Strategy {
       }
 
       public String grammar(BaseShape shape){
-            return "triangle " + shape.x + " " + shape.y + " " + shape.width + " " + shape.height + "\n";
+            return "triangle" + "\n";
       }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
