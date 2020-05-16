@@ -12,12 +12,17 @@ import shapes.Shape;
 import commands.*;
 
 public class ExportVisitor extends Visitor {
+      private StringBuilder sb = new StringBuilder();
 
       public void visit(Shape shape){
-            System.out.println("Shape exported");
+            sb.append(shape.strategy.toString() + " " + shape.x + " " + shape.y + " " + shape.width + " " + shape.height + "\n");
       }
 
       public void visit(Group group){
 
       }
+
+      public String export(){
+            return this.sb.toString();
+      }     
 }

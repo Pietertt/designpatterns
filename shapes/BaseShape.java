@@ -34,7 +34,7 @@ public abstract class BaseShape extends JComponent {
       public boolean dragging = false;
       public boolean resizing = false;
 
-      protected Strategy strategy;
+      public Strategy strategy;
 
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
