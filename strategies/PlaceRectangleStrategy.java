@@ -23,7 +23,7 @@ public final class PlaceRectangleStrategy extends Strategy {
       }
 
       public String toString(){
-            return "Rectangle";
+            return "rectangle";
       }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){

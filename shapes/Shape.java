@@ -110,12 +110,12 @@ public class Shape extends BaseShape {
             label.setText("Rectangle");
             label.setBorder(new EmptyBorder(0, 30, 0, 0));
             try {
-                  ImageIcon image = new ImageIcon(ImageIO.read(new File("img/rectangle.png")));
+                  ImageIcon image = new ImageIcon(ImageIO.read(new File("img/" + this.strategy.toString() + ".png")));
                   label.setIcon(image);
                   layers.add(Box.createRigidArea(new Dimension(10, 10)));
                   layers.add(label);
             } catch(IOException e){
-
+                  System.out.println("File not found");
             }
       }
 

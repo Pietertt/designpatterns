@@ -23,7 +23,7 @@ public final class PlaceEllipseStrategy extends Strategy {
       }
 
       public String toString(){
-            return "Ellipse";
+            return "ellipse";
       }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
