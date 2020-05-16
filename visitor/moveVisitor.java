@@ -15,10 +15,12 @@ import commands.*;
 public class moveVisitor implements Visitor {
 //    public Invoker invoker;
     public Board board;
+    public JFrame frame;
 //    public boolean shifted;
 
-    public moveVisitor(Board board) {
+    public moveVisitor(Board board, JFrame frame) {
         this.board = board;
+        this.frame = frame;
     }
 
 
@@ -61,6 +63,8 @@ public class moveVisitor implements Visitor {
             }
         });
 
+
+
 //        rectangle.addMouseMotionListener(new MouseAdapter() {
 //            public void mouseDragged(MouseEvent e) {
 //                System.out.println("Dragged in visitor");
@@ -77,9 +81,8 @@ public class moveVisitor implements Visitor {
 //            }
 //        });
 
-        rectangle.setBorder(BorderFactory.createTitledBorder("Node"));
-
         this.board.add(rectangle);
+        this.frame.add(rectangle);
     }
 
     @Override
