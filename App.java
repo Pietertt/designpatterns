@@ -95,7 +95,7 @@ public class App extends JFrame {
             redo.setContentAreaFilled(false);
 
             JButton save = new JButton();
-            //save.addActionListener(actionEvent -> board.saveFile());
+            save.addActionListener(actionEvent -> board.export());
             try {
                   save.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
             } catch(IOException e) {
@@ -138,8 +138,6 @@ public class App extends JFrame {
             setVisible(true);
 
             board.init();
-
-            fileIO.saveFile();
       }
 
       public static void main(String[] args) {

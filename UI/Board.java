@@ -275,6 +275,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       @Override
       public void mouseDragged(MouseEvent e) {
+
             DragVisitor dragVisitor = new DragVisitor();
             
             for(BaseShape shape : this.shapes){
@@ -298,4 +299,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             // }
       }
 
+      public void export(){
+            Visitor exportVisitor = new ExportVisitor();
+            for(BaseShape shape : this.shapes){
+                  shape.accept(exportVisitor);
+            }
+      }
 }

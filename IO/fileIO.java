@@ -10,7 +10,7 @@ import java.awt.*;
 import java.io.*;
 
 public class fileIO {
-      public static void saveFile(){
+      public static void saveFile() {
             String sb = "Hoii";
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
@@ -18,14 +18,22 @@ public class fileIO {
             chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
             int retrival = chooser.showSaveDialog(null);
             if (retrival == JFileChooser.APPROVE_OPTION) {
-                try {
-                    try(FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
-                        fw.write(sb);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                  try {
+                        try (FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
+                              fw.write(sb);
+                        }
+                  } catch (Exception ex) {
+                        ex.printStackTrace();
+                  }
             }
-        }
-            
       }
+
+      private static String saveGrammarCorrectly(Board board) {
+            StringBuilder grammar = new StringBuilder();
+
+            
+
+            return grammar.toString();
+      }
+
+}
