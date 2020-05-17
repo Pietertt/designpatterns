@@ -31,8 +31,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       private JButton submit;
 
       // Visitors
-      public moveVisitor moveVisitor;
-      public resizeVisitor resizeVisitor;
+      //public moveVisitor moveVisitor;
+      //public resizeVisitor resizeVisitor;
 
       public Board(JFrame frame, Layers layers) {
             setOpaque(false);
@@ -42,7 +42,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             addMouseListener(this);
             addMouseMotionListener(this);
             addKeyListener(this);
-            this.moveVisitor = new moveVisitor(this, this.frame);
+            //this.moveVisitor = new moveVisitor(this, this.frame);
       }
 
       public void init() {
@@ -85,7 +85,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   }
             }
 
-            Group group = new Group(0, 0, 0, 0, this, this.moveVisitor, this.resizeVisitor);
+            Group group = new Group(0, 0, 0, 0, this);
             Order place = new PlaceShapeCommand(group);
             this.invoker.execute(place);
             
@@ -268,22 +268,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       @Override
       public void mouseDragged(MouseEvent e) {
+            moveVisitor move = new moveVisitor();
+            resizeVisitor resize = new resizeVisitor();
             for (BaseShape shape : this.shapes) {
-
-                  if (shape.resizing) {
-                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
-                        shape.resize(location);
+                  if(shape.resizing) {
+//                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
+//                        shape.resize(location);
+                        shape.accept(resize);
                   }
 
-                  if (shape.dragging) {
-                      // Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                      // shape.drag(location);
-
-                      Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-                      moveVisitor.setLocation(location);
-                      shape.accept(moveVisitor);
+                  if(shape.dragging) {
+                        shape.accept(move);
                   }
             }
+
+            if(move.selectedShape != null)
+                  move.drag(new Location(e.getX(), e.getY(), move.selectedShape.width, move.selectedShape.height));
+
+            if(resize.selectedShape != null)
+                  resize.resize(new Location(resize.selectedShape.x, resize.selectedShape.y, e.getX() - resize.selectedShape.start.x, e.getY() - resize.selectedShape.start.y));
       }
 
 }

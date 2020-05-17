@@ -24,18 +24,18 @@ public class Group extends BaseShape {
       private JButton submit;
 
       // Visitors
-      private moveVisitor moveVisitor;
-      private resizeVisitor resizeVisitor;
+//      private moveVisitor moveVisitor;
+//      private resizeVisitor resizeVisitor;
 
-      public Group(int x, int y, int width, int height, Board board, moveVisitor moveVisitor, resizeVisitor resizeVisitor){
+      public Group(int x, int y, int width, int height, Board board){
             super(x, y, width, height);
             // this.x = this.getx();
             // this.y = this.gety();
             // this.width = this.getwidth();
             // this.height = this.getheight();
             this.board = board;
-            this.moveVisitor = moveVisitor;
-            this.resizeVisitor = resizeVisitor;
+//            this.moveVisitor = moveVisitor;
+//            this.resizeVisitor = resizeVisitor;
       }
 
       public void addd(BaseShape shape){
@@ -47,7 +47,7 @@ public class Group extends BaseShape {
       }
 
       public void accept(Visitor visitor){
-            visitor.visitGroup(this);
+            visitor.visit(this);
       }
 
       public void place() {
@@ -61,13 +61,6 @@ public class Group extends BaseShape {
       }
 
       public void drag(Location location){
-            boolean s = false;
-            for(BaseShape shape : this.children){
-                  if(shape.selected){
-                        Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                        //shape.drag(childLocation);
-                  }
-            }
 //            boolean s = false;
 //            for(BaseShape shape : this.children){
 //                  if(shape.selected){
@@ -129,32 +122,32 @@ public class Group extends BaseShape {
       }
 
       public void resize(Location location){
-            boolean s = false;
-            for(BaseShape shape : this.children){
-                  if(shape.selected){
-                        s = true;
-                        Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
-                        System.out.println(shape.start.x - location.x);
-                        shape.resize(childLocation);
-                  }
-            }
-
-            if(s == false){
-                  float percentageWidth = (float)location.width / (float)this.start.width;
-                  float percentageHeight = (float)location.height / (float)this.start.height;
-
-                  for(BaseShape shape : this.children){
-                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
-                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
-
-                        Location childLocation = new Location();
-                        childLocation.x = this.start.x + Math.round(diffX);
-                        childLocation.y = this.start.y + Math.round(diffY);
-                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
-                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);                        
-                        shape.resize(childLocation);
-                  }
-            }
+//            boolean s = false;
+//            for(BaseShape shape : this.children){
+//                  if(shape.selected){
+//                        s = true;
+//                        Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
+//                        System.out.println(shape.start.x - location.x);
+//                        shape.resize(childLocation);
+//                  }
+//            }
+//
+//            if(s == false){
+//                  float percentageWidth = (float)location.width / (float)this.start.width;
+//                  float percentageHeight = (float)location.height / (float)this.start.height;
+//
+//                  for(BaseShape shape : this.children){
+//                        float diffX = ((float)shape.start.x - (float)this.x) * percentageWidth;
+//                        float diffY = ((float)shape.start.y - (float)this.y) * percentageHeight;
+//
+//                        Location childLocation = new Location();
+//                        childLocation.x = this.start.x + Math.round(diffX);
+//                        childLocation.y = this.start.y + Math.round(diffY);
+//                        childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+//                        childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+//                        shape.resize(childLocation);
+//                  }
+//            }
             
             // boolean selected = false;
             // for(BaseShape shape : this.children){

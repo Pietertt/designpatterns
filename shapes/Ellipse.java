@@ -120,7 +120,7 @@ public class Ellipse extends BaseShape {
 
       @Override
       public void accept(Visitor visitor) {
-            visitor.visitEllipse(this);
+            visitor.visit(this);
       }
 
       public boolean getIfSelected(int x, int y) {

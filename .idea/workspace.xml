@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/BaseShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/BaseShape.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Ellipse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Group.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/TextShapeDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/TextShapeDecorator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visitor/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/Visitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visitor/moveVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/moveVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visitor/resizeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/resizeVisitor.java" afterDir="false" />
@@ -124,7 +120,8 @@
       <workItem from="1587971896477" duration="6688000" />
       <workItem from="1588056883640" duration="11952000" />
       <workItem from="1588145903945" duration="7009000" />
-      <workItem from="1589620016842" duration="8014000" />
+      <workItem from="1589620016842" duration="18107000" />
+      <workItem from="1589701230197" duration="6317000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>

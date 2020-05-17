@@ -118,7 +118,7 @@ public class Rectangle extends BaseShape {
 
       @Override
       public void accept(Visitor visitor) {
-            visitor.visitRectangle(this);
+            visitor.visit(this);
       }
 
       public boolean getIfSelected(int x, int y) {

@@ -11,82 +11,57 @@ import shapes.Shape;
 import commands.*;
 
 public class resizeVisitor implements Visitor {
-    @Override
-    public void visitRectangle(Rectangle rectangle) {
-
-    }
-
-    @Override
-    public void visitEllipse(Ellipse ellipse) {
-
-    }
-
-    @Override
-    public void visitGroup(Group group) {
-
-    }
+    public BaseShape selectedShape;
+    public Group group = null;
 
     @Override
     public void visit(BaseShape shape) {
-
+        this.selectedShape = shape;
     }
-    // public void visitRectangle(Rectangle rectangle){
-      //       rectangle.addMouseListener(new MouseAdapter(){
-      //             public void mouseReleased(MouseEvent e){
-      //                   if (rectangle.resizing) {
-      //                         Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-      //                         Order drag = new ResizeShapeCommand(rectangle, location);
-      //                         rectangle.invoker.execute(drag);
-      //                         rectangle.resizing = false;
-      //                   }
-      //             }
-      //       });
 
-      //       rectangle.addMouseMotionListener(new MouseAdapter(){
-      //             public void mouseDragged(MouseEvent e){
-      //                   if (rectangle.start != null) {
-      //                         if(rectangle.cursor == Cursor.SE_RESIZE_CURSOR){
-      //                               rectangle.resizing = true;
-      //                               rectangle.dragging = false;
-      
-      //                               rectangle.setBounds(rectangle.getX(), rectangle.getY(), rectangle.getWidth() + e.getX() - rectangle.start.x, rectangle.getHeight() + e.getY() - rectangle.start.y);
-      //                               rectangle.start = e.getPoint();
-      //                               rectangle.width = rectangle.getWidth();
-      //                               rectangle.height = rectangle.getHeight();
-      //                               rectangle.repaint();
-      //                         }
-      //                   }
-      //             }
-      //       });   
-      // }
+    @Override
+    public void visit(Group group) {
+        this.selectedShape = group;
+        this.group = group;
+    }
 
-      // public void visitEllipse(Ellipse ellipse){
-      //       ellipse.addMouseListener(new MouseAdapter(){
-      //             public void mouseReleased(MouseEvent e){
-      //                   if(ellipse.resizing){
-      //                         Location location = new Location(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight());
-      //                         Order drag = new ResizeShapeCommand(ellipse, location);
-      //                         ellipse.invoker.execute(drag);
-      //                         ellipse.resizing = false;
-      //                   }
-      //             }
-      //       });
+    public void resize(Location location) {
+        if(group == null) {
+            selectedShape.x = location.x;
+            selectedShape.y = location.y;
+            selectedShape.width = location.width;
+            selectedShape.height = location.height;
+            selectedShape.repaint();
+        } else {
+            boolean s = false;
+            for(BaseShape shape : group.children){
+                if(shape.selected){
+                    s = true;
+                    Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
+                    resizeVisitor resizeVisitor = new resizeVisitor();
+                    shape.accept(resizeVisitor);
+                    resizeVisitor.resize(childLocation);
+                }
+            }
 
-      //       ellipse.addMouseMotionListener(new MouseAdapter(){
-      //             public void mouseDragged(MouseEvent e){
-      //                   if (ellipse.start != null) {
-      //                         if(ellipse.cursor == Cursor.SE_RESIZE_CURSOR){
-      //                               ellipse.resizing = true;
-      //                               ellipse.dragging = false;
-      
-      //                               ellipse.setBounds(ellipse.getX(), ellipse.getY(), ellipse.getWidth() + e.getX() - ellipse.start.x, ellipse.getHeight() + e.getY() - ellipse.start.y);
-      //                               ellipse.start = e.getPoint();
-      //                               ellipse.width = ellipse.getWidth();
-      //                               ellipse.height = ellipse.getHeight();
-      //                               ellipse.repaint();
-      //                         }
-      //                   }
-      //             }
-      //       });   
-      // }
+            if(s == false){
+                float percentageWidth = (float)location.width / (float)group.start.width;
+                float percentageHeight = (float)location.height / (float)group.start.height;
+
+                for(BaseShape shape : group.children){
+                    float diffX = ((float)shape.start.x - (float)group.x) * percentageWidth;
+                    float diffY = ((float)shape.start.y - (float)group.y) * percentageHeight;
+
+                    Location childLocation = new Location();
+                    childLocation.x = group.start.x + Math.round(diffX);
+                    childLocation.y = group.start.y + Math.round(diffY);
+                    childLocation.width = Math.round((float)shape.start.width * percentageWidth);
+                    childLocation.height = Math.round((float)shape.start.height * percentageHeight);
+                    resizeVisitor resizeVisitor = new resizeVisitor();
+                    shape.accept(resizeVisitor);
+                    resizeVisitor.resize(childLocation);
+                }
+            }
+        }
+    }
 }
