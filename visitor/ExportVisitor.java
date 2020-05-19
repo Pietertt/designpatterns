@@ -19,7 +19,7 @@ public class ExportVisitor extends Visitor {
       }
 
       public void visit(Group group){
-      
+            sb.append(group.toString(0));
       }
 
       public String export(){

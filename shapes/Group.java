@@ -39,13 +39,19 @@ public class Group extends BaseShape {
       }
 
       public String toString(int indent){
-            String result = "";
-
-            for(BaseShape shape : this.children){
-                  result += shape.toString(indent + 1);
+            StringBuilder string = new StringBuilder();
+            for(int i = 0; i < indent; i++){
+                  string.append("\t");
             }
 
-            return result;
+            string.append("group" + " " + this.children.size() + "\n");
+
+
+            for(BaseShape shape : this.children){
+                  string.append(shape.toString(indent + 1) + "\n");
+            }
+
+            return string.toString();
             
       }
 
