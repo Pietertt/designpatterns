@@ -15,11 +15,11 @@ public class ExportVisitor extends Visitor {
       private StringBuilder sb = new StringBuilder();
 
       public void visit(Shape shape){
-            sb.append(shape.strategy.grammar(shape));
+            sb.append(shape.toString(0) + " " + shape.x + " " + shape.y + " " + shape.width + " " + shape.height + "\n");
       }
 
       public void visit(Group group){
-            sb.append(group.strategy.grammar(group));
+      
       }
 
       public String export(){

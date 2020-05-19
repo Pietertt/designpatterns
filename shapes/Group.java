@@ -38,13 +38,14 @@ public class Group extends BaseShape {
             this.children.add(shape);
       }
 
-      public String toString(){
-            int tab = 0;
+      public String toString(int indent){
             String result = "";
 
             for(BaseShape shape : this.children){
-                  shape.toString()
+                  result += shape.toString(indent + 1);
             }
+
+            return result;
             
       }
 

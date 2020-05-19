@@ -25,18 +25,6 @@ public final class PlaceGroupStrategy extends Strategy {
       public String toString(){
             return "group";
       }
-      
-      public String grammar(BaseShape shape){
-            String text = "";
-            text += ("group " + shape.children.size() + "\n");
-            for(BaseShape child : shape.children){
-                  // text.append("\t" + child.strategy.grammar(child));
-                  String result = "\t" + child.strategy.grammar(child);
-                  text += (result);
-            }
-            
-            return text.toString();
-      }
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){

@@ -26,14 +26,6 @@ public final class PlaceRectangleStrategy extends Strategy {
             return "rectangle";
       }
 
-      public String grammar(BaseShape shape){
-            return "rectangle\n";
-      }
-
-      public String grammar(Group shape){
-            return "";
-      }
-
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
                   g.setColor(new Color(gray[0], gray[1], gray[2]));

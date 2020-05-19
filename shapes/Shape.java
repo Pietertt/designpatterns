@@ -22,8 +22,13 @@ public class Shape extends BaseShape {
             super(x, y, width, height);
       }
 
-      public String toString(){
-            return "Shape";
+      public String toString(int indent){
+            String string = "";
+            for(int i = 0; i < indent; i++){
+                  string += "\t";
+            }
+            string += this.strategy.toString() + " " + this.x + " " + this.y + " " + this.width + " " + this.height;
+            return string;
       }
 
       public void accept(Visitor visitor){
