@@ -17,7 +17,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public JFrame frame;
       public Layers layers;
       public Invoker invoker = new Invoker();
-      private ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
+      Group group = new Group(0, 0, 0, 0, this);
       public Strategy groupStrategy = PlaceGroupStrategy.getInstance();
       public Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
       public Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
@@ -48,11 +48,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       public void init() {
             for (int i = 0; i < 3; i++) {
+                  this.currentStrategy = this.rectangleStrategy;
                   BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
                   shape.setStrategy(this.currentStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
-                  this.shapes.add(place.shape);
+                  this.group.children.add(place.shape);
                   this.frame.add(place.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
@@ -64,7 +65,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.setStrategy(this.currentStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
-                  this.shapes.add(place.shape);
+                  this.group.children.add(place.shape);
                   this.frame.add(place.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
@@ -76,19 +77,19 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.setStrategy(this.currentStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
-                  this.shapes.add(place.shape);
+                  this.group.children.add(place.shape);
                   this.frame.add(place.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
             }
-            this.layers.update(this.shapes);
+            this.layers.update(this.group);
       }
 
       public void group(){
             this.currentStrategy = this.groupStrategy;
 
             ArrayList<BaseShape> grouped = new ArrayList<BaseShape>();
-            Iterator<BaseShape> i = this.shapes.iterator();
+            Iterator<BaseShape> i = this.group.children.iterator();
             while (i.hasNext()) {
                   BaseShape shape = i.next();
                   if(shape.selected){
@@ -108,8 +109,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   group.addd(shape);
             }
 
-            this.shapes.add(group);
-            this.layers.update(this.shapes);
+            this.group.children.add(group);
+            this.layers.update(this.group);
 
             this.frame.add(group);
             this.frame.revalidate();
@@ -135,15 +136,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.setStrategy(this.currentStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
-                  this.shapes.add(place.shape);
+                  this.group.children.add(place.shape);
                   this.frame.add(place.shape);
                   this.frame.revalidate();
                   this.frame.repaint();
-                  this.layers.update(this.shapes);
+                  this.layers.update(this.group);
                   this.created = false;
             }
 
-            for (BaseShape shape : this.shapes) {
+            for (BaseShape shape : this.group.children) {
                   if (shape.drawed) {
                         if (shape.getIfSelected(e.getX(), e.getY())) {
                               System.out.println("selected");
@@ -236,7 +237,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void mouseReleased(MouseEvent e) {
-            for (BaseShape shape : this.shapes) {
+            for (BaseShape shape : this.group.children) {
                   shape.clear();
             }
       }
@@ -293,7 +294,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
             DragVisitor dragVisitor = new DragVisitor();
             
-            for(BaseShape shape : this.shapes){
+            for(BaseShape shape : this.group.children){
                   shape.accept(dragVisitor);
             }
 
@@ -316,9 +317,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       public void export(){
             ExportVisitor exportVisitor = new ExportVisitor();
-            for(BaseShape shape : this.shapes){
-                  shape.accept(exportVisitor);
-            }
+            this.group.accept(exportVisitor);
+            
 
             System.out.println(exportVisitor.export());
       }

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import shapes.BaseShape;
+import shapes.Group;
 
 public class Layers extends JPanel {
       public JFrame frame;
@@ -21,13 +22,10 @@ public class Layers extends JPanel {
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
       }
 
-      public void update(ArrayList<BaseShape> shapes){
+      public void update(Group group){
             removeAll();
-            for(BaseShape shape : shapes){
-                  // add(new Item(shape));
-                  // add(Box.createRigidArea(new Dimension(10, 10)));
-                  shape.print(this);
-            }
+            group.print(this);
+            
             revalidate();
             repaint();
       }
