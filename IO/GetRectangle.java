@@ -1,7 +1,11 @@
 package IO;
 
+import shapes.*;
+
 public class GetRectangle implements Operation {
-      public void apply(){
-            System.out.println("Rectangle");
+      public BaseShape apply(Location location){
+            BaseShape shape = new Shape(location.x, location.y, location.width, location.height);
+
+            return shape;
       }
 }

@@ -18,7 +18,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public JFrame frame;
       public Layers layers;
       public Invoker invoker = new Invoker();
-      Group group = new Group(0, 0, 0, 0, this);
+      public Group group = new Group(0, 0, 0, 0, this);
       public Strategy groupStrategy = PlaceGroupStrategy.getInstance();
       public Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
       public Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
@@ -48,42 +48,54 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void init() {
-            for (int i = 0; i < 3; i++) {
-                  this.currentStrategy = this.rectangleStrategy;
-                  BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
-                  shape.setStrategy(this.currentStrategy);
-                  Order place = new PlaceShapeCommand(shape);
-                  this.invoker.execute(place);
-                  this.group.children.add(place.shape);
-                  this.frame.add(place.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
-            }
+            this.currentStrategy = this.groupStrategy;
+            this.group.setStrategy(this.currentStrategy);
+            Order place = new PlaceShapeCommand(this.group);
+            this.invoker.execute(place);
+            fileIO file = new fileIO();
+            this.group.children.add(file.read(this));
+            this.frame.add(this.group);
+            this.frame.revalidate();
+            this.frame.repaint();
 
-            for (int i = 0; i < 3; i++) {
-                  this.currentStrategy = this.ellipseStrategy;
-                  BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
-                  shape.setStrategy(this.currentStrategy);
-                  Order place = new PlaceShapeCommand(shape);
-                  this.invoker.execute(place);
-                  this.group.children.add(place.shape);
-                  this.frame.add(place.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
-            }
-
-            for (int i = 0; i < 3; i++) {
-                  this.currentStrategy = this.triangleStrategy;
-                  BaseShape shape = new Shape(50 + 75 * i, 300, 50, 50);
-                  shape.setStrategy(this.currentStrategy);
-                  Order place = new PlaceShapeCommand(shape);
-                  this.invoker.execute(place);
-                  this.group.children.add(place.shape);
-                  this.frame.add(place.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
-            }
             this.layers.update(this.group);
+
+            
+            // for (int i = 0; i < 3; i++) {
+            //       this.currentStrategy = this.rectangleStrategy;
+            //       BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
+            //       shape.setStrategy(this.currentStrategy);
+            //       Order place = new PlaceShapeCommand(shape);
+            //       this.invoker.execute(place);
+            //       this.group.children.add(place.shape);
+            //       this.frame.add(place.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
+            // }
+
+            // for (int i = 0; i < 3; i++) {
+            //       this.currentStrategy = this.ellipseStrategy;
+            //       BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
+            //       shape.setStrategy(this.currentStrategy);
+            //       Order place = new PlaceShapeCommand(shape);
+            //       this.invoker.execute(place);
+            //       this.group.children.add(place.shape);
+            //       this.frame.add(place.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
+            // }
+
+            // for (int i = 0; i < 3; i++) {
+            //       this.currentStrategy = this.triangleStrategy;
+            //       BaseShape shape = new Shape(50 + 75 * i, 300, 50, 50);
+            //       shape.setStrategy(this.currentStrategy);
+            //       Order place = new PlaceShapeCommand(shape);
+            //       this.invoker.execute(place);
+            //       this.group.children.add(place.shape);
+            //       this.frame.add(place.shape);
+            //       this.frame.revalidate();
+            //       this.frame.repaint();
+            // }
       }
 
       public void group(){
@@ -312,6 +324,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void fetch(){
-            System.out.println(fileIO.read());
+            this.group.children.clear();
+            this.frame.getContentPane().removeAll();
+            fileIO file = new fileIO();
+            this.group.children.add(file.read(this));
+            this.frame.revalidate();
+            this.frame.repaint();
+            System.out.println(this.group.children.size());
       }
 }

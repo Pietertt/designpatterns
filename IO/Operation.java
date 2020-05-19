@@ -1,5 +1,7 @@
 package IO;
 
+import shapes.*;
+
 public interface Operation {
-      void apply();
+      public BaseShape apply(Location location);
 }

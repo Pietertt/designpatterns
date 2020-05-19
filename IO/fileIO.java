@@ -2,6 +2,7 @@ package IO;
 
 import shapes.*;
 import UI.Board;
+import commands.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,26 +30,42 @@ public class fileIO {
             }
       }
 
-      public static ArrayList<String> read(){
-            ArrayList<String> lines = new ArrayList<String>();
-            // try {
-            //       Scanner reader = new Scanner(new File("data.txt"));
-            //       while(reader.hasNextLine()){
-            //             lines.add(reader.nextLine() + "\n");
-            //       }
-            //       reader.close();
+      public Group read(Board board){
+            Group group = new Group(0, 0, 0, 0, board);
+            try {
+                  Scanner reader = new Scanner(new File("data.txt"));
+                  while(reader.hasNextLine()){
+                        //lines.add(reader.nextLine() + "\n");
+                        String[] line = reader.nextLine().trim().split("\\s+");
+                        String shape = line[0];
+                        if(!shape.equals("group") && !shape.equals("")){
+                              Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+                              BaseShape s = test(shape, location);
+                              s.setStrategy(board.currentStrategy);
+                              Order place = new PlaceShapeCommand(s);
+                              board.invoker.execute(place);
+                              group.children.add(s);
+                              board.frame.add(s);
 
-            //       return lines;
-            // } catch(FileNotFoundException e){
-            //       System.out.println("An error occured");
-            test();
-                   return lines;
+                              board.frame.revalidate();
+                              board.frame.repaint();
+
+                        }
+                  }
+                  reader.close();
+
+                  //return lines;
+            } catch(FileNotFoundException e){
+                  System.out.println("An error occured");
+            }
+            //test();
+                   return group;
             // }
       }
 
-      private static void test(){
-            Operation target = Factory.getOperation("rectangle").orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
-            target.apply();
+      private BaseShape test(String shape, Location location){
+            Operation target = Factory.getOperation(shape).orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
+            return target.apply(location);
       }
 
 
