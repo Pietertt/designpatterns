@@ -3,10 +3,12 @@ package shapes;
 import javax.swing.*;
 
 import UI.Layers;
+import visitor.Visitor;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 
 public class TextShapeDecorator extends ShapeDecorator {
 
@@ -21,6 +23,24 @@ public class TextShapeDecorator extends ShapeDecorator {
             this.top = top;
             this.left = left;
             this.right = right;
+      }
+
+      public void accept(Visitor visitor){
+            visitor.visit(this);
+      }
+
+      public BaseShape getDecoratedShape() {
+            return decoratedShape;
+      }
+
+      public ArrayList<String> getOrnaments() {
+            ArrayList<String> ornaments = new ArrayList<>();
+            ornaments.add(bottom);
+            ornaments.add(top);
+            ornaments.add(left);
+            ornaments.add(right);
+
+            return ornaments;
       }
 
       @Override

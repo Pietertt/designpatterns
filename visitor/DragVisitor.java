@@ -24,6 +24,11 @@ public class DragVisitor extends Visitor {
             System.out.println("Group dragged");
       }
 
+      @Override
+      public void visit(TextShapeDecorator decorator) {
+
+      }
+
       public void drag(Location location){      
             selectedShape.x = location.x;
             selectedShape.y = location.y;
