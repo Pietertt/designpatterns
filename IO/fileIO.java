@@ -10,8 +10,7 @@ import java.awt.*;
 import java.io.*;
 
 public class fileIO {
-      public static void saveFile() {
-            String sb = "Hoii";
+      public static void saveFile(String sb) {
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
             chooser.setFileFilter(filter);

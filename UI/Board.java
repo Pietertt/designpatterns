@@ -2,6 +2,7 @@ package UI;
 
 import javax.swing.*;
 
+import IO.fileIO;
 import commands.*;
 import shapes.*;
 import shapes.Shape;
@@ -115,18 +116,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.frame.add(group);
             this.frame.revalidate();
             this.frame.repaint();
-
-
-            // this.currentStrategy = this.triangleStrategy;
-            //       BaseShape shape = new Shape(50 + 75 * i, 300, 50, 50);
-            //       shape.setStrategy(this.currentStrategy);
-            //       Order place = new PlaceShapeCommand(shape);
-            //       this.invoker.execute(place);
-            //       this.shapes.add(place.shape);
-            //       this.frame.add(place.shape);
-            //       this.frame.revalidate();
-            //       this.frame.repaint();
-
       }
 
       public void mousePressed(MouseEvent e) {
@@ -320,6 +309,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.group.accept(exportVisitor);
             
 
-            System.out.println(exportVisitor.export());
+            fileIO.saveFile(exportVisitor.export());
       }
 }
