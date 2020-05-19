@@ -31,18 +31,24 @@ public class fileIO {
 
       public static ArrayList<String> read(){
             ArrayList<String> lines = new ArrayList<String>();
-            try {
-                  Scanner reader = new Scanner(new File("data.txt"));
-                  while(reader.hasNextLine()){
-                        lines.add(reader.nextLine());
-                  }
-                  reader.close();
+            // try {
+            //       Scanner reader = new Scanner(new File("data.txt"));
+            //       while(reader.hasNextLine()){
+            //             lines.add(reader.nextLine() + "\n");
+            //       }
+            //       reader.close();
 
-                  return lines;
-            } catch(FileNotFoundException e){
-                  System.out.println("An error occured");
-                  return lines;
-            }
+            //       return lines;
+            // } catch(FileNotFoundException e){
+            //       System.out.println("An error occured");
+            test();
+                   return lines;
+            // }
+      }
+
+      private static void test(){
+            Operation target = Factory.getOperation("rectangle").orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
+            target.apply();
       }
 
 
