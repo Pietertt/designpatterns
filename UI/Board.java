@@ -307,8 +307,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public void export(){
             ExportVisitor exportVisitor = new ExportVisitor();
             this.group.accept(exportVisitor);
+
+            System.out.println(fileIO.read());
             
 
-            fileIO.saveFile(exportVisitor.export());
+            fileIO.export(exportVisitor.export());
       }
 }

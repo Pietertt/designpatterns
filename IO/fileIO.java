@@ -8,9 +8,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class fileIO {
-      public static void saveFile(String sb) {
+      public static void export(String sb) {
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
             chooser.setFileFilter(filter);
@@ -27,12 +29,21 @@ public class fileIO {
             }
       }
 
-      private static String saveGrammarCorrectly(Board board) {
-            StringBuilder grammar = new StringBuilder();
+      public static ArrayList<String> read(){
+            ArrayList<String> lines = new ArrayList<String>();
+            try {
+                  Scanner reader = new Scanner(new File("data.txt"));
+                  while(reader.hasNextLine()){
+                        lines.add(reader.nextLine());
+                  }
+                  reader.close();
 
-            
-
-            return grammar.toString();
+                  return lines;
+            } catch(FileNotFoundException e){
+                  System.out.println("An error occured");
+                  return lines;
+            }
       }
+
 
 }
