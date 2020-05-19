@@ -21,6 +21,8 @@ public class Group extends BaseShape {
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
+      public ArrayList<TextShapeDecorator> decorators = new ArrayList<>();
+
       public Group(int x, int y, int width, int height, Board board){
             super(x, y, width, height);
             // this.x = this.getx();
@@ -44,10 +46,49 @@ public class Group extends BaseShape {
                   string.append("\t");
             }
 
+            if(!decorators.isEmpty()) {
+                  for (TextShapeDecorator decorator : decorators) {
+                        if (decorator.decoratedShape.equals(this)) {
+                              if(!(decorator.bottom.equals(""))) {
+                                    string.append("ornament" + " " + "bottom" + " " + decorator.bottom + "\n");
+                              }
+                              if(!(decorator.top.equals(""))) {
+                                    string.append("ornament" + " " + "top" + " " + decorator.top + "\n");
+                              }
+                              if(!(decorator.left.equals(""))) {
+                                    string.append("ornament" + " " + "left" + " " + decorator.left + "\n");
+                              }
+                              if(!(decorator.right.equals(""))) {
+                                    string.append("ornament" + " " + "right" + " " + decorator.right + "\n");
+                              }
+                        }
+                  }
+            }
+
             string.append("group" + " " + this.children.size() + "\n");
 
 
             for(BaseShape shape : this.children){
+                  if(!decorators.isEmpty()) {
+                        for (TextShapeDecorator decorator : decorators) {
+                              if (decorator.decoratedShape.equals(shape)) {
+                                    if(!(decorator.bottom.equals(""))) {
+                                          string.append("ornament" + " " + "bottom" + " " + decorator.bottom + "\n");
+                                    }
+                                    if(!(decorator.top.equals(""))) {
+                                          string.append("ornament" + " " + "top" + " " + decorator.top + "\n");
+                                    }
+                                    if(!(decorator.left.equals(""))) {
+                                          string.append("ornament" + " " + "left" + " " + decorator.left + "\n");
+                                    }
+                                    if(!(decorator.right.equals(""))) {
+                                          string.append("ornament" + " " + "right" + " " + decorator.right + "\n");
+                                    }
+                              }
+                        }
+                  }
+
+
                   string.append(shape.toString(indent + 1) + "\n");
             }
 

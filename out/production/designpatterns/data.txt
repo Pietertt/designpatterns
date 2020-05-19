@@ -1,0 +1,10 @@
+group 9
+	rectangle 50 200 50 50
+	rectangle 125 200 50 50
+	rectangle 200 200 50 50
+	ellipse 50 100 50 50
+	ellipse 125 100 50 50
+	ellipse 200 100 50 50
+	triangle 50 300 50 50
+	triangle 125 300 50 50
+	triangle 200 300 50 50

@@ -22,6 +22,14 @@ public class ExportVisitor extends Visitor {
             sb.append(group.toString(0));
       }
 
+      public void visit(TextShapeDecorator decorator) {
+            ArrayList<String> ornaments = decorator.getOrnaments();
+
+            for(String orn : ornaments) {
+                  sb.append(orn);
+            }
+      }
+
       public String export(){
             return this.sb.toString();
       }     

@@ -37,6 +37,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
+
+      // decorator
+      private TextShapeDecorator base;
+
       public Board(JFrame frame, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
@@ -145,6 +149,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.created = false;
             }
 
+
             for (BaseShape shape : this.group.children) {
                   if (shape.drawed) {
                         if (shape.getIfSelected(e.getX(), e.getY())) {
@@ -152,7 +157,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                               Order select = new SelectShapeCommand(shape, e);
                               this.invoker.execute(select);
                               if (e.getClickCount() == 2) {
-                                    String[] labels = { "Top side: ", "Bottom side: ", "Left side: ", "Right side: " };
 
                                     RectangleOrnamentWindow = new JFrame("New Window");
                                     RectangleOrnamentWindow.pack();
@@ -190,11 +194,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                     submit = new JButton("Submit");
                                     submit.addActionListener(arg0 -> {
                                           if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
-                                                      || !textLeft.getText().isEmpty()
-                                                      || !textRight.getText().isEmpty()) {
+                                                  || !textLeft.getText().isEmpty()
+                                                  || !textRight.getText().isEmpty()) {
 
-                                                TextShapeDecorator base = new TextShapeDecorator(shape, textBottom.getText(),
-                                                            textTop.getText(), textLeft.getText(), textRight.getText());
+                                                base = new TextShapeDecorator(shape, textBottom.getText(),
+                                                        textTop.getText(), textLeft.getText(), textRight.getText());
+
+                                                this.group.decorators.add(base);
                                                 for (Component component : shape.getComponents()) {
                                                       shape.remove(component);
                                                 }
@@ -203,7 +209,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                                 JOptionPane.showMessageDialog(null, "Ornament(s) added");
                                           } else
                                                 JOptionPane.showMessageDialog(null, "All fields empty\n "
-                                                            + "Fill in at least one field to submit ornament");
+                                                        + "Fill in at least one field to submit ornament");
                                     });
                                     p.add(submit);
 
@@ -211,8 +217,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
                                     RectangleOrnamentWindow.setSize(400, 200);
 
+
                               }
                         }
+
+
 
                         if (shape.selected) {
                               if (shape.getIfSelected(e.getX(), e.getY())) {
