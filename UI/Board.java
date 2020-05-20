@@ -57,7 +57,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             Order place = new PlaceShapeCommand(this.group);
             this.invoker.execute(place);
             fileIO file = new fileIO();
-            this.group.children.add(file.read(this));
+            this.group = file.read(this);
             this.frame.add(this.group);
             this.frame.revalidate();
             this.frame.repaint();

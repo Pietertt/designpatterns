@@ -32,6 +32,8 @@ public class fileIO {
 
       public Group read(Board board){
             Group group = new Group(0, 0, 0, 0, board);
+            board.currentStrategy = board.groupStrategy;
+            group.setStrategy(board.currentStrategy);
             try {
                   Scanner reader = new Scanner(new File("data.txt"));
                   while(reader.hasNextLine()){
