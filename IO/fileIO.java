@@ -42,9 +42,7 @@ public class fileIO {
                         String shape = line[0];
                         if(!shape.equals("group") && !shape.equals("")){
                               Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-                              BaseShape s = test(shape, location);
-                              board.currentStrategy = board.rectangleStrategy;
-                              s.setStrategy(board.currentStrategy);
+                              BaseShape s = this.getShape(shape, location, board);
                               Order place = new PlaceShapeCommand(s);
                               board.invoker.execute(place);
                               group.children.add(s);
@@ -66,9 +64,9 @@ public class fileIO {
             // }
       }
 
-      private BaseShape test(String shape, Location location){
+      private BaseShape getShape(String shape, Location location, Board board){
             Operation target = Factory.getOperation(shape).orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
-            return target.apply(location);
+            return target.apply(location, board);
       }
 
 
