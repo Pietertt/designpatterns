@@ -161,6 +161,7 @@ public class Shape extends BaseShape {
 
       @Override
       public void paintComponent(Graphics g) {
+            System.out.println("Drawed");
             super.paintComponent(g);
             if(this.drawed){
                   this.strategy.execute(this.x, this.y, this.width, this.height, g, this.selected);

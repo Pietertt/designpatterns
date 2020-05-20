@@ -41,6 +41,7 @@ public class fileIO {
                         if(!shape.equals("group") && !shape.equals("")){
                               Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
                               BaseShape s = test(shape, location);
+                              board.currentStrategy = board.rectangleStrategy;
                               s.setStrategy(board.currentStrategy);
                               Order place = new PlaceShapeCommand(s);
                               board.invoker.execute(place);
