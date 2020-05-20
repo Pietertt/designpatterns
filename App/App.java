@@ -1,3 +1,5 @@
+package App;
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.io.IOException;
@@ -14,6 +16,15 @@ import java.awt.*;
 public class App extends JFrame {
 
       public App(){
+            
+            
+      }
+
+      public void clear(){
+            getContentPane().removeAll();
+      }
+
+      public void init(){
             JPanel UI = new JPanel();
 
             Layers layers = new Layers();
@@ -144,8 +155,6 @@ public class App extends JFrame {
             getContentPane().add(UI, BorderLayout.SOUTH);
             getContentPane().add(layers, BorderLayout.EAST);
             getContentPane().add(board);
-
-            setLocation(1000, 0);
             setSize(800, 600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
@@ -155,5 +164,6 @@ public class App extends JFrame {
 
       public static void main(String[] args) {
             App app = new App();
+            app.init();
       }
 }

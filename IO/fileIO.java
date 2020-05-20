@@ -48,10 +48,10 @@ public class fileIO {
                               Order place = new PlaceShapeCommand(s);
                               board.invoker.execute(place);
                               group.children.add(s);
-                              board.frame.add(s);
+                              board.app.add(s);
 
-                              board.frame.revalidate();
-                              board.frame.repaint();
+                              board.app.revalidate();
+                              board.app.repaint();
 
                         }
                   }

@@ -14,8 +14,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import App.*;
+
 public class Board extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
-      public JFrame frame;
+      public App app;
       public Layers layers;
       public Invoker invoker = new Invoker();
       public Group group = new Group(0, 0, 0, 0, this);
@@ -41,65 +43,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       // decorator
       private TextShapeDecorator base;
 
-      public Board(JFrame frame, Layers layers) {
+      public Board(App app, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
-            this.frame = frame;
+            this.app = app;
             this.layers = layers;
             addMouseListener(this);
             addMouseMotionListener(this);
             addKeyListener(this);
-      }
-
-      public void init() {
-            this.currentStrategy = this.groupStrategy;
-            this.group.setStrategy(this.currentStrategy);
-            Order place = new PlaceShapeCommand(this.group);
-            this.invoker.execute(place);
-            fileIO file = new fileIO();
-            this.group = file.read(this);
-            this.frame.add(this.group);
-            this.frame.revalidate();
-            this.frame.repaint();
-
-            this.layers.update(this.group);
-
-            
-            // for (int i = 0; i < 3; i++) {
-            //       this.currentStrategy = this.rectangleStrategy;
-            //       BaseShape shape = new Shape(50 + 75 * i, 200, 50, 50);
-            //       shape.setStrategy(this.currentStrategy);
-            //       Order place = new PlaceShapeCommand(shape);
-            //       this.invoker.execute(place);
-            //       this.group.children.add(place.shape);
-            //       this.frame.add(place.shape);
-            //       this.frame.revalidate();
-            //       this.frame.repaint();
-            // }
-
-            // for (int i = 0; i < 3; i++) {
-            //       this.currentStrategy = this.ellipseStrategy;
-            //       BaseShape shape = new Shape(50 + 75 * i, 100, 50, 50);
-            //       shape.setStrategy(this.currentStrategy);
-            //       Order place = new PlaceShapeCommand(shape);
-            //       this.invoker.execute(place);
-            //       this.group.children.add(place.shape);
-            //       this.frame.add(place.shape);
-            //       this.frame.revalidate();
-            //       this.frame.repaint();
-            // }
-
-            // for (int i = 0; i < 3; i++) {
-            //       this.currentStrategy = this.triangleStrategy;
-            //       BaseShape shape = new Shape(50 + 75 * i, 300, 50, 50);
-            //       shape.setStrategy(this.currentStrategy);
-            //       Order place = new PlaceShapeCommand(shape);
-            //       this.invoker.execute(place);
-            //       this.group.children.add(place.shape);
-            //       this.frame.add(place.shape);
-            //       this.frame.revalidate();
-            //       this.frame.repaint();
-            // }
       }
 
       public void group(){
@@ -129,9 +80,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.group.children.add(group);
             this.layers.update(this.group);
 
-            this.frame.add(group);
-            this.frame.revalidate();
-            this.frame.repaint();
+            this.app.add(group);
+            this.app.revalidate();
+            this.app.repaint();
       }
 
       public void mousePressed(MouseEvent e) {
@@ -142,9 +93,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
                   this.group.children.add(place.shape);
-                  this.frame.add(place.shape);
-                  this.frame.revalidate();
-                  this.frame.repaint();
+                  this.app.add(place.shape);
+                  this.app.revalidate();
+                  this.app.repaint();
                   this.layers.update(this.group);
                   this.created = false;
             }
@@ -205,7 +156,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                                       shape.remove(component);
                                                 }
                                                 shape.add((JComponent) base);
-                                                this.frame.repaint();
+                                                this.app.repaint();
                                                 JOptionPane.showMessageDialog(null, "Ornament(s) added");
                                           } else
                                                 JOptionPane.showMessageDialog(null, "All fields empty\n "
@@ -333,12 +284,21 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public void fetch(){
-            this.group.children.clear();
-            this.frame.getContentPane().removeAll();
+            this.app.clear();
+            this.app.init();
+      }
+
+
+      public void init() {
+            this.currentStrategy = this.groupStrategy;
+            this.group.setStrategy(this.currentStrategy);
+            Order place = new PlaceShapeCommand(this.group);
+            this.invoker.execute(place);
             fileIO file = new fileIO();
-            this.group.children.add(file.read(this));
-            this.frame.revalidate();
-            this.frame.repaint();
-            System.out.println(this.group.children.size());
+            this.group = file.read(this);
+            this.app.add(this.group);
+            this.app.revalidate();
+            this.app.repaint();
+            this.layers.update(this.group);
       }
 }

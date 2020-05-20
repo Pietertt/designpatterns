@@ -6,7 +6,7 @@ compile:
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java strategies/PlaceGroupStrategy.java
 	@javac IO/fileIO.java IO/Factory.java IO/GetRectangle.java IO/Operation.java
 	@javac visitor/DragVisitor.java visitor/Visitor.java visitor/resizeVisitor.java visitor/ExportVisitor.java
-	@javac App.java
+	@javac App/App.java
 	@echo "Compiling done!"
 
 clean:
@@ -18,11 +18,12 @@ clean:
 	@cd strategies && rm -rf *.class
 	@cd IO && rm -rf *.class
 	@cd visitor && rm -rf *.class
+	@cd App && rm -rf *.class
 	@echo "Cleaning done!"
 
 run: compile
 	@echo "Running application..."
-	@java App
+	@java App/App
 	@echo "Closed application!" 
 	@make clean
 	@clear
