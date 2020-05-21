@@ -2,6 +2,7 @@ package IO;
 
 import shapes.*;
 import UI.Board;
+import commands.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,20 +30,43 @@ public class fileIO {
             }
       }
 
-      public static ArrayList<String> read(){
-            ArrayList<String> lines = new ArrayList<String>();
+      public Group read(Board board){
+            Group group = new Group(0, 0, 0, 0, board);
+            board.currentStrategy = board.groupStrategy;
+            group.setStrategy(board.currentStrategy);
             try {
                   Scanner reader = new Scanner(new File("data.txt"));
                   while(reader.hasNextLine()){
-                        lines.add(reader.nextLine());
+                        //lines.add(reader.nextLine() + "\n");
+                        String[] line = reader.nextLine().trim().split("\\s+");
+                        String shape = line[0];
+                        if(!shape.equals("group") && !shape.equals("")){
+                              Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+                              BaseShape s = this.getShape(shape, location, board);
+                              Order place = new PlaceShapeCommand(s);
+                              board.invoker.execute(place);
+                              group.children.add(s);
+                              board.app.add(s);
+
+                              board.app.revalidate();
+                              board.app.repaint();
+
+                        }
                   }
                   reader.close();
 
-                  return lines;
+                  //return lines;
             } catch(FileNotFoundException e){
                   System.out.println("An error occured");
-                  return lines;
             }
+            //test();
+                   return group;
+            // }
+      }
+
+      private BaseShape getShape(String shape, Location location, Board board){
+            Operation target = Factory.getOperation(shape).orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
+            return target.apply(location, board);
       }
 
 

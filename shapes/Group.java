@@ -374,8 +374,10 @@ public class Group extends BaseShape {
             this.width = this.getwidth();
             this.height = this.getheight();
 
-            if(this.isChildSelected()){
-                  this.strategy.execute(this.x, this.y, this.width, this.height, g, this.selected);
+            if(this.selected){
+                  if(!this.isChildSelected()){
+                        this.strategy.execute(this.x, this.y, this.width, this.height, g, true);
+                  }
             }
 
       }
