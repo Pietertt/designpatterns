@@ -1,13 +1,16 @@
 package IO;
 
+import java.util.ArrayList;
+
 import UI.Board;
 import shapes.*;
 
 public class GetTriangle implements Operation {
-      public BaseShape apply(Location location, Board board){
-            BaseShape shape = new Shape(location.x, location.y, location.width, location.height);
-            shape.setStrategy(board.triangleStrategy);
+      public void apply(ArrayList<String> lines, Board board){
+            System.out.println("Triangle");
+            //BaseShape shape = new Shape(values.get(0).x, values.get(0).y, values.get(0).width, values.get(0).height);
+            //shape.setStrategy(board.triangleStrategy);
 
-            return shape;
+            //return new BaseShape();
       }
 }

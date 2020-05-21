@@ -19,7 +19,10 @@ import strategies.Strategy;
 public class Shape extends BaseShape {
 
       public Shape(int x, int y, int width, int height) {
-            super(x, y, width, height);
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
       }
 
       public String toString(int indent){

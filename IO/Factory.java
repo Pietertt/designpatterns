@@ -10,9 +10,11 @@ public class Factory {
             operationMap.put("rectangle", new GetRectangle());
             operationMap.put("ellipse", new GetEllipse());
             operationMap.put("triangle", new GetTriangle());
+            operationMap.put("group", new GetGroup());
         }
      
         public static Operation getOperation(String operator) {
+              System.out.println(operator);
             return operationMap.get(operator);
         }
 }

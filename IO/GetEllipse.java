@@ -2,12 +2,13 @@ package IO;
 
 import UI.Board;
 import shapes.*;
+import java.util.ArrayList;
 
 public class GetEllipse implements Operation {
-      public BaseShape apply(Location location, Board board){
-            BaseShape shape = new Shape(location.x, location.y, location.width, location.height);
-            shape.setStrategy(board.ellipseStrategy);
+      public void apply(ArrayList<String> lines, Board board){
+            System.out.println("Ellipse");
+            // BaseShape shape = new Shape(values.get(0).x, values.get(0).y, values.get(0).width, values.get(0).height);
+            // shape.setStrategy(board.ellipseStrategy);
 
-            return shape;
       }
 }

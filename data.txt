@@ -11,4 +11,3 @@ group 10
 	group 2
 		triangle 200 300 50 50
 		rectangle 363 384 50 50
-

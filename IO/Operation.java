@@ -2,7 +2,8 @@ package IO;
 
 import UI.Board;
 import shapes.*;
+import java.util.ArrayList;
 
 public interface Operation {
-      public BaseShape apply(Location location, Board board);
+      public void apply(ArrayList<String> lines, Board board);
 }

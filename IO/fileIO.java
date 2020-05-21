@@ -31,27 +31,37 @@ public class fileIO {
       }
 
       public Group read(Board board){
-            Group group = new Group(0, 0, 0, 0, board);
+            Group group = new Group(board);
             board.currentStrategy = board.groupStrategy;
             group.setStrategy(board.currentStrategy);
+
+            ArrayList<String> lines = new ArrayList<String>();
+
             try {
                   Scanner reader = new Scanner(new File("data.txt"));
                   while(reader.hasNextLine()){
-                        //lines.add(reader.nextLine() + "\n");
-                        String[] line = reader.nextLine().trim().split("\\s+");
-                        String shape = line[0];
-                        if(!shape.equals("group") && !shape.equals("")){
-                              Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-                              BaseShape s = this.getShape(shape, location, board);
-                              Order place = new PlaceShapeCommand(s);
-                              board.invoker.execute(place);
-                              group.children.add(s);
-                              board.app.add(s);
+                        lines.add(reader.nextLine());
+                        // //lines.add(reader.nextLine() + "\n");
+                        // String[] line = reader.nextLine().trim().split("\\s+");
+                        // String shape = line[0];
+                        // if(!shape.equals("")){
+                        //       ArrayList<Value> value = new ArrayList<Value>();
+                        //       Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
 
-                              board.app.revalidate();
-                              board.app.repaint();
+                        //       BaseShape s = this.getShape(shape, value, board);
+                        //       Order place = new PlaceShapeCommand(s);
+                        //       board.invoker.execute(place);
+                        //       group.children.add(s);
+                        //       board.app.add(s);
 
-                        }
+                        //       board.app.revalidate();
+                        //       board.app.repaint();
+
+                        // }
+                  }
+                  for(String s : lines){
+                        String shape = s.trim().split("\\s+")[0];
+                        this.getShape(shape, lines, board);
                   }
                   reader.close();
 
@@ -64,9 +74,10 @@ public class fileIO {
             // }
       }
 
-      private BaseShape getShape(String shape, Location location, Board board){
+      private void getShape(String shape, ArrayList<String> lines, Board board){
+            System.out.println(shape);
             Operation target = Factory.getOperation(shape);
-            return target.apply(location, board);
+            target.apply(lines, board);
       }
 
 

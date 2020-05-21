@@ -20,7 +20,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public App app;
       public Layers layers;
       public Invoker invoker = new Invoker();
-      public Group group = new Group(0, 0, 0, 0, this);
+      public Group group = new Group(this);
       public Strategy groupStrategy = PlaceGroupStrategy.getInstance();
       public Strategy rectangleStrategy = PlaceRectangleStrategy.getInstance();
       public Strategy ellipseStrategy = PlaceEllipseStrategy.getInstance();
@@ -68,7 +68,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   }
             }
 
-            Group group = new Group(0, 0, 0, 0, this);
+            Group group = new Group(this);
             group.setStrategy(this.currentStrategy);
             Order place = new PlaceShapeCommand(group);
             this.invoker.execute(place);
@@ -301,10 +301,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             Order place = new PlaceShapeCommand(this.group);
             this.invoker.execute(place);
             fileIO file = new fileIO();
-            this.group = file.read(this);
-            this.app.add(this.group);
-            this.app.revalidate();
-            this.app.repaint();
-            this.layers.update(this.group);
+            //this.group = file.read(this);
+            file.read(this);
+            // this.app.add(this.group);
+            // this.app.revalidate();
+            // this.app.repaint();
+            // this.layers.update(this.group);
       }
 }
