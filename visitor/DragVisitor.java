@@ -13,120 +13,55 @@ import commands.*;
 
 public class DragVisitor extends Visitor {
       public BaseShape selectedShape;
+      public Group group = null;
 
-      public void visit(Shape shape){
-            if(shape.selected){
-                  this.selectedShape = shape;
-            }
-      }
-
-      public void visit(Group group){
-            System.out.println("Group dragged");
+      @Override
+      public void visit(BaseShape shape) {
+            this.selectedShape = shape;
       }
 
       @Override
-      public void visit(TextShapeDecorator decorator) {
-
+      public void visit(Group group) {
+            System.out.println("Visited group");
+            this.selectedShape = group;
+            this.group = group;
       }
 
-      public void drag(Location location){      
-            selectedShape.x = location.x;
-            selectedShape.y = location.y;
-            selectedShape.width = location.width;
-            selectedShape.height = location.height;
-            selectedShape.repaint();
+      public void drag(Location location) {
+            if (group == null) {
+                  selectedShape.x = location.x;
+                  selectedShape.y = location.y;
+                  selectedShape.width = location.width;
+                  selectedShape.height = location.height;
+                  selectedShape.repaint();
+            } else {
+                  boolean s = false;
+                  for (BaseShape shape : group.children) {
+                        if (shape.selected) {
+                              Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+                              DragVisitor moveVisitor = new DragVisitor();
+                              shape.accept(moveVisitor);
+                              moveVisitor.drag(childLocation);
+                              s = true;
+                        }
+                  }
+                  if (!s) {
+                        for (BaseShape shape : group.children) {
+                              int dx = location.x - group.start.x + shape.start.x;
+                              int dy = location.y - group.start.y + shape.start.y;
+
+                              Location childLocation = new Location();
+                              childLocation.x = dx;
+                              childLocation.y = dy;
+                              childLocation.width = shape.width;
+                              childLocation.height = shape.height;
+
+                              DragVisitor moveVisitor = new DragVisitor();
+                              shape.accept(moveVisitor);
+                              moveVisitor.drag(childLocation);
+                        }
+                        selectedShape.repaint();
+                  }
+            }
       }
-
-      // public void visitRectangle(Rectangle rectangle){
-      //       rectangle.addMouseListener(new MouseAdapter(){
-      //             public void mouseReleased(MouseEvent e){
-      //                   /*
-      //                         * Pollution of the undo/redo history is prevented by only adding
-      //                         * DragShapeCommand when the shape has been dragged
-      //                   */
-      //                   if (rectangle.dragging) {
-      //                         Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-
-      //                         Order drag = new DragShapeCommand(rectangle, location);
-      //                         rectangle.invoker.execute(drag);
-      //                         rectangle.dragging = false;
-      //                   }
-      //             }
-
-      //             public void mousePressed(MouseEvent e){
-      //                   /*
-      //                         Executes a drag command to note the initial position
-      //                   */
-      //                   if(rectangle.undoStack.size() == 0){
-      //                         Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
-      //                         Order drag = new DragShapeCommand(rectangle, location);
-      //                         rectangle.invoker.execute(drag);
-      //                   }
-      //             }
-      //       });
-
-      //       rectangle.addMouseMotionListener(new MouseAdapter(){
-      //             public void mouseDragged(MouseEvent e){
-      //                   if (rectangle.start != null) {
-      //                         if(rectangle.cursor == Cursor.MOVE_CURSOR){
-      //                               rectangle.resizing = false;  
-      //                               rectangle.dragging = true;      
-
-      //                               var bounds = rectangle.getBounds();
-      //                               bounds.translate(e.getX() - rectangle.start.x, e.getY() - rectangle.start.y);
-      //                               rectangle.setBounds(bounds);
-      //                               rectangle.width = rectangle.getWidth();
-      //                               rectangle.height = rectangle.getHeight();
-      //                               rectangle.repaint();
-      //                         }
-      //                   }
-      //             }
-      //       });
-      // }
-
-      // public void visitEllipse(Ellipse ellipse){
-      //       ellipse.addMouseListener(new MouseAdapter(){
-      //             public void mouseReleased(MouseEvent e){
-      //                   /*
-      //                         Pollution of the undo/redo history is prevented by only adding 
-      //                         DragShapeCommand when the shape has been dragged
-      //                   */
-      //                   if(ellipse.dragging){
-      //                         Location location = new Location(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight());
-      //                         Order drag = new DragShapeCommand(ellipse, location);
-      //                         ellipse.invoker.execute(drag);
-      //                         ellipse.dragging = false;
-      //                   }  
-      //             }
-
-      //             public void mousePressed(MouseEvent e){
-      //                   /*
-      //                         Executes a drag command to note the initial position
-      //                   */
-      //                   if(ellipse.undoStack.size() == 0){
-      //                         Location location = new Location(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight());
-      //                         Order drag = new DragShapeCommand(ellipse, location);
-      //                         ellipse.invoker.execute(drag);
-      //                   }
-      //             }
-      //       });
-
-      //       ellipse.addMouseMotionListener(new MouseAdapter(){
-      //             public void mouseDragged(MouseEvent e){
-      //                   if (ellipse.start != null) {
-      //                         if(ellipse.cursor == Cursor.MOVE_CURSOR){
-      //                               ellipse.resizing = false;  
-      //                               ellipse.dragging = true;      
-
-      //                               var bounds = ellipse.getBounds();
-      //                               bounds.translate(e.getX() - ellipse.start.x, e.getY() - ellipse.start.y);
-      //                               ellipse.setBounds(bounds);
-      //                               ellipse.width = ellipse.getWidth();
-      //                               ellipse.height = ellipse.getHeight();
-      //                               ellipse.repaint();
-      //                         }
-      //                   }
-      //             }
-      //       });
-      // }
 }

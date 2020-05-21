@@ -14,20 +14,12 @@ import commands.*;
 public class ExportVisitor extends Visitor {
       private StringBuilder sb = new StringBuilder();
 
-      public void visit(Shape shape){
+      public void visit(BaseShape shape){
             sb.append(shape.toString(0) + " " + shape.x + " " + shape.y + " " + shape.width + " " + shape.height + "\n");
       }
 
       public void visit(Group group){
             sb.append(group.toString(0));
-      }
-
-      public void visit(TextShapeDecorator decorator) {
-            ArrayList<String> ornaments = decorator.getOrnaments();
-
-            for(String orn : ornaments) {
-                  sb.append(orn);
-            }
       }
 
       public String export(){

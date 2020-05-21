@@ -256,28 +256,25 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       @Override
       public void mouseDragged(MouseEvent e) {
+            DragVisitor move = new DragVisitor();
+            ResizeVisitor resize = new ResizeVisitor();
+            for (BaseShape shape : this.group.children) {
+                  if(shape.resizing) {
+//                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
+//                        shape.resize(location);
+                        shape.accept(resize);
+                  }
 
-            DragVisitor dragVisitor = new DragVisitor();
-            
-            for(BaseShape shape : this.group.children){
-                  shape.accept(dragVisitor);
+                  if(shape.dragging) {
+                        shape.accept(move);
+                  }
             }
 
-            dragVisitor.drag(new Location(e.getX(), e.getY(), dragVisitor.selectedShape.width, dragVisitor.selectedShape.height));
+            if(move.selectedShape != null)
+                  move.drag(new Location(e.getX(), e.getY(), move.selectedShape.width, move.selectedShape.height));
 
-            
-
-            // for (BaseShape shape : this.shapes) {
-            //       if (shape.resizing) {
-            //             Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
-            //             shape.resize(location);
-            //       }
-
-            //       if (shape.dragging) {
-            //             Location location = new Location(e.getX(), e.getY(), shape.width, shape.height);
-            //             shape.drag(location);
-            //       }
-            // }
+            if(resize.selectedShape != null)
+                  resize.resize(new Location(resize.selectedShape.x, resize.selectedShape.y, e.getX() - resize.selectedShape.start.x, e.getY() - resize.selectedShape.start.y));
       }
 
       public void export(){

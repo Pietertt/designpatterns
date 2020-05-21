@@ -25,10 +25,6 @@ public class TextShapeDecorator extends ShapeDecorator {
             this.right = right;
       }
 
-      public void accept(Visitor visitor){
-            visitor.visit(this);
-      }
-
       public BaseShape getDecoratedShape() {
             return decoratedShape;
       }
