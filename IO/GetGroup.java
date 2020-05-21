@@ -3,6 +3,7 @@ package IO;
 import UI.Board;
 import shapes.*;
 import java.util.ArrayList;
+import commands.*;
 
 public class GetGroup implements Operation {
       public BaseShape apply(ArrayList<String> lines, Board board){
@@ -24,6 +25,12 @@ public class GetGroup implements Operation {
                         lines.remove(0);
                   }
             }
+
+            Order place = new PlaceShapeCommand(shape);
+            board.invoker.execute(place);
+            board.app.add(shape);
+            board.app.revalidate();
+            board.app.repaint();
 
             return shape;
 
