@@ -85,6 +85,83 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.app.repaint();
       }
 
+      public void addOrnament() {
+            BaseShape selectedToDecorate = null;
+
+            for (BaseShape shape : this.group.children) {
+                  if(shape.selected) {
+                        selectedToDecorate = shape;
+                  }
+                  for (BaseShape children : shape.children) {
+                        if (children.selected) {
+                              selectedToDecorate = children;
+                        }
+                  }
+            }
+
+            if (selectedToDecorate != null && selectedToDecorate.drawed) {
+                  RectangleOrnamentWindow = new JFrame("Add ornaments");
+                  RectangleOrnamentWindow.pack();
+                  RectangleOrnamentWindow.setVisible(true);
+                  JPanel p = new JPanel();
+
+                  // Lay out the panel.
+                  GridLayout grid = new GridLayout();
+                  grid.setColumns(2);
+                  grid.setRows(5);
+                  grid.setHgap(5);
+                  grid.setVgap(5);
+                  p.setLayout(grid);
+
+                  JTextField textTop = new JTextField(25);
+                  JLabel labelTop = new JLabel("Top side: ");
+                  p.add(labelTop);
+                  p.add(textTop);
+
+                  JTextField textBottom = new JTextField(25);
+                  JLabel labelBottom = new JLabel("Bottom side: ");
+                  p.add(labelBottom);
+                  p.add(textBottom);
+
+                  JTextField textLeft = new JTextField(25);
+                  JLabel labelLeft = new JLabel("Left side: ");
+                  p.add(labelLeft);
+                  p.add(textLeft);
+
+                  JTextField textRight = new JTextField(25);
+                  JLabel labelRight = new JLabel("Right side: ");
+                  p.add(labelRight);
+                  p.add(textRight);
+
+
+                  submit = new JButton("Submit");
+                  BaseShape finalSelectedToDecorate = selectedToDecorate;
+                  submit.addActionListener(arg0 -> {
+                        if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
+                                || !textLeft.getText().isEmpty()
+                                || !textRight.getText().isEmpty()) {
+
+                              base = new TextShapeDecorator(finalSelectedToDecorate, textBottom.getText(),
+                                      textTop.getText(), textLeft.getText(), textRight.getText());
+                              for (Component component : finalSelectedToDecorate.getComponents()) {
+                                    finalSelectedToDecorate.remove(component);
+                              }
+
+                              finalSelectedToDecorate.add((JComponent) base);
+                              this.app.repaint();
+                              JOptionPane.showMessageDialog(null, "Ornament(s) added");
+                        } else
+                              JOptionPane.showMessageDialog(null, "All fields empty\n "
+                                      + "Fill in at least one field to submit ornament");
+                  });
+                  p.add(submit);
+
+                  RectangleOrnamentWindow.add(p);
+
+                  RectangleOrnamentWindow.setSize(400, 200);
+            }
+      }
+
       public void mousePressed(MouseEvent e) {
             requestFocus();
             if (this.created) {
@@ -106,77 +183,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                               System.out.println("selected");
                               Order select = new SelectShapeCommand(shape, e);
                               this.invoker.execute(select);
-                              if (e.getClickCount() == 2) {
-                                    RectangleOrnamentWindow = new JFrame("Add ornaments");
-                                    RectangleOrnamentWindow.pack();
-                                    RectangleOrnamentWindow.setVisible(true);
-                                    JPanel p = new JPanel();
-
-                                    // Lay out the panel.
-                                    GridLayout grid = new GridLayout();
-                                    grid.setColumns(2);
-                                    grid.setRows(5);
-                                    grid.setHgap(5);
-                                    grid.setVgap(5);
-                                    p.setLayout(grid);
-
-                                    JTextField textTop = new JTextField(25);
-                                    JLabel labelTop = new JLabel("Top side: ");
-                                    p.add(labelTop);
-                                    p.add(textTop);
-
-                                    JTextField textBottom = new JTextField(25);
-                                    JLabel labelBottom = new JLabel("Bottom side: ");
-                                    p.add(labelBottom);
-                                    p.add(textBottom);
-
-                                    JTextField textLeft = new JTextField(25);
-                                    JLabel labelLeft = new JLabel("Left side: ");
-                                    p.add(labelLeft);
-                                    p.add(textLeft);
-
-                                    JTextField textRight = new JTextField(25);
-                                    JLabel labelRight = new JLabel("Right side: ");
-                                    p.add(labelRight);
-                                    p.add(textRight);
-
-
-                                    submit = new JButton("Submit");
-                                    submit.addActionListener(arg0 -> {
-                                          if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
-                                                  || !textLeft.getText().isEmpty()
-                                                  || !textRight.getText().isEmpty()) {
-
-//                                                for(BaseShape childShape : shape.children) {
-//                                                      if(childShape.selected) {
-//
-//                                                      }
-//                                                }
-                                                base = new TextShapeDecorator(shape, textBottom.getText(),
-                                                        textTop.getText(), textLeft.getText(), textRight.getText());
-
-                                                this.group.decorators.add(base);
-                                                for (Component component : shape.getComponents()) {
-                                                      shape.remove(component);
-                                                }
-                                                shape.add((JComponent) base);
-                                                this.app.repaint();
-                                                JOptionPane.showMessageDialog(null, "Ornament(s) added");
-                                          } else
-                                                JOptionPane.showMessageDialog(null, "All fields empty\n "
-                                                        + "Fill in at least one field to submit ornament");
-                                    });
-                                    p.add(submit);
-
-                                    RectangleOrnamentWindow.add(p);
-
-                                    RectangleOrnamentWindow.setSize(400, 200);
-
-
-                              }
                         }
-
-
 
                         if (shape.selected) {
                               if (shape.getIfSelected(e.getX(), e.getY())) {
@@ -260,8 +267,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             ResizeVisitor resize = new ResizeVisitor();
             for (BaseShape shape : this.group.children) {
                   if(shape.resizing) {
-//                        Location location = new Location(shape.x, shape.y, e.getX() - shape.start.x, e.getY() - shape.start.y);
-//                        shape.resize(location);
                         shape.accept(resize);
                   }
 
