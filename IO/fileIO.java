@@ -65,7 +65,7 @@ public class fileIO {
       }
 
       private BaseShape getShape(String shape, Location location, Board board){
-            Operation target = Factory.getOperation(shape).orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
+            Operation target = Factory.getOperation(shape);
             return target.apply(location, board);
       }
 

@@ -12,7 +12,7 @@ public class Factory {
             operationMap.put("triangle", new GetTriangle());
         }
      
-        public static Optional<Operation> getOperation(String operator) {
-            return Optional.ofNullable(operationMap.get(operator));
+        public static Operation getOperation(String operator) {
+            return operationMap.get(operator);
         }
 }

@@ -5,7 +5,7 @@ compile:
 	@javac UI/Board.java UI/Invoker.java UI/Layers.java UI/Item.java
 	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java strategies/PlaceGroupStrategy.java
 	@javac IO/fileIO.java IO/Factory.java IO/GetRectangle.java IO/Operation.java IO/GetEllipse.java IO/GetTriangle.java
-	@javac visitor/DragVisitor.java visitor/Visitor.java visitor/resizeVisitor.java visitor/ExportVisitor.java
+	@javac visitor/DragVisitor.java visitor/Visitor.java visitor/ResizeVisitor.java visitor/ExportVisitor.java visitor/OrnamentVisitor.java
 	@javac App/App.java
 	@echo "Compiling done!"
 

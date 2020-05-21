@@ -27,6 +27,7 @@ public class Shape extends BaseShape {
             for(int i = 0; i < indent; i++){
                   string += "\t";
             }
+            System.out.println(getComponents());
             string += this.strategy.toString() + " " + this.x + " " + this.y + " " + this.width + " " + this.height;
             return string;
       }
