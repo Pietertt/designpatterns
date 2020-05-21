@@ -304,8 +304,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.group = file.read(this);
             //file.read(this);
             // this.app.add(this.group);
-            // this.app.revalidate();
-            // this.app.repaint();
-            // this.layers.update(this.group);
+            this.app.revalidate();
+            this.app.repaint();
+            this.layers.update(this.group);
       }
 }
