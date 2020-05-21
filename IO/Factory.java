@@ -14,7 +14,6 @@ public class Factory {
         }
      
         public static Operation getOperation(String operator) {
-              System.out.println(operator);
             return operationMap.get(operator);
         }
 }

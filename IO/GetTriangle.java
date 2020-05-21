@@ -6,11 +6,11 @@ import UI.Board;
 import shapes.*;
 
 public class GetTriangle implements Operation {
-      public void apply(ArrayList<String> lines, Board board){
-            System.out.println("Triangle");
-            //BaseShape shape = new Shape(values.get(0).x, values.get(0).y, values.get(0).width, values.get(0).height);
-            //shape.setStrategy(board.triangleStrategy);
+      public BaseShape apply(ArrayList<String> lines, Board board){
+            String[] line = lines.get(0).trim().split("\\s+");
+            BaseShape shape = new Shape(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
+            shape.setStrategy(board.triangleStrategy);
 
-            //return new BaseShape();
+            return shape;
       }
 }

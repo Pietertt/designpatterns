@@ -30,10 +30,8 @@ public class fileIO {
             }
       }
 
-      public Group read(Board board){
-            Group group = new Group(board);
-            board.currentStrategy = board.groupStrategy;
-            group.setStrategy(board.currentStrategy);
+      public BaseShape read(Board board){
+            BaseShape group = new Group(board);
 
             ArrayList<String> lines = new ArrayList<String>();
 
@@ -59,10 +57,10 @@ public class fileIO {
 
                         // }
                   }
-                  for(String s : lines){
-                        String shape = s.trim().split("\\s+")[0];
-                        this.getShape(shape, lines, board);
-                  }
+                  
+                        String shape = lines.get(0).trim().split("\\s+")[0];
+                        group = this.getShape(shape, lines, board);
+                  
                   reader.close();
 
                   //return lines;
@@ -74,10 +72,9 @@ public class fileIO {
             // }
       }
 
-      private void getShape(String shape, ArrayList<String> lines, Board board){
-            System.out.println(shape);
+      private BaseShape getShape(String shape, ArrayList<String> lines, Board board){
             Operation target = Factory.getOperation(shape);
-            target.apply(lines, board);
+            return target.apply(lines, board);
       }
 
 

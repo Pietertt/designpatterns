@@ -5,5 +5,5 @@ import shapes.*;
 import java.util.ArrayList;
 
 public interface Operation {
-      public void apply(ArrayList<String> lines, Board board);
+      public BaseShape apply(ArrayList<String> lines, Board board);
 }
