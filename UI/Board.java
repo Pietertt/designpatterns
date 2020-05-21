@@ -137,7 +137,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   this.created = false;
             }
 
-
             for (BaseShape shape : this.group.children) {
                   if (shape.drawed) {
                         if (shape.getIfSelected(e.getX(), e.getY())) {
@@ -145,8 +144,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                               Order select = new SelectShapeCommand(shape, e);
                               this.invoker.execute(select);
                               if (e.getClickCount() == 2) {
-
-                                    RectangleOrnamentWindow = new JFrame("New Window");
+                                    RectangleOrnamentWindow = new JFrame("Add ornaments");
                                     RectangleOrnamentWindow.pack();
                                     RectangleOrnamentWindow.setVisible(true);
                                     JPanel p = new JPanel();
@@ -179,12 +177,18 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                     p.add(labelRight);
                                     p.add(textRight);
 
+
                                     submit = new JButton("Submit");
                                     submit.addActionListener(arg0 -> {
                                           if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
                                                   || !textLeft.getText().isEmpty()
                                                   || !textRight.getText().isEmpty()) {
 
+//                                                for(BaseShape childShape : shape.children) {
+//                                                      if(childShape.selected) {
+//
+//                                                      }
+//                                                }
                                                 base = new TextShapeDecorator(shape, textBottom.getText(),
                                                         textTop.getText(), textLeft.getText(), textRight.getText());
 
