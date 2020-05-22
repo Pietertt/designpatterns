@@ -12,6 +12,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class fileIO {
       public static void export(String sb) {
             JFileChooser chooser = new JFileChooser();
@@ -30,52 +33,28 @@ public class fileIO {
             }
       }
 
-      public BaseShape read(Board board){
+      public BaseShape read(Board board) {
             BaseShape group = new Group(board);
-
             ArrayList<String> lines = new ArrayList<String>();
 
             try {
                   Scanner reader = new Scanner(new File("data.txt"));
-                  while(reader.hasNextLine()){
-                        lines.add(reader.nextLine());
-                        // //lines.add(reader.nextLine() + "\n");
-                        // String[] line = reader.nextLine().trim().split("\\s+");
-                        // String shape = line[0];
-                        // if(!shape.equals("")){
-                        //       ArrayList<Value> value = new ArrayList<Value>();
-                        //       Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-
-                        //       BaseShape s = this.getShape(shape, value, board);
-                        //       Order place = new PlaceShapeCommand(s);
-                        //       board.invoker.execute(place);
-                        //       group.children.add(s);
-                        //       board.app.add(s);
-
-                        //       board.app.revalidate();
-                        //       board.app.repaint();
-
-                        // }
+                  while(reader.hasNextLine()){                  
+                        //if(!(reader.nextLine() == "\r\n")){
+                              lines.add(reader.nextLine());
+                        //}
                   }
-                  
-                        String shape = lines.get(0).trim().split("\\s+")[0];
-                        group = this.getShape(shape, lines, board);
+
+                  String shape = lines.get(0).trim().split("\\s+")[0];
+                  Operation target = Factory.getOperation(shape);
+                  group = target.apply(lines, board);
                   
                   reader.close();
 
-                  //return lines;
             } catch(FileNotFoundException e){
                   System.out.println("An error occured");
             }
-            //test();
-                   return group;
-            // }
+            
+            return group;
       }
-
-      private BaseShape getShape(String shape, ArrayList<String> lines, Board board){
-            Operation target = Factory.getOperation(shape);
-            return target.apply(lines, board);
-      }
-
-
 }

@@ -82,9 +82,14 @@ public class Group extends BaseShape {
                               }
                         }
                   }
+            }
 
-
-                  string.append(shape.toString(indent + 1) + "\n");
+            for(int i = 0; i < this.children.size(); i++){
+                  if(i == (this.children.size() - 1)){
+                        string.append(this.children.get(i).toString(indent + 1));
+                  } else {
+                        string.append(this.children.get(i).toString(indent + 1) + "\n");
+                  }
             }
 
             return string.toString();

@@ -11,6 +11,7 @@ import visitor.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -295,7 +296,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
 
-      public void init() {
+      public void init(){
             this.currentStrategy = this.groupStrategy;
             this.group.setStrategy(this.currentStrategy);
             Order place = new PlaceShapeCommand(this.group);

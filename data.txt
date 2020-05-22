@@ -1,10 +1,8 @@
-group 5
-	rectangle 50 200 50 50
-	rectangle 200 100 50 50
-	triangle 125 400 50 50
-	group 2
-		triangle 200 300 50 50
-		rectangle 363 384 50 50
-	group 2
-		rectangle 444 100 50 50
-		triangle 343 106 50 50
+group 2
+	rectangle 100 100 50 50
+	group 3
+		rectangle 200 200 50 50
+		rectangle 200 300 50 50
+		group 2
+			rectangle 300 200 50 50
+			rectangle 300 300 50 50
