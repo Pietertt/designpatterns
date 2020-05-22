@@ -3,6 +3,11 @@ group 2
 	group 3
 		rectangle 200 200 50 50
 		rectangle 200 300 50 50
-		group 2
+		group 3
 			rectangle 300 200 50 50
 			rectangle 300 300 50 50
+			group 4
+				ellipse 469 62 50 50
+				ellipse 469 112 50 50
+				ellipse 469 162 50 50
+				ellipse 534 267 50 50
