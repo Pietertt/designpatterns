@@ -1,14 +1,16 @@
 group 10
 	rectangle 50 200 50 50
 	rectangle 150 200 50 50
-	rectangle 250 200 50 50
-	ellipse 350 200 50 50
-	rectangle 450 200 50 50
-	ellipse 550 200 50 50
 	triangle 50 100 50 50
-	rectangle 200 100 50 50
+	triangle 200 300 50 50
 	triangle 125 400 50 50
-	group 2
-		triangle 200 300 50 50
-		rectangle 363 384 50 50
+	rectangle 363 384 50 50
+	group 0
+
+	ellipse 550 200 50 50
+	rectangle 480 238 50 50
+	group 3
+		rectangle 250 200 50 50
+		rectangle 200 100 50 50
+		ellipse 350 200 50 50
 
