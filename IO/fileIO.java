@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class fileIO {
       private Group importedGroup;
       private Group currentGroup;
@@ -42,7 +45,7 @@ public class fileIO {
 
       public Group importFile(Board board) {
             previousGroup = new Stack<>();
-            currentGroup = new Group(0,0,0,0,board);
+            currentGroup = new Group(board);
             //importedGroup = new Group(0,0,0,0,board);
             try {
                   File myObj = new File("data.txt");
@@ -67,7 +70,7 @@ public class fileIO {
                               System.out.println(words[1]);
                               if (words[1].contains("group") /* && whiteSpaceCounter > 3 */&& whiteSpaceCounter == previousWhiteSpaceCount) {
                                     previousGroup.push(currentGroup);
-                                    Group group = new Group(0,0,0,0,board);
+                                    Group group = new Group(board);
                                     currentGroup.children.add(group);
                                     //currentGroup = group;
                               }
@@ -81,11 +84,11 @@ public class fileIO {
                                     Location location = new Location(Integer.parseInt(words[2]),
                                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                                             Integer.parseInt(words[5]));
-                                    BaseShape shape = this.getShape(words[1], location, board);
-                                    Order place = new PlaceShapeCommand(shape);
-                                    board.invoker.execute(place);
-                                    currentGroup.children.add(shape);
-                                    board.app.add(shape);
+                                   // BaseShape shape = this.getShape(words[1], location, board);
+//                                    Order place = new PlaceShapeCommand(shape);
+//                                    board.invoker.execute(place);
+//                                    currentGroup.children.add(shape);
+//                                    board.app.add(shape);
 
                                     board.app.revalidate();
                                     board.app.repaint();
@@ -106,44 +109,28 @@ public class fileIO {
             return importedGroup;
       }
 
-      public Group read(Board board){
-            Group group = new Group(0, 0, 0, 0, board);
-            board.currentStrategy = board.groupStrategy;
-            group.setStrategy(board.currentStrategy);
+
+      public BaseShape read(Board board) {
+            BaseShape group = new Group(board);
+            ArrayList<String> lines = new ArrayList<String>();
             try {
                   Scanner reader = new Scanner(new File("data.txt"));
-                  while(reader.hasNextLine()){
-                        //lines.add(reader.nextLine() + "\n");
-                        String[] line = reader.nextLine().trim().split("\\s+");
-                        String shape = line[0];
-                        if(!shape.equals("group") && !shape.equals("")){
-                              Location location = new Location(Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]));
-                              BaseShape s = this.getShape(shape, location, board);
-                              Order place = new PlaceShapeCommand(s);
-                              board.invoker.execute(place);
-                              group.children.add(s);
-                              board.app.add(s);
-
-                              board.app.revalidate();
-                              board.app.repaint();
-
-                        }
+                  while(reader.hasNextLine()){                  
+                        //if(!(reader.nextLine() == "\r\n")){
+                              lines.add(reader.nextLine());
+                        //}
                   }
+
+                  String shape = lines.get(0).trim().split("\\s+")[0];
+                  Operation target = Factory.getOperation(shape);
+                  group = target.apply(lines, board);
+                  
                   reader.close();
 
-                  //return lines;
             } catch(FileNotFoundException e){
                   System.out.println("An error occured");
             }
-            //test();
-                   return group;
-            // }
+            
+            return group;
       }
-
-      private BaseShape getShape(String shape, Location location, Board board){
-            Operation target = Factory.getOperation(shape).orElseThrow(() -> new IllegalArgumentException("Invalid shape"));
-            return target.apply(location, board);
-      }
-
-
 }

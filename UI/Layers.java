@@ -22,7 +22,7 @@ public class Layers extends JPanel {
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
       }
 
-      public void update(Group group){
+      public void update(BaseShape group){
             removeAll();
             group.print(this);
             

@@ -41,11 +41,8 @@ public abstract class BaseShape extends JComponent {
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
-      public BaseShape(int x, int y, int width, int height){
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+      public BaseShape(){
+
       }
 
       public abstract void setStrategy(Strategy strategy);

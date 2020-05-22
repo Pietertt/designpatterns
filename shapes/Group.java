@@ -23,12 +23,7 @@ public class Group extends BaseShape {
 
       public ArrayList<TextShapeDecorator> decorators = new ArrayList<>();
 
-      public Group(int x, int y, int width, int height, Board board){
-            super(x, y, width, height);
-            // this.x = this.getx();
-            // this.y = this.gety();
-            // this.width = this.getwidth();
-            // this.height = this.getheight();
+      public Group(Board board){
             this.board = board;
       }
 
@@ -87,9 +82,14 @@ public class Group extends BaseShape {
                               }
                         }
                   }
+            }
 
-
-                  string.append(shape.toString(indent + 1) + "\n");
+            for(int i = 0; i < this.children.size(); i++){
+                  if(i == (this.children.size() - 1)){
+                        string.append(this.children.get(i).toString(indent + 1));
+                  } else {
+                        string.append(this.children.get(i).toString(indent + 1) + "\n");
+                  }
             }
 
             return string.toString();

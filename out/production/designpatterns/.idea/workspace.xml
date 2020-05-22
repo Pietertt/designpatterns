@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/designpatterns/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/DragVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/DragVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/Visitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/Visitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/resizeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ResizeVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IO/GetGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shapes/Value.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/GetEllipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/GetEllipse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/GetRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/GetRectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/GetTriangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/GetTriangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IO/fileIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/fileIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Layers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Layers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/BaseShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/BaseShape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/ExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ExportVisitor.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +46,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -115,7 +123,8 @@
       <option name="presentableId" value="Default" />
       <updated>1588764292284</updated>
       <workItem from="1588764295177" duration="228000" />
-      <workItem from="1590047380680" duration="591000" />
+      <workItem from="1590047380680" duration="19222000" />
+      <workItem from="1590162493020" duration="308000" />
     </task>
     <servers />
   </component>
@@ -134,5 +143,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
