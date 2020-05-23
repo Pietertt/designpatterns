@@ -11,7 +11,6 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class TextShapeDecorator extends ShapeDecorator {
-
       public String bottom = "";
       public String top = "";
       public String left = "";
@@ -25,8 +24,35 @@ public class TextShapeDecorator extends ShapeDecorator {
             this.right = right;
       }
 
+      public TextShapeDecorator() {
+      }
+
+
+
+
+      public void setDecoratedShape(BaseShape shape) {
+            this.decoratedShape = shape;
+      }
+
       public BaseShape getDecoratedShape() {
             return decoratedShape;
+      }
+
+
+      public void setBottom(String bottom) {
+            this.bottom = bottom;
+      }
+
+      public void setTop(String top) {
+            this.top = top;
+      }
+
+      public void setLeft(String left) {
+            this.left = left;
+      }
+
+      public void setRight(String right) {
+            this.right = right;
       }
 
       public ArrayList<String> getOrnaments() {

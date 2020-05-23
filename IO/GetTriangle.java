@@ -17,6 +17,8 @@ public class GetTriangle implements Operation {
             board.app.revalidate();
             board.app.repaint();
 
+            System.out.println(line[0]);
+
             return shape;
       }
 }

@@ -10,8 +10,16 @@ public abstract class ShapeDecorator extends JComponent {
         this.decoratedShape = decoratedShape;
     }
 
+    public ShapeDecorator() {
+
+    }
+
     public void place() {
         decoratedShape.place();
+    }
+
+    public void setDecoratedShape(BaseShape shape) {
+        this.decoratedShape = shape;
     }
 
 }
