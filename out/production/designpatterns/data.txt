@@ -1,5 +1,7 @@
 group 2
+    ornament top tekst
     rectangle 100 100 50 50
+    ornament top tekst
     group 3
         rectangle 200 200 50 50
         rectangle 200 300 50 50
@@ -7,12 +9,16 @@ group 2
         group 3
             rectangle 300 200 50 50
             rectangle 300 300 50 50
+            ornament top tekst
             group 4
                 ornament top tekst
                 ornament bottom tekst
                 ornament left tekst
                 ornament right tekst
                 ellipse 469 62 50 50
+                ornament right tekst
                 ellipse 469 112 50 50
+                ornament right tekst
                 ellipse 469 162 50 50
+                ornament right tekst
                 ellipse 534 267 50 50

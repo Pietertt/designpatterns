@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import commands.*;
 
 public class GetGroup implements Operation {
-      private TextShapeDecorator decorator = null;
+      public TextShapeDecorator decorator = null;
 
-      private String previousLine = "nothing";
+      public String previousLine = "nothing";
 
       public BaseShape apply(ArrayList<String> lines, Board board){
             BaseShape shape = new Group(board);
@@ -18,9 +18,15 @@ public class GetGroup implements Operation {
             int count = Integer.parseInt(line[1]);
 
 
+            if(decorator != null) {
+                  previousLine = "group";
+                  TextShapeDecorator newGroupDecorator = decorator;
+                  System.out.println(decorator.top);
+                  newGroupDecorator.setDecoratedShape(shape);
+                  shape.add(newGroupDecorator);
+            }
 
             System.out.println(line[0] + " " + count);
-
 
 
             lines.remove(0);
@@ -44,15 +50,10 @@ public class GetGroup implements Operation {
                               decorator.setRight(l[2]);
                         }
                   } else {
-                        if(previousLine.equals("ornament") && (l[0].equals("group"))) {
-                              decorator.setDecoratedShape(shape);
-                              shape.add(decorator);
-                        }
-
                         Operation target = Factory.getOperation(l[0]);
                         BaseShape appliedTarget = target.apply(lines, board);
 
-                        if(previousLine.equals("ornament") && !(l[0].equals("group"))) {
+                        if(previousLine.equals("ornament")) {
                               decorator.setDecoratedShape(appliedTarget);
                               appliedTarget.add(decorator);
                         }
