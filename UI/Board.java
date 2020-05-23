@@ -170,7 +170,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.setStrategy(this.currentStrategy);
                   Order place = new PlaceShapeCommand(shape);
                   this.invoker.execute(place);
-                  this.group.children.add(place.shape);
+                  this.group.children.add(0, place.shape);
                   this.app.add(place.shape);
                   this.app.revalidate();
                   this.app.repaint();
