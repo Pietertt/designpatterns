@@ -44,7 +44,7 @@ public class GetGroup implements Operation {
                               decorator.setRight(l[2]);
                         }
                   } else {
-                        if(previousLine.equals("ornament") && lines.get(0).equals("group")) {
+                        if(previousLine.equals("ornament") && (l[0].equals("group"))) {
                               decorator.setDecoratedShape(shape);
                               shape.add(decorator);
                         }
@@ -52,7 +52,7 @@ public class GetGroup implements Operation {
                         Operation target = Factory.getOperation(l[0]);
                         BaseShape appliedTarget = target.apply(lines, board);
 
-                        if(previousLine.equals("ornament") && !l[0].equals("group")) {
+                        if(previousLine.equals("ornament") && !(l[0].equals("group"))) {
                               decorator.setDecoratedShape(appliedTarget);
                               appliedTarget.add(decorator);
                         }
