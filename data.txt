@@ -1,15 +1,14 @@
-group 4
-	rectangle 215 107 50 50
+group 5
+	rectangle 243 121 50 50
 	rectangle 115 155 50 50
-	ornament top fdsfdsf
 	group 3
 		rectangle 211 215 50 50
 		rectangle 211 315 50 50
-		group 3
+		group 5
 			rectangle 319 89 50 50
 			rectangle 311 315 50 50
 			group 4
-				ellipse 480 77 50 50
-				ellipse 480 127 50 50
-				ellipse 480 177 50 50
-				ellipse 545 282 50 50
+				ellipse 479 88 50 50
+				ellipse 511 147 50 50
+				ellipse 511 197 50 50
+				ellipse 576 302 50 50

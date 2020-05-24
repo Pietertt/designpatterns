@@ -35,19 +35,33 @@ public class TextShapeDecorator extends ShapeDecorator {
 
       public String toString(int indent) {
             String string = "";
-            for(int i = 0; i < indent; i++){
-                  string += "\t";
-            }
+
 
             //System.out.println(getComponents());
-            if(!top.equals(""))
+            if(!top.equals("")) {
+                  for(int i = 0; i < indent; i++){
+                        string += "\t";
+                  }
                   string += "ornament top" + " " + this.top + System.lineSeparator();
-            if(!bottom.equals(""))
+            }
+            if(!bottom.equals("")) {
+                  for(int i = 0; i < indent; i++){
+                        string += "\t";
+                  }
                   string += "ornament bottom" + " " + this.bottom + System.lineSeparator();
-            if(!left.equals(""))
+            }
+            if(!left.equals("")) {
+                  for(int i = 0; i < indent; i++){
+                        string += "\t";
+                  }
                   string += "ornament left" + " " + this.left + System.lineSeparator();
-            if(!right.equals(""))
+            }
+            if(!right.equals("")) {
+                  for(int i = 0; i < indent; i++){
+                        string += "\t";
+                  }
                   string += "ornament right" + " " + this.right + System.lineSeparator();
+            }
 
             //string += decoratedShape.toString(0);
 
@@ -104,16 +118,16 @@ public class TextShapeDecorator extends ShapeDecorator {
       }
 
       public void resize(Location location){
-
+            decoratedShape.resize(location);
       }
 
       public void drag(Location location){
-       
+            decoratedShape.drag(location);
       }
 
       @Override
       public void clear() {
-
+            decoratedShape.clear();
       }
 
       @Override
@@ -173,7 +187,7 @@ public class TextShapeDecorator extends ShapeDecorator {
 
       @Override
       public boolean getIfSelected(int x, int y) {
-            return false;
+            return decoratedShape.getIfSelected(x,y);
       }
 
       public void dragCommand(Location location) {
@@ -193,7 +207,7 @@ public class TextShapeDecorator extends ShapeDecorator {
       }
 
       public void print(Layers layers){
-
+            decoratedShape.print(layers);
       }
 
       @Override

@@ -56,8 +56,10 @@ public class GetGroup implements Operation {
                         if(previousLine.equals("ornament")) {
                               decorator.setDecoratedShape(appliedTarget);
                               appliedTarget.add(decorator);
+                              shape.children.add(decorator);
                         }
                         shape.children.add(appliedTarget);
+
                   }
 
                   previousLine = l[0];

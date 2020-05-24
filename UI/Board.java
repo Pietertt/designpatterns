@@ -107,7 +107,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             }
       }
 
-      private void removeAndReplace(BaseShape shape, TextShapeDecorator decoratedShape) {
+      private void addDecoratorToGroup(BaseShape shape, TextShapeDecorator decoratedShape) {
             if(shape == null) {
                   return;
             }
@@ -124,46 +124,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   shape.children.add(decoratedShape);
             } else {
                   for (BaseShape children : shape.children) {
-                        removeAndReplace(children, decoratedShape);
-                  }
-            }
-
-//
-//            Iterator<BaseShape> it = shape.children.iterator();
-//            while (it.hasNext()) {
-//                  BaseShape i = it.next();
-//                  if(i.equals(decoratedShape.getDecoratedShape())) {
-//                        it.remove();
-//                  } el
-//            }
-//
-//            if(shape.children != null) {
-//                  for (BaseShape children : shape.children) {
-//                       if(children.equals(decoratedShape.getDecoratedShape())) {
-//                              shape.children.add(decoratedShape);
-//                              //shape.children.remove(children);
-//
-//                              //children.remove(children);
-//                              //children.add(decoratedShape);
-//                        } else {
-//                              removeAndReplace(children, decoratedShape);
-//                        }
-//                  }
-//            }
-      }
-
-      public void addDecorator(Group shape, TextShapeDecorator decoratedShape) {
-            if(shape == null) {
-                  return;
-            }
-
-            if(shape.children != null) {
-                  for (BaseShape children : shape.children) {
-                        if(children.equals(decoratedShape.getDecoratedShape())) {
-                              shape.decorators.add(decoratedShape);
-                        } else {
-                              removeAndReplace(children, decoratedShape);
-                        }
+                        addDecoratorToGroup(children, decoratedShape);
                   }
             }
       }
@@ -221,9 +182,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
                               finalSelectedToDecorate.add((JComponent) base);
 
-                              removeAndReplace(this.group, base);
-
-                              //addDecorator((Group) this.group, base);
+                              addDecoratorToGroup(this.group, base);
 
                               this.app.repaint();
                               JOptionPane.showMessageDialog(null, "Ornament(s) added");
