@@ -86,6 +86,15 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.app.repaint();
       }
 
+      public BaseShape getSelectedShape(BaseShape shape) {
+            for(BaseShape shapes : shape.children) {
+                  if(shapes.selected) {
+                        return getSelectedShape(shape);
+                  }
+            }
+            return null;
+      }
+
       public void addOrnament() {
             BaseShape selectedToDecorate = null;
 
@@ -95,8 +104,9 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   }
                   for (BaseShape children : shape.children) {
                         if (children.selected) {
-                              selectedToDecorate = children;
+                              selectedToDecorate = getSelectedShape(children);
                         }
+
                   }
             }
 
