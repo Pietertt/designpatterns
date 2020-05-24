@@ -12,4 +12,3 @@ group 3
 				ellipse 480 127 50 50
 				ellipse 480 177 50 50
 				ellipse 545 282 50 50
-

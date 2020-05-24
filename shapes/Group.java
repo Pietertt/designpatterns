@@ -45,22 +45,22 @@ public class Group extends BaseShape {
                   for (TextShapeDecorator decorator : decorators) {
                         if (decorator.decoratedShape.equals(this)) {
                               if(!(decorator.bottom.equals(""))) {
-                                    string.append("ornament" + " " + "bottom" + " " + decorator.bottom + "\n");
+                                    string.append("ornament" + " " + "bottom" + " " + decorator.bottom + System.lineSeparator());
                               }
                               if(!(decorator.top.equals(""))) {
-                                    string.append("ornament" + " " + "top" + " " + decorator.top + "\n");
+                                    string.append("ornament" + " " + "top" + " " + decorator.top + System.lineSeparator());
                               }
                               if(!(decorator.left.equals(""))) {
-                                    string.append("ornament" + " " + "left" + " " + decorator.left + "\n");
+                                    string.append("ornament" + " " + "left" + " " + decorator.left + System.lineSeparator());
                               }
                               if(!(decorator.right.equals(""))) {
-                                    string.append("ornament" + " " + "right" + " " + decorator.right + "\n");
+                                    string.append("ornament" + " " + "right" + " " + decorator.right + System.lineSeparator());
                               }
                         }
                   }
             }
 
-            string.append("group" + " " + this.children.size() + "\n");
+            string.append("group" + " " + this.children.size() + System.lineSeparator());
 
 
             for(BaseShape shape : this.children){
@@ -88,7 +88,7 @@ public class Group extends BaseShape {
                   if(i == (this.children.size() - 1)){
                         string.append(this.children.get(i).toString(indent + 1));
                   } else {
-                        string.append(this.children.get(i).toString(indent + 1) + "\n");
+                        string.append(this.children.get(i).toString(indent + 1) + System.lineSeparator());
                   }
             }
 
