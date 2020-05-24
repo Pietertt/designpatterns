@@ -44,6 +44,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       // decorator
       private TextShapeDecorator base;
 
+
       public Board(App app, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
@@ -87,28 +88,42 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       }
 
       public BaseShape getSelectedShape(BaseShape shape) {
-            for(BaseShape shapes : shape.children) {
-                  if(shapes.selected) {
-                        return getSelectedShape(shape);
+            if(shape == null) {
+                  return null;
+            }
+
+            if(shape.children != null) {
+                  for (BaseShape children : shape.children) {
+                        if(children.selected) {
+                              return getSelectedShape(children);
+                        }
                   }
             }
-            return null;
+
+            if(shape.selected) {
+                  return shape;
+            } else {
+                  return null;
+            }
+
+            //if(shape.get)
       }
 
       public void addOrnament() {
-            BaseShape selectedToDecorate = null;
+//            BaseShape selectedToDecorate = null;
+//
+//            for (BaseShape shape : this.group.children) {
+//                  if(shape.selected) {
+//                        selectedToDecorate = shape;
+//                  }
+//                  for (BaseShape children : shape.children) {
+//                        if (children.selected) {
+//                              selectedToDecorate = getSelectedShape(children);
+//                        }
+//                  }
+//            }
 
-            for (BaseShape shape : this.group.children) {
-                  if(shape.selected) {
-                        selectedToDecorate = shape;
-                  }
-                  for (BaseShape children : shape.children) {
-                        if (children.selected) {
-                              selectedToDecorate = getSelectedShape(children);
-                        }
-
-                  }
-            }
+            BaseShape selectedToDecorate = getSelectedShape(this.group);
 
             if (selectedToDecorate != null && selectedToDecorate.drawed) {
                   RectangleOrnamentWindow = new JFrame("Add ornaments");
