@@ -87,7 +87,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.app.repaint();
       }
 
-      public BaseShape getSelectedShape(BaseShape shape) {
+      private BaseShape getSelectedShape(BaseShape shape) {
             if(shape == null) {
                   return null;
             }
@@ -105,24 +105,70 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             } else {
                   return null;
             }
-
-            //if(shape.get)
       }
 
-      public void addOrnament() {
-//            BaseShape selectedToDecorate = null;
+      private void removeAndReplace(BaseShape shape, TextShapeDecorator decoratedShape) {
+            if(shape == null) {
+                  return;
+            }
+            boolean changed = false;
+
+            for (Iterator<BaseShape> iterator = shape.children.iterator(); iterator.hasNext();) {
+                  BaseShape shape1 = iterator.next();
+                  if (shape1.equals(decoratedShape.getDecoratedShape())) {
+                        changed = true;
+                  }
+            }
+
+            if(changed) {
+                  shape.children.add(decoratedShape);
+            } else {
+                  for (BaseShape children : shape.children) {
+                        removeAndReplace(children, decoratedShape);
+                  }
+            }
+
 //
-//            for (BaseShape shape : this.group.children) {
-//                  if(shape.selected) {
-//                        selectedToDecorate = shape;
-//                  }
+//            Iterator<BaseShape> it = shape.children.iterator();
+//            while (it.hasNext()) {
+//                  BaseShape i = it.next();
+//                  if(i.equals(decoratedShape.getDecoratedShape())) {
+//                        it.remove();
+//                  } el
+//            }
+//
+//            if(shape.children != null) {
 //                  for (BaseShape children : shape.children) {
-//                        if (children.selected) {
-//                              selectedToDecorate = getSelectedShape(children);
+//                       if(children.equals(decoratedShape.getDecoratedShape())) {
+//                              shape.children.add(decoratedShape);
+//                              //shape.children.remove(children);
+//
+//                              //children.remove(children);
+//                              //children.add(decoratedShape);
+//                        } else {
+//                              removeAndReplace(children, decoratedShape);
 //                        }
 //                  }
 //            }
+      }
 
+      public void addDecorator(Group shape, TextShapeDecorator decoratedShape) {
+            if(shape == null) {
+                  return;
+            }
+
+            if(shape.children != null) {
+                  for (BaseShape children : shape.children) {
+                        if(children.equals(decoratedShape.getDecoratedShape())) {
+                              shape.decorators.add(decoratedShape);
+                        } else {
+                              removeAndReplace(children, decoratedShape);
+                        }
+                  }
+            }
+      }
+
+      public void addOrnament() {
             BaseShape selectedToDecorate = getSelectedShape(this.group);
 
             if (selectedToDecorate != null && selectedToDecorate.drawed) {
@@ -174,6 +220,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                               }
 
                               finalSelectedToDecorate.add((JComponent) base);
+
+                              removeAndReplace(this.group, base);
+
+                              //addDecorator((Group) this.group, base);
+
                               this.app.repaint();
                               JOptionPane.showMessageDialog(null, "Ornament(s) added");
                         } else
@@ -310,7 +361,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       public void export(){
             ExportVisitor exportVisitor = new ExportVisitor();
-            this.group.accept(exportVisitor);            
+            this.group.accept(exportVisitor);
 
             fileIO.export(exportVisitor.export());
       }

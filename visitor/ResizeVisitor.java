@@ -24,6 +24,11 @@ public class ResizeVisitor extends Visitor {
             this.group = group;
       }
 
+      @Override
+      public void visit(TextShapeDecorator shapeDecorator) {
+
+      }
+
       public void resize(Location location) {
             if(group == null) {
                   selectedShape.x = location.x;

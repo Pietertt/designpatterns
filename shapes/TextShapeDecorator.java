@@ -3,6 +3,7 @@ package shapes;
 import javax.swing.*;
 
 import UI.Layers;
+import strategies.Strategy;
 import visitor.Visitor;
 
 import java.awt.*;
@@ -27,8 +28,40 @@ public class TextShapeDecorator extends ShapeDecorator {
       public TextShapeDecorator() {
       }
 
+      @Override
+      public void setStrategy(Strategy strategy) {
 
+      }
 
+      public String toString(int indent) {
+            String string = "";
+            for(int i = 0; i < indent; i++){
+                  string += "\t";
+            }
+
+            //System.out.println(getComponents());
+            if(!top.equals(""))
+                  string += "ornament top" + " " + this.top + System.lineSeparator();
+            if(!bottom.equals(""))
+                  string += "ornament bottom" + " " + this.bottom + System.lineSeparator();
+            if(!left.equals(""))
+                  string += "ornament left" + " " + this.left + System.lineSeparator();
+            if(!right.equals(""))
+                  string += "ornament right" + " " + this.right + System.lineSeparator();
+
+            //string += decoratedShape.toString(0);
+
+            return string;
+      }
+
+      @Override
+      public boolean getHandleIfSelected(int x, int y) {
+            return false;
+      }
+
+      public void accept(Visitor visitor){
+            visitor.visit(this);
+      }
 
       public void setDecoratedShape(BaseShape shape) {
             this.decoratedShape = shape;
@@ -79,8 +112,14 @@ public class TextShapeDecorator extends ShapeDecorator {
       }
 
       @Override
+      public void clear() {
+
+      }
+
+      @Override
       protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+
 
             if (decoratedShape.selected) {
 
@@ -130,6 +169,11 @@ public class TextShapeDecorator extends ShapeDecorator {
 
       public void deselect(MouseEvent e) {
             decoratedShape.deselect(e);
+      }
+
+      @Override
+      public boolean getIfSelected(int x, int y) {
+            return false;
       }
 
       public void dragCommand(Location location) {

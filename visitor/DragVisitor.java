@@ -27,6 +27,11 @@ public class DragVisitor extends Visitor {
             this.group = group;
       }
 
+      @Override
+      public void visit(TextShapeDecorator shapeDecorator) {
+
+      }
+
       public void drag(Location location) {
             if (group == null) {
                   selectedShape.x = location.x;

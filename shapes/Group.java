@@ -62,7 +62,6 @@ public class Group extends BaseShape {
 
             string.append("group" + " " + this.children.size() + System.lineSeparator());
 
-
             for(BaseShape shape : this.children){
                   if(!decorators.isEmpty()) {
                         for (TextShapeDecorator decorator : decorators) {
@@ -84,11 +83,29 @@ public class Group extends BaseShape {
                   }
             }
 
+            for(BaseShape shape : this.children) {
+                  if(shape instanceof TextShapeDecorator) {
+                        decorators.add((TextShapeDecorator) shape);
+                  }
+            }
+
             for(int i = 0; i < this.children.size(); i++){
                   if(i == (this.children.size() - 1)){
-                        string.append(this.children.get(i).toString(indent + 1));
+                        for(TextShapeDecorator decorator : decorators) {
+                              if (this.children.get(i).equals(decorator.getDecoratedShape())) {
+                                    string.append(decorator.toString(indent + 1));
+                              }
+                        }
+                        if(!(this.children.get(i) instanceof TextShapeDecorator))
+                              string.append(this.children.get(i).toString(indent + 1));
                   } else {
-                        string.append(this.children.get(i).toString(indent + 1) + System.lineSeparator());
+                        for(TextShapeDecorator decorator : decorators) {
+                              if (this.children.get(i).equals(decorator.getDecoratedShape())) {
+                                    string.append(decorator.toString(indent + 1));
+                              }
+                        }
+                        if(!(this.children.get(i) instanceof TextShapeDecorator))
+                              string.append(this.children.get(i).toString(indent + 1) + System.lineSeparator());
                   }
             }
 

@@ -1,11 +1,12 @@
-group 3
-	rectangle 134 421 50 50
-	rectangle 100 100 50 50
+group 4
+	rectangle 215 107 50 50
+	rectangle 115 155 50 50
+	ornament top fdsfdsf
 	group 3
 		rectangle 211 215 50 50
 		rectangle 211 315 50 50
 		group 3
-			rectangle 311 215 50 50
+			rectangle 319 89 50 50
 			rectangle 311 315 50 50
 			group 4
 				ellipse 480 77 50 50
