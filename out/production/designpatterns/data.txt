@@ -1,18 +1,15 @@
-group 4
+group 3
+	rectangle 134 421 50 50
 	rectangle 100 100 50 50
 	group 3
-		rectangle 156 170 50 50
-		rectangle 156 270 50 50
+		rectangle 211 215 50 50
+		rectangle 211 315 50 50
 		group 3
-			rectangle 256 170 50 50
-			rectangle 256 270 50 50
-			group 5
-				ellipse 449 53 50 50
-				ellipse 425 82 50 50
-				ellipse 425 132 50 50
-				ellipse 490 237 50 50
-				group 2
-					rectangle 295 399 50 50
-					rectangle 394 390 50 50
-	rectangle 139 410 50 50
-	rectangle 85 417 50 50
+			rectangle 311 215 50 50
+			rectangle 311 315 50 50
+			group 4
+				ellipse 480 77 50 50
+				ellipse 480 127 50 50
+				ellipse 480 177 50 50
+				ellipse 545 282 50 50
+
