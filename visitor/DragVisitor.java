@@ -22,7 +22,6 @@ public class DragVisitor extends Visitor {
 
       @Override
       public void visit(Group group) {
-            System.out.println("Visited group");
             this.selectedShape = group;
             this.group = group;
       }

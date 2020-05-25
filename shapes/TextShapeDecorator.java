@@ -87,19 +87,19 @@ public class TextShapeDecorator extends ShapeDecorator {
 
 
       public void setBottom(String bottom) {
-            this.bottom = bottom.substring(1, bottom.length() - 1);
+            this.bottom = bottom;
       }
 
       public void setTop(String top) {
-            this.top = top.substring(1, top.length() - 1);
+            this.top = top;
       }
 
       public void setLeft(String left) {
-            this.left = left.substring(1, left.length() - 1);
+            this.left = left;
       }
 
       public void setRight(String right) {
-            this.right = right.substring(1, right.length() - 1);
+            this.right = right;
       }
 
       public ArrayList<String> getOrnaments() {

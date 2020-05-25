@@ -41,48 +41,7 @@ public class Group extends BaseShape {
                   string.append("\t");
             }
 
-//            if(!decorators.isEmpty()) {
-//                  for (TextShapeDecorator decorator : decorators) {
-//                        if (decorator.decoratedShape.equals(this)) {
-//                              if(!(decorator.bottom.equals(""))) {
-//                                    string.append("ornament" + " " + "bottom" + " " + decorator.bottom + System.lineSeparator());
-//                              }
-//                              if(!(decorator.top.equals(""))) {
-//                                    string.append("ornament" + " " + "top" + " " + decorator.top + System.lineSeparator());
-//                              }
-//                              if(!(decorator.left.equals(""))) {
-//                                    string.append("ornament" + " " + "left" + " " + decorator.left + System.lineSeparator());
-//                              }
-//                              if(!(decorator.right.equals(""))) {
-//                                    string.append("ornament" + " " + "right" + " " + decorator.right + System.lineSeparator());
-//                              }
-//                        }
-//                  }
-//            }
-//
             string.append("group" + " " + this.children.size() + System.lineSeparator());
-//
-//            for(BaseShape shape : this.children){
-//                  if(!decorators.isEmpty()) {
-//                        for (TextShapeDecorator decorator : decorators) {
-//                              if (decorator.decoratedShape.equals(shape)) {
-//                                    if(!(decorator.bottom.equals(""))) {
-//                                          string.append("ornament" + " " + "bottom" + " " + decorator.bottom + "\n");
-//                                    }
-//                                    if(!(decorator.top.equals(""))) {
-//                                          string.append("ornament" + " " + "top" + " " + decorator.top + "\n");
-//                                    }
-//                                    if(!(decorator.left.equals(""))) {
-//                                          string.append("ornament" + " " + "left" + " " + decorator.left + "\n");
-//                                    }
-//                                    if(!(decorator.right.equals(""))) {
-//                                          string.append("ornament" + " " + "right" + " " + decorator.right + "\n");
-//                                    }
-//                              }
-//                        }
-//                  }
-//            }
-
             for(BaseShape shape : this.children) {
                   if(shape instanceof TextShapeDecorator) {
                         decorators.add((TextShapeDecorator) shape);
