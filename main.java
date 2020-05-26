@@ -1,36 +1,27 @@
-import java.util.*;
 import javax.swing.*;
-
-import javax.swing.Timer;
-import java.awt.event.*;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.awt.*;
-
-import java.awt.event.*;
-import java.awt.BorderLayout;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
-
-import shapes.Rectangle;
 import UI.Board;
 import strategies.*;
 
 public class main {
 
       public static void main(String[] args) {
+            /*
+                  Maak nieuwe UI elementen
+             */
             JFrame frame = new JFrame();
             JPanel UI = new JPanel();
-
             Board board = new Board(frame);
 
+            // Rectangle button - Toevoegen rectangle aan scherm
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.strategy = new PlaceRectangleStrategy(board.invoker, board);     
+                  board.placeWhich = "Rectangle";
+                  //board.strategy = new PlaceRectangleStrategy(board.invoker, board);
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -46,7 +37,7 @@ public class main {
 
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.strategy = new PlaceEllipseStrategy(board.invoker, board);
+                  board.placeWhich = "Ellipse";
             });
 
             try {

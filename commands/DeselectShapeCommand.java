@@ -3,6 +3,7 @@ package commands;
 import shapes.*;
 import java.awt.event.*;
 
+// Het deselecteren van een shape
 public class DeselectShapeCommand extends Order {
       private MouseEvent event;
 

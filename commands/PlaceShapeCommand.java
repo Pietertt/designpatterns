@@ -4,6 +4,7 @@ import shapes.*;
 import UI.Invoker;
 import UI.Board;
 
+// Plaatsen vaan een shape op board commando
 public class PlaceShapeCommand extends Order {
       private Invoker invoker;
       private Board board;

@@ -3,6 +3,7 @@ package commands;
 import shapes.*;
 import UI.Invoker;
 
+// Het resizen van een shape commando
 public class ResizeShapeCommand extends Order {
       private Location location;
 

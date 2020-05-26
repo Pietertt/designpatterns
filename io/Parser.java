@@ -3,9 +3,6 @@ package io;
 import java.io.*;
 import java.util.Scanner;
 
-import UI.*;
-import strategies.*;
-
 import java.util.*;
 
 import shapes.Rectangle;
@@ -17,6 +14,7 @@ public class Parser {
       public Parser(){
       }
 
+      // Aanmaken van een file
       public ArrayList<String> read(String filename){
             ArrayList<String> lines = new ArrayList<String>();
             try {
@@ -34,6 +32,7 @@ public class Parser {
             }
       }
 
+      // Het vertalen van data uit de file naar daadwerkelijke shapes
       public ArrayList<Shape> get(ArrayList<String> lines){
             ArrayList<Shape> shapes = new ArrayList<Shape>();
             for(int i = 0; i < lines.size(); i++){

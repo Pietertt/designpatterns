@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
+    <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/DeselectShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/DeselectShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/DragShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/DragShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/PlaceShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/PlaceShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/ResizeShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/ResizeShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/SelectShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/commands/SelectShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/io/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/io/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/graphicsEditorTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/graphicsEditorTest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/graphicsEditorTest/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/graphicsEditorTest/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/ResizableBorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/ResizableBorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/PlaceEllipseStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/PlaceRectangleStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/Strategy.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +47,9 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1ZTdntzW4UaHmedsHsBI32zxmmM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />

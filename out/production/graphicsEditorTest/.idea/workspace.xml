@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08ec2ec7-642c-4aee-9e31-c6aa83d9688c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+    <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/graphicsEditorTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/graphicsEditorTest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/graphicsEditorTest/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/graphicsEditorTest/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Rectangle.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +32,9 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1ZTdntzW4UaHmedsHsBI32zxmmM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -94,7 +99,7 @@
       <workItem from="1585586644475" duration="2060000" />
       <workItem from="1585677340436" duration="603000" />
       <workItem from="1586420412967" duration="1863000" />
-      <workItem from="1586595391518" duration="599000" />
+      <workItem from="1586595391518" duration="1199000" />
     </task>
     <task id="LOCAL-00001" summary="Bezig met command&#10;~ Place rectangle afgemaakt">
       <created>1585393755457</created>

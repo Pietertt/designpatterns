@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+// Logica van het vergoten van een shape
 public class ResizableBorder implements Border {
 
       private int size = 8;
@@ -31,6 +32,7 @@ public class ResizableBorder implements Border {
             return false;
       }
 
+      // Border van het resizen wordt hier getekent.
       @Override
       public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
             // if (component.hasFocus()) {
@@ -44,6 +46,7 @@ public class ResizableBorder implements Border {
             //}
       }
 
+      // Welke handle wordt geselecteerd?
       private Rectangle getRectangle(int x, int y, int width, int height, int location) {
             switch (location) {
                   case SwingConstants.NORTH:
@@ -74,6 +77,7 @@ public class ResizableBorder implements Border {
             }
       }
 
+      // Krijg de juiste cursor voor het vergroten van een rectangle
       public int getCursor(MouseEvent e) {
             Component component = e.getComponent();
             int width = component.getWidth();

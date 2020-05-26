@@ -2,6 +2,7 @@ package commands;
 
 import shapes.*;
 
+// Standaard commando's die uitgevoerd kunnen worden
 public abstract class Order {
       public Shape shape;
 
