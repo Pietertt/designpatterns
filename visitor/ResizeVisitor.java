@@ -26,11 +26,13 @@ public class ResizeVisitor extends Visitor {
 
       @Override
       public void visit(TextShapeDecorator shapeDecorator) {
-
+            this.selectedShape = shapeDecorator.getDecoratedShape();
+            this.group = group;
       }
 
       public void resize(Location location) {
             if(group == null) {
+
                   selectedShape.x = location.x;
                   selectedShape.y = location.y;
                   selectedShape.width = location.width;

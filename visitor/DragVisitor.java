@@ -28,41 +28,48 @@ public class DragVisitor extends Visitor {
 
       @Override
       public void visit(TextShapeDecorator shapeDecorator) {
-
+            this.selectedShape = shapeDecorator;
+            this.group = group;
       }
 
       public void drag(Location location) {
             if (group == null) {
-                  selectedShape.x = location.x;
-                  selectedShape.y = location.y;
-                  selectedShape.width = location.width;
-                  selectedShape.height = location.height;
-                  selectedShape.repaint();
+                  if(!(selectedShape instanceof TextShapeDecorator)) {
+                        selectedShape.x = location.x;
+                        selectedShape.y = location.y;
+                        selectedShape.width = location.width;
+                        selectedShape.height = location.height;
+                        selectedShape.repaint();
+                  }
             } else {
                   boolean s = false;
                   for (BaseShape shape : group.children) {
                         if (shape.selected) {
-                              Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
-                              DragVisitor moveVisitor = new DragVisitor();
-                              shape.accept(moveVisitor);
-                              moveVisitor.drag(childLocation);
-                              s = true;
+                              if(!(shape instanceof TextShapeDecorator)) {
+                                    Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
+                                    DragVisitor moveVisitor = new DragVisitor();
+                                    shape.accept(moveVisitor);
+                                    moveVisitor.drag(childLocation);
+                                    s = true;
+                              }
                         }
                   }
                   if (!s) {
                         for (BaseShape shape : group.children) {
-                              int dx = location.x - group.start.x + shape.start.x;
-                              int dy = location.y - group.start.y + shape.start.y;
+                              if(!(shape instanceof TextShapeDecorator)) {
+                                    int dx = location.x - group.start.x + shape.start.x;
+                                    int dy = location.y - group.start.y + shape.start.y;
 
-                              Location childLocation = new Location();
-                              childLocation.x = dx;
-                              childLocation.y = dy;
-                              childLocation.width = shape.width;
-                              childLocation.height = shape.height;
+                                    Location childLocation = new Location();
+                                    childLocation.x = dx;
+                                    childLocation.y = dy;
+                                    childLocation.width = shape.width;
+                                    childLocation.height = shape.height;
 
-                              DragVisitor moveVisitor = new DragVisitor();
-                              shape.accept(moveVisitor);
-                              moveVisitor.drag(childLocation);
+                                    DragVisitor moveVisitor = new DragVisitor();
+                                    shape.accept(moveVisitor);
+                                    moveVisitor.drag(childLocation);
+                              }
                         }
                         selectedShape.repaint();
                   }
