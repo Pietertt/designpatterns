@@ -120,7 +120,7 @@ public class App extends JFrame {
             JButton fetch = new JButton();
             fetch.addActionListener(actionEvent -> board.fetch());
             try {
-                  fetch.setIcon(new ImageIcon(ImageIO.read(new File("img/save.png"))));
+                  fetch.setIcon(new ImageIcon(ImageIO.read(new File("img/import.png"))));
             } catch(IOException e) {
                   e.printStackTrace();
             }
@@ -164,6 +164,7 @@ public class App extends JFrame {
             UI.add(fetch);
             UI.add(group);
             UI.add(ornament);
+            UI.setBackground(Color.WHITE);
 
             // // added the board and the UI to the frame
             getContentPane().add(UI, BorderLayout.SOUTH);

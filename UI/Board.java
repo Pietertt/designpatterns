@@ -312,7 +312,11 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             }
 
             if(move.selectedShape != null)
-                  move.drag(new Location(e.getX(), e.getY(), move.selectedShape.width, move.selectedShape.height));
+                  try {
+                        move.drag(new Location(e.getX(), e.getY(), move.selectedShape.width, move.selectedShape.height));
+                  } catch(NullPointerException error){
+                        System.out.println("Er ging iets fout:" + error.getMessage());
+                  }
 
             if(resize.selectedShape != null)
                   resize.resize(new Location(resize.selectedShape.x, resize.selectedShape.y, e.getX() - resize.selectedShape.start.x, e.getY() - resize.selectedShape.start.y));

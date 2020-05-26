@@ -1,5 +1,5 @@
-group 5
-	rectangle 243 121 50 50
+group 4
+	rectangle 64 24 50 50
 	ornament top Test
 	rectangle 115 155 50 50
 	group 3
@@ -8,8 +8,9 @@ group 5
 		group 3
 			rectangle 329 63 50 50
 			rectangle 321 289 50 50
-			group 4
+			group 5
 				ellipse 489 62 50 50
+                        ornament top "Test"
 				ellipse 521 121 50 50
 				ellipse 521 171 50 50
 				ellipse 586 276 50 50

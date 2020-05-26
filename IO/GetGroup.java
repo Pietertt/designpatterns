@@ -33,9 +33,13 @@ public class GetGroup implements Operation {
 
             while(lines.size() > 0){
                   String[] l = lines.get(0).trim().split("\\s+");
+
+
                   if(l[0].equals("ornament")) {
                         if(!previousLine.equals("ornament")) {
                               decorator = new TextShapeDecorator();
+                              System.out.println("Test");
+
                         }
                         if(l[1].equals("top")) {
                               decorator.setTop(l[2]);
