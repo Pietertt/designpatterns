@@ -3,6 +3,7 @@ package commands;
 import shapes.*;
 import java.awt.event.*;
 
+// Selecteren van een shape aan de hand van commands
 public class SelectShapeCommand extends Order {
       private MouseEvent event;
 

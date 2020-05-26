@@ -1,22 +1,11 @@
 package shapes;
 
-import java.awt.*;
 import java.awt.event.*;
-
-import javax.sound.sampled.Line;
 import javax.swing.*;
-
-import java.util.ArrayList;
 import java.util.Stack;
-import commands.*;
 import UI.*;
-import visitor.Visitor;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseListener;
 
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
+// Een basisfiguur waarvan anders figuren afgeleid kunnen worden
 public abstract class BaseShape extends JComponent implements Shape {
       public int x;
       public int y;
@@ -31,12 +20,14 @@ public abstract class BaseShape extends JComponent implements Shape {
 
       public Location start = null;
 
+      // Welke opties/modus staan aan op deze shape
       public boolean selected = false;
       public boolean drawed = false;
       public boolean dragging = false;
       public boolean resizing = false;
       public boolean handle = false;
 
+      // Standaar kleuren van een shape
       int[] gray = { 205, 205, 205 };
       int[] blue = { 80, 155, 229 };
 
@@ -47,6 +38,7 @@ public abstract class BaseShape extends JComponent implements Shape {
             this.height = height;
       }
 
+      // Standaard functionaliteit voor shape
       public abstract void place();
       public abstract void remove();
       public abstract void dragCommand(Location location);      
@@ -60,16 +52,13 @@ public abstract class BaseShape extends JComponent implements Shape {
 
 
 
-      // public abstract void accept(Visitor visitor);
-      // public abstract void print();
-
-
       public abstract void select(MouseEvent e);
 
       public abstract void deselect(MouseEvent e);
 
       public abstract boolean getIfSelected(int x, int y);
 
+      // Opslaan van een shape op de stack
       public void save(Location location){
             this.redoStack.clear();
             this.undoStack.add(location);

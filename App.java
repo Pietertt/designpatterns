@@ -3,14 +3,8 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.awt.event.*;
-
 import UI.Board;
 import UI.Layers;
-import shapes.BaseShape;
-import shapes.Rectangle;
-import strategies.*;
-import java.awt.*;
 
 public class App extends JFrame {
 
@@ -20,10 +14,11 @@ public class App extends JFrame {
             Layers layers = new Layers();
             Board board = new Board(this, layers);
 
+            // Maak een nieuwe rectangle aan met deze button
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.setStrategy(new PlaceRectangleStrategy(board.invoker, board));     
+                  board.placeWhich = "Rectangle";
             });
             try {
                   rectangle.setIcon(new ImageIcon(ImageIO.read(new File("img/rectangle.png"))));
@@ -35,11 +30,11 @@ public class App extends JFrame {
             rectangle.setFocusPainted(false);
             rectangle.setContentAreaFilled(false);
 
+            // Maak een nieuwe ellipse aan met deze button
             JButton ellipse = new JButton();
-
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
-                  board.setStrategy(new PlaceEllipseStrategy(board.invoker, board));
+                  board.placeWhich = "Ellipse";
             });
 
             try {
@@ -65,7 +60,7 @@ public class App extends JFrame {
             undo.setFocusPainted(false);
             undo.setContentAreaFilled(false);
 
-            // Undo button
+            // Redo button
             JButton redo = new JButton();
             redo.addActionListener(actionEvent -> board.invoker.redo());
             try {
@@ -90,7 +85,7 @@ public class App extends JFrame {
             save.setFocusPainted(false);
             save.setContentAreaFilled(false);
 
-
+            // Groepeer een aantal shapes met deze button
             JButton group = new JButton();
             group.addActionListener(actionEvent -> board.group());
             try {
@@ -103,6 +98,7 @@ public class App extends JFrame {
             group.setFocusPainted(false);
             group.setContentAreaFilled(false);
 
+            // Voeg de buttons toe aan de UI
             UI.add(rectangle);
             UI.add(ellipse);
             UI.add(undo);

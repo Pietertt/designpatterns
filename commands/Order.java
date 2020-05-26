@@ -2,6 +2,7 @@ package commands;
 
 import shapes.*;
 
+// Standaard orders(commands) die uit te voeren zijn
 public abstract class Order {
       public BaseShape shape;
 

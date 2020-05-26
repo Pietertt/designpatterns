@@ -3,6 +3,7 @@ package commands;
 import shapes.*;
 import UI.Invoker;
 
+// Het opslaan van een shape aan de hand van commands
 public class SaveShapeCommand extends Order {
       private Location location;
 

@@ -1,13 +1,9 @@
 package UI;
 
 import javax.swing.*;
-
 import commands.*;
 import shapes.*;
-import shapes.Shape;
-import strategies.*;
-
-import java.awt.*;
+import shapes.Rectangle;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,12 +13,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public Layers layers;
       public Invoker invoker = new Invoker();
       private ArrayList<BaseShape> shapes = new ArrayList<BaseShape>();
-      private Strategy strategy;
 
       public boolean created = false;
       public boolean shifted = false;
       public boolean cmd = false;
       public boolean ctrl = false;
+
+      public String placeWhich = "";
 
       // New window to edit ornaments
       private JFrame RectangleOrnamentWindow;
@@ -38,23 +35,24 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             addKeyListener(this);
       }
 
+      // Initieer het board
       public void init() {
-            this.setStrategy(new PlaceRectangleStrategy(this.invoker, this));
-
             for (int i = 0; i < 5; i++) {
-                  this.strategy.place(50 + i * 100, 100, 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
+                  BaseShape shape = new Rectangle(50 + i * 100, 100, 50, 50);
+                  Order place = new PlaceShapeCommand(shape);
+                  this.invoker.execute(place);
+                  this.shapes.add(shape);
+                  this.frame.add(shape);
                   this.frame.revalidate();
                   this.frame.repaint();
             }
 
-            this.setStrategy(new PlaceEllipseStrategy(this.invoker, this));
-
             for (int i = 0; i < 5; i++) {
-                  this.strategy.place(50 + i * 100, 300, 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
+                  BaseShape shape2 = new Ellipse(50 + i * 100, 300, 50, 50);
+                  Order place = new PlaceShapeCommand(shape2);
+                  this.invoker.execute(place);
+                  this.shapes.add(shape2);
+                  this.frame.add(shape2);
                   this.frame.revalidate();
                   this.frame.repaint();
             }
@@ -65,6 +63,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
             this.layers.update(this.shapes);
       }
 
+      // Groupeer meerdere geselecteerde shapes
       public void group(){
             ArrayList<BaseShape> grouped = new ArrayList<BaseShape>();
             Iterator<BaseShape> i = this.shapes.iterator();
@@ -95,16 +94,22 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       }
 
-      public void setStrategy(Strategy strategy){
-            this.strategy = strategy;
-      }
-
+      // Maak nieuwe shapes aan, of selecteer ze door te klikken met shift
       public void mousePressed(MouseEvent e) {
             requestFocus();
             if (this.created) {
-                  this.strategy.place(e.getX(), e.getY(), 50, 50);
-                  this.shapes.add(this.strategy.shape);
-                  this.frame.add(this.strategy.shape);
+                  BaseShape shape = null;
+                  if(placeWhich.equals("Rectangle")) {
+                        shape = new Rectangle(e.getX(), e.getY(), 50, 50);
+                  }
+                  if(placeWhich.equals("Ellipse")) {
+                        shape = new Ellipse(e.getX(), e.getY(), 50, 50);
+                  }
+
+                  Order place = new PlaceShapeCommand(shape);
+                  this.invoker.execute(place);
+                  this.shapes.add(shape);
+                  this.frame.add(shape);
                   this.frame.revalidate();
                   this.frame.repaint();
                   this.created = false;   
@@ -117,67 +122,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                         if (shape.getIfSelected(e.getX(), e.getY())) {
                               Order select = new SelectShapeCommand(shape, e);
                               this.invoker.execute(select);
-                              if (e.getClickCount() == 2) {
-                                    String[] labels = { "Top side: ", "Bottom side: ", "Left side: ", "Right side: " };
-
-                                    RectangleOrnamentWindow = new JFrame("New Window");
-                                    RectangleOrnamentWindow.pack();
-                                    RectangleOrnamentWindow.setVisible(true);
-                                    JPanel p = new JPanel();
-
-                                    // Lay out the panel.
-                                    GridLayout grid = new GridLayout();
-                                    grid.setColumns(2);
-                                    grid.setRows(5);
-                                    grid.setHgap(5);
-                                    grid.setVgap(5);
-                                    p.setLayout(grid);
-
-                                    JTextField textTop = new JTextField(25);
-                                    JLabel labelTop = new JLabel("Top side: ");
-                                    p.add(labelTop);
-                                    p.add(textTop);
-
-                                    JTextField textBottom = new JTextField(25);
-                                    JLabel labelBottom = new JLabel("Bottom side: ");
-                                    p.add(labelBottom);
-                                    p.add(textBottom);
-
-                                    JTextField textLeft = new JTextField(25);
-                                    JLabel labelLeft = new JLabel("Left side: ");
-                                    p.add(labelLeft);
-                                    p.add(textLeft);
-
-                                    JTextField textRight = new JTextField(25);
-                                    JLabel labelRight = new JLabel("Right side: ");
-                                    p.add(labelRight);
-                                    p.add(textRight);
-
-                                    submit = new JButton("Submit");
-                                    submit.addActionListener(arg0 -> {
-                                          if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
-                                                      || !textLeft.getText().isEmpty()
-                                                      || !textRight.getText().isEmpty()) {
-
-                                                Shape base = new TextShapeDecorator(shape, textBottom.getText(),
-                                                            textTop.getText(), textLeft.getText(), textRight.getText());
-                                                for (Component component : shape.getComponents()) {
-                                                      shape.remove(component);
-                                                }
-                                                shape.add((JComponent) base);
-                                                this.frame.repaint();
-                                                JOptionPane.showMessageDialog(null, "Ornament(s) added");
-                                          } else
-                                                JOptionPane.showMessageDialog(null, "All fields empty\n "
-                                                            + "Fill in at least one field to submit ornament");
-                                    });
-                                    p.add(submit);
-
-                                    RectangleOrnamentWindow.add(p);
-
-                                    RectangleOrnamentWindow.setSize(400, 200);
-
-                              }
                         }
 
                         if (shape.selected) {
@@ -256,6 +200,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
 
       }
 
+      // Drag de shape
       @Override
       public void mouseDragged(MouseEvent e) {
             for (BaseShape shape : this.shapes) {

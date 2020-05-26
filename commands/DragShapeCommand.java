@@ -3,6 +3,7 @@ package commands;
 import shapes.*;
 import UI.Invoker;
 
+// Draggen van een shape via commands
 public class DragShapeCommand extends Order {
       private Location location;
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import shapes.BaseShape;
 
+// Het updaten van het board
 public class Layers extends JPanel {
       public JFrame frame;
       public Board board;

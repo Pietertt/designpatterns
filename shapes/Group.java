@@ -4,42 +4,31 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import java.util.ArrayList;
-import java.util.Stack;
 import commands.*;
 import UI.*;
-import shapes.*;
-import visitor.Visitor;
 
+
+// Het grouperen van een shape dmv het composite pattern
 public class Group extends BaseShape {
+      // Shapes die tot deze groep behoren, Group is zelf ook een BaseShape dus er kunnen ook groepen in groepen
       public ArrayList<BaseShape> children = new ArrayList<BaseShape>();
       public Board board;
-      private JFrame RectangleOrnamentWindow;
-      private JButton submit;
 
       public Group(int x, int y, int width, int height, Board board){
             super(x, y, width, height);
-            // this.x = this.getx();
-            // this.y = this.gety();
-            // this.width = this.getwidth();
-            // this.height = this.getheight();
             this.board = board;
       }
 
+      // Voeg een shape toe aan de groep
       public void addd(BaseShape shape){
             this.children.add(shape);
       }
 
       public void remove(Shape shape){
             this.children.remove(shape);
-      }
-
-      public void accept(Visitor visitor){
-
       }
 
       public void place() {
@@ -52,6 +41,8 @@ public class Group extends BaseShape {
             repaint();
       }
 
+
+      // Drag de hele groep, dus alle children word ook de drag functie aangeroepen
       public void drag(Location location){
             boolean s = false;
             for(BaseShape shape : this.children){
@@ -81,6 +72,7 @@ public class Group extends BaseShape {
             }
       }
 
+      // Het resizen van een shape & children van deze group
       public void resize(Location location){
             boolean s = false;
             for(BaseShape shape : this.children){
@@ -110,6 +102,7 @@ public class Group extends BaseShape {
             }
       }
 
+      // het selecteren van een groep
       public void select(MouseEvent e) {
             for(BaseShape shape : this.children){
                   if(this.selected){
@@ -131,6 +124,7 @@ public class Group extends BaseShape {
             this.selected = true;
       }
 
+      // Het deselecteren van een groep
       public void deselect(MouseEvent e) {
             for(BaseShape shape : this.children){
                   if(shape.selected){
@@ -219,6 +213,7 @@ public class Group extends BaseShape {
             return false;
       }
 
+      // Krijg de handle van deze groep
       public boolean getHandleIfSelected(int x, int y){
             boolean s = false;
             for(BaseShape shape : this.children){
@@ -304,6 +299,7 @@ public class Group extends BaseShape {
             return false;
       }
 
+      // Teken de groep
       @Override
       public void paintComponent(Graphics g) {
             if(!this.isChildSelected()){
