@@ -10,6 +10,7 @@ import shapes.*;
 public class ui extends JPanel {
       private shapes s;
 
+      // Zet modus
       public int mode = 0;
       public String kind = "";
 

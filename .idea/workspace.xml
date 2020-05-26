@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="519a5044-dda2-45d0-bb98-c69a54ad6b42" name="Default Changelist" comment="" />
+    <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/io/parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/io/parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/handle.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/handle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +27,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1XWP5RFbTYljQuV3opnAh518r9y" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -67,7 +83,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="519a5044-dda2-45d0-bb98-c69a54ad6b42" name="Default Changelist" comment="" />
+      <changelist id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="" />
       <created>1581158693081</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -77,10 +93,22 @@
       <workItem from="1581319389224" duration="4717000" />
       <workItem from="1581420382422" duration="6423000" />
       <workItem from="1581582536698" duration="475000" />
+      <workItem from="1590500476636" duration="456000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

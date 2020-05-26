@@ -11,7 +11,9 @@ import shapes.handle;
 import shapes.shapes;
 
 public class board extends JPanel implements MouseListener {
-
+      // //-----------------------------------------------------------------------------
+      // //                              Screen Elements
+      // //-----------------------------------------------------------------------------
       private static JFrame frame;
       private static ui ui;
       private shapes shapes;
@@ -30,8 +32,16 @@ public class board extends JPanel implements MouseListener {
       public int mode = 0;
       public String kind = "";
 
+      // //-----------------------------------------------------------------------------
+      // //                         Functions turned on/off
+      // //-----------------------------------------------------------------------------
+
       public boolean dragging = false;
       public boolean added = false;
+
+      // //-----------------------------------------------------------------------------
+      // //                     Place elements in relation to frame
+      // //-----------------------------------------------------------------------------
 
       public static int offsetX = 200;
       public static int offsetY = 200;
@@ -44,6 +54,8 @@ public class board extends JPanel implements MouseListener {
             this.frame = frame;
             super.setFocusable(true);
             this.ui = ui;
+
+            // Voeg mouselistener toe aan board, zodat muis gebruikt kan worden.
             addMouseListener(this);
 
             // fires an event with the 'DELETE' identifier when the backspace is pressed

@@ -15,7 +15,12 @@ import io.parser;
 public class main {
       static shapes s;
 
-      public static shapes init(){
+
+    /*
+        Programma wordt geinitieerd, dit betekent dat de file test.peter wordt uitgelezen
+        en aan de hand daarvan worden rectangles of ellipses getekent op het scherm
+     */
+    public static shapes init(){
             parser p = new parser("test.pieter");
             ArrayList<String> commands =  p.read();
             shapes s = new shapes();

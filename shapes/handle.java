@@ -1,5 +1,6 @@
 package shapes;
 
+// Handle van een shape, als deze geselecteerd is kan de shape vergroot worden
 public class handle extends shape {
       public boolean selected = false;
 

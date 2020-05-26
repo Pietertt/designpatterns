@@ -7,10 +7,13 @@ import java.util.*;
 public class parser {
       private File file;
 
+      // Nieuwe file wordt aangemaakt.
       public parser(String filename){
             this.file = new File(filename);
       }
 
+
+      // Inlezen van een file.
       public ArrayList<String> read(){
             ArrayList<String> lines = new ArrayList<String>();
             try {

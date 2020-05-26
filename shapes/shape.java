@@ -12,9 +12,11 @@ public class shape extends JPanel {
 
       public int[] color;
 
+      // Moving op true betkeent dat shape kan worden verplaatst
       public boolean moving = false;
       public boolean selected = false;
 
+      // Handle voor het resizen
       public ArrayList<handle> handles  = new ArrayList<handle>();
 
       public shape(int x, int y, int width, int height, int[] color){
@@ -25,6 +27,7 @@ public class shape extends JPanel {
             this.color = color;
       }
 
+      // Controleer op de shape is geselecteerd dmv positie & grootte
       public boolean selected(int x, int y){
             for(int i = 0; i < this.width; i++){
                   if(x == this.x + i){
