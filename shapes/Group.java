@@ -18,8 +18,6 @@ import visitor.Visitor;
 
 public class Group extends BaseShape {
       public Board board;
-      private JFrame RectangleOrnamentWindow;
-      private JButton submit;
 
       public Group(Board board){
             this.board = board;

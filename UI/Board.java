@@ -39,10 +39,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       public boolean cmd = false;
       public boolean ctrl = false;
 
-      // New window to edit ornaments
-      private JFrame RectangleOrnamentWindow;
-      private JButton submit;
-
       public Board(App app, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
