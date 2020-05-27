@@ -33,11 +33,10 @@ public class TextShapeDecorator extends ShapeDecorator {
 
       }
 
+      // Returns the ornament as a string
       public String toString(int indent) {
             String string = "";
 
-
-            //System.out.println(getComponents());
             if(!top.equals("")) {
                   for(int i = 0; i < indent; i++){
                         string += "\t";
@@ -63,8 +62,6 @@ public class TextShapeDecorator extends ShapeDecorator {
                   string += "ornament right" + " " + this.right + System.lineSeparator();
             }
 
-            //string += decoratedShape.toString(0);
-
             return string;
       }
 
@@ -73,6 +70,7 @@ public class TextShapeDecorator extends ShapeDecorator {
             return false;
       }
 
+      // Accepts any visitor
       public void accept(Visitor visitor){
             visitor.visit(this);
       }
@@ -134,7 +132,7 @@ public class TextShapeDecorator extends ShapeDecorator {
       protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-
+            // Draws the ornament when it is selected
             if (decoratedShape.selected) {
 
                   Graphics2D g2d = (Graphics2D) g;
@@ -153,6 +151,7 @@ public class TextShapeDecorator extends ShapeDecorator {
             }
       }
 
+      // Draws the ornament -90 degrees
       private void verticalLeft(Graphics2D g2d, String str) {
             int position = decoratedShape.y + 5;
             for (int i = 0; i < str.length(); i++) {
@@ -163,6 +162,7 @@ public class TextShapeDecorator extends ShapeDecorator {
             }
       }
 
+      // Draws the ornament 90 degrees
       private void verticalRight(Graphics2D g2d, String str) {
             int position = decoratedShape.y + 5;
             for (int i = 0; i < str.length(); i++) {

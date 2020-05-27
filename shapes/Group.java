@@ -31,10 +31,6 @@ public class Group extends BaseShape {
             this.strategy = strategy;
       }
 
-      public void addd(BaseShape shape){
-            this.children.add(shape);
-      }
-
       public String toString(int indent){
             StringBuilder string = new StringBuilder();
 

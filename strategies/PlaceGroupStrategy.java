@@ -15,6 +15,7 @@ public final class PlaceGroupStrategy extends Strategy {
 
       }
 
+      // Prevents the strategy from instantiating multiple times
       public static Strategy getInstance(){
             if(strategy == null){
                   strategy = new PlaceGroupStrategy();
@@ -28,6 +29,7 @@ public final class PlaceGroupStrategy extends Strategy {
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
+                  // Draws the group when it is selected
                   g.setColor(new Color(this.blue[0], this.blue[1], this.blue[2]));
                   g.drawRect(x, y, width, height);
 

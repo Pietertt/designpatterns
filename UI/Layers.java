@@ -22,8 +22,11 @@ public class Layers extends JPanel {
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); 
       }
 
+      // Updates the layers
       public void update(BaseShape group){
+            // Removes all added items
             removeAll();
+            // Prints the given group
             group.print(this);
             
             revalidate();

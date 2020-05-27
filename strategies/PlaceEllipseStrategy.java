@@ -15,6 +15,7 @@ public final class PlaceEllipseStrategy extends Strategy {
 
       }
 
+      // Prevents the strategy from instantiating multiple times
       public static Strategy getInstance(){
             if(strategy == null){
                   strategy = new PlaceEllipseStrategy();
@@ -28,6 +29,7 @@ public final class PlaceEllipseStrategy extends Strategy {
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
+                  // Draws an ellipse with a border when the shape is selected
                   g.setColor(new Color(gray[0], gray[1], gray[2]));
                   g.fillOval(x, y, width, height);
                   g.setColor(new Color(blue[0], blue[1], blue[2]));
@@ -40,6 +42,7 @@ public final class PlaceEllipseStrategy extends Strategy {
                   g.fillOval(x + width - 4, y + height - 4, 8, 8);
             }
             else {
+                  // Draws an ellipse when the shape is not selected
                   g.setColor(new Color(gray[0], gray[1], gray[2]));
                   g.fillOval(x, y, width, height);
             }

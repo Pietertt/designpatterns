@@ -15,6 +15,7 @@ public final class PlaceTriangleStrategy extends Strategy {
 
       }
 
+      // Prevents the strategy from instantiating multiple times
       public static Strategy getInstance(){
             if(strategy == null){
                   strategy = new PlaceTriangleStrategy();
@@ -28,6 +29,7 @@ public final class PlaceTriangleStrategy extends Strategy {
 
       public void execute(int x, int y, int width, int height, Graphics g, boolean selected){
             if(selected){
+                  // Draws a triangle with a border when it is not selected
                   g.setColor(new Color(gray[0], gray[1], gray[2]));
                   g.fillPolygon(new int[] {x, x + (width / 2), x + width}, new int[] {y + height, y, y + height}, 3);
 
@@ -41,6 +43,7 @@ public final class PlaceTriangleStrategy extends Strategy {
                   g.fillOval(x + width - 4, y + height - 4, 8, 8);
             }
             else {
+                  // Draws a triangle when it is not selected
                   g.setColor(new Color(gray[0], gray[1], gray[2]));
                   g.fillPolygon(new int[] {x, x + (width / 2), x + width}, new int[] {y + height, y, y + height}, 3);
             }
