@@ -37,17 +37,21 @@ public class Group extends BaseShape {
 
       public String toString(int indent){
             StringBuilder string = new StringBuilder();
+
+            // Appends the right amount of tabs to the string
             for(int i = 0; i < indent; i++){
                   string.append("\t");
             }
 
             string.append("group" + " " + this.children.size() + System.lineSeparator());
+
             for(BaseShape shape : this.children) {
                   if(shape instanceof TextShapeDecorator) {
                         decorators.add((TextShapeDecorator) shape);
                   }
             }
 
+            // Adds any decorators to the grammar
             for(int i = 0; i < this.children.size(); i++){
                   if(i == (this.children.size() - 1)){
                         for(TextShapeDecorator decorator : decorators) {
@@ -72,19 +76,23 @@ public class Group extends BaseShape {
             
       }
 
+      // Removes a child
       public void remove(Shape shape){
             this.children.remove(shape);
       }
 
+      // Accepts any visitor
       public void accept(Visitor visitor){
             visitor.visit(this); 
       }
 
+      // Places the group
       public void place() {
             this.drawed = true;
             repaint();
       }
 
+      // 'Removes' the group by not drawing it
       public void remove(){
             this.drawed = false;
             repaint();
@@ -92,6 +100,8 @@ public class Group extends BaseShape {
 
       public void drag(Location location){
             boolean s = false;
+
+            // Drags any child when it is selected
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
@@ -100,6 +110,7 @@ public class Group extends BaseShape {
                   }
             }
 
+            // Drags all children when no children are selected
             if(s == false){
                   for(BaseShape shape : this.children){
                         int dx = location.x - this.start.x + shape.start.x;
@@ -120,15 +131,17 @@ public class Group extends BaseShape {
 
       public void resize(Location location){
             boolean s = false;
+
+            // Resizes any child when a child is selected
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         s = true;
                         Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
-                        System.out.println(shape.start.x - location.x);
                         shape.resize(childLocation);
                   }
             }
 
+            // Resizes all children when no child is selected
             if(s == false){
                   float percentageWidth = (float)location.width / (float)this.start.width;
                   float percentageHeight = (float)location.height / (float)this.start.height;
@@ -149,15 +162,20 @@ public class Group extends BaseShape {
 
       public void select(MouseEvent e) {
             for(BaseShape shape : this.children){
+                  // The group must be selected to selects its children
                   if(this.selected){
+                        // Selects the shape when it is clicked
                         if(shape.getIfSelected(e.getX(), e.getY())){
                               Order select = new SelectShapeCommand(shape, e);
                               this.board.invoker.execute(select);
+                              // Deselects the shape when is it selected
+                              // but isn't clicked
                         } else {
                               Order deselect = new DeselectShapeCommand(shape, e);
                               this.board.invoker.execute(deselect);     
                         }
 
+                        // Initialises resizing when a handle is pressed
                         if(shape.getHandleIfSelected(e.getX(), e.getY())){
                               System.out.println("resizing execute");
                               Order resize = new ResizeShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
@@ -169,6 +187,7 @@ public class Group extends BaseShape {
       }
 
       public void deselect(MouseEvent e) {
+            // Deselects all children
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         Order deselect = new DeselectShapeCommand(shape, e);
@@ -337,7 +356,6 @@ public class Group extends BaseShape {
                         return true;
                   }
             }
-
             return false;
       }
 
@@ -355,6 +373,5 @@ public class Group extends BaseShape {
                         this.strategy.execute(this.x, this.y, this.width, this.height, g, true);
                   }
             }
-
       }
 }

@@ -22,20 +22,22 @@ public class GetGroup implements Operation {
             int count = Integer.parseInt(line[1]);
 
 
+            // Adds a new decorator to the group
             if(decorator != null) {
                   previousLine = "group";
                   TextShapeDecorator newGroupDecorator = decorator;
-                  System.out.println(decorator.top);
                   newGroupDecorator.setDecoratedShape(shape);
                   shape.add(newGroupDecorator);
             }
 
+            // Removes the first line
             lines.remove(0);
 
             while(lines.size() > 0){
+                  // Trims the first line of all blank characters
                   String[] l = lines.get(0).trim().split("\\s+");
 
-
+                  // Filling the text of the ornament
                   if(l[0].equals("ornament")) {
                         if(!previousLine.equals("ornament")) {
                               decorator = new TextShapeDecorator();
@@ -55,14 +57,19 @@ public class GetGroup implements Operation {
                               decorator.setRight(l[2]);
                         }
                   } else {
+                        // Gets the right Operation based on the first element 
                         Operation target = Factory.getOperation(l[0]);
+                        // Executes the operation
                         BaseShape appliedTarget = target.apply(lines, board);
 
+                        // Adds an ornament
                         if(previousLine.equals("ornament")) {
                               decorator.setDecoratedShape(appliedTarget);
                               appliedTarget.add(decorator);
                               shape.children.add(decorator);
                         }
+
+                        // Adds the retrieved BaseShape to the children of the group
                         shape.children.add(appliedTarget);
 
                   }
@@ -73,11 +80,13 @@ public class GetGroup implements Operation {
                         decorator = null;
                   }
 
+                  // Removes the first line if there is any
                   if(lines.size() > 0){
                         lines.remove(0);
                   }
             }
 
+            // Places the group and adds it to the board
             Order place = new PlaceShapeCommand(shape);
             board.invoker.execute(place);
             board.app.add(shape);
