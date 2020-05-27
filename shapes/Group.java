@@ -21,8 +21,6 @@ public class Group extends BaseShape {
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
-      public ArrayList<TextShapeDecorator> decorators = new ArrayList<>();
-
       public Group(Board board){
             this.board = board;
       }
@@ -40,33 +38,6 @@ public class Group extends BaseShape {
             }
 
             string.append("group" + " " + this.children.size() + System.lineSeparator());
-
-            for(BaseShape shape : this.children) {
-                  if(shape instanceof TextShapeDecorator) {
-                        decorators.add((TextShapeDecorator) shape);
-                  }
-            }
-
-            // Adds any decorators to the grammar
-            for(int i = 0; i < this.children.size(); i++){
-                  if(i == (this.children.size() - 1)){
-                        for(TextShapeDecorator decorator : decorators) {
-                              if (this.children.get(i).equals(decorator.getDecoratedShape())) {
-                                    string.append(decorator.toString(indent + 1));
-                              }
-                        }
-                        if(!(this.children.get(i) instanceof TextShapeDecorator))
-                              string.append(this.children.get(i).toString(indent + 1));
-                  } else {
-                        for(TextShapeDecorator decorator : decorators) {
-                              if (this.children.get(i).equals(decorator.getDecoratedShape())) {
-                                    string.append(decorator.toString(indent + 1));
-                              }
-                        }
-                        if(!(this.children.get(i) instanceof TextShapeDecorator))
-                              string.append(this.children.get(i).toString(indent + 1) + System.lineSeparator());
-                  }
-            }
 
             return string.toString();
             

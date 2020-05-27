@@ -25,11 +25,6 @@ public class ExportVisitor extends Visitor {
             sb.append(group.toString(0));
       }
 
-      @Override
-      public void visit(TextShapeDecorator shapeDecorator) {
-
-      }
-
       // Returns the string
       public String export(){
             return this.sb.toString();

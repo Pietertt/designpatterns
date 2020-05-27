@@ -23,13 +23,7 @@ public class ResizeVisitor extends Visitor {
             this.selectedShape = group;
             this.group = group;
       }
-
-      @Override
-      public void visit(TextShapeDecorator shapeDecorator) {
-            this.selectedShape = shapeDecorator.getDecoratedShape();
-            this.group = group;
-      }
-
+      
       public void resize(Location location) {
             if(group == null) {
                   // Resizes an individual shape

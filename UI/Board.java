@@ -43,11 +43,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
       private JFrame RectangleOrnamentWindow;
       private JButton submit;
 
-
-      // decorator
-      private TextShapeDecorator base;
-
-
       public Board(App app, Layers layers) {
             setOpaque(false);
             super.setFocusable(true);
@@ -114,104 +109,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                   return shape;
             } else {
                   return null;
-            }
-      }
-
-      private void addDecoratorToGroup(BaseShape shape, TextShapeDecorator decoratedShape) {
-            if(shape == null) {
-                  return;
-            }
-            boolean changed = false;
-
-            // Determines the desired shape
-            for (Iterator<BaseShape> iterator = shape.children.iterator(); iterator.hasNext();) {
-                  BaseShape shape1 = iterator.next();
-                  if (shape1.equals(decoratedShape.getDecoratedShape())) {
-                        changed = true;
-                  }
-            }
-
-            // Adds the shape to the children
-            if(changed) {
-                  shape.children.add(decoratedShape);
-            } else {
-                  for (BaseShape children : shape.children) {
-                        addDecoratorToGroup(children, decoratedShape);
-                  }
-            }
-      }
-
-      public void addOrnament() {
-            BaseShape selectedToDecorate = getSelectedShape(this.group);
-
-            // Created the window
-            if (selectedToDecorate != null && selectedToDecorate.drawed) {
-                  RectangleOrnamentWindow = new JFrame("Add ornaments");
-                  RectangleOrnamentWindow.pack();
-                  RectangleOrnamentWindow.setVisible(true);
-                  JPanel p = new JPanel();
-
-                  // Lay out the panel.
-                  GridLayout grid = new GridLayout();
-                  grid.setColumns(2);
-                  grid.setRows(5);
-                  grid.setHgap(5);
-                  grid.setVgap(5);
-                  p.setLayout(grid);
-
-                  JTextField textTop = new JTextField(25);
-                  JLabel labelTop = new JLabel("Top side: ");
-                  p.add(labelTop);
-                  p.add(textTop);
-
-                  JTextField textBottom = new JTextField(25);
-                  JLabel labelBottom = new JLabel("Bottom side: ");
-                  p.add(labelBottom);
-                  p.add(textBottom);
-
-                  JTextField textLeft = new JTextField(25);
-                  JLabel labelLeft = new JLabel("Left side: ");
-                  p.add(labelLeft);
-                  p.add(textLeft);
-
-                  JTextField textRight = new JTextField(25);
-                  JLabel labelRight = new JLabel("Right side: ");
-                  p.add(labelRight);
-                  p.add(textRight);
-
-
-                  submit = new JButton("Submit");
-                  BaseShape finalSelectedToDecorate = selectedToDecorate;
-
-                  // Adds an action listener to the submit button
-                  submit.addActionListener(arg0 -> {
-                        if (!textTop.getText().isEmpty() || !textBottom.getText().isEmpty()
-                                || !textLeft.getText().isEmpty()
-                                || !textRight.getText().isEmpty()) {
-
-                              // Created a new decorator and appends the texts to it
-                              base = new TextShapeDecorator(finalSelectedToDecorate, textBottom.getText(),
-                                      textTop.getText(), textLeft.getText(), textRight.getText());
-                              for (Component component : finalSelectedToDecorate.getComponents()) {
-                                    finalSelectedToDecorate.remove(component);
-                              }
-
-                              // Adds the decoration to the group
-                              finalSelectedToDecorate.add((JComponent) base);
-                              
-                              addDecoratorToGroup(this.group, base);
-
-                              this.app.repaint();
-                              JOptionPane.showMessageDialog(null, "Ornament(s) added");
-                        } else
-                              JOptionPane.showMessageDialog(null, "All fields empty\n "
-                                      + "Fill in at least one field to submit ornament");
-                  });
-                  p.add(submit);
-
-                  RectangleOrnamentWindow.add(p);
-
-                  RectangleOrnamentWindow.setSize(400, 200);
             }
       }
 

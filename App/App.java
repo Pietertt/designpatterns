@@ -143,19 +143,6 @@ public class App extends JFrame {
             group.setFocusPainted(false);
             group.setContentAreaFilled(false);
 
-            // Ornament button
-            JButton ornament = new JButton();
-            ornament.addActionListener(actionEvent -> board.addOrnament());
-            try {
-                  ornament.setIcon(new ImageIcon(ImageIO.read(new File("img/add_txt.png"))));
-            } catch(IOException e) {
-                  e.printStackTrace();
-            }
-
-            ornament.setBorderPainted(false);
-            ornament.setFocusPainted(false);
-            ornament.setContentAreaFilled(false);
-
             // Adds all button to the UI
             UI.add(rectangle);
             UI.add(ellipse);
@@ -165,7 +152,6 @@ public class App extends JFrame {
             UI.add(save);
             UI.add(fetch);
             UI.add(group);
-            UI.add(ornament);
             UI.setBackground(Color.WHITE);
 
             // // added the board and the UI to the frame
