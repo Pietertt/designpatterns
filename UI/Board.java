@@ -27,6 +27,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
       public Board(JFrame frame){
             super(null);
             this.frame = frame;
+            // Adds mouselisteners
             addMouseListener(this);
             super.setFocusable(true);
 
@@ -35,6 +36,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             ArrayList<Shape> shapes = parser.get(data);
 
             for(Shape shape : shapes){
+                  // Checks whether the current shape is a rectangle or a ellipse
+                  // ans sets the according strategy
                   if(shape instanceof Rectangle){
                         this.strategy = new PlaceRectangleStrategy(this.invoker, this);  
                   }
@@ -46,6 +49,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                   Visitor move = new moveVisitor();
                   Visitor resize = new resizeVisitor();
 
+                  // Prepares the strategy and places the shape
                   this.strategy.prepare(shape.x, shape.y, shape.width, shape.height);
                   this.strategy.place();
                   this.strategy.shape.accept(move);
@@ -60,11 +64,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             return new Dimension(500, 500);
       }
 
+      // Adds a new shape when the created variable is set to true
       public void mouseClicked(MouseEvent e){
             if(this.created){
                   Visitor move = new moveVisitor();
                   Visitor resize = new resizeVisitor();
-                  
+
                   this.strategy.prepare(e.getX(), e.getY(), 50, 50);
                   this.strategy.place();
                   this.strategy.shape.accept(move);
@@ -90,6 +95,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       }
 
+      // Deselects all shapes when the board is pressed
       public void mousePressed(MouseEvent e){
             for(Shape shape : this.shapes){
                   if(shape.selected){

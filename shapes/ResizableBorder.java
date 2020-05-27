@@ -22,6 +22,7 @@ public class ResizableBorder implements Border {
             return false;
       }
 
+      // Paints the border
       @Override
       public void paintBorder(Component component, Graphics g, int x, int y, int width, int height) {
             var rect = new Rectangle(x + width - 8, y + height - 8, 8, 8);
@@ -31,12 +32,16 @@ public class ResizableBorder implements Border {
             g.fillOval(rect.x, rect.y, rect.width, rect.height);      
       }
 
+      // Possibly returns a cursor based on the mouseevent
       public int getCursor(MouseEvent e) {
+            // Creates a new rectangle 
             var rect = new Rectangle(0 + e.getComponent().getWidth() - 8, 0 + e.getComponent().getHeight() - 8, 8, 8);
+            // Returns a cursor as an int when the rectangle contains the given mouseevent coordinates
             if (rect.contains(e.getPoint())) {
                   return Cursor.SE_RESIZE_CURSOR;
             }
             
+            // Returns the default cursor
             return Cursor.MOVE_CURSOR;
       }
 }
