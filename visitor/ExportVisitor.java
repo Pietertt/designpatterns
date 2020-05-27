@@ -15,10 +15,12 @@ import commands.*;
 public class ExportVisitor extends Visitor {
       private StringBuilder sb = new StringBuilder();
 
+      // Visits an individual shape
       public void visit(BaseShape shape){
             sb.append(shape.toString(0) + " " + shape.x + " " + shape.y + " " + shape.width + " " + shape.height + "");
       }
 
+      // Visits a group
       public void visit(Group group){
             sb.append(group.toString(0));
       }
@@ -28,7 +30,7 @@ public class ExportVisitor extends Visitor {
 
       }
 
-
+      // Returns the string
       public String export(){
             return this.sb.toString();
       }     

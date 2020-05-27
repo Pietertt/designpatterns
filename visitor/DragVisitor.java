@@ -34,6 +34,7 @@ public class DragVisitor extends Visitor {
 
       public void drag(Location location) {
             if (group == null) {
+                  // Drags an individual shape when 
                   if(!(selectedShape instanceof TextShapeDecorator)) {
                         selectedShape.x = location.x;
                         selectedShape.y = location.y;
@@ -46,9 +47,12 @@ public class DragVisitor extends Visitor {
                   for (BaseShape shape : group.children) {
                         if (shape.selected) {
                               if(!(shape instanceof TextShapeDecorator)) {
+                                    // Accepts a visitor
                                     Location childLocation = new Location(location.x, location.y, shape.width, shape.height);
                                     DragVisitor moveVisitor = new DragVisitor();
                                     shape.accept(moveVisitor);
+
+                                    // Drags the child when it is selected
                                     moveVisitor.drag(childLocation);
                                     s = true;
                               }

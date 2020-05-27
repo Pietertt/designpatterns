@@ -32,6 +32,7 @@ public class ResizeVisitor extends Visitor {
 
       public void resize(Location location) {
             if(group == null) {
+                  // Resizes an individual shape
                   selectedShape.x = location.x;
                   selectedShape.y = location.y;
                   selectedShape.width = location.width;
@@ -41,6 +42,7 @@ public class ResizeVisitor extends Visitor {
                   boolean s = false;
                   for(BaseShape shape : group.children){
                         if(shape.selected){
+                              // Resizes an individual shape when it is selected
                               s = true;
                               Location childLocation = new Location(shape.x, shape.y, location.width - (shape.start.x - location.x), location.height - (shape.start.y - location.y));
                               ResizeVisitor resizeVisitor = new ResizeVisitor();
@@ -54,6 +56,7 @@ public class ResizeVisitor extends Visitor {
                         float percentageHeight = (float)location.height / (float)group.start.height;
 
                         for(BaseShape shape : group.children){
+                              // Drags all children
                               float diffX = ((float)shape.start.x - (float)group.x) * percentageWidth;
                               float diffY = ((float)shape.start.y - (float)group.y) * percentageHeight;
 
