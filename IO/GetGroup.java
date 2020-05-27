@@ -11,10 +11,14 @@ public class GetGroup implements Operation {
       public String previousLine = "nothing";
 
       public BaseShape apply(ArrayList<String> lines, Board board){
+
+            // Defines a new group and set the corresponding strategy
             BaseShape shape = new Group(board);
             shape.setStrategy(board.groupStrategy);
 
+            // Trims the first line of any spaces
             String[] line = lines.get(0).trim().split("\\s+");
+            // Retrieves the amount of children the group has
             int count = Integer.parseInt(line[1]);
 
 
@@ -25,9 +29,6 @@ public class GetGroup implements Operation {
                   newGroupDecorator.setDecoratedShape(shape);
                   shape.add(newGroupDecorator);
             }
-
-            System.out.println(line[0] + " " + count);
-
 
             lines.remove(0);
 
@@ -84,11 +85,5 @@ public class GetGroup implements Operation {
             board.app.repaint();
 
             return shape;
-
-            // for(int i = 0; i < count; i++){
-            //       String[] l = lines.get(i).trim().split("\\s+");
-            //       System.out.println(l[0]);
-            //       lines.remove(i);
-            // }
       }
 }

@@ -5,33 +5,30 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.awt.event.*;
 
 import UI.*;
-import IO.*;
-import shapes.BaseShape;
-import strategies.*;
 import java.awt.*;
 
 public class App extends JFrame {
 
       public App(){
-            
-            
+              
       }
 
       public void clear(){
+            // Removes all components from the app
             getContentPane().removeAll();
       }
 
       public void init(){
             JPanel UI = new JPanel();
-
             Layers layers = new Layers();
             Board board = new Board(this, layers);
 
+            // Add rectangle button
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
+                  // Sets the current strategy to a rectangle and the created variable to true
                   board.created = true;
                   board.currentStrategy = board.rectangleStrategy;
             });
@@ -45,9 +42,10 @@ public class App extends JFrame {
             rectangle.setFocusPainted(false);
             rectangle.setContentAreaFilled(false);
 
+            // Add ellipse button
             JButton ellipse = new JButton();
-
             ellipse.addActionListener(actionEvent -> {
+                  // Sets the current strategy to a ellipse and the created variable to true
                   board.created = true;
                   board.currentStrategy = board.ellipseStrategy;
             });
@@ -62,9 +60,10 @@ public class App extends JFrame {
             ellipse.setFocusPainted(false);
             ellipse.setContentAreaFilled(false);
 
+            // Add triangle button
             JButton triangle = new JButton();
-
             triangle.addActionListener(actionEvent -> {
+                  // Sets the current strategy to a triangle and the created variable to true
                   board.created = true;
                   board.currentStrategy = board.triangleStrategy;
             });
@@ -92,7 +91,7 @@ public class App extends JFrame {
             undo.setFocusPainted(false);
             undo.setContentAreaFilled(false);
 
-            // Undo button
+            // Redo button
             JButton redo = new JButton();
             redo.addActionListener(actionEvent -> board.invoker.redo());
             try {
@@ -105,6 +104,7 @@ public class App extends JFrame {
             redo.setFocusPainted(false);
             redo.setContentAreaFilled(false);
 
+            // Export or save button
             JButton save = new JButton();
             save.addActionListener(actionEvent -> board.export());
             try {
@@ -117,6 +117,7 @@ public class App extends JFrame {
             save.setFocusPainted(false);
             save.setContentAreaFilled(false);
 
+            // Import or fetch button
             JButton fetch = new JButton();
             fetch.addActionListener(actionEvent -> board.fetch());
             try {
@@ -129,7 +130,7 @@ public class App extends JFrame {
             fetch.setFocusPainted(false);
             fetch.setContentAreaFilled(false);
 
-
+            // Group button
             JButton group = new JButton();
             group.addActionListener(actionEvent -> board.group());
             try {
@@ -142,7 +143,7 @@ public class App extends JFrame {
             group.setFocusPainted(false);
             group.setContentAreaFilled(false);
 
-
+            // Ornament button
             JButton ornament = new JButton();
             ornament.addActionListener(actionEvent -> board.addOrnament());
             try {
@@ -155,6 +156,7 @@ public class App extends JFrame {
             ornament.setFocusPainted(false);
             ornament.setContentAreaFilled(false);
 
+            // Adds all button to the UI
             UI.add(rectangle);
             UI.add(ellipse);
             UI.add(triangle);
@@ -170,6 +172,8 @@ public class App extends JFrame {
             getContentPane().add(UI, BorderLayout.SOUTH);
             getContentPane().add(layers, BorderLayout.EAST);
             getContentPane().add(board);
+
+            // Some styling
             setSize(800, 600);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setVisible(true);
