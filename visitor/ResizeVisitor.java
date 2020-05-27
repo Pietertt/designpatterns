@@ -32,7 +32,6 @@ public class ResizeVisitor extends Visitor {
 
       public void resize(Location location) {
             if(group == null) {
-
                   selectedShape.x = location.x;
                   selectedShape.y = location.y;
                   selectedShape.width = location.width;

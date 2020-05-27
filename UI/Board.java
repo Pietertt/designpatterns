@@ -238,7 +238,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                     } else {
                                           if(!this.shifted){
                                                 Order deselect = new DeselectShapeCommand(shape, e);
-                                                deselect.execute();
+                                                //deselect.execute();
                                                 this.invoker.execute(deselect);
                                           } 
                                     }

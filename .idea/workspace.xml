@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56d085e1-8ff9-4e30-acbe-27311d87e5b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IO/GetGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/IO/GetGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/designpatterns/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shapes/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/shapes/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/ResizeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ResizeVisitor.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,6 +119,7 @@
       <workItem from="1590304199250" duration="17065000" />
       <workItem from="1590326943569" duration="2339000" />
       <workItem from="1590483392553" duration="1820000" />
+      <workItem from="1590598228848" duration="2558000" />
     </task>
     <servers />
   </component>

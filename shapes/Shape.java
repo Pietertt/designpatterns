@@ -79,7 +79,8 @@ public class Shape extends BaseShape {
 
       public void undoDrag() {
             Location location = this.undoStack.pop();
-            this.redoStack.add(location);
+            Location locationOld = new Location(this.x, this.y, this.width, this.height);
+            this.redoStack.add(locationOld);
             this.x = location.x;
             this.y = location.y;
             this.width = location.width;
@@ -90,7 +91,8 @@ public class Shape extends BaseShape {
       public void redoDrag() {
             if (this.redoStack.size() > 0) {
                   Location location = this.redoStack.pop();
-                  this.undoStack.add(location);
+                  Location locationOld = new Location(this.x, this.y, this.width, this.height);
+                  this.undoStack.add(locationOld);
                   this.x = location.x;
                   this.y = location.y;
                   this.width = location.width;
