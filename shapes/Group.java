@@ -167,12 +167,14 @@ public class Group extends BaseShape {
                         // Selects the shape when it is clicked
                         if(shape.getIfSelected(e.getX(), e.getY())){
                               Order select = new SelectShapeCommand(shape, e);
-                              this.board.invoker.execute(select);
+                              select.execute();
+                              //this.board.invoker.execute(select);
                               // Deselects the shape when is it selected
                               // but isn't clicked
                         } else {
                               Order deselect = new DeselectShapeCommand(shape, e);
-                              this.board.invoker.execute(deselect);     
+                              deselect.execute();
+                              //this.board.invoker.execute(deselect);
                         }
 
                         // Initialises resizing when a handle is pressed
@@ -191,7 +193,8 @@ public class Group extends BaseShape {
             for(BaseShape shape : this.children){
                   if(shape.selected){
                         Order deselect = new DeselectShapeCommand(shape, e);
-                        this.board.invoker.execute(deselect);
+                        deselect.execute();
+                        //this.board.invoker.execute(deselect);
                   }
             }
 
@@ -221,7 +224,7 @@ public class Group extends BaseShape {
 
             for(BaseShape shape : this.children){
                   Order save = new SaveShapeCommand(shape, new Location(shape.x, shape.y, shape.width, shape.height));
-                  this.board.invoker.execute(save);
+                  save.execute();
                   shape.clear();
             }
       }
@@ -234,6 +237,12 @@ public class Group extends BaseShape {
             this.width = location.width;
             this.height = location.height;
             repaint();
+
+            if(this.children != null) {
+                  for(BaseShape shape : this.children) {
+                        shape.undoDrag();
+                  }
+            }
       }
 
       public void redoDrag() {
@@ -245,6 +254,12 @@ public class Group extends BaseShape {
                   this.width = location.width;
                   this.height = location.height;
                   repaint();
+            }
+
+            if(this.children != null) {
+                  for(BaseShape shape : this.children) {
+                        shape.redoDrag();
+                  }
             }
       }
 

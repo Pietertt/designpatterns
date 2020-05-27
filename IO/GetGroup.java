@@ -88,7 +88,8 @@ public class GetGroup implements Operation {
 
             // Places the group and adds it to the board
             Order place = new PlaceShapeCommand(shape);
-            board.invoker.execute(place);
+            place.execute();
+            //board.invoker.execute(place);
             board.app.add(shape);
             board.app.revalidate();
             board.app.repaint();

@@ -218,11 +218,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                         if (shape.getIfSelected(e.getX(), e.getY())) {
                               System.out.println("selected");
                               Order select = new SelectShapeCommand(shape, e);
-                              this.invoker.execute(select);
+                              select.execute();
+                              //this.invoker.execute(select);
                         }
-
+                        BaseShape selectedToDecorate = getSelectedShape(this.group);
                         if (shape.selected) {
+
                               if (shape.getIfSelected(e.getX(), e.getY())) {
+                                    System.out.println("dragging");
                                     Order drag = new DragShapeCommand(shape,
                                     new Location(shape.x, shape.y, shape.width, shape.height));
                                     this.invoker.execute(drag);
@@ -235,6 +238,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener,
                                     } else {
                                           if(!this.shifted){
                                                 Order deselect = new DeselectShapeCommand(shape, e);
+                                                deselect.execute();
                                                 this.invoker.execute(deselect);
                                           } 
                                     }

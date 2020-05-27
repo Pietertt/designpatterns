@@ -15,13 +15,14 @@ package UI;
        }
 
        public void execute(Order cmd) {
+           System.out.println("execute");
              undoStack.push(cmd);
              redoStack.clear();
              cmd.execute();
        }
 
        public void undo() {
-             if (!undoStack.isEmpty()) {
+             if (!undoStack.empty()) {
                    Order cmd = undoStack.pop();
                    cmd.undo();
                    redoStack.push(cmd);
@@ -29,10 +30,10 @@ package UI;
        }
 
      public void redo() {
-       if(!redoStack.isEmpty()) {
-             Order cmd = redoStack.pop();
-             cmd.redo();
-             undoStack.push(cmd);
-       }
+            if(!redoStack.empty()) {
+                Order cmd = redoStack.pop();
+                cmd.redo();
+                undoStack.push(cmd);
+            }
      }
  }
