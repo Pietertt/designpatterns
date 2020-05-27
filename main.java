@@ -15,6 +15,7 @@ public class main {
 
             Board board = new Board(frame);
 
+            // Set the strategy to a rectangle strategy and the created variable to true when the button is clicked
             JButton rectangle = new JButton();
             rectangle.addActionListener(actionEvent -> {
                   board.created = true;
@@ -32,6 +33,7 @@ public class main {
 
             JButton ellipse = new JButton();
 
+            // Set the strategy to a ellipse strategy and the created variable to true when the button is clicked
             ellipse.addActionListener(actionEvent -> {
                   board.created = true;
                   board.strategy = new PlaceEllipseStrategy(board.invoker, board);
@@ -60,7 +62,7 @@ public class main {
             undo.setFocusPainted(false);
             undo.setContentAreaFilled(false);
 
-            // Undo button
+            // Redo button
             JButton redo = new JButton();
             redo.addActionListener(actionEvent -> board.invoker.redo());
             try {

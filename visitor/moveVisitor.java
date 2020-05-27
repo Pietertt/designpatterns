@@ -87,6 +87,9 @@ public class moveVisitor implements Visitor {
             });
 
             ellipse.addMouseMotionListener(new MouseAdapter(){
+                  /*
+                        Drags the shape when the cursor is the default cursor
+                  */
                   public void mouseDragged(MouseEvent e){
                         if (ellipse.start != null) {
                               if(ellipse.cursor == Cursor.MOVE_CURSOR){

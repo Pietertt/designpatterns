@@ -178,9 +178,11 @@ public abstract class Shape extends JComponent implements MouseMotionListener, M
       public boolean getIfSelected(int x, int y) {
             // Loops through the x axis
             for (int i = 0; i < this.width; i++) {
+                  // Continues when the x value is in range
                   if (x == this.x + i) {
                         // Loops through the y axis
                         for (int j = 0; j < this.height; j++) {
+                              // Continues when the y value is in range
                               if (y == this.y + j) {
                                     return true;
                               }

@@ -14,6 +14,9 @@ public class resizeVisitor implements Visitor {
       public void visitRectangle(Rectangle rectangle){
             rectangle.addMouseListener(new MouseAdapter(){
                   public void mouseReleased(MouseEvent e){
+                        /*
+                              Resizes the rectangle when the resizing variable is set to true
+                        */
                         if (rectangle.resizing) {
                               Location location = new Location(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
                               Order drag = new ResizeShapeCommand(rectangle, location);
@@ -25,6 +28,9 @@ public class resizeVisitor implements Visitor {
 
             rectangle.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
+                        /*
+                              Drags the shape when the cursor is the default cursor
+                        */
                         if (rectangle.start != null) {
                               if(rectangle.cursor == Cursor.SE_RESIZE_CURSOR){
                                     rectangle.resizing = true;
@@ -44,6 +50,9 @@ public class resizeVisitor implements Visitor {
       public void visitEllipse(Ellipse ellipse){
             ellipse.addMouseListener(new MouseAdapter(){
                   public void mouseReleased(MouseEvent e){
+                        /*
+                              Resizes the shape when resize variable is set to true
+                        */
                         if(ellipse.resizing){
                               Location location = new Location(ellipse.getX(), ellipse.getY(), ellipse.getWidth(), ellipse.getHeight());
                               Order drag = new ResizeShapeCommand(ellipse, location);
@@ -55,6 +64,9 @@ public class resizeVisitor implements Visitor {
 
             ellipse.addMouseMotionListener(new MouseAdapter(){
                   public void mouseDragged(MouseEvent e){
+                        /*
+                              Drags the shape when the cursor is the default cursor
+                        */
                         if (ellipse.start != null) {
                               if(ellipse.cursor == Cursor.SE_RESIZE_CURSOR){
                                     ellipse.resizing = true;
