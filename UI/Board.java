@@ -62,8 +62,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
       public void mouseClicked(MouseEvent e){
             if(this.created){
+                  Visitor move = new moveVisitor();
+                  Visitor resize = new resizeVisitor();
+                  
                   this.strategy.prepare(e.getX(), e.getY(), 50, 50);
                   this.strategy.place();
+                  this.strategy.shape.accept(move);
+                  this.strategy.shape.accept(resize);
                   add(this.strategy.shape);
                   this.shapes.add(this.strategy.shape);
 
