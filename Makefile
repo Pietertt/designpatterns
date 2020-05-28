@@ -1,11 +1,9 @@
 compile:
 	@echo "Start compiling..."
-	@javac shapes/Shape.java shapes/BaseShape.java shapes/Group.java shapes/Rectangle.java shapes/Ellipse.java shapes/Location.java shapes/ShapeDecorator.java shapes/TextShapeDecorator.java
+	@javac shapes/Shape.java shapes/BaseShape.java shapes/Group.java shapes/Rectangle.java shapes/Ellipse.java shapes/Location.java
 	@javac commands/Order.java commands/PlaceShapeCommand.java commands/SelectShapeCommand.java commands/DragShapeCommand.java commands/ResizeShapeCommand.java commands/SaveShapeCommand.java
 	@javac UI/Board.java UI/Invoker.java UI/Layers.java UI/Item.java
-	@javac strategies/Strategy.java strategies/PlaceRectangleStrategy.java
 	@javac io/Parser.java
-	@javac visitor/moveVisitor.java visitor/Visitor.java visitor/resizeVisitor.java
 	@javac App.java
 	@echo "Compiling done!"
 
@@ -15,9 +13,7 @@ clean:
 	@cd shapes && rm -rf *.class	
 	@cd UI && rm -rf *.class
 	@cd commands && rm -rf *.class
-	@cd strategies && rm -rf *.class
 	@cd io && rm -rf *.class
-	@cd visitor && rm -rf *.class
 	@echo "Cleaning done!"
 
 run: compile
